@@ -16,6 +16,7 @@ public class CrosshairClamp : MonoBehaviour
 
     private void FixedUpdate()
     {
-        transform.localPosition = new Vector2(Mathf.Clamp(transform.localPosition.x, minimumAimPosition, maximumAimPosition), Mathf.Clamp(transform.localPosition.y, minimumAimPosition, maximumAimPosition)).normalized * offset;
+        transform.localPosition = new Vector2(Mathf.Clamp(transform.localPosition.x, minimumAimPosition, maximumAimPosition), Mathf.Clamp(transform.localPosition.y, minimumAimPosition, maximumAimPosition));
+        transform.localPosition.Normalize();
     }
 }
