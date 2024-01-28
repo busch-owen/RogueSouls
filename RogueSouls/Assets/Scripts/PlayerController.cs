@@ -94,8 +94,8 @@ public class PlayerController : MonoBehaviour
     {
         _movementSpeed = new Vector2(_xSpeed, _ySpeed);
 
-        _rb.velocity = _movementSpeed * _movement * Time.fixedDeltaTime;
-        _rb.velocity.Normalize();
+        _rb.velocity = (_movement).normalized;
+        _rb.velocity *= _movementSpeed * Time.fixedDeltaTime;
     }
 
     private void HandleAim()
@@ -136,7 +136,7 @@ public class PlayerController : MonoBehaviour
     {
         if(!rolling)
         {
-            Debug.Log("Roll");
+            _animator.SetTrigger("Dodge");
             _rb.AddForce(_movement * dodgeRollForce);
             rolling = true;
 
@@ -150,12 +150,12 @@ public class PlayerController : MonoBehaviour
         if (_movement.x != 0 || _movement.y != 0)
         {
             _animator.SetBool("Running", true);
-            _animator.speed = (Mathf.Abs(_movement.x) + Mathf.Abs(_movement.y)) / 2;
+            //_animator.speed = (Mathf.Abs(_movement.x) + Mathf.Abs(_movement.y)) / 2;
         }
         else
         {
             _animator.SetBool("Running", false);
-            _animator.speed = 1;
+            //_animator.speed = 1;
         }
 
         if (_movement.x < 0)
