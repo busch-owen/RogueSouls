@@ -19,6 +19,9 @@ public class PlayerController : MonoBehaviour
     float dodgeRollCooldownTime;
 
     [SerializeField]
+    float dodgeRollDurationTime;
+
+    [SerializeField]
     GameObject _playerSpriteObject;
 
     Animator _animator;
@@ -30,6 +33,7 @@ public class PlayerController : MonoBehaviour
     Vector2 _movement;
 
     bool rolling = false;
+    bool canRoll = true;
 
     [Space(10)]
 
@@ -92,10 +96,13 @@ public class PlayerController : MonoBehaviour
 
     private void HandleMovement()
     {
-        _movementSpeed = new Vector2(_xSpeed, _ySpeed);
+        if(!rolling)
+        {
+            _movementSpeed = new Vector2(_xSpeed, _ySpeed);
 
-        _rb.velocity = (_movement).normalized;
-        _rb.velocity *= _movementSpeed * Time.fixedDeltaTime;
+            _rb.velocity = (_movement).normalized;
+            _rb.velocity *= _movementSpeed * Time.fixedDeltaTime;
+        }
     }
 
     private void HandleAim()
@@ -134,13 +141,13 @@ public class PlayerController : MonoBehaviour
 
     public void HandleDodgeRollInput()
     {
-        if(!rolling)
+        Vector2 dodgeDir = _movement.normalized;
+
+        if(canRoll && _rb.velocity != Vector2.zero)
         {
             _animator.SetTrigger("Dodge");
-            _rb.AddForce(_movement * dodgeRollForce);
-            rolling = true;
-
-            StartCoroutine(BeginDodgeRollCoolDown());
+            StartCoroutine(BeginDodgeRollDuration(dodgeDir));
+            canRoll = false; 
         }
         
     }
@@ -174,9 +181,18 @@ public class PlayerController : MonoBehaviour
         Debug.Log("Attack");
     }
 
+    IEnumerator BeginDodgeRollDuration(Vector2 dodgeDir)
+    {
+        rolling = true;
+        _rb.AddForce(dodgeDir * dodgeRollForce);
+        yield return new WaitForSeconds(dodgeRollDurationTime);
+        StartCoroutine(BeginDodgeRollCoolDown());
+        rolling = false;
+    }
+
     IEnumerator BeginDodgeRollCoolDown()
     {
         yield return new WaitForSeconds(dodgeRollCooldownTime);
-        rolling = false;
+        canRoll = true;
     }
 }
