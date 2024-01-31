@@ -141,12 +141,10 @@ public class PlayerController : MonoBehaviour
 
     public void HandleDodgeRollInput()
     {
-        Vector2 dodgeDir = _movement.normalized;
-
         if(canRoll && _rb.velocity != Vector2.zero)
         {
             _animator.SetTrigger("Dodge");
-            StartCoroutine(BeginDodgeRollDuration(dodgeDir));
+            StartCoroutine(BeginDodgeRollDuration());
             canRoll = false; 
         }
         
@@ -181,10 +179,10 @@ public class PlayerController : MonoBehaviour
         Debug.Log("Attack");
     }
 
-    IEnumerator BeginDodgeRollDuration(Vector2 dodgeDir)
+    IEnumerator BeginDodgeRollDuration()
     {
         rolling = true;
-        _rb.AddForce(dodgeDir * dodgeRollForce);
+        _rb.AddForce(_movement.normalized * dodgeRollForce);
         yield return new WaitForSeconds(dodgeRollDurationTime);
         StartCoroutine(BeginDodgeRollCoolDown());
         rolling = false;
