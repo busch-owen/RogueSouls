@@ -302,8 +302,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _xSpeed: 420
   _ySpeed: 300
-  dodgeRollForce: 3000
+  dodgeRollForce: 300
   dodgeRollCooldownTime: 1
+  dodgeRollDurationTime: 0.25
   _playerSpriteObject: {fileID: 2024246983}
   _rb: {fileID: 478994745}
   _crosshair: {fileID: 1726913078}
