@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 9722639eaad3b8b41b861b2f8f250c6c
+guid: 8e87bdfccfb704e4789711b681b9ee1f
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -67,12 +67,12 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 256
+    maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 0
-    compressionQuality: 100
-    crunchedCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
     androidETC2FallbackOverride: 0
@@ -131,8 +131,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0e8ff97b7dc8cb0469b1454e71063cb0
-      internalID: 1538277678
+      spriteID: ec15232f65533974eb37bec34d0f77cb
+      internalID: 1941237586
       vertices: []
       indices: 
       edges: []
@@ -152,8 +152,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 19e26cb6497bb684eb0fe51432f95ec6
-      internalID: -1904897364
+      spriteID: cb12c27bbe0fc9f4e8a117bdfc456079
+      internalID: -683186178
       vertices: []
       indices: 
       edges: []
@@ -173,8 +173,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 18eb125bdc85f5849a95f29ae84d0a89
-      internalID: -693920677
+      spriteID: 995632f76be50214da22a498bdd02400
+      internalID: -515255575
       vertices: []
       indices: 
       edges: []
@@ -194,8 +194,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e6295d57453ab9546ae3e66e6e150d00
-      internalID: 1380263082
+      spriteID: 9004fadb22ee2c14e8255f61d2f09584
+      internalID: 1062338060
       vertices: []
       indices: 
       edges: []
@@ -211,10 +211,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      roguesoulIdle_0: 1538277678
-      roguesoulIdle_1: -1904897364
-      roguesoulIdle_2: -693920677
-      roguesoulIdle_3: 1380263082
+      roguesoulIdle_0: 1941237586
+      roguesoulIdle_1: -683186178
+      roguesoulIdle_2: -515255575
+      roguesoulIdle_3: 1062338060
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

@@ -660,7 +660,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 077fd61a9499a9544983b58781997d1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _weaponOffset: 1
+  _weaponOffset: 0.75
   _weapon: {fileID: 1946170078}
 --- !u!1001 &687514393
 PrefabInstance:
@@ -2410,7 +2410,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.16, y: 0.16}
+  m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
