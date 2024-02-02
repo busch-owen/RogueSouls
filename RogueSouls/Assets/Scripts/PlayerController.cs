@@ -64,6 +64,15 @@ public class PlayerController : MonoBehaviour
 
     float _weaponRotationAngle;
 
+    private Weaponbase weapon;
+
+    [SerializeField]
+	private Weaponbase gun;
+	[SerializeField]
+	private Transform gunLocation;
+
+
+
 
 
     // Start is called before the first frame update
