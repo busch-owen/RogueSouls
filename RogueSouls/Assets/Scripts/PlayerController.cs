@@ -45,8 +45,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     float _crosshairMoveSpeed;
 
-    float _crosshairXMovement;
-    float _crosshairYMovement;
+    Vector2 _crosshairMovement;
 
     CrosshairClamp _crosshairClamp;
 
@@ -128,15 +127,18 @@ public class PlayerController : MonoBehaviour
 
     private void HandleCrosshairControllerMovement()
     {
-        _crosshair.transform.localPosition = new Vector3(_crosshair.transform.localPosition.x + _crosshairXMovement * _crosshairMoveSpeed * Time.fixedDeltaTime, 
-            _crosshair.transform.localPosition.y + _crosshairYMovement * _crosshairMoveSpeed * Time.fixedDeltaTime);
+        _crosshair.transform.localPosition = new Vector3(_crosshair.transform.localPosition.x + _crosshairMovement.x * _crosshairMoveSpeed * Time.fixedDeltaTime, 
+            _crosshair.transform.localPosition.y + _crosshairMovement.y * _crosshairMoveSpeed * Time.fixedDeltaTime);
+        if(_crosshairClamp.enabled)
+        {
+            _crosshairClamp.LockCrosshairPosition(_crosshairMovement);
+        }
     }
 
     public void HandleAimControllerInput(Vector2 aimPosition)
     {
         _crosshairClamp.enabled = true;
-        _crosshairXMovement = aimPosition.x;
-        _crosshairYMovement = aimPosition.y;
+        _crosshairMovement = aimPosition;   
     }
 
     public void HandleDodgeRollInput()
