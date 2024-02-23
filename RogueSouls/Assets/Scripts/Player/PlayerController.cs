@@ -54,8 +54,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     float _crosshairMoveSpeed;
 
-    float _crosshairXMovement;
-    float _crosshairYMovement;
+    Vector2 _crosshairMovement;
 
     CrosshairClamp _crosshairClamp;
 
@@ -82,6 +81,21 @@ public class PlayerController : MonoBehaviour
 	[SerializeField]
 	private Transform gunLocation;
 
+    [Space(10)]
+
+    #endregion
+
+    #region Effects
+
+    [Header("Effects"), Space(5)]
+
+    PlayerEffectHandler _effectHandler;
+
+    [SerializeField]
+    TrailRenderer _dodgeSmearRenderer;
+
+    //[Space(10)]
+
     #endregion
 
     #region Unity Runtime Functions
@@ -93,6 +107,8 @@ public class PlayerController : MonoBehaviour
         _rb = GetComponent<Rigidbody2D>();
         _crosshairClamp = FindObjectOfType<CrosshairClamp>();
         _weaponOffsetHandle = GetComponentInChildren<WeaponOffsetHandle>();
+        _effectHandler = GetComponentInChildren<PlayerEffectHandler>();
+        _dodgeSmearRenderer.enabled = false;
     }
 
     void Start()
@@ -109,7 +125,7 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate()
     {
         HandleAim();
-
+        HandleSpritesAndAnimations();
         HandleMovement();
         HandleCrosshairControllerMovement();
     }
@@ -130,8 +146,6 @@ public class PlayerController : MonoBehaviour
     public void HandleMovementInput(Vector2 input)
     {
         _movement = input;
-
-        HandleSpritesAndAnimations();
     }
     public void HandleDodgeRollInput()
     {
@@ -152,8 +166,10 @@ public class PlayerController : MonoBehaviour
     {
         rolling = true;
         _rb.AddForce(_movement.normalized * dodgeRollForce);
+        _dodgeSmearRenderer.enabled = true;
         yield return new WaitForSeconds(dodgeRollDurationTime);
         StartCoroutine(BeginDodgeRollCoolDown());
+        _dodgeSmearRenderer.enabled = false;
         rolling = false;
     }
 
@@ -164,6 +180,8 @@ public class PlayerController : MonoBehaviour
     }
 
     #endregion
+
+    
 
     #region Aiming and Crosshair
 
@@ -187,15 +205,18 @@ public class PlayerController : MonoBehaviour
     //Handles where the crosshair should go when using a controller
     private void HandleCrosshairControllerMovement()
     {
-        _crosshair.transform.localPosition = new Vector3(_crosshair.transform.localPosition.x + _crosshairXMovement * _crosshairMoveSpeed * Time.fixedDeltaTime, 
-            _crosshair.transform.localPosition.y + _crosshairYMovement * _crosshairMoveSpeed * Time.fixedDeltaTime);
+        _crosshair.transform.localPosition = new Vector3(_crosshair.transform.localPosition.x + _crosshairMovement.x * _crosshairMoveSpeed * Time.fixedDeltaTime, 
+            _crosshair.transform.localPosition.y + _crosshairMovement.y * _crosshairMoveSpeed * Time.fixedDeltaTime);
+        if(_crosshairClamp.enabled)
+        {
+            _crosshairClamp.ClampCrosshair(_crosshairMovement);
+        }
     }
 
     public void HandleAimControllerInput(Vector2 aimPosition)
     {
         _crosshairClamp.enabled = true;
-        _crosshairXMovement = aimPosition.x;
-        _crosshairYMovement = aimPosition.y;
+        _crosshairMovement = aimPosition;
     }
 
     #endregion
@@ -208,10 +229,13 @@ public class PlayerController : MonoBehaviour
         if (_movement.x != 0 || _movement.y != 0)
         {
             _animator.SetBool("Running", true);
+            if(!_effectHandler.RunParticlesPlaying())
+                _effectHandler.PlayRunParticles();
         }
         else
         {
             _animator.SetBool("Running", false);
+            _effectHandler.StopRunParticles();
         }
 
         if (_movement.x < 0)
