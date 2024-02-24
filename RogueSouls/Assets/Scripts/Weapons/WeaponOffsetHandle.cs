@@ -9,7 +9,12 @@ public class WeaponOffsetHandle : MonoBehaviour
     float _weaponOffset;
 
     [SerializeField]
-    GameObject _weapon;
+    RangedWeapon _weapon;
+
+    private void Awake()
+    {
+        _weapon = GetComponentInChildren<RangedWeapon>();
+    }
 
     public void OffsetWeaponPos(float rotationAngle)
     {
@@ -23,5 +28,10 @@ public class WeaponOffsetHandle : MonoBehaviour
         {
             _weapon.transform.localScale = new Vector3(_weapon.transform.localScale.x, -1, _weapon.transform.localScale.z);
         }
+    }
+
+    public void SetCurrentWeapon()
+    {
+        _weapon = GetComponentInChildren<RangedWeapon>();
     }
 }

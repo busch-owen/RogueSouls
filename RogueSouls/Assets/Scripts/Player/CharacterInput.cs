@@ -255,6 +255,15 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""OpenWeaponWheel"",
+                    ""type"": ""Button"",
+                    ""id"": ""b5a54461-6d6f-42c8-935a-6de247c26aa2"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -301,6 +310,28 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
                     ""action"": ""DodgeRoll"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""fe08304b-e16b-4643-b85b-004b1d392077"",
+                    ""path"": ""<Keyboard>/tab"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""OpenWeaponWheel"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8325e03b-6f1b-4c9f-9aa6-fcc2d78502f3"",
+                    ""path"": ""<Gamepad>/leftShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""OpenWeaponWheel"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -316,6 +347,7 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
         m_CharacterActions = asset.FindActionMap("CharacterActions", throwIfNotFound: true);
         m_CharacterActions_Attack = m_CharacterActions.FindAction("Attack", throwIfNotFound: true);
         m_CharacterActions_DodgeRoll = m_CharacterActions.FindAction("DodgeRoll", throwIfNotFound: true);
+        m_CharacterActions_OpenWeaponWheel = m_CharacterActions.FindAction("OpenWeaponWheel", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -441,12 +473,14 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
     private List<ICharacterActionsActions> m_CharacterActionsActionsCallbackInterfaces = new List<ICharacterActionsActions>();
     private readonly InputAction m_CharacterActions_Attack;
     private readonly InputAction m_CharacterActions_DodgeRoll;
+    private readonly InputAction m_CharacterActions_OpenWeaponWheel;
     public struct CharacterActionsActions
     {
         private @CharacterInput m_Wrapper;
         public CharacterActionsActions(@CharacterInput wrapper) { m_Wrapper = wrapper; }
         public InputAction @Attack => m_Wrapper.m_CharacterActions_Attack;
         public InputAction @DodgeRoll => m_Wrapper.m_CharacterActions_DodgeRoll;
+        public InputAction @OpenWeaponWheel => m_Wrapper.m_CharacterActions_OpenWeaponWheel;
         public InputActionMap Get() { return m_Wrapper.m_CharacterActions; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -462,6 +496,9 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
             @DodgeRoll.started += instance.OnDodgeRoll;
             @DodgeRoll.performed += instance.OnDodgeRoll;
             @DodgeRoll.canceled += instance.OnDodgeRoll;
+            @OpenWeaponWheel.started += instance.OnOpenWeaponWheel;
+            @OpenWeaponWheel.performed += instance.OnOpenWeaponWheel;
+            @OpenWeaponWheel.canceled += instance.OnOpenWeaponWheel;
         }
 
         private void UnregisterCallbacks(ICharacterActionsActions instance)
@@ -472,6 +509,9 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
             @DodgeRoll.started -= instance.OnDodgeRoll;
             @DodgeRoll.performed -= instance.OnDodgeRoll;
             @DodgeRoll.canceled -= instance.OnDodgeRoll;
+            @OpenWeaponWheel.started -= instance.OnOpenWeaponWheel;
+            @OpenWeaponWheel.performed -= instance.OnOpenWeaponWheel;
+            @OpenWeaponWheel.canceled -= instance.OnOpenWeaponWheel;
         }
 
         public void RemoveCallbacks(ICharacterActionsActions instance)
@@ -499,5 +539,6 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
     {
         void OnAttack(InputAction.CallbackContext context);
         void OnDodgeRoll(InputAction.CallbackContext context);
+        void OnOpenWeaponWheel(InputAction.CallbackContext context);
     }
 }

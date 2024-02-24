@@ -119,15 +119,14 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        HandleAim();
+        HandleCrosshairControllerMovement();
     }
 
     private void FixedUpdate()
     {
-        HandleAim();
         HandleSpritesAndAnimations();
         HandleMovement();
-        HandleCrosshairControllerMovement();
     }
 
     #endregion
@@ -180,8 +179,6 @@ public class PlayerController : MonoBehaviour
     }
 
     #endregion
-
-    
 
     #region Aiming and Crosshair
 

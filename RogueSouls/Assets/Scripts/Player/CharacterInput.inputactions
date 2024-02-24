@@ -233,6 +233,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "OpenWeaponWheel",
+                    "type": "Button",
+                    "id": "b5a54461-6d6f-42c8-935a-6de247c26aa2",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -277,6 +286,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "DodgeRoll",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "fe08304b-e16b-4643-b85b-004b1d392077",
+                    "path": "<Keyboard>/tab",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "OpenWeaponWheel",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8325e03b-6f1b-4c9f-9aa6-fcc2d78502f3",
+                    "path": "<Gamepad>/leftShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "OpenWeaponWheel",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

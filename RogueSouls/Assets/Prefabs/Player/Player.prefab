@@ -29,9 +29,9 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 7237135835995572849}
   - {fileID: 7162156126019081975}
   - {fileID: 7162156125008275515}
-  - {fileID: 7237135835995572849}
   m_Father: {fileID: 3879974646544272210}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -101,9 +101,9 @@ MonoBehaviour:
   _xSpeed: 420
   _ySpeed: 300
   dodgeRollForce: 300
-  playerFriction: 0
+  playerFriction: 0.2
   dodgeRollCooldownTime: 1
-  dodgeRollDurationTime: 0.25
+  dodgeRollDurationTime: 0.4
   _playerSpriteObject: {fileID: 3879974646364937229}
   _rb: {fileID: 3879974645762487283}
   _crosshair: {fileID: 0}
@@ -112,6 +112,7 @@ MonoBehaviour:
   _aimHandleTransform: {fileID: 3879974645599177196}
   gun: {fileID: -7550700366089920953, guid: 7621fc21a650de44c8f8053ba5063b5c, type: 3}
   gunLocation: {fileID: 7162156126019081975}
+  _dodgeSmearRenderer: {fileID: 0}
 --- !u!114 &3879974645762487293
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -324,7 +325,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6250265583612026718, guid: b47d89c4ec14c0140968ffd2b988d81e, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6250265583612026718, guid: b47d89c4ec14c0140968ffd2b988d81e, type: 3}
       propertyPath: m_LocalPosition.x
@@ -415,7 +416,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6250265583612026718, guid: 7621fc21a650de44c8f8053ba5063b5c, type: 3}
       propertyPath: m_RootOrder
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6250265583612026718, guid: 7621fc21a650de44c8f8053ba5063b5c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -497,7 +498,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6250265583612026718, guid: cf0f37ece5705a74c813ae9f1f8b61c9, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6250265583612026718, guid: cf0f37ece5705a74c813ae9f1f8b61c9, type: 3}
       propertyPath: m_LocalPosition.x
