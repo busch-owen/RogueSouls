@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 28073703179475118}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.25, y: 0.15, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -91,9 +91,9 @@ MonoBehaviour:
   reloadSFX: {fileID: 0}
   firePoint: {fileID: 4810791225441788072}
   bulletPrefab: {fileID: 2713882379851067500, guid: b954354dfbcdd624d90c2f4cf0739dc7, type: 3}
-  bulletForce: 50
-  minSpread: 10
-  maxSpread: 20
+  bulletForce: 30
+  minSpread: -2
+  maxSpread: 2
 --- !u!1 &8647750539015994099
 GameObject:
   m_ObjectHideFlags: 0
@@ -120,7 +120,7 @@ Transform:
   m_GameObject: {fileID: 8647750539015994099}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 10, y: 10, z: 10}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6250265583612026718}

@@ -175,6 +175,6 @@ MonoBehaviour:
   reloadSFX: {fileID: 0}
   firePoint: {fileID: 7675829782731265171}
   bulletPrefab: {fileID: 2713882379851067500, guid: b954354dfbcdd624d90c2f4cf0739dc7, type: 3}
-  bulletForce: 15
+  bulletForce: 20
   minSpread: -8
   maxSpread: 8

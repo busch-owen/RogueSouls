@@ -24,6 +24,9 @@ public class WeaponWheel : MonoBehaviour
     Vector2 _aimPosition;
 
     [SerializeField]
+    ItemHighlight _itemHighlight;
+
+    [SerializeField]
     Transform[] _itemSlots;
 
     [SerializeField]
@@ -56,6 +59,7 @@ public class WeaponWheel : MonoBehaviour
     private void Update()
     {
         HandleArrowRotation();
+        HighlightSelectedWeapon();
     }
 
     private void HandleArrowRotation()
@@ -85,38 +89,48 @@ public class WeaponWheel : MonoBehaviour
     public void CloseWeaponWheel()
     {
         _weaponWheelObject.SetActive(false);
-        PutAwayCurrentWeapon();
-        _playerWeapons[WhichWeaponToSelect()].gameObject.SetActive(true);
-        _playerInputHandler.UpdateRangedWeaponReference();
-        _weaponOffsetHandle.SetCurrentWeapon();
+        if(WhichWeaponToSelect() < _playerWeapons.Length)
+        {
+            PutAwayCurrentWeapon();
+            _playerWeapons[WhichWeaponToSelect()].gameObject.SetActive(true);
+            _playerInputHandler.UpdateRangedWeaponReference();
+            _weaponOffsetHandle.SetCurrentWeapon();
+        }
         Time.timeScale = 1;
     }
 
     private void FillItemSlots()
     {
-        for(int i = 0; i < _itemSlots.Length; i++)
+        for (int i = 0; i < _weapons.Length; i++)
         {
-            if (_weapons[i] != null)
-            {
-                _itemSlots[i].GetComponent<SpriteRenderer>().sprite = _weapons[i].GetComponentInChildren<SpriteRenderer>().sprite;
-            }
-            else
-            {
-                _itemSlots[i].GetComponent<SpriteRenderer>().sprite = null;
-            }
+            _itemSlots[i].GetComponent<SpriteRenderer>().sprite = _weapons[i].GetComponentInChildren<SpriteRenderer>().sprite;
         }
+    }
+
+    private void HighlightSelectedWeapon()
+    {
+        _itemHighlight.transform.localPosition = _itemSlots[WhichWeaponToSelect()].transform.localPosition;
     }
 
     private int WhichWeaponToSelect()
     {
         if (_arrowAngle is < 135 and >= 45)
-            return 0;
-        else if (_arrowAngle is < 45 and >= -45)
-            return 1;
-        else if (_arrowAngle is < -45 and >= -135)
-            return 2;
-        else
+        {
             return 3;
+        }
+            
+        else if (_arrowAngle is < 45 and >= -45)
+        {
+            return 0;
+        }
+        else if (_arrowAngle is < -45 and >= -135)
+        {
+            return 1;
+        }
+        else
+        {
+            return 2;
+        }
     }
 
     private void PutAwayCurrentWeapon()
