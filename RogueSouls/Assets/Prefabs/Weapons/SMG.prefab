@@ -162,9 +162,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 5
-  fireRate: 30
-  bulletLifetime: 0
-  maxAmmo: 0
+  fireRate: 15
+  bulletLifetime: 3
+  maxAmmo: 40
   bulletCount: 1
   reloadTime: 1
   cam: {fileID: 0}
