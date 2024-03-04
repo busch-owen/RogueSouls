@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1849512328634653346
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3097555738734719332}
+  m_Layer: 0
+  m_Name: CarryPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3097555738734719332
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1849512328634653346}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.8000001, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4318066684862964578}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4318066684622877757
 GameObject:
   m_ObjectHideFlags: 0
@@ -5085,6 +5116,7 @@ Transform:
   m_Children:
   - {fileID: 4318066684622877746}
   - {fileID: 4318066686059717084}
+  - {fileID: 3097555738734719332}
   m_Father: {fileID: 4318066686164884428}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5194,7 +5226,10 @@ MonoBehaviour:
   dodgeRollCooldownTime: 1
   dodgeRollDurationTime: 0.4
   _playerSpriteObject: {fileID: 4318066684622877757}
+  _objectCarryPoint: {fileID: 1849512328634653346}
   _rb: {fileID: 4318066686164884419}
+  _throwForce: 10
+  _throwObjectDrag: 0.1
   _crosshair: {fileID: 0}
   _crosshairMoveSpeed: 75
   _rotateSpeed: 15

@@ -29,6 +29,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     GameObject _playerSpriteObject;
 
+    [SerializeField]
+    GameObject _objectCarryPoint;
+
     Animator _animator;
 
     Vector2 _movementSpeed;
@@ -39,6 +42,16 @@ public class PlayerController : MonoBehaviour
 
     bool rolling = false;
     bool canRoll = true;
+
+    bool _carryableObjectInRange;
+    bool _currentlyCarryingAnObject;
+    GameObject _carryableObject;
+
+    [SerializeField]
+    float _throwForce;
+
+    [SerializeField]
+    float _throwObjectDrag;
 
     [Space(10)]
 
@@ -127,6 +140,11 @@ public class PlayerController : MonoBehaviour
     {
         HandleSpritesAndAnimations();
         HandleMovement();
+
+        if(_currentlyCarryingAnObject)
+        {
+            _carryableObject.transform.localPosition = Vector2.zero;
+        }
     }
 
     #endregion
@@ -176,6 +194,11 @@ public class PlayerController : MonoBehaviour
     {
         yield return new WaitForSeconds(dodgeRollCooldownTime);
         canRoll = true;
+    }
+
+    public bool CurrentlyRolling()
+    {
+        return rolling;
     }
 
     #endregion
@@ -246,4 +269,49 @@ public class PlayerController : MonoBehaviour
     }
 
     #endregion
+
+    #region Collision Detection
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if(other.gameObject.tag == "Carryable" && !_currentlyCarryingAnObject)
+        {
+            _carryableObjectInRange = true;
+            _carryableObject = other.gameObject;
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Carryable" && !_currentlyCarryingAnObject)
+        {
+            _carryableObjectInRange = false;
+            _carryableObject = null;
+        }
+    }
+
+    #endregion
+
+    public void Interact()
+    {
+        if(_carryableObjectInRange && !_currentlyCarryingAnObject)
+        {
+            BoxCollider2D heldCollider = _carryableObject.GetComponent<BoxCollider2D>();
+            heldCollider.enabled = false;
+            _aimHandleTransform.gameObject.SetActive(false);
+            _carryableObject.transform.parent = _objectCarryPoint.transform;
+            _carryableObject.transform.localPosition = Vector3.zero;
+            _currentlyCarryingAnObject = true;
+        }
+        else if(_currentlyCarryingAnObject)
+        {
+            Rigidbody2D tempRb = _carryableObject.GetComponent<Rigidbody2D>();
+            tempRb.velocity = new Vector2(_throwForce + (Mathf.Abs(_rb.velocity.x) * 2), tempRb.velocity.y) * _playerSpriteObject.transform.localScale.x;
+            _aimHandleTransform.gameObject.SetActive(true);
+            _carryableObject.transform.parent = null;
+            _currentlyCarryingAnObject = false;
+            BoxCollider2D heldCollider = _carryableObject.GetComponent<BoxCollider2D>();
+            heldCollider.enabled = true;
+        }
+    }
 }

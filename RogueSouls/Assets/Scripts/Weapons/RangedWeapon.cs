@@ -42,6 +42,8 @@ public class RangedWeapon : MonoBehaviour
     [SerializeField]
     float maxSpread;
 
+    PlayerController playerController;
+
     bool shoot;
 
     //end of editable variables within the inspector
@@ -56,6 +58,11 @@ public class RangedWeapon : MonoBehaviour
         currentAmmo = maxAmmo;// always start with max ammo
     }
 
+    private void OnEnable()
+    {
+        playerController = GetComponentInParent<PlayerController>();
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -65,7 +72,7 @@ public class RangedWeapon : MonoBehaviour
             return;
         }
 
-        if (shoot)
+        if (shoot && !playerController.CurrentlyRolling())
         {
             Shoot();
         }
