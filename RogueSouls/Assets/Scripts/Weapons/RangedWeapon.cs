@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class RangedWeapon : MonoBehaviour
 {
@@ -24,13 +25,6 @@ public class RangedWeapon : MonoBehaviour
     ParticleSystem muzzleFlashEffect;
     [SerializeField]
     private GameObject impactEffect;    
-    [SerializeField]
-    private AudioSource audioSource;
-    [SerializeField]
-    private AudioClip shootSFX;
-    [SerializeField]
-    private AudioClip reloadSFX;
-
     [SerializeField] 
 	Transform firePoint;
 	[SerializeField]
@@ -41,6 +35,17 @@ public class RangedWeapon : MonoBehaviour
     float minSpread;
     [SerializeField]
     float maxSpread;
+
+    [SerializeField]
+    AudioClip Reload_sounds;
+    [SerializeField]
+    AudioSource sfxHandler;
+    [SerializeField]
+    AudioClip gun_sounds;
+
+
+    [SerializeField]
+    string projectileName = "Projectile";
 
     PlayerController playerController;
 
@@ -66,10 +71,9 @@ public class RangedWeapon : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (currentAmmo == 0)
+        if (currentAmmo == 0 && !isReloading)
         {
             Reload();
-            return;
         }
 
         if (shoot && !playerController.CurrentlyRolling())
@@ -78,6 +82,10 @@ public class RangedWeapon : MonoBehaviour
         }
     }
 
+    private void FixedUpdate()
+    {
+        
+    }
 
     public void EnableShootInput()//virtual function can be overridden 
 	{
@@ -96,6 +104,8 @@ public class RangedWeapon : MonoBehaviour
             timeToNextFire = Time.time + 1.0f / fireRate;// sets the time for the next bullet to be able to be fired
 
             currentAmmo--;
+            sfxHandler?.PlayOneShot(gun_sounds);
+
 
             Quaternion defaultSpreadAngle = firePoint.localRotation;
             float spread = Random.Range(minSpread, maxSpread);
@@ -106,7 +116,9 @@ public class RangedWeapon : MonoBehaviour
 
                 firePoint.transform.Rotate(new Vector3(0, 0, 1), angle);
 
-                Bullet bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+                Bullet bullet = (Bullet)PoolManager.Instance.Spawn(projectileName);
+                bullet.transform.position = firePoint.transform.position;
+                bullet.transform.rotation = firePoint.transform.rotation;
                 Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
                 rb?.AddForce(firePoint.right * bulletForce, ForceMode2D.Impulse);//impulse force represents impact 
             }
@@ -117,17 +129,23 @@ public class RangedWeapon : MonoBehaviour
 
     void Reload()
     {
+
         isReloading = true;
 
-        //audiosource go here audioSource.PlayOneShot(reloadsfx);
+        sfxHandler.clip = Reload_sounds;
+        sfxHandler?.Play();
 
+
+        //Reload_sfx?.Stop();
+        //Reload_sfx?.PlayOneShot(Reload_sounds);
         Invoke("FinishReload", reloadTime); // we do an invoke so we can add a delay to the reload time, rather than a regular function call
     }
 
     void FinishReload()
     {
         currentAmmo = maxAmmo;
-
+        sfxHandler.Stop();
+        sfxHandler.clip = null;
         isReloading = false;
     }
 }
