@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 7319297449972969170}
   m_Layer: 3
   m_Name: Projectile
-  m_TagString: Untagged
+  m_TagString: bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -50,6 +50,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hitEffect: {fileID: 2137886286693348554, guid: 16d35f7c6af167f468ce4f4d65cbdcf3, type: 3}
+  bulletLife: 2
 --- !u!50 &-8330872383825618795
 Rigidbody2D:
   serializedVersion: 4
@@ -69,7 +70,7 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 0
 --- !u!58 &4490841868447902012
 CircleCollider2D:
@@ -95,7 +96,7 @@ TrailRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1922432395358111844}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1

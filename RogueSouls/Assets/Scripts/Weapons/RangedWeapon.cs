@@ -7,8 +7,7 @@ public class RangedWeapon : MonoBehaviour
 {
 
     //weapon basics
-    [SerializeField]
-    private float damage;
+
     [SerializeField]
     private float fireRate;
     [SerializeField]
@@ -47,6 +46,11 @@ public class RangedWeapon : MonoBehaviour
     [SerializeField]
     string projectileName = "Projectile";
 
+    public static RangedWeapon Instance;
+
+    [SerializeField]
+    public float damage;
+
     PlayerController playerController;
 
     bool shoot;
@@ -61,6 +65,7 @@ public class RangedWeapon : MonoBehaviour
     void Start()
     {
         currentAmmo = maxAmmo;// always start with max ammo
+        damage = 1.0f;
     }
 
     private void OnEnable()
@@ -104,7 +109,7 @@ public class RangedWeapon : MonoBehaviour
             timeToNextFire = Time.time + 1.0f / fireRate;// sets the time for the next bullet to be able to be fired
 
             currentAmmo--;
-            sfxHandler?.PlayOneShot(gun_sounds);
+            //sfxHandler?.PlayOneShot(gun_sounds);
 
 
             Quaternion defaultSpreadAngle = firePoint.localRotation;
@@ -132,8 +137,8 @@ public class RangedWeapon : MonoBehaviour
 
         isReloading = true;
 
-        sfxHandler.clip = Reload_sounds;
-        sfxHandler?.Play();
+       // sfxHandler.clip = Reload_sounds;
+       // sfxHandler?.Play();
 
 
         //Reload_sfx?.Stop();
@@ -144,8 +149,13 @@ public class RangedWeapon : MonoBehaviour
     void FinishReload()
     {
         currentAmmo = maxAmmo;
-        sfxHandler.Stop();
-        sfxHandler.clip = null;
+        //sfxHandler?.Stop();
+        //sfxHandler.clip = null;
         isReloading = false;
+    }
+
+    public float AssignDamage( )
+    {
+        return damage;
     }
 }
