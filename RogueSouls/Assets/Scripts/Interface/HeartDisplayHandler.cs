@@ -7,27 +7,55 @@ public class HeartDisplayHandler : MonoBehaviour
     [SerializeField]
     Heart heartDisplayObject;
 
-    List<Heart> heartsSpawned = new List<Heart>();
+    List<Heart> _heartsSpawned = new List<Heart>();
 
-    PlayerStats playerStats;
+    [SerializeField]
+    EntityStats _entityStats;
+
+    int _heartToIncrement;
 
     private void OnEnable()
     {
-        playerStats = FindObjectOfType<PlayerStats>();
         CreateHeartsForAmountOfHearts();
     }
 
     private void CreateHeartsForAmountOfHearts()
     {
-        for(int i = 0; i < playerStats.AmountOfHearts; i++)
+        for(int i = 0; i < _entityStats?.AmountOfHearts; i++)
         {
             AddOneHeart();
         }
     }
 
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.KeypadEnter))
+        {
+            DecrementHeartQuarters(1);
+        }
+    }
+
     public void AddOneHeart()
     {
+        _heartToIncrement = _heartsSpawned.Count;
         Heart heartSpawned = Instantiate(heartDisplayObject, this.transform);
-        heartsSpawned.Add(heartSpawned);
+        _heartsSpawned.Add(heartSpawned);
+    }
+
+    public void DecrementHeartQuarters(int healthToTakeAway)
+    {
+        for(int i = 0; i < healthToTakeAway; i++)
+        {
+            if (_heartsSpawned[_heartToIncrement]._heartEmpty)
+            {
+                _heartToIncrement--;
+                _heartToIncrement = Mathf.Clamp(_heartToIncrement, 0, _heartsSpawned.Count);
+                _heartsSpawned[_heartToIncrement].DisableQuarters();
+            }
+            else
+            {
+                _heartsSpawned[_heartToIncrement].DisableQuarters();
+            }
+        }    
     }
 }

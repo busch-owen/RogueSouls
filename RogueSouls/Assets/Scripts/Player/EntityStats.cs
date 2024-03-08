@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerStats : Singleton<PlayerStats>
+public class EntityStats : Singleton<EntityStats>
 {
     [SerializeField]
-    protected int _health;
+    public int _health { get; private set; }
     [SerializeField]
     protected int _maxHealth;
     public int AmountOfHearts { get; private set; }
@@ -44,6 +44,11 @@ public class PlayerStats : Singleton<PlayerStats>
     public void UpdateHeartAmount()
     {
         AmountOfHearts = _maxHealth / 4;
+    }
+
+    public void IncrementHealth(int incrementAmount)
+    {
+        _health -= incrementAmount;
     }
 
 }
