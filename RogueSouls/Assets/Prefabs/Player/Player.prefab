@@ -5184,6 +5184,7 @@ GameObject:
   - component: {fileID: 4318066686164884416}
   - component: {fileID: 4318066686164884417}
   - component: {fileID: 4318066685167444878}
+  - component: {fileID: 8169967321194697775}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -5320,6 +5321,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _runParticleSystem: {fileID: 4318066684831323263}
+--- !u!114 &8169967321194697775
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4318066686164884431}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1208892c04bfdd4994ba637bb61464a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _health: 12
+  _maxHealth: 12
+  _damage: 0
+  _speed: 0
+  _playerLevel: 0
+  _levelProgressionMultiplier: 0
 --- !u!1001 &4318066685894828441
 PrefabInstance:
   m_ObjectHideFlags: 0

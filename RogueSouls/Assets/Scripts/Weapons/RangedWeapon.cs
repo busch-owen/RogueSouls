@@ -122,9 +122,12 @@ public class RangedWeapon : MonoBehaviour
                 firePoint.transform.Rotate(new Vector3(0, 0, 1), angle);
 
                 Bullet bullet = (Bullet)PoolManager.Instance.Spawn(projectileName);
+                bullet.GetComponent<TrailRenderer>().enabled = false;
                 bullet.transform.position = firePoint.transform.position;
                 bullet.transform.rotation = firePoint.transform.rotation;
+                bullet.GetComponent<TrailRenderer>().enabled = true;
                 Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
+                rb.velocity = Vector2.zero;
                 rb?.AddForce(firePoint.right * bulletForce, ForceMode2D.Impulse);//impulse force represents impact 
             }
 
