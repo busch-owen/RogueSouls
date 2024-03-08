@@ -9,9 +9,12 @@ public class Chest : MonoBehaviour
 
     Inventory _playerInventory;
 
+    Animator _animator;
+
     private void Awake()
     {
         _playerInventory = FindObjectOfType<Inventory>();
+        _animator = GetComponentInChildren<Animator>();
     }
 
     public void OpenChest()
@@ -24,5 +27,7 @@ public class Chest : MonoBehaviour
         {
             _playerInventory.AddItemsToInventoryList(_itemToGivePlayer);
         }
+
+        _animator.SetBool("ChestOpen", true);
     }
 }
