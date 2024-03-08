@@ -3,21 +3,29 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class Enemy : MonoBehaviour
+public class Enemy : EntityStats
 {
     [SerializeField] Transform target;
-
     NavMeshAgent agent;
-    EntityStats stats;
     [SerializeField]
     bool isRanged;
+
+    [SerializeField]
+    private RangedWeapon enemyGun;
+    [SerializeField]
+    private Transform gunLocation;
+
+    float _enemyWeaponRotationAngle;
+
+
     private void Start()
     {
-        stats = GetComponent<EntityStats>();
+     
         agent = GetComponent<NavMeshAgent>();
-        agent.speed = stats._speed;
+        agent.speed = _speed;
         agent.updateRotation = false;
         agent.updateUpAxis = false;
+        
     }
 
 
@@ -31,33 +39,28 @@ public class Enemy : MonoBehaviour
 
     }
 
-    public void TakeDamage(int damage)
-    {
-        stats.IncrementHealth(damage);
-        if (stats._health <= 0)
-        {
-            Destroy(this.gameObject);
-        }
-    }
-
-    IEnumerator Attack(EntityStats otherStats)
+    IEnumerator Attack()
     {
         if (isRanged)
         {
-
+            _enemyWeaponRotationAngle = Mathf.Atan2(target.transform.position.y, target.transform.position.x) * Mathf.Rad2Deg;
+            Quaternion rotation = Quaternion.AngleAxis(_enemyWeaponRotationAngle, Vector3.forward);
+            enemyGun.transform.rotation = rotation;
+            Debug.Log("eA");
+            enemyGun.Shoot();
         }
         else
         {
-            yield return new WaitForSeconds(stats._timeToAttack);
-            otherStats.IncrementHealth(stats._damage);
+            yield return new WaitForSeconds(_timeToAttack);
+            IncrementHealth(_damage);
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    private void OnTriggerStay2D(Collider2D other)
     {
         if (other.gameObject.tag == "Player")
         {
-            StartCoroutine(Attack(other.GetComponent<EntityStats>()));
+            StartCoroutine(Attack());
         }
     }
 
@@ -65,7 +68,7 @@ public class Enemy : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            StopCoroutine(Attack(other.GetComponent<EntityStats>()));
+            StopCoroutine(Attack());
         }
     }
 

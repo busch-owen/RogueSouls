@@ -156,7 +156,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
-  isRanged: 0
+  isRanged: 1
+  enemyGun: {fileID: 0}
+  gunLocation: {fileID: 707130954911064591}
 --- !u!195 &707130954911064588
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -213,7 +215,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0.25}
   serializedVersion: 2
-  m_Radius: 0.75
+  m_Radius: 7.5
 --- !u!58 &4139663914434503878
 CircleCollider2D:
   m_ObjectHideFlags: 0
