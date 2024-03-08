@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EntityStats : Singleton<EntityStats>
+public class EntityStats : MonoBehaviour
 {
     [SerializeField]
     public int _health { get; private set; }
@@ -19,43 +19,32 @@ public class EntityStats : Singleton<EntityStats>
     [field: SerializeField]
     public float _timeToAttack { get; private set; }
 
-    [SerializeField]
-    protected int _playerLevel;
-    protected float _playerLevelProgression;
-    protected float _amountUntilNextLevel;
-    [SerializeField]
-    protected float _levelProgressionMultiplier;
-    [SerializeField]
-    protected float _xpValue;
-
     HeartDisplayHandler _heartDisplayHandler;
 
-    private void Awake()
+    public virtual void Awake()
     {
         _heartDisplayHandler = GetComponentInChildren<HeartDisplayHandler>();
         UpdateHeartAmount();
         _health = _maxHealth;
     }
 
-    public void IncrementPlayerLevel(int incrementAmount)
-    {
-        _playerLevelProgression += incrementAmount;
 
-        if(_playerLevelProgression >= _amountUntilNextLevel)
-        {
-            _playerLevel++;
-            _playerLevelProgression -= _amountUntilNextLevel;
 
-            _amountUntilNextLevel *= _levelProgressionMultiplier;
-        }
-    }
-
-    public void UpdateHeartAmount()
+    public virtual void UpdateHeartAmount()
     {
         AmountOfHearts = _maxHealth / 4;
     }
 
-    public void IncrementHealth(int incrementAmount)
+    public void TakeDamage(int damage)
+    {
+        IncrementHealth(damage);
+        if (_health <= 0)
+        {
+            Destroy(this.gameObject);
+        }
+    }
+
+    public virtual void IncrementHealth(int incrementAmount)
     {
 
         if(_health <= 0)
