@@ -22,7 +22,10 @@ public class Bullet : PoolObject
             enemyToHit.TakeDamage(bulletDamage);
             this.OnDeSpawn();
         }
-        
+        else
+        {
+            this.OnDeSpawn();
+        }
 
     }
 
