@@ -134,8 +134,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 707130954911064585}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 6.107341, y: -1.0404524, z: 9.895327}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -194,7 +194,7 @@ MonoBehaviour:
   _maxHealth: 8
   <_damage>k__BackingField: 1
   <_speed>k__BackingField: 4
-  <_timeToAttack>k__BackingField: 0.25
+  <_timeToAttack>k__BackingField: 1
   _playerLevel: 0
   _levelProgressionMultiplier: 0
   _xpValue: 10

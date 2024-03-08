@@ -53,7 +53,16 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     float _throwObjectDrag;
 
+    Chest _currentChest;
+    bool _inRangeOfChest = false;
+
     [Space(10)]
+
+    #endregion
+
+    #region Inventory
+
+    Inventory _playerInventory;
 
     #endregion
 
@@ -119,8 +128,10 @@ public class PlayerController : MonoBehaviour
         _animator = GetComponent<Animator>();
         _rb = GetComponent<Rigidbody2D>();
         _crosshairClamp = FindObjectOfType<CrosshairClamp>();
+        _crosshair = _crosshairClamp.gameObject;
         _weaponOffsetHandle = GetComponentInChildren<WeaponOffsetHandle>();
         _effectHandler = GetComponentInChildren<PlayerEffectHandler>();
+        _playerInventory = FindObjectOfType<Inventory>();
         _dodgeSmearRenderer.enabled = false;
     }
 
@@ -279,6 +290,11 @@ public class PlayerController : MonoBehaviour
             _carryableObjectInRange = true;
             _carryableObject = other.gameObject;
         }
+        if(other.gameObject.tag == "Chest" && !_inRangeOfChest)
+        {
+            _currentChest = other.GetComponent<Chest>();
+            _inRangeOfChest = true;
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -287,6 +303,11 @@ public class PlayerController : MonoBehaviour
         {
             _carryableObjectInRange = false;
             _carryableObject = null;
+        }
+        if (other.gameObject.tag == "Chest" && !_inRangeOfChest)
+        {
+            _currentChest = null;
+            _inRangeOfChest = false;
         }
     }
 
@@ -312,6 +333,11 @@ public class PlayerController : MonoBehaviour
             _currentlyCarryingAnObject = false;
             BoxCollider2D heldCollider = _carryableObject.GetComponent<BoxCollider2D>();
             heldCollider.enabled = true;
+        }
+
+        if(_inRangeOfChest)
+        {
+            _currentChest.OpenChest();
         }
     }
 }
