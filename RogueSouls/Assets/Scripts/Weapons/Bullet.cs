@@ -7,6 +7,8 @@ public class Bullet : PoolObject
     [SerializeField]
 	GameObject hitEffect;
     [SerializeField]
+    TrailRenderer _trailRenderer;
+    [SerializeField]
     float bulletLife = 2f;
     float bulletDamage;
     RangedWeapon weapon;
@@ -31,6 +33,7 @@ public class Bullet : PoolObject
 
     void OnEnable()
     {
+        _trailRenderer = GetComponent<TrailRenderer>();
         Invoke("OnDeSpawn", bulletLife);
         weapon = FindObjectOfType<RangedWeapon>();
         bulletDamage = weapon.AssignDamage();

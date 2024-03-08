@@ -14,7 +14,7 @@ public class HeartDisplayHandler : MonoBehaviour
 
     int _heartToIncrement;
 
-    private void OnEnable()
+    private void Start()
     {
         CreateHeartsForAmountOfHearts();
     }

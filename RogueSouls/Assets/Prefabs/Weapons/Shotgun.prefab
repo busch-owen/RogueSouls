@@ -161,8 +161,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20ed228703a8f364aaede8ce7460a766, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 15
-  fireRate: 1
+  fireRate: 0.75
   bulletLifetime: 0
   maxAmmo: 10
   bulletCount: 5
@@ -170,11 +169,13 @@ MonoBehaviour:
   cam: {fileID: 0}
   muzzleFlashEffect: {fileID: 0}
   impactEffect: {fileID: 0}
-  audioSource: {fileID: 0}
-  shootSFX: {fileID: 0}
-  reloadSFX: {fileID: 0}
   firePoint: {fileID: 7675829782731265171}
   bulletPrefab: {fileID: 2713882379851067500, guid: b954354dfbcdd624d90c2f4cf0739dc7, type: 3}
   bulletForce: 15
   minSpread: 30
   maxSpread: 50
+  Reload_sounds: {fileID: 0}
+  sfxHandler: {fileID: 0}
+  gun_sounds: {fileID: 0}
+  projectileName: Projectile
+  damage: 15
