@@ -49,7 +49,7 @@ public class RangedWeapon : MonoBehaviour
     public static RangedWeapon Instance;
 
     [SerializeField]
-    public float damage;
+    int damage;
 
     PlayerController playerController;
 
@@ -65,7 +65,6 @@ public class RangedWeapon : MonoBehaviour
     void Start()
     {
         currentAmmo = maxAmmo;// always start with max ammo
-        damage = 1.0f;
     }
 
     private void OnEnable()
@@ -157,7 +156,7 @@ public class RangedWeapon : MonoBehaviour
         isReloading = false;
     }
 
-    public float AssignDamage( )
+    public int AssignDamage( )
     {
         return damage;
     }

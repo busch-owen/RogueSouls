@@ -10,7 +10,7 @@ public class Bullet : PoolObject
     TrailRenderer _trailRenderer;
     [SerializeField]
     float bulletLife = 2f;
-    float bulletDamage;
+    int bulletDamage;
     RangedWeapon weapon;
 
 
@@ -20,7 +20,7 @@ public class Bullet : PoolObject
 
         if(other.gameObject.tag == "enemy")
         {
-            enemy enemyToHit = other.gameObject.GetComponent<enemy>();
+            Enemy enemyToHit = other.gameObject.GetComponent<Enemy>();
             enemyToHit.TakeDamage(bulletDamage);
             this.OnDeSpawn();
         }

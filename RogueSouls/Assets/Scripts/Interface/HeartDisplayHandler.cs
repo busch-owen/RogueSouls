@@ -9,14 +9,15 @@ public class HeartDisplayHandler : MonoBehaviour
 
     List<Heart> _heartsSpawned = new List<Heart>();
 
-    [SerializeField]
     EntityStats _entityStats;
 
     int _heartToIncrement;
 
     private void Start()
     {
+        _entityStats = GetComponentInParent<EntityStats>();
         CreateHeartsForAmountOfHearts();
+
     }
 
     private void CreateHeartsForAmountOfHearts()
