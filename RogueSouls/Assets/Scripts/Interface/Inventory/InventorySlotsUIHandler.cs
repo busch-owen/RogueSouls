@@ -30,7 +30,6 @@ public class InventorySlotsUIHandler : MonoBehaviour
     {
         for(int i = 0; i < _inventory._inventoryObjects.Count; i++)
         {
-            Debug.Log(i);
             _slotItemImages[i].enabled = true;
             _slotItemImages[i].sprite = _inventory._inventoryObjects[i].GetComponentInChildren<SpriteRenderer>().sprite;
             _slotItemImages[i].SetNativeSize();
