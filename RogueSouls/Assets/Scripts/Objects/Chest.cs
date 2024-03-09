@@ -11,23 +11,30 @@ public class Chest : MonoBehaviour
 
     Animator _animator;
 
+    bool _opened;
+
     private void Awake()
     {
         _playerInventory = FindObjectOfType<Inventory>();
         _animator = GetComponentInChildren<Animator>();
+        _opened = false;
     }
 
     public void OpenChest()
     {
-        if(_itemToGivePlayer.GetComponent<Key>())
+        if(!_opened)
         {
-            _playerInventory.AddKeysToKeysCount(_itemToGivePlayer);
-        }
-        else
-        {
-            _playerInventory.AddItemsToInventoryList(_itemToGivePlayer);
-        }
+            if (_itemToGivePlayer.GetComponent<Key>())
+            {
+                _playerInventory.AddKeysToKeysCount(_itemToGivePlayer);
+            }
+            else
+            {
+                _playerInventory.AddItemsToInventoryList(_itemToGivePlayer);
+            }
 
-        _animator.SetBool("ChestOpen", true);
+            _animator.SetBool("ChestOpen", true);
+            _opened = true;
+        }
     }
 }
