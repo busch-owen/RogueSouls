@@ -7,8 +7,6 @@ TagManager:
   - Carryable
   - bullet
   - enemy
-  - EnemyBullet
-  - Chest
   layers:
   - Default
   - TransparentFX
