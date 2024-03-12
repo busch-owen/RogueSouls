@@ -5,17 +5,19 @@ using UnityEngine;
 public class Bullet : PoolObject
 {
     [SerializeField]
-	GameObject hitEffect;
+    protected GameObject hitEffect;
     [SerializeField]
-    TrailRenderer _trailRenderer;
+    protected TrailRenderer _trailRenderer;
     [SerializeField]
-    float bulletLife = 2f;
-    int bulletDamage;
-    RangedWeapon weapon;
+    protected float bulletLife = 2f;
+    [SerializeField]
+    protected int bulletDamage;
+    [SerializeField]
+    protected RangedWeapon weapon;
 
 
     // Start is called before the first frame update
-    private void OnCollisionEnter2D(Collision2D other) 
+    public virtual void OnCollisionEnter2D(Collision2D other) 
 	{
 
         if(other.gameObject.tag == "enemy")
@@ -31,7 +33,7 @@ public class Bullet : PoolObject
 
     }
 
-    void OnEnable()
+    public virtual void OnEnable()
     {
         _trailRenderer = GetComponent<TrailRenderer>();
         Invoke("OnDeSpawn", bulletLife);

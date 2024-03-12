@@ -25,7 +25,7 @@ public class RangedWeapon : MonoBehaviour
     [SerializeField]
     private GameObject impactEffect;    
     [SerializeField] 
-	Transform firePoint;
+	public Transform firePoint;
 	[SerializeField]
 	Bullet bulletPrefab;
 	[SerializeField]
