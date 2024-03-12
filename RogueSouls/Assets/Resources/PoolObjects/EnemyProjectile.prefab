@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4490841868447902012}
   - component: {fileID: 1529760520838631460}
   - component: {fileID: 7319297449972969170}
-  m_Layer: 3
+  m_Layer: 6
   m_Name: EnemyProjectile
   m_TagString: EnemyBullet
   m_Icon: {fileID: 0}
@@ -131,7 +131,7 @@ TrailRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 461597429
-  m_SortingLayer: 4
+  m_SortingLayer: 5
   m_SortingOrder: 0
   m_Time: 0.05
   m_Parameters:
@@ -209,7 +209,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1148064506714309996}
   - component: {fileID: 1803989428083035449}
-  m_Layer: 3
+  m_Layer: 6
   m_Name: Light 2D
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -320,7 +320,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1420703805567809762}
   - component: {fileID: 7766332586431079263}
-  m_Layer: 3
+  m_Layer: 6
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -381,7 +381,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 461597429
-  m_SortingLayer: 4
+  m_SortingLayer: 5
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 2c9e07789b385004abc4d2ba8888b25c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

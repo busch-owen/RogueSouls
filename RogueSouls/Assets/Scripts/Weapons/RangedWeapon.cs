@@ -42,10 +42,6 @@ public class RangedWeapon : MonoBehaviour
     [SerializeField]
     AudioClip gun_sounds;
 
-
-    [SerializeField]
-    string projectileName = "Projectile";
-
     public static RangedWeapon Instance;
 
     [SerializeField]
@@ -69,6 +65,7 @@ public class RangedWeapon : MonoBehaviour
 
     private void OnEnable()
     {
+
         playerController = GetComponentInParent<PlayerController>();
     }
 
@@ -120,7 +117,7 @@ public class RangedWeapon : MonoBehaviour
 
                 firePoint.transform.Rotate(new Vector3(0, 0, 1), angle);
 
-                Bullet bullet = (Bullet)PoolManager.Instance.Spawn(projectileName);
+                Bullet bullet = (Bullet)PoolManager.Instance.Spawn(bulletPrefab.name);
                 bullet.GetComponent<TrailRenderer>().enabled = false;
                 bullet.transform.position = firePoint.transform.position;
                 bullet.transform.rotation = firePoint.transform.rotation;
