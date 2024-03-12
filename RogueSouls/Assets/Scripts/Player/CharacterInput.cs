@@ -273,6 +273,15 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""PauseMenu"",
+                    ""type"": ""Button"",
+                    ""id"": ""e3d8881c-9e59-477b-baed-0f8b8d917001"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -363,6 +372,28 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
                     ""action"": ""Interact"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8e4c3905-a140-4a52-b847-7d28f0c349c9"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PauseMenu"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""944210cb-2c96-4432-9007-5d10eeceb67d"",
+                    ""path"": ""<Gamepad>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PauseMenu"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -380,6 +411,7 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
         m_CharacterActions_DodgeRoll = m_CharacterActions.FindAction("DodgeRoll", throwIfNotFound: true);
         m_CharacterActions_OpenWeaponWheel = m_CharacterActions.FindAction("OpenWeaponWheel", throwIfNotFound: true);
         m_CharacterActions_Interact = m_CharacterActions.FindAction("Interact", throwIfNotFound: true);
+        m_CharacterActions_PauseMenu = m_CharacterActions.FindAction("PauseMenu", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -507,6 +539,7 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_CharacterActions_DodgeRoll;
     private readonly InputAction m_CharacterActions_OpenWeaponWheel;
     private readonly InputAction m_CharacterActions_Interact;
+    private readonly InputAction m_CharacterActions_PauseMenu;
     public struct CharacterActionsActions
     {
         private @CharacterInput m_Wrapper;
@@ -515,6 +548,7 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
         public InputAction @DodgeRoll => m_Wrapper.m_CharacterActions_DodgeRoll;
         public InputAction @OpenWeaponWheel => m_Wrapper.m_CharacterActions_OpenWeaponWheel;
         public InputAction @Interact => m_Wrapper.m_CharacterActions_Interact;
+        public InputAction @PauseMenu => m_Wrapper.m_CharacterActions_PauseMenu;
         public InputActionMap Get() { return m_Wrapper.m_CharacterActions; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -536,6 +570,9 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
             @Interact.started += instance.OnInteract;
             @Interact.performed += instance.OnInteract;
             @Interact.canceled += instance.OnInteract;
+            @PauseMenu.started += instance.OnPauseMenu;
+            @PauseMenu.performed += instance.OnPauseMenu;
+            @PauseMenu.canceled += instance.OnPauseMenu;
         }
 
         private void UnregisterCallbacks(ICharacterActionsActions instance)
@@ -552,6 +589,9 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
             @Interact.started -= instance.OnInteract;
             @Interact.performed -= instance.OnInteract;
             @Interact.canceled -= instance.OnInteract;
+            @PauseMenu.started -= instance.OnPauseMenu;
+            @PauseMenu.performed -= instance.OnPauseMenu;
+            @PauseMenu.canceled -= instance.OnPauseMenu;
         }
 
         public void RemoveCallbacks(ICharacterActionsActions instance)
@@ -581,5 +621,6 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
         void OnDodgeRoll(InputAction.CallbackContext context);
         void OnOpenWeaponWheel(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
+        void OnPauseMenu(InputAction.CallbackContext context);
     }
 }
