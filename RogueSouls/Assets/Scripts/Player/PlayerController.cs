@@ -297,7 +297,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerExit2D(Collider2D other)
     {
         if (other.gameObject.tag == "Carryable" && !_currentlyCarryingAnObject)
         {
@@ -310,7 +310,6 @@ public class PlayerController : MonoBehaviour
             _inRangeOfChest = false;
         }
     }
-
     #endregion
 
     public void Interact()
