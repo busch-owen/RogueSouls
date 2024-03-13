@@ -35,7 +35,10 @@ public class WarpObject : MonoBehaviour
         if(other.gameObject.GetComponent<PlayerController>())
         {
             _warpTarget = other.transform;
-            _warpPosition.GetComponent<BoxCollider2D>().enabled = false;
+            if(_warpPosition.GetComponent<BoxCollider2D>())
+            {
+                _warpPosition.GetComponent<BoxCollider2D>().enabled = false;
+            }
             StartCoroutine(BeginWarpSequence());
             Invoke("TriggerReturnTransition", _warpCooldownLength);
         }
@@ -57,19 +60,6 @@ public class WarpObject : MonoBehaviour
         }
     }
 
-    void TriggerReturnTransition()
-    {
-        StartCoroutine(ReturnWarpSequence());
-    }
-
-    void ResetStairs()
-    {
-        _warpOverlay.SetActive(false);
-        _warpPosition.GetComponent<BoxCollider2D>().enabled = true;
-        StopAllCoroutines();
-        _onCooldown = false;
-    }
-
     IEnumerator ReturnWarpSequence()
     {
         _warpOverlay.transform.localScale = _targetWarpOverlaySize;
@@ -79,5 +69,22 @@ public class WarpObject : MonoBehaviour
             _warpOverlay.transform.localScale = Vector3.Lerp(_warpOverlay.transform.localScale, _defaultWarpOverlaySize, _warpOutTransitionSpeed * Time.fixedDeltaTime);
             yield return new WaitForFixedUpdate();
         }
+    }
+
+    void TriggerReturnTransition()
+    {
+        StartCoroutine(ReturnWarpSequence());
+    }
+
+    void ResetStairs()
+    {
+        _warpOverlay.SetActive(false);
+        if (_warpPosition.GetComponent<BoxCollider2D>())
+        {
+            _warpPosition.GetComponent<BoxCollider2D>().enabled = true;
+        }
+        StopAllCoroutines();
+        _onCooldown = false;
+        _warpTarget = null;
     }
 }
