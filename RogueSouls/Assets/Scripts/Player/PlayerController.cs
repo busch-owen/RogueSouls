@@ -53,9 +53,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     float _throwObjectDrag;
 
-    Chest _currentChest;
-    bool _inRangeOfChest = false;
-
     [Space(10)]
 
     #endregion
@@ -104,6 +101,16 @@ public class PlayerController : MonoBehaviour
 	private Transform gunLocation;
 
     [Space(10)]
+
+    #endregion
+
+    #region Misc Interaction Variables
+
+    Door _currentDoor;
+    bool _inRangeOfDoor = false;
+
+    Chest _currentChest;
+    bool _inRangeOfChest = false;
 
     #endregion
 
@@ -295,6 +302,11 @@ public class PlayerController : MonoBehaviour
             _currentChest = other.GetComponent<Chest>();
             _inRangeOfChest = true;
         }
+        if (other.GetComponent<Door>())
+        {
+            _currentDoor = other.GetComponent<Door>();
+            _inRangeOfDoor = true;
+        }
     }
 
     private void OnTriggerExit2D(Collider2D other)
@@ -304,10 +316,15 @@ public class PlayerController : MonoBehaviour
             _carryableObjectInRange = false;
             _carryableObject = null;
         }
-        if (other.gameObject.tag == "Chest" && !_inRangeOfChest)
+        if (other.gameObject.tag == "Chest")
         {
             _currentChest = null;
             _inRangeOfChest = false;
+        }
+        if(other.GetComponent<Door>())
+        {
+            _currentDoor = null;
+            _inRangeOfDoor = false;
         }
     }
     #endregion
@@ -337,6 +354,16 @@ public class PlayerController : MonoBehaviour
         if(_inRangeOfChest)
         {
             _currentChest.OpenChest();
+        }
+
+        if(_inRangeOfDoor)
+        {
+            if(_currentDoor.IsLocked && _playerInventory._keys.Count < 0)
+            {
+                _currentDoor.UnlockDoor();
+                _currentDoor.OpenDoor();
+                _playerInventory._keys.RemoveAt(0);
+            }
         }
     }
 }
