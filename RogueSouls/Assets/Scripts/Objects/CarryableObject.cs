@@ -12,6 +12,9 @@ public class CarryableObject : MonoBehaviour
     [SerializeField]
     ParticleSystem _destructionEffect;
 
+    BoxCollider2D _boxCollider;
+    CircleCollider2D _circleCollider;
+
     Rigidbody2D _rb;
 
     [SerializeField]
@@ -20,6 +23,11 @@ public class CarryableObject : MonoBehaviour
     private void Start()
     {
         _carryableObject = GetComponentInChildren<SpriteRenderer>().gameObject;
+        _boxCollider = GetComponent<BoxCollider2D>();
+        _circleCollider = GetComponent<CircleCollider2D>();
+
+        _boxCollider.enabled = true;
+        _circleCollider.enabled = true;
         _rb = GetComponent<Rigidbody2D>();
     }
 
@@ -29,11 +37,15 @@ public class CarryableObject : MonoBehaviour
         {
             _destructionEffect?.Play();
             _carryableObject?.SetActive(false);
+            _boxCollider.enabled = false;
+            _circleCollider.enabled = false;
         }
     }
 
     public void ReEnableVisuals()
     {
         _carryableObject?.SetActive(true);
+        _boxCollider.enabled = true;
+        _circleCollider.enabled = true;
     }
 }

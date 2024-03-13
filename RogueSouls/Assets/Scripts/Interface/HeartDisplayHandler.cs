@@ -28,14 +28,6 @@ public class HeartDisplayHandler : MonoBehaviour
         }
     }
 
-    private void Update()
-    {
-        if(Input.GetKeyDown(KeyCode.KeypadEnter))
-        {
-            DecrementHeartQuarters(1);
-        }
-    }
-
     public void AddOneHeart()
     {
         _heartToIncrement = _heartsSpawned.Count;

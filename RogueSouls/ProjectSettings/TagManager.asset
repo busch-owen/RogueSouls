@@ -8,6 +8,7 @@ TagManager:
   - bullet
   - enemy
   - Chest
+  - WarpOverlay
   layers:
   - Default
   - TransparentFX

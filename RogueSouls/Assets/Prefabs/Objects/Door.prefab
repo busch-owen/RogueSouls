@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5864565272681678596}
   m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: -10.5, y: -0.5, z: -0.015649883}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -49,6 +49,7 @@ MonoBehaviour:
   <IsLocked>k__BackingField: 0
   _unlockedSprite: {fileID: 1764806380, guid: 6662024cfeada224c91b67727658692e, type: 3}
   _lockedSprite: {fileID: 571667588, guid: 6662024cfeada224c91b67727658692e, type: 3}
+  _bossDoorSprite: {fileID: 0}
 --- !u!61 &5864565272681678595
 BoxCollider2D:
   m_ObjectHideFlags: 0
