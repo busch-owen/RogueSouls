@@ -3517,7 +3517,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a737ed26817ceb48899a8892934a5f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _itemToGivePlayer: {fileID: 3873842773402911558, guid: b47d89c4ec14c0140968ffd2b988d81e, type: 3}
+  _itemToGivePlayer: {fileID: 1513510823955187234, guid: a668b7cdba5073d42b710fd430408496, type: 3}
 --- !u!1 &936539257
 GameObject:
   m_ObjectHideFlags: 0
@@ -5599,7 +5599,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 936c1957a22eb5547a5d2f0c0a80a6c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <IsLocked>k__BackingField: 0
+  <IsLocked>k__BackingField: 1
   _unlockedSprite: {fileID: 1764806380, guid: 6662024cfeada224c91b67727658692e, type: 3}
   _lockedSprite: {fileID: 571667588, guid: 6662024cfeada224c91b67727658692e, type: 3}
 --- !u!4 &1625394636
