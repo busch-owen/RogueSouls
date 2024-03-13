@@ -358,7 +358,7 @@ public class PlayerController : MonoBehaviour
 
         if(_inRangeOfDoor)
         {
-            if(_currentDoor.IsLocked && _playerInventory._keys.Count < 0)
+            if(_currentDoor.IsLocked && _playerInventory._keys.Count > 0)
             {
                 _currentDoor.UnlockDoor();
                 _currentDoor.OpenDoor();
