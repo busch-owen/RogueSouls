@@ -28,18 +28,22 @@ public class InteractableObject : MonoBehaviour
         {
             return;
         }
-        if(!isTriggerObject && !collision.gameObject.GetComponent<Bullet>())
+        if (!isTriggerObject && !collision.gameObject.GetComponent<Bullet>())
         {
-            if(!_targetDoor.IsLocked)
+            if (!_targetDoor.IsLocked)
             {
                 _targetDoor.OpenDoor();
                 _renderer.sprite = _onSprite;
             }
-                
+
         }
-        else if(collision.gameObject.GetComponent<Bullet>() && isTriggerObject)
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.GetComponent<Bullet>() && isTriggerObject)
         {
-            if(!_targetDoor.IsOpen)
+            if (!_targetDoor.IsOpen)
             {
                 _targetDoor.OpenDoor();
                 _renderer.sprite = _onSprite;
@@ -50,7 +54,6 @@ public class InteractableObject : MonoBehaviour
                 _renderer.sprite = _offSprite;
             }
         }
-
     }
 
     private void OnTriggerExit2D(Collider2D collision)
