@@ -28,6 +28,10 @@ public class Chest : MonoBehaviour
             {
                 _playerInventory.AddKeysToKeysCount(_itemToGivePlayer);
             }
+            else if(_itemToGivePlayer.GetComponent<BossKey>())
+            {
+                _playerInventory.AddBossKeysToBossKeysCount(_itemToGivePlayer);
+            }
             else
             {
                 _playerInventory.AddItemsToInventoryList(_itemToGivePlayer);

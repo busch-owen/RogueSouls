@@ -17,8 +17,6 @@ public class WarpObject : MonoBehaviour
     [SerializeField]
     float _warpInTransitionSpeed, _warpOutTransitionSpeed, _warpCooldownLength, _stairUseCooldownTime;
 
-    bool _onCooldown;
-
     private void Awake()
     {
         _warpOverlay = GameObject.FindGameObjectWithTag("WarpOverlay");
@@ -84,7 +82,6 @@ public class WarpObject : MonoBehaviour
             _warpPosition.GetComponent<BoxCollider2D>().enabled = true;
         }
         StopAllCoroutines();
-        _onCooldown = false;
         _warpTarget = null;
     }
 }

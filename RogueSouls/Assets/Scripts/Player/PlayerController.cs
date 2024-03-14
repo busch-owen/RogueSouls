@@ -358,11 +358,17 @@ public class PlayerController : MonoBehaviour
 
         if(_inRangeOfDoor)
         {
-            if(_currentDoor.IsLocked && _playerInventory._keys.Count > 0)
+            if(_currentDoor.IsLocked && _playerInventory.Keys.Count > 0)
             {
                 _currentDoor.UnlockDoor();
                 _currentDoor.OpenDoor();
-                _playerInventory._keys.RemoveAt(0);
+                _playerInventory.Keys.RemoveAt(0);
+            }
+            else if(_currentDoor.IsBossDoor && _playerInventory.BossKeys.Count > 0)
+            {
+                _currentDoor.UnlockDoor();
+                _currentDoor.OpenDoor();
+                _playerInventory.BossKeys.RemoveAt(0);
             }
         }
     }

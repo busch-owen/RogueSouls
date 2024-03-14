@@ -7,6 +7,7 @@ public class Door : MonoBehaviour
     [field: SerializeField]
     public bool IsLocked { get; private set; }
 
+    [field: SerializeField]
     public bool IsBossDoor { get; private set; }
 
     public bool IsOpen { get; private set; }
@@ -14,7 +15,7 @@ public class Door : MonoBehaviour
     GameObject _doorObject;
 
     [SerializeField]
-    Sprite _unlockedSprite, _lockedSprite, _bossDoorSprite;
+    Sprite _unlockedSprite, _lockedSprite;
 
     SpriteRenderer _doorRenderer;
 
@@ -26,7 +27,6 @@ public class Door : MonoBehaviour
         if(IsBossDoor)
         {
             IsLocked = true;
-            _doorRenderer.sprite = _bossDoorSprite;
         }
 
         if(IsLocked)
