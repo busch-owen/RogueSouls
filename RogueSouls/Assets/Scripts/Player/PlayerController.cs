@@ -43,6 +43,8 @@ public class PlayerController : MonoBehaviour
     bool rolling = false;
     bool canRoll = true;
 
+    bool _preventInput = false;
+
     bool _carryableObjectInRange;
     bool _currentlyCarryingAnObject;
     GameObject _carryableObject;
@@ -150,14 +152,18 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        HandleAim();
+        if(!_preventInput)
+        {
+            HandleAim();
+            HandleMovement();
+        }
         HandleCrosshairControllerMovement();
     }
 
     private void FixedUpdate()
     {
         HandleSpritesAndAnimations();
-        HandleMovement();
+        
 
         if(_currentlyCarryingAnObject)
         {
@@ -217,6 +223,18 @@ public class PlayerController : MonoBehaviour
     public bool CurrentlyRolling()
     {
         return rolling;
+    }
+
+    public void PreventInput()
+    {
+        _preventInput = true;
+        _movementSpeed = Vector2.zero;
+        _rb.velocity = Vector2.zero;
+    }
+
+    public void AllowInput()
+    {
+        _preventInput = false;
     }
 
     #endregion

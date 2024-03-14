@@ -44,6 +44,14 @@ public class EntityStats : MonoBehaviour
         }
     }
 
+    public void IncreaseHealth(int increaseAmount)
+    {
+        _maxHealth += increaseAmount;
+        _health = _maxHealth;
+        UpdateHeartAmount();
+        _heartDisplayHandler.AddOneHeart();
+    }
+
     public virtual void IncrementHealth(int incrementAmount)
     {
 

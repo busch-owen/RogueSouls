@@ -19,15 +19,18 @@ public class Heart : MonoBehaviour
 
     public void DisableQuarters()
     {
-        _heartQuarters[_quarters - 1].SetActive(false);
-        _quarters--;
-        _heartEmpty = _quarters <= 0;
+        if(_quarters >= 1)
+        {
+            _heartQuarters[_quarters - 1]?.SetActive(false);
+            _quarters--;
+            _heartEmpty = _quarters <= 0;
+        }
     }
 
     public void EnableQuarters(int quarterIndex)
     {
         int index = quarterIndex - 1;
-        _heartQuarters[index].SetActive(true);
+        _heartQuarters[index]?.SetActive(true);
         _heartEmpty = false;
     }
 }

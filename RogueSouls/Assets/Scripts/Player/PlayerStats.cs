@@ -13,10 +13,6 @@ public class PlayerStats : EntityStats
     protected float _levelProgressionMultiplier;
     [SerializeField]
     protected float _xpValue;
-    void Start()
-    {
-        
-    }
 
     public void IncrementPlayerLevel(int incrementAmount)
     {
@@ -29,11 +25,5 @@ public class PlayerStats : EntityStats
 
             _amountUntilNextLevel *= _levelProgressionMultiplier;
         }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }
