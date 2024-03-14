@@ -7,8 +7,9 @@ TagManager:
   - Carryable
   - bullet
   - enemy
-  - Chest
+  - EnemyBullet
   - WarpOverlay
+  - Chest
   layers:
   - Default
   - TransparentFX
@@ -16,8 +17,8 @@ TagManager:
   - projectile
   - Water
   - UI
-  - 
-  - 
+  - EnemyProjectile
+  - Enemy
   - 
   - 
   - 
