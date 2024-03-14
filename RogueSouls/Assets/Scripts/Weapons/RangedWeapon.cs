@@ -110,6 +110,8 @@ public class RangedWeapon : MonoBehaviour
             currentAmmo--;
             //sfxHandler?.PlayOneShot(gun_sounds);
 
+            muzzleFlashEffect?.Stop();
+            muzzleFlashEffect?.Play();
 
             Quaternion defaultSpreadAngle = firePoint.localRotation;
             float spread = Random.Range(minSpread, maxSpread);

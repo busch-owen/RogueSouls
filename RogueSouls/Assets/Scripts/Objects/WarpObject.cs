@@ -6,6 +6,8 @@ public class WarpObject : MonoBehaviour
 {
     Transform _warpTarget;
 
+    Rigidbody2D _warpTargetRb;
+
     [SerializeField]
     Transform _warpPosition;
 
@@ -32,6 +34,7 @@ public class WarpObject : MonoBehaviour
     {
         if(other.gameObject.GetComponent<PlayerController>())
         {
+            _warpTargetRb = other.gameObject.GetComponent<Rigidbody2D>();
             _warpTarget = other.transform;
             if(_warpPosition.GetComponent<BoxCollider2D>())
             {
@@ -51,7 +54,8 @@ public class WarpObject : MonoBehaviour
     {
         _warpOverlay.transform.localScale = _defaultWarpOverlaySize;
         _warpOverlay.SetActive(true);
-        while(true)
+        _warpTargetRb.velocity = Vector3.zero;
+        while (true)
         {
             _warpOverlay.transform.localScale = Vector3.Lerp(_warpOverlay.transform.localScale, _targetWarpOverlaySize, _warpInTransitionSpeed * Time.fixedDeltaTime);
             yield return new WaitForFixedUpdate();
@@ -82,6 +86,5 @@ public class WarpObject : MonoBehaviour
             _warpPosition.GetComponent<BoxCollider2D>().enabled = true;
         }
         StopAllCoroutines();
-        _warpTarget = null;
     }
 }
