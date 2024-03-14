@@ -35,6 +35,8 @@ public class RangedWeapon : MonoBehaviour
     [SerializeField]
     float maxSpread;
 
+    ScreenShakeEffect _screenShakeEffect;
+
     [SerializeField]
     AudioClip Reload_sounds;
     [SerializeField]
@@ -61,6 +63,7 @@ public class RangedWeapon : MonoBehaviour
     void Start()
     {
         currentAmmo = maxAmmo;// always start with max ammo
+        _screenShakeEffect = GetComponent<ScreenShakeEffect>();
     }
 
     private void OnEnable()
@@ -109,6 +112,8 @@ public class RangedWeapon : MonoBehaviour
 
             muzzleFlashEffect?.Stop();
             muzzleFlashEffect?.Play();
+
+            _screenShakeEffect?.ShakeScreen();
 
             Quaternion defaultSpreadAngle = firePoint.localRotation;
             float spread = Random.Range(minSpread, maxSpread);

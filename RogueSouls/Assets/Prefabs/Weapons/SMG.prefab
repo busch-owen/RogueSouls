@@ -126,6 +126,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6250265583612026718}
   - component: {fileID: -7550700366089920953}
+  - component: {fileID: 7758360766845423352}
   m_Layer: 0
   m_Name: SMG
   m_TagString: Untagged
@@ -175,11 +176,28 @@ MonoBehaviour:
   bulletForce: 20
   minSpread: -8
   maxSpread: 8
+  _screenShakeEffect: {fileID: 7758360766845423352}
   Reload_sounds: {fileID: 0}
   sfxHandler: {fileID: 0}
   gun_sounds: {fileID: 0}
-  projectileName: Projectile
   damage: 5
+--- !u!114 &7758360766845423352
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3873842773402911558}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71c936eb1088e824caec41dbfba797a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _targetCamTransform: {fileID: 0}
+  _shakeAmount: 5
+  _shakeDuration: 0.1
+  _shakeRate: 0.001
+  _shakeSmoothRate: 0.6
 --- !u!1001 &2463602303940190721
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -190,6 +208,18 @@ PrefabInstance:
     - target: {fileID: 1963117155386572038, guid: 5c1e6a6233d885a419ba2b377b3f13ed, type: 3}
       propertyPath: m_RootOrder
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1963117155386572038, guid: 5c1e6a6233d885a419ba2b377b3f13ed, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1963117155386572038, guid: 5c1e6a6233d885a419ba2b377b3f13ed, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1963117155386572038, guid: 5c1e6a6233d885a419ba2b377b3f13ed, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 1963117155386572038, guid: 5c1e6a6233d885a419ba2b377b3f13ed, type: 3}
       propertyPath: m_LocalPosition.x
@@ -230,6 +260,10 @@ PrefabInstance:
     - target: {fileID: 1963117155386572038, guid: 5c1e6a6233d885a419ba2b377b3f13ed, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1963117155386572038, guid: 5c1e6a6233d885a419ba2b377b3f13ed, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7094647082865296170, guid: 5c1e6a6233d885a419ba2b377b3f13ed, type: 3}
       propertyPath: m_Name
