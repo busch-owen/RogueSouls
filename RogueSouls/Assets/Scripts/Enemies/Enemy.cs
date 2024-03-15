@@ -23,7 +23,7 @@ public class Enemy : EntityStats
     private void Start()
     {
         agent = GetComponent<NavMeshAgent>();
-        agent.speed = _speed;
+        agent.speed = Speed;
         agent.updateRotation = false;
         agent.updateUpAxis = false;
     }

@@ -22,7 +22,7 @@ public class HealthSoul : MonoBehaviour
         if(other.GetComponent<PlayerStats>())
         {
             PlayerStats targetPlayer = other.GetComponent<PlayerStats>();
-            targetPlayer.IncreaseHealth(4);
+            targetPlayer.IncreaseHealth(99);
             Destroy(this.gameObject);
 
             _targetHUD.ShowSpecificMessage(_collectionMessage, _messageDuration);

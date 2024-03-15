@@ -4,20 +4,20 @@ using UnityEngine;
 
 public class EntityStats : MonoBehaviour
 {
-    [SerializeField]
-    public int _health { get; private set; }
+    [field: SerializeField]
+    public int Health { get; private set; }
     [SerializeField]
     protected int _maxHealth;
     public int AmountOfHearts { get; private set; }
 
     [field: SerializeField]
-    public int _damage { get; private set; }
+    public int Damage { get; private set; }
 
     [field: SerializeField]
-    public float _speed { get; private set; }
+    public float Speed { get; private set; }
 
     [field: SerializeField]
-    public float _timeToAttack { get; private set; }
+    public float TimeToAttack { get; private set; }
 
     HeartDisplayHandler _heartDisplayHandler;
 
@@ -25,7 +25,7 @@ public class EntityStats : MonoBehaviour
     {
         _heartDisplayHandler = GetComponentInChildren<HeartDisplayHandler>();
         UpdateHeartAmount();
-        _health = _maxHealth;
+        Health = _maxHealth;
     }
 
 
@@ -38,16 +38,22 @@ public class EntityStats : MonoBehaviour
     public void TakeDamage(int damage)
     {
         IncrementHealth(damage);
-        if (_health <= 0)
+        if (Health <= 0)
         {
             Destroy(this.gameObject);
         }
     }
 
+    public void HealEntity(int healthToHeal)
+    {
+        _heartDisplayHandler.IncreaseHeartQuarters(healthToHeal);
+        Health += healthToHeal;
+        Health = Mathf.Clamp(Health, 0, _maxHealth);
+    }
+
     public void IncreaseHealth(int increaseAmount)
     {
-        _maxHealth += increaseAmount;
-        _health = _maxHealth;
+        HealEntity(increaseAmount);
         UpdateHeartAmount();
         _heartDisplayHandler.AddOneHeart();
     }
@@ -55,14 +61,17 @@ public class EntityStats : MonoBehaviour
     public virtual void IncrementHealth(int incrementAmount)
     {
 
-        if(_health <= 0)
+        if(Health <= 0)
         {
             return;
         }
-        _health -= incrementAmount;
-        _health = Mathf.Clamp (_health, 0 , _maxHealth);
-        _heartDisplayHandler?.DecrementHeartQuarters(incrementAmount);
+        Health -= incrementAmount;
+        Health = Mathf.Clamp (Health, 0 , _maxHealth);
+        _heartDisplayHandler?.DecreaseHeartQuarters(incrementAmount);
     }
 
-
+    public bool AtFullHealth()
+    {
+        return Health == _maxHealth;
+    }
 }
