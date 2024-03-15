@@ -104,9 +104,10 @@ public class PlayerController : MonoBehaviour
     float _weaponRotationAngle;
 
     [SerializeField]
-	private RangedWeapon gun;
+	private RangedWeapon _gun;
+	private MeleeBase _melee;
 	[SerializeField]
-	private Transform gunLocation;
+	private Transform _gunLocation;
 
     [Space(10)]
 
@@ -148,6 +149,7 @@ public class PlayerController : MonoBehaviour
         _effectHandler = GetComponentInChildren<PlayerEffectHandler>();
         _playerInventory = FindObjectOfType<Inventory>();
         _dodgeSmearRenderer.enabled = false;
+        _melee = GetComponentInChildren<MeleeBase>();
 
         _normalMask = LayerMask.NameToLayer("Player");
         _invulnerableMask = LayerMask.NameToLayer("Invulnerable");
@@ -161,7 +163,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(!_preventInput)
+        if(!_preventInput )
         {
             HandleAim();
             HandleMovement();
@@ -185,7 +187,7 @@ public class PlayerController : MonoBehaviour
     #region Movement Input and Physics
     private void HandleMovement()
     {
-        if(!rolling)
+        if(!rolling && !_melee.IsLunging())
         {
             _movementSpeed = new Vector2(_xSpeed, _ySpeed);
 
@@ -217,10 +219,10 @@ public class PlayerController : MonoBehaviour
         rolling = true;
         _rb.AddForce(_movement.normalized * dodgeRollForce);
         GoInvulnerable(_invulnTime);
-        _dodgeSmearRenderer.enabled = true;
+        ToggleDashSmear(true);
         yield return new WaitForSeconds(dodgeRollDurationTime);
         StartCoroutine(BeginDodgeRollCoolDown());
-        _dodgeSmearRenderer.enabled = false;
+        ToggleDashSmear(false);
         
         rolling = false;
     }
@@ -229,6 +231,11 @@ public class PlayerController : MonoBehaviour
     {
         yield return new WaitForSeconds(dodgeRollCooldownTime);
         canRoll = true;
+    }
+
+    public void ToggleDashSmear(bool state)
+    {
+        _dodgeSmearRenderer.enabled = state;
     }
 
     public bool CurrentlyRolling()

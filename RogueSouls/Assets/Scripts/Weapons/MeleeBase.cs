@@ -8,17 +8,20 @@ public class MeleeBase : MonoBehaviour
     [SerializeField]
     PlayerController _playerController;
 
+    Rigidbody2D _playerRB;
+
     [SerializeField]
     private int _damage;
     [SerializeField]
     private float _knockback;
+    bool _canLunge;
+    bool _isLunging;
     [SerializeField]
     private float _cooldown;
 
     [SerializeField]
     float _invulnTime;
 
-    [SerializeField]
     List<Enemy> _enemiesInRange = new List<Enemy>();
 
     float _leastDistance;
@@ -28,36 +31,59 @@ public class MeleeBase : MonoBehaviour
     [SerializeField]
     float _lungeSpeed;
 
+    ScreenShakeEffect _shakeEffect;
+
+    Vector2 _lungeDirection;
+
     private void Awake()
     {
         _playerController = GetComponentInParent<PlayerController>();
+        _shakeEffect = GetComponent<ScreenShakeEffect>();
+        _canLunge = true;
+        _playerRB = GetComponentInParent<Rigidbody2D>();
     }
 
     public virtual void Attack()
     {
         DetermineClosestEnemy();
-        StartCoroutine(BeginLunge());
+        if(_closestEnemy != null && _canLunge)
+        {
+            StartCoroutine(BeginLunge());
+        }
+    }
+
+    void AllowLunge()
+    {
+        _canLunge = true;
     }
 
     IEnumerator BeginLunge()
     {
-
+        _playerController.ToggleDashSmear(true);
+        _isLunging = true;
         while (true)
         {
-            if (_closestEnemy != null)
-            {
-                _playerController.transform.position = Vector2.Lerp(_playerController.transform.position, _closestEnemy.transform.position, _lungeSpeed * Time.fixedDeltaTime);
-                _playerController.GoInvulnerable(_invulnTime);
-                
-                //DealDamage();
-            }
+            _lungeDirection = _closestEnemy.transform.position - _playerController.transform.position;
+            _leastDistance = Vector2.Distance(_closestEnemy.transform.position, this.transform.position);
+            //_playerController.transform.position = Vector2.Lerp(_playerController.transform.position, _closestEnemy.transform.position, _lungeSpeed * Time.fixedDeltaTime);
+            _playerRB.AddForce(_lungeDirection * _lungeSpeed);
+            _playerController.GoInvulnerable(_invulnTime);
+            _canLunge = false;
+            DealDamage();
             yield return new WaitForFixedUpdate();
         }
     }
     void DealDamage()
     {
-        _closestEnemy.TakeDamage(_damage);
-        StopCoroutine(BeginLunge());
+        if(_leastDistance < 1)
+        {
+            _shakeEffect.ShakeScreen();
+            _closestEnemy.TakeDamage(_damage);
+            StopAllCoroutines();
+            _playerController.ToggleDashSmear(false);
+            Invoke("AllowLunge", _cooldown);
+            _isLunging = false;
+        }
     }
 
     void DetermineClosestEnemy()
@@ -96,6 +122,11 @@ public class MeleeBase : MonoBehaviour
                 _closestEnemy = null;
             }
         }
+    }
+
+    public bool IsLunging()
+    {
+        return _isLunging;
     }
 
 }

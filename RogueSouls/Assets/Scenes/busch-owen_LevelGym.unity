@@ -3138,7 +3138,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4778386910285843649, guid: bc9a9e951fd762348acec446dc37676e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.75
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 4778386910285843649, guid: bc9a9e951fd762348acec446dc37676e, type: 3}
       propertyPath: m_LocalPosition.z
@@ -5680,7 +5680,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7529075971869702691, guid: 8b1159860714b0c499d8eab4ac673856, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4.25
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 7529075971869702691, guid: 8b1159860714b0c499d8eab4ac673856, type: 3}
       propertyPath: m_LocalPosition.z
@@ -6881,10 +6881,6 @@ PrefabInstance:
     - target: {fileID: 5264473875195493327, guid: 7d0ce984f9c707546b26d1c0106621da, type: 3}
       propertyPath: m_Layer
       value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: 5343458295173780438, guid: 7d0ce984f9c707546b26d1c0106621da, type: 3}
-      propertyPath: _maxHealth
-      value: 900
       objectReference: {fileID: 0}
     - target: {fileID: 5346572388036344939, guid: 7d0ce984f9c707546b26d1c0106621da, type: 3}
       propertyPath: m_AnchorMax.y

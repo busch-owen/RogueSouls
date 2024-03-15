@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class ScreenShakeEffect : MonoBehaviour
 {
-    [SerializeField]
     Transform _targetCamTransform;
 
     Vector3 _currentCameraVelocity = Vector3.zero;

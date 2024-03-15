@@ -6298,8 +6298,8 @@ MonoBehaviour:
   _crosshairMoveSpeed: 75
   _rotateSpeed: 15
   _aimHandleTransform: {fileID: 4318066686059717084}
-  gun: {fileID: -7550700366089920953, guid: 7621fc21a650de44c8f8053ba5063b5c, type: 3}
-  gunLocation: {fileID: 7877285765489557191}
+  _gun: {fileID: 0}
+  _gunLocation: {fileID: 0}
   _dodgeSmearRenderer: {fileID: 4526521788505701639}
 --- !u!114 &4318066686164884429
 MonoBehaviour:
@@ -6414,6 +6414,7 @@ GameObject:
   - component: {fileID: 3704044071359838554}
   - component: {fileID: 4116793828583703398}
   - component: {fileID: 5352692324321096958}
+  - component: {fileID: 2607573233301856704}
   m_Layer: 10
   m_Name: MeleeWeapon
   m_TagString: Untagged
@@ -6450,16 +6451,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playerController: {fileID: 0}
   _damage: 12
-  _range: 0
   _knockback: 0
-  _stamina: 0
-  _cooldown: 0
-  _swingSpeed: 0
-  _animator: {fileID: 0}
+  _cooldown: 1.5
   _invulnTime: 0.6
-  _enemiesInRange: []
   _closestEnemy: {fileID: 0}
-  _lungeSpeed: 10
+  _lungeSpeed: 500
 --- !u!58 &5352692324321096958
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -6476,6 +6472,22 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 4
+--- !u!114 &2607573233301856704
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4325499935359909940}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71c936eb1088e824caec41dbfba797a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _shakeAmount: 20
+  _shakeDuration: 0.2
+  _shakeRate: 0.001
+  _shakeSmoothRate: 0.2
 --- !u!1 &4331654419437423143
 GameObject:
   m_ObjectHideFlags: 0
