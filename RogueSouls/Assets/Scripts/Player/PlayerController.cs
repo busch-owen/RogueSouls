@@ -149,8 +149,8 @@ public class PlayerController : MonoBehaviour
         _playerInventory = FindObjectOfType<Inventory>();
         _dodgeSmearRenderer.enabled = false;
 
-        _normalMask = LayerMask.GetMask("Player");
-        _invulnerableMask = LayerMask.GetMask("Invulnerable");
+        _normalMask = LayerMask.NameToLayer("Player");
+        _invulnerableMask = LayerMask.NameToLayer("Invulnerable");
     }
 
     void Start()
@@ -216,7 +216,7 @@ public class PlayerController : MonoBehaviour
     {
         rolling = true;
         _rb.AddForce(_movement.normalized * dodgeRollForce);
-        
+        GoInvulnerable(_invulnTime);
         _dodgeSmearRenderer.enabled = true;
         yield return new WaitForSeconds(dodgeRollDurationTime);
         StartCoroutine(BeginDodgeRollCoolDown());

@@ -6449,7 +6449,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerController: {fileID: 0}
-  _damage: 0
+  _damage: 12
   _range: 0
   _knockback: 0
   _stamina: 0
@@ -6457,6 +6457,7 @@ MonoBehaviour:
   _swingSpeed: 0
   _animator: {fileID: 0}
   _invulnTime: 0.6
+  _enemiesInRange: []
   _closestEnemy: {fileID: 0}
   _lungeSpeed: 10
 --- !u!58 &5352692324321096958

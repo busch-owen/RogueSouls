@@ -9,23 +9,16 @@ public class MeleeBase : MonoBehaviour
     PlayerController _playerController;
 
     [SerializeField]
-    private float _damage;
-    [SerializeField]
-    private float _range;
+    private int _damage;
     [SerializeField]
     private float _knockback;
     [SerializeField]
-    private float _stamina;
-    [SerializeField]
     private float _cooldown;
-    [SerializeField]
-    private float _swingSpeed;
-    [SerializeField]
-    private Animator _animator;
 
     [SerializeField]
     float _invulnTime;
 
+    [SerializeField]
     List<Enemy> _enemiesInRange = new List<Enemy>();
 
     float _leastDistance;
@@ -42,27 +35,36 @@ public class MeleeBase : MonoBehaviour
 
     public virtual void Attack()
     {
+        DetermineClosestEnemy();
         StartCoroutine(BeginLunge());
     }
 
     IEnumerator BeginLunge()
     {
-        if (_closestEnemy != null)
+
+        while (true)
         {
-            while (true)
+            if (_closestEnemy != null)
             {
                 _playerController.transform.position = Vector2.Lerp(_playerController.transform.position, _closestEnemy.transform.position, _lungeSpeed * Time.fixedDeltaTime);
                 _playerController.GoInvulnerable(_invulnTime);
-                yield return new WaitForFixedUpdate();
+                
+                //DealDamage();
             }
-        }   
+            yield return new WaitForFixedUpdate();
+        }
+    }
+    void DealDamage()
+    {
+        _closestEnemy.TakeDamage(_damage);
+        StopCoroutine(BeginLunge());
     }
 
     void DetermineClosestEnemy()
     {
         foreach(Enemy enemy in _enemiesInRange)
         {
-            if(Vector2.Distance(enemy.transform.position, this.transform.position) < _leastDistance)
+            if (Vector2.Distance(enemy.transform.position, this.transform.position) < _leastDistance)
             {
                 _closestEnemy = enemy;
                 _leastDistance = Vector2.Distance(enemy.transform.position, this.transform.position);
@@ -75,7 +77,11 @@ public class MeleeBase : MonoBehaviour
         if(other.GetComponent<Enemy>())
         {
             _enemiesInRange.Add(other.GetComponent<Enemy>());
-            DetermineClosestEnemy();
+            if (_closestEnemy == null)
+            {
+                _closestEnemy = other.GetComponent<Enemy>();
+                _leastDistance = Vector2.Distance(_closestEnemy.transform.position, this.transform.position);
+            }
         }
     }
 
@@ -84,7 +90,11 @@ public class MeleeBase : MonoBehaviour
         if (other.GetComponent<Enemy>())
         {
             _enemiesInRange.Remove(other.GetComponent<Enemy>());
-            DetermineClosestEnemy();
+
+            if (_enemiesInRange.Count == 0)
+            {
+                _closestEnemy = null;
+            }
         }
     }
 
