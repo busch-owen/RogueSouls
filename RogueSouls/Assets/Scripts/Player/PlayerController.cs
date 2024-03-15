@@ -32,6 +32,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     GameObject _objectCarryPoint;
 
+    [SerializeField]
+    float _invulnTime;
+
     Animator _animator;
 
     Vector2 _movementSpeed;
@@ -54,6 +57,9 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField]
     float _throwObjectDrag;
+
+    LayerMask _normalMask;
+    LayerMask _invulnerableMask;
 
     [Space(10)]
 
@@ -142,6 +148,9 @@ public class PlayerController : MonoBehaviour
         _effectHandler = GetComponentInChildren<PlayerEffectHandler>();
         _playerInventory = FindObjectOfType<Inventory>();
         _dodgeSmearRenderer.enabled = false;
+
+        _normalMask = LayerMask.GetMask("Player");
+        _invulnerableMask = LayerMask.GetMask("Invulnerable");
     }
 
     void Start()
@@ -207,10 +216,12 @@ public class PlayerController : MonoBehaviour
     {
         rolling = true;
         _rb.AddForce(_movement.normalized * dodgeRollForce);
+        
         _dodgeSmearRenderer.enabled = true;
         yield return new WaitForSeconds(dodgeRollDurationTime);
         StartCoroutine(BeginDodgeRollCoolDown());
         _dodgeSmearRenderer.enabled = false;
+        
         rolling = false;
     }
 
@@ -235,6 +246,17 @@ public class PlayerController : MonoBehaviour
     public void AllowInput()
     {
         _preventInput = false;
+    }
+
+    public void GoInvulnerable(float invTime)
+    {
+        this.gameObject.layer = _invulnerableMask;
+        Invoke("GoVulnerable", invTime);
+    }
+
+    public void GoVulnerable()
+    {
+        this.gameObject.layer = _normalMask;
     }
 
     #endregion

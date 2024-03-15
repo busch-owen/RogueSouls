@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7381209623812006981}
   - component: {fileID: 8849757056999674165}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Shadow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7483417688896057716}
   - component: {fileID: 7483417688896057719}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -182,7 +182,7 @@ GameObject:
   - component: {fileID: 7483417689031346958}
   - component: {fileID: 7483417689031346955}
   - component: {fileID: 7483417689031346954}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: PotObject
   m_TagString: Carryable
   m_Icon: {fileID: 0}
@@ -295,7 +295,7 @@ GameObject:
   - component: {fileID: 7483417689347296012}
   - component: {fileID: 7483417689347296002}
   - component: {fileID: 7483417689347296013}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: ShatterParticle
   m_TagString: Untagged
   m_Icon: {fileID: 0}

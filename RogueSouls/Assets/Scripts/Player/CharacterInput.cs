@@ -282,6 +282,15 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""MeleeAttack"",
+                    ""type"": ""Button"",
+                    ""id"": ""c0974870-f41d-489f-8aea-f70f488c74f8"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -394,6 +403,28 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
                     ""action"": ""PauseMenu"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5866abc3-1e99-47c1-b9cb-271acf3fa0c7"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MeleeAttack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9f1a2795-9064-41ea-a966-0e7dbdae4cde"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MeleeAttack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -412,6 +443,7 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
         m_CharacterActions_OpenWeaponWheel = m_CharacterActions.FindAction("OpenWeaponWheel", throwIfNotFound: true);
         m_CharacterActions_Interact = m_CharacterActions.FindAction("Interact", throwIfNotFound: true);
         m_CharacterActions_PauseMenu = m_CharacterActions.FindAction("PauseMenu", throwIfNotFound: true);
+        m_CharacterActions_MeleeAttack = m_CharacterActions.FindAction("MeleeAttack", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -540,6 +572,7 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_CharacterActions_OpenWeaponWheel;
     private readonly InputAction m_CharacterActions_Interact;
     private readonly InputAction m_CharacterActions_PauseMenu;
+    private readonly InputAction m_CharacterActions_MeleeAttack;
     public struct CharacterActionsActions
     {
         private @CharacterInput m_Wrapper;
@@ -549,6 +582,7 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
         public InputAction @OpenWeaponWheel => m_Wrapper.m_CharacterActions_OpenWeaponWheel;
         public InputAction @Interact => m_Wrapper.m_CharacterActions_Interact;
         public InputAction @PauseMenu => m_Wrapper.m_CharacterActions_PauseMenu;
+        public InputAction @MeleeAttack => m_Wrapper.m_CharacterActions_MeleeAttack;
         public InputActionMap Get() { return m_Wrapper.m_CharacterActions; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -573,6 +607,9 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
             @PauseMenu.started += instance.OnPauseMenu;
             @PauseMenu.performed += instance.OnPauseMenu;
             @PauseMenu.canceled += instance.OnPauseMenu;
+            @MeleeAttack.started += instance.OnMeleeAttack;
+            @MeleeAttack.performed += instance.OnMeleeAttack;
+            @MeleeAttack.canceled += instance.OnMeleeAttack;
         }
 
         private void UnregisterCallbacks(ICharacterActionsActions instance)
@@ -592,6 +629,9 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
             @PauseMenu.started -= instance.OnPauseMenu;
             @PauseMenu.performed -= instance.OnPauseMenu;
             @PauseMenu.canceled -= instance.OnPauseMenu;
+            @MeleeAttack.started -= instance.OnMeleeAttack;
+            @MeleeAttack.performed -= instance.OnMeleeAttack;
+            @MeleeAttack.canceled -= instance.OnMeleeAttack;
         }
 
         public void RemoveCallbacks(ICharacterActionsActions instance)
@@ -622,5 +662,6 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
         void OnOpenWeaponWheel(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
         void OnPauseMenu(InputAction.CallbackContext context);
+        void OnMeleeAttack(InputAction.CallbackContext context);
     }
 }

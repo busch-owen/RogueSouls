@@ -3,104 +3,89 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class meleeBase : MonoBehaviour
+public class MeleeBase : MonoBehaviour
 {
+    [SerializeField]
+    PlayerController _playerController;
 
     [SerializeField]
-    private float damage;
+    private float _damage;
     [SerializeField]
-    private float range;
+    private float _range;
     [SerializeField]
-    private float knockback;
+    private float _knockback;
     [SerializeField]
-    private float stamina;
+    private float _stamina;
     [SerializeField]
-    private float cooldown;
+    private float _cooldown;
     [SerializeField]
-    private float swingSpeed;
+    private float _swingSpeed;
     [SerializeField]
-    private Animator animator;
-    private Collider2D hitbox;
+    private Animator _animator;
 
     [SerializeField]
-    GameObject melee;
-    [SerializeField]
-    float meleeOffset;
-    //
+    float _invulnTime;
 
-    private bool isSwinging = false;
-    [SerializeField]
-    private float timeTonextSwing;
-    private float currentStamina;
+    List<Enemy> _enemiesInRange = new List<Enemy>();
 
-    void Start()
+    float _leastDistance;
+    [SerializeField]
+    Enemy _closestEnemy;
+
+    [SerializeField]
+    float _lungeSpeed;
+
+    private void Awake()
     {
-        currentStamina = stamina;
+        _playerController = GetComponentInParent<PlayerController>();
     }
 
-    
-    void Update()
+    public virtual void Attack()
     {
-        if (isSwinging)
-        {
-            return;
-            
-           
-        }
+        StartCoroutine(BeginLunge());
+    }
 
-         if (Input.GetButton("Fire2") && Time.time >= timeTonextSwing)
+    IEnumerator BeginLunge()
+    {
+        if (_closestEnemy != null)
+        {
+            while (true)
             {
-                timeTonextSwing = Time.time + cooldown;
-                
-                Swing();
+                _playerController.transform.position = Vector2.Lerp(_playerController.transform.position, _closestEnemy.transform.position, _lungeSpeed * Time.fixedDeltaTime);
+                _playerController.GoInvulnerable(_invulnTime);
+                yield return new WaitForFixedUpdate();
             }
+        }   
     }
 
-    void Swing()
+    void DetermineClosestEnemy()
     {
-        if (currentStamina == 0)
+        foreach(Enemy enemy in _enemiesInRange)
         {
-            return;
-        }
-
-        isSwinging = true;
-
-        animator.SetTrigger("Swing");
-
-        currentStamina --;
-
-        Invoke("StopSwing", swingSpeed);    
-    }
-
-    void StopSwing()
-    {
-        isSwinging = false;
-
-    }
-
-    void DisableHitbox()
-    {
-        hitbox.enabled = false;
-    }
-
-    void OnTriggerEnter2D(Collider2D other)
-    {
-            Vector2 direction = other.transform.position - transform.position;
-            direction.Normalize();
-            other.GetComponent<Rigidbody2D>().AddForce(direction * knockback, ForceMode2D.Impulse);
-    }
-
-    void MeleeOffsetWeaponPos(float rotationAngle)
-    {
-        melee.transform.localPosition = new Vector2(this.transform.localPosition.x + meleeOffset, this.transform.localPosition.y);
-
-        if (rotationAngle is < 90 and > -180 && rotationAngle is not < -90 and > -180)
-        {
-            melee.transform.localScale = new Vector3(melee.transform.localScale.x, 1, melee.transform.localScale.z);
-        }
-        else
-        {
-            melee.transform.localScale = new Vector3(melee.transform.localScale.x, -1, melee.transform.localScale.z);
+            if(Vector2.Distance(enemy.transform.position, this.transform.position) < _leastDistance)
+            {
+                _closestEnemy = enemy;
+                _leastDistance = Vector2.Distance(enemy.transform.position, this.transform.position);
+            }
         }
     }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if(other.GetComponent<Enemy>())
+        {
+            _enemiesInRange.Add(other.GetComponent<Enemy>());
+            DetermineClosestEnemy();
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.GetComponent<Enemy>())
+        {
+            _enemiesInRange.Remove(other.GetComponent<Enemy>());
+            DetermineClosestEnemy();
+        }
+    }
+
 }

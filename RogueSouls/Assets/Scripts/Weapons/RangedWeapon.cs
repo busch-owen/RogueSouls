@@ -68,7 +68,6 @@ public class RangedWeapon : MonoBehaviour
 
     private void OnEnable()
     {
-
         playerController = GetComponentInParent<PlayerController>();
     }
 

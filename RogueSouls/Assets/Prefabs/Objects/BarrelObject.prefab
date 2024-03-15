@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4613193152841316233}
   - component: {fileID: 4613193152841316230}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -98,7 +98,7 @@ GameObject:
   - component: {fileID: 4613193153211709863}
   - component: {fileID: 4613193153211709862}
   - component: {fileID: 4613193153211709865}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: BarrelObject
   m_TagString: Carryable
   m_Icon: {fileID: 0}
@@ -209,7 +209,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2157147197120804678}
   - component: {fileID: 5481592739287878397}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Shadow
   m_TagString: Untagged
   m_Icon: {fileID: 0}

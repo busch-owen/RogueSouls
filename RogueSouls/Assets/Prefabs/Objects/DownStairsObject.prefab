@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 8552267405743716871}
   - component: {fileID: 8552267405743716872}
   - component: {fileID: 8552267405743716873}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: DownStairsObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}

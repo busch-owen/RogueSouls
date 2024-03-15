@@ -6,6 +6,7 @@ public class PlayerInputHandler : MonoBehaviour
 {
     private PlayerController playerController;
     private RangedWeapon rangedWeapon;
+    private MeleeBase meleeWeapon;
     private WeaponWheel weaponWheel;
     private UIHandler uiHandler;
 
@@ -15,6 +16,7 @@ public class PlayerInputHandler : MonoBehaviour
     {
         playerController = GetComponent<PlayerController>();
         uiHandler = FindObjectOfType<UIHandler>();
+        meleeWeapon = FindObjectOfType<MeleeBase>();
         UpdateRangedWeaponReference();
         weaponWheel = FindObjectOfType<WeaponWheel>();
         if(characterInput == null)
@@ -31,6 +33,7 @@ public class PlayerInputHandler : MonoBehaviour
 
                 characterInput.CharacterActions.Attack.started += i => rangedWeapon?.EnableShootInput();
                 characterInput.CharacterActions.Attack.canceled += i => rangedWeapon?.DisableShootInput();
+                characterInput.CharacterActions.MeleeAttack.started += i => meleeWeapon.Attack();
                 characterInput.CharacterActions.DodgeRoll.started += i => playerController?.HandleDodgeRollInput();
                 characterInput.CharacterActions.Interact.started += i => playerController?.Interact();
 
