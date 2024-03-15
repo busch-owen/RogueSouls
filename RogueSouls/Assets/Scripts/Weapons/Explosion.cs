@@ -14,6 +14,10 @@ public class Explosion : Bullet
     ParticleSystem FireAOEEffect;
     bool isRocket = false;
     bool hasCollided = false;
+
+    [SerializeField]
+    float _explosionRadius, _startRadius;
+
     // Start is called before the first frame update
     private void FixedUpdate()
     {
@@ -33,23 +37,22 @@ public class Explosion : Bullet
     public override void OnEnable()
     {
         circleCollider.enabled = true;
+        circleCollider.radius = _startRadius;
         hasCollided = false;
         Invoke("OnDeSpawn", bulletLife);
     }
 
     public override void OnCollisionEnter2D(Collision2D other)
-    {
-        
+    { 
         if (other.gameObject.tag == "Player")
         {
             return;
             
         }
-        circleCollider.radius = (1.0f);
+        circleCollider.radius = _explosionRadius;
         FireAOEEffect?.Play();
         isRocket = true;
         hasCollided = true;
-
 
         //create particle system
         //create circle collider the same size as particle system
@@ -57,18 +60,10 @@ public class Explosion : Bullet
     }
     private void OnTriggerStay2D(Collider2D other)
     {
-
-            if (other.gameObject.tag == "enemy" && isRocket == true)
-            {
-                Enemy enemyToHit = other.gameObject.GetComponent<Enemy>();
-                enemyToHit.TakeDamage(bulletDamage);
-            }
-        
+        if (other.gameObject.tag == "enemy" && isRocket == true)
+        {
+            Enemy enemyToHit = other.gameObject.GetComponent<Enemy>();
+            enemyToHit.TakeDamage(bulletDamage);
+        }
     }
-
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        
-    }
-
 }

@@ -63,14 +63,11 @@ public class HeartDisplayHandler : MonoBehaviour
             }
             else if (_heartsSpawned[_heartToIncrement].HeartFull && _heartToIncrement < _entityStats.AmountOfHearts - 1)
             {
-                Debug.Log("Heart healed, moving to next heart");
                 _heartToIncrement++;
                 _heartToIncrement = Mathf.Clamp(_heartToIncrement, 0, 3);
             }
             else
             {
-                Debug.Log("Current heart full? " + _heartsSpawned[_heartToIncrement].HeartFull);
-                Debug.Log("current heart quarter: " + (_heartsSpawned[_heartToIncrement].QuarterToRestore));
                 _heartsSpawned[_heartToIncrement].EnableQuarters(_heartsSpawned[_heartToIncrement].QuarterToRestore);
             }
         }

@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3773190192185705788}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.37300014, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -188,10 +188,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c09d0826ee61fe445ab0467dda31a9a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <Health>k__BackingField: 0
   _maxHealth: 8
-  <_damage>k__BackingField: 1
-  <_speed>k__BackingField: 4
-  <_timeToAttack>k__BackingField: 0
+  <Damage>k__BackingField: 0
+  <Speed>k__BackingField: 0
+  <TimeToAttack>k__BackingField: 0
+  _gameManager: {fileID: 0}
   target: {fileID: 0}
   isRanged: 1
   enemyGun: {fileID: 842670650562238592}
@@ -231,10 +233,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1208892c04bfdd4994ba637bb61464a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <Health>k__BackingField: 0
   _maxHealth: 8
-  <_damage>k__BackingField: 1
-  <_speed>k__BackingField: 4
-  <_timeToAttack>k__BackingField: 0.25
+  <Damage>k__BackingField: 0
+  <Speed>k__BackingField: 0
+  <TimeToAttack>k__BackingField: 0
+  _gameManager: {fileID: 0}
 --- !u!58 &3912358352390913484
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -266,7 +270,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0.25}
   serializedVersion: 2
-  m_Radius: 0.2
+  m_Radius: 0.4
 --- !u!1001 &5872252956889366768
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -44,7 +44,6 @@ public class Heart : MonoBehaviour
             QuarterToRestore--;
             QuarterToRestore = Mathf.Clamp(QuarterToRestore, 0, 3);
             _heartQuarters[quarterIndex].SetActive(true);
-            Debug.Log("Enabled Quarter: " + quarterIndex);
         }
     }
 }

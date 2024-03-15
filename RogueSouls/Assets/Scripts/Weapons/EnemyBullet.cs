@@ -13,7 +13,6 @@ public class EnemyBullet : Bullet
         {
             PlayerStats enemyToHit = other.gameObject.GetComponent<PlayerStats>();
             enemyToHit.TakeDamage(bulletDamage);
-            Debug.Log(bulletDamage);
             this.OnDeSpawn();
         }
         else
