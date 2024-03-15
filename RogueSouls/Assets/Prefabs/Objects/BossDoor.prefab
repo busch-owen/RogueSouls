@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1145996335955585950}
   - component: {fileID: 1145996335955585951}
   - component: {fileID: 1145996335955585948}
+  - component: {fileID: 2789218178245396648}
   m_Layer: 0
   m_Name: DoorObject
   m_TagString: Untagged
@@ -111,6 +112,22 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &2789218178245396648
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1145996335955585945}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9809bf1345abc5648af68b3a82653f08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_OverrideArea: 1
+  m_Area: 1
+  m_IgnoreFromBuild: 0
+  m_AffectedAgents: ffffffff
 --- !u!1 &1145996336052055152
 GameObject:
   m_ObjectHideFlags: 0
@@ -161,7 +178,6 @@ MonoBehaviour:
   <IsBossDoor>k__BackingField: 1
   _unlockedSprite: {fileID: 21300000, guid: 3d858a3d071f0c24cbdb817dc96139e3, type: 3}
   _lockedSprite: {fileID: 21300000, guid: 3d858a3d071f0c24cbdb817dc96139e3, type: 3}
-  _bossDoorSprite: {fileID: 21300000, guid: 3d858a3d071f0c24cbdb817dc96139e3, type: 3}
 --- !u!61 &1145996336052055159
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -162,7 +162,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20ed228703a8f364aaede8ce7460a766, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fireRate: 7.5
+  fireRate: 3.75
   bulletLifetime: 3
   maxAmmo: 40
   bulletCount: 1
@@ -178,7 +178,7 @@ MonoBehaviour:
   Reload_sounds: {fileID: 0}
   sfxHandler: {fileID: 0}
   gun_sounds: {fileID: 0}
-  damage: 5
+  damage: 1
 --- !u!1001 &4734263459141700348
 PrefabInstance:
   m_ObjectHideFlags: 0

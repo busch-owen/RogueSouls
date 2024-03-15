@@ -16,7 +16,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &5864565272681678594
 Transform:
@@ -47,9 +47,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <IsLocked>k__BackingField: 0
+  <IsBossDoor>k__BackingField: 0
   _unlockedSprite: {fileID: 1764806380, guid: 6662024cfeada224c91b67727658692e, type: 3}
   _lockedSprite: {fileID: 571667588, guid: 6662024cfeada224c91b67727658692e, type: 3}
-  _bossDoorSprite: {fileID: 0}
 --- !u!61 &5864565272681678595
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -92,7 +92,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &5864565272853643498
 Transform:

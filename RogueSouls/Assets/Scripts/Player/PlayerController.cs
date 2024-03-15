@@ -8,9 +8,9 @@ public class PlayerController : MonoBehaviour
 
     [Header("Character Attributes"), Space(5)]
 
-    [SerializeField] 
+    [SerializeField]
     float _xSpeed;
-        
+
     [SerializeField]
     float _ySpeed;
 
@@ -104,10 +104,10 @@ public class PlayerController : MonoBehaviour
     float _weaponRotationAngle;
 
     [SerializeField]
-	private RangedWeapon _gun;
-	private MeleeBase _melee;
-	[SerializeField]
-	private Transform _gunLocation;
+    private RangedWeapon _gun;
+    private MeleeBase _melee;
+    [SerializeField]
+    private Transform _gunLocation;
 
     [Space(10)]
 
@@ -157,13 +157,13 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(!_preventInput )
+        if (!_preventInput)
         {
             HandleAim();
             HandleMovement();
@@ -174,9 +174,9 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate()
     {
         HandleSpritesAndAnimations();
-        
 
-        if(_currentlyCarryingAnObject)
+
+        if (_currentlyCarryingAnObject)
         {
             _carryableObject.transform.localPosition = Vector2.zero;
         }
@@ -187,7 +187,7 @@ public class PlayerController : MonoBehaviour
     #region Movement Input and Physics
     private void HandleMovement()
     {
-        if(!rolling && !_melee.IsLunging())
+        if (!rolling && !_melee.IsLunging())
         {
             _movementSpeed = new Vector2(_xSpeed, _ySpeed);
 
@@ -223,7 +223,7 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(dodgeRollDurationTime);
         StartCoroutine(BeginDodgeRollCoolDown());
         ToggleDashSmear(false);
-        
+
         rolling = false;
     }
 
@@ -290,9 +290,9 @@ public class PlayerController : MonoBehaviour
     //Handles where the crosshair should go when using a controller
     private void HandleCrosshairControllerMovement()
     {
-        _crosshair.transform.localPosition = new Vector3(_crosshair.transform.localPosition.x + _crosshairMovement.x * _crosshairMoveSpeed * Time.fixedDeltaTime, 
+        _crosshair.transform.localPosition = new Vector3(_crosshair.transform.localPosition.x + _crosshairMovement.x * _crosshairMoveSpeed * Time.fixedDeltaTime,
             _crosshair.transform.localPosition.y + _crosshairMovement.y * _crosshairMoveSpeed * Time.fixedDeltaTime);
-        if(_crosshairClamp.enabled)
+        if (_crosshairClamp.enabled)
         {
             _crosshairClamp.ClampCrosshair(_crosshairMovement);
         }
@@ -314,7 +314,7 @@ public class PlayerController : MonoBehaviour
         if (_movement.x != 0 || _movement.y != 0)
         {
             _animator.SetBool("Running", true);
-            if(!_effectHandler.RunParticlesPlaying())
+            if (!_effectHandler.RunParticlesPlaying())
                 _effectHandler.PlayRunParticles();
         }
         else
@@ -339,12 +339,12 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.gameObject.tag == "Carryable" && !_currentlyCarryingAnObject)
+        if (other.gameObject.tag == "Carryable" && !_currentlyCarryingAnObject)
         {
             _carryableObjectInRange = true;
             _carryableObject = other.gameObject;
         }
-        if(other.gameObject.tag == "Chest" && !_inRangeOfChest)
+        if (other.gameObject.tag == "Chest" && !_inRangeOfChest)
         {
             _currentChest = other.GetComponent<Chest>();
             _inRangeOfChest = true;
@@ -368,7 +368,7 @@ public class PlayerController : MonoBehaviour
             _currentChest = null;
             _inRangeOfChest = false;
         }
-        if(other.GetComponent<Door>())
+        if (other.GetComponent<Door>())
         {
             _currentDoor = null;
             _inRangeOfDoor = false;
@@ -376,9 +376,11 @@ public class PlayerController : MonoBehaviour
     }
     #endregion
 
+    #region Interactions
+
     public void Interact()
     {
-        if(_carryableObjectInRange && !_currentlyCarryingAnObject)
+        if (_carryableObjectInRange && !_currentlyCarryingAnObject)
         {
             BoxCollider2D heldCollider = _carryableObject.GetComponent<BoxCollider2D>();
             heldCollider.enabled = false;
@@ -387,7 +389,7 @@ public class PlayerController : MonoBehaviour
             _carryableObject.transform.localPosition = Vector3.zero;
             _currentlyCarryingAnObject = true;
         }
-        else if(_currentlyCarryingAnObject)
+        else if (_currentlyCarryingAnObject)
         {
             Rigidbody2D tempRb = _carryableObject.GetComponent<Rigidbody2D>();
             tempRb.velocity = new Vector2(_throwForce + (Mathf.Abs(_rb.velocity.x) * 2), tempRb.velocity.y) * _playerSpriteObject.transform.localScale.x;
@@ -398,25 +400,26 @@ public class PlayerController : MonoBehaviour
             heldCollider.enabled = true;
         }
 
-        if(_inRangeOfChest)
+        if (_inRangeOfChest)
         {
             _currentChest.OpenChest();
         }
 
-        if(_inRangeOfDoor)
+        if (_inRangeOfDoor)
         {
-            if(_currentDoor.IsLocked && _playerInventory.Keys.Count > 0)
+            if (_currentDoor.IsLocked && _playerInventory.Keys.Count > 0)
             {
                 _currentDoor.UnlockDoor();
                 _currentDoor.OpenDoor();
                 _playerInventory.Keys.RemoveAt(0);
             }
-            else if(_currentDoor.IsBossDoor && _playerInventory.BossKeys.Count > 0)
+            else if (_currentDoor.IsBossDoor && _playerInventory.BossKeys.Count > 0)
             {
                 _currentDoor.UnlockDoor();
                 _currentDoor.OpenDoor();
                 _playerInventory.BossKeys.RemoveAt(0);
             }
         }
+        #endregion
     }
 }

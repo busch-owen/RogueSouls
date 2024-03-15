@@ -57,7 +57,10 @@ public class WarpObject : MonoBehaviour
         _warpTargetRb.velocity = Vector3.zero;
         while (true)
         {
-            _warpOverlay.transform.localScale = Vector3.Lerp(_warpOverlay.transform.localScale, _targetWarpOverlaySize, _warpInTransitionSpeed * Time.fixedDeltaTime);
+            if (_warpOverlay != null)
+            {
+                _warpOverlay.transform.localScale = Vector3.Lerp(_warpOverlay.transform.localScale, _targetWarpOverlaySize, _warpInTransitionSpeed * Time.fixedDeltaTime);
+            }   
             yield return new WaitForFixedUpdate();
         }
     }
