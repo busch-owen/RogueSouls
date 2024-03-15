@@ -27,7 +27,7 @@ public class WarpObject : MonoBehaviour
 
     private void Start()
     {
-        _warpOverlay?.SetActive(false);
+        
     }
 
     void OnTriggerEnter2D(Collider2D other)
