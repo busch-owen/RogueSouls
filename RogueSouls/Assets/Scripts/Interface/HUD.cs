@@ -25,7 +25,6 @@ public class HUD : MonoBehaviour
     {
         _textBox.SetActive(true);
         _textBoxText.text = message;
-        _player.PreventInput();
         Invoke("CloseTextBox", messageLength);
     }
 

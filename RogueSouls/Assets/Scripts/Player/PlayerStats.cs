@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerStats : EntityStats
 {
-#region Global Variables
+    #region Global Variables
     [SerializeField]
     protected int _playerLevel;
     protected float _playerLevelProgression;
@@ -12,12 +12,10 @@ public class PlayerStats : EntityStats
     [SerializeField]
     protected float _levelProgressionMultiplier;
     [SerializeField]
-    protected float _xpValue;
 
-    [SerializeField]
-    GameManager _gameManager;
+    protected float _xpValue;
     #endregion
-#region Level
+    #region Level
     public void IncrementPlayerLevel(int incrementAmount)
     {
         _playerLevelProgression += incrementAmount;
@@ -31,15 +29,16 @@ public class PlayerStats : EntityStats
         }
     }
     #endregion
-#region Damage
+    #region Damage
     public override void TakeDamage(int damage)
     {
         IncrementHealth(damage);
-        if (_health <= 0)
+        if (Health <= 0)
         {
-         _gameManager.Restart();
+            _gameManager.Restart();
         }
   
     }
+    #endregion
+
 }
-#endregion

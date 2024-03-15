@@ -7,6 +7,7 @@ public class EntityStats : MonoBehaviour
     #region GlobalVariables
     [field: SerializeField]
     public int Health { get; private set; }
+
     [SerializeField]
     protected int _maxHealth;
     public int AmountOfHearts { get; private set; }
@@ -21,34 +22,33 @@ public class EntityStats : MonoBehaviour
     public float TimeToAttack { get; private set; }
 
     HeartDisplayHandler _heartDisplayHandler;
+
+    [SerializeField]
+    protected GameManager _gameManager;
+
     #endregion
 
-    #region hearts
     public virtual void Awake()
     {
         _heartDisplayHandler = GetComponentInChildren<HeartDisplayHandler>();
+        _gameManager = FindObjectOfType<GameManager>();
         UpdateHeartAmount();
         Health = _maxHealth;
     }
+
+    #region Health
     public virtual void UpdateHeartAmount()
     {
         AmountOfHearts = _maxHealth / 4;
     }
-    #endregion
-
-    #region damage
     public virtual void TakeDamage(int damage)
     {
         IncrementHealth(damage);
-        if (_health <= 0 && tag == "enemy")
-        if (Health <= 0)
+        if (Health <= 0 && tag == "enemy")
         {
             Destroy(this.gameObject);
         }
-    }
-    #endregion 
-
-    #region IncrementHealth
+    } 
     public void HealEntity(int healthToHeal)
     {
         _heartDisplayHandler.IncreaseHeartQuarters(healthToHeal);
@@ -74,10 +74,11 @@ public class EntityStats : MonoBehaviour
         Health = Mathf.Clamp (Health, 0 , _maxHealth);
         _heartDisplayHandler?.DecreaseHeartQuarters(incrementAmount);
     }
-    #endregion
+    
 
     public bool AtFullHealth()
     {
         return Health == _maxHealth;
     }
+    #endregion
 }
