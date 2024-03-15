@@ -201,7 +201,7 @@ public class PlayerController : MonoBehaviour
     }
     public void HandleDodgeRollInput()
     {
-        if (canRoll && _rb.velocity != Vector2.zero)
+        if (canRoll && _rb?.velocity != Vector2.zero)
         {
             _animator.SetTrigger("Dodge");
             StartCoroutine(BeginDodgeRollDuration());

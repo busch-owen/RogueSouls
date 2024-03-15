@@ -8,7 +8,7 @@ public class UIHandler : MonoBehaviour
     GameObject _pauseMenu;
 
     [SerializeField]
-    GameObject _inventoryMenu;
+    GameObject _inventoryMenu, optionsMenu, _gameMenu;
 
     [SerializeField]
     GameObject _heartsDisplay;
@@ -20,6 +20,8 @@ public class UIHandler : MonoBehaviour
     private void Awake()
     {
         _pauseMenu.SetActive(false);
+        _inventoryMenu.SetActive(false);
+        _gameMenu.SetActive(false);
     }
 
     public void TogglePauseMenu()
