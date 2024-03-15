@@ -71,8 +71,11 @@ public class WeaponWheel : MonoBehaviour
 
     public void HandleArrowInputMouse(Vector2 aimPosition)
     {
-        aimPosition = _camera.ScreenToWorldPoint(aimPosition) - _camera.transform.position;
-        _aimPosition = aimPosition;
+        if (_camera != null)
+        {
+            aimPosition = _camera.ScreenToWorldPoint(aimPosition) - _camera.transform.position;
+            _aimPosition = aimPosition;
+        }
     }
     public void HandleArrowInputController(Vector2 aimPosition)
     {
@@ -81,22 +84,28 @@ public class WeaponWheel : MonoBehaviour
 
     public void OpenWeaponWheel()
     {
-        _weaponWheelObject.SetActive(true);
-        FillItemSlots();
-        Time.timeScale = _menuOpenTimeScale;
+        if(_weaponWheelObject != null)
+        {
+            _weaponWheelObject.SetActive(true);
+            FillItemSlots();
+            Time.timeScale = _menuOpenTimeScale;
+        }
     }
 
     public void CloseWeaponWheel()
     {
-        _weaponWheelObject.SetActive(false);
-        if(WhichWeaponToSelect() < _playerWeapons.Length)
+        if(_weaponWheelObject != null )
         {
-            PutAwayCurrentWeapon();
-            _playerWeapons[WhichWeaponToSelect()].gameObject.SetActive(true);
-            _playerInputHandler.UpdateRangedWeaponReference();
-            _weaponOffsetHandle.SetCurrentWeapon();
+            _weaponWheelObject.SetActive(false);
+            if (WhichWeaponToSelect() < _playerWeapons.Length)
+            {
+                PutAwayCurrentWeapon();
+                _playerWeapons[WhichWeaponToSelect()].gameObject.SetActive(true);
+                _playerInputHandler.UpdateRangedWeaponReference();
+                _weaponOffsetHandle.SetCurrentWeapon();
+            }
+            Time.timeScale = 1;
         }
-        Time.timeScale = 1;
     }
 
     private void FillItemSlots()

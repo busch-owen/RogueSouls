@@ -5,7 +5,7 @@ using UnityEngine.Rendering;
 
 public class RangedWeapon : MonoBehaviour
 {
-
+    #region global Variables
     //weapon basics
 
     [SerializeField]
@@ -53,13 +53,15 @@ public class RangedWeapon : MonoBehaviour
 
     bool shoot;
 
+
     //end of editable variables within the inspector
 
     private int currentAmmo;
     private bool isReloading = false;
     private float timeToNextFire = 0f;
+#endregion
 
-    // Start is called before the first frame update
+    #region first load
     void Start()
     {
         currentAmmo = maxAmmo;// always start with max ammo
@@ -70,8 +72,8 @@ public class RangedWeapon : MonoBehaviour
     {
         playerController = GetComponentInParent<PlayerController>();
     }
-
-    // Update is called once per frame
+#endregion
+    #region Update
     void Update()
     {
         if (currentAmmo == 0 && !isReloading)
@@ -84,7 +86,8 @@ public class RangedWeapon : MonoBehaviour
             Shoot();
         }
     }
-
+    #endregion
+    #region Misc
     private void FixedUpdate()
     {
         
@@ -99,7 +102,8 @@ public class RangedWeapon : MonoBehaviour
     {
         shoot = false;
     }
-
+#endregion
+    #region Shoot
     public virtual void Shoot(Vector2 additionalVelocity = new Vector2())
     {
         if (Time.time >= timeToNextFire && !isReloading)// make sure you can't shoot faster than the gun allows to
@@ -137,13 +141,14 @@ public class RangedWeapon : MonoBehaviour
             firePoint.localRotation = defaultSpreadAngle;
         }
     }
-
+#endregion
+    #region Reload
     void Reload()
     {
 
         isReloading = true;
 
-       // sfxHandler.clip = Reload_sounds;
+       // sfxHandler.clip = Reload_sounds; // this is commented out until we add back sfx, it was causing errors with not every weapon having one 
        // sfxHandler?.Play();
 
 
@@ -152,6 +157,7 @@ public class RangedWeapon : MonoBehaviour
         Invoke("FinishReload", reloadTime); // we do an invoke so we can add a delay to the reload time, rather than a regular function call
     }
 
+
     void FinishReload()
     {
         currentAmmo = maxAmmo;
@@ -159,9 +165,11 @@ public class RangedWeapon : MonoBehaviour
         //sfxHandler.clip = null;
         isReloading = false;
     }
-
+    #endregion
+    #region Damage
     public int AssignDamage( )
     {
         return damage;
     }
 }
+#endregion
