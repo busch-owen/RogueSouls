@@ -37,7 +37,12 @@ public class Bullet : PoolObject
     {
         _trailRenderer = GetComponent<TrailRenderer>();
         Invoke("OnDeSpawn", bulletLife);
-        weapon = FindObjectOfType<RangedWeapon>();
+        
+    }
+
+    public void AssignWeapon(RangedWeapon weaponToAssign)
+    {
+        weapon = weaponToAssign;
         bulletDamage = weapon.AssignDamage();
     }
 }

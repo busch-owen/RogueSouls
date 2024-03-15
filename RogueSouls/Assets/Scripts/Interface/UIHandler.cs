@@ -24,7 +24,7 @@ public class UIHandler : MonoBehaviour
 
     public void TogglePauseMenu()
     {
-        if (_pauseMenu.activeSelf)
+        if (_pauseMenu.activeSelf && _pauseMenu != null)
         {
             _pauseMenu.SetActive(false);
             ChangeHealthDisplayState(true);

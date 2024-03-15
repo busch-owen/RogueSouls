@@ -5,17 +5,15 @@ using UnityEngine;
 
 public class EnemyBullet : Bullet
 {
-
-
-
     // Start is called before the first frame update
     public override void  OnCollisionEnter2D(Collision2D other)
     {
 
-        if (other.gameObject.tag == "Player")
+        if (other.gameObject.GetComponent<PlayerStats>())
         {
             PlayerStats enemyToHit = other.gameObject.GetComponent<PlayerStats>();
             enemyToHit.TakeDamage(bulletDamage);
+            Debug.Log(bulletDamage);
             this.OnDeSpawn();
         }
         else

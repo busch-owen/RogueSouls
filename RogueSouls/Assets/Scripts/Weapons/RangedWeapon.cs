@@ -124,6 +124,7 @@ public class RangedWeapon : MonoBehaviour
                 firePoint.transform.Rotate(new Vector3(0, 0, 1), angle);
 
                 Bullet bullet = (Bullet)PoolManager.Instance.Spawn(bulletPrefab.name);
+                bullet.AssignWeapon(this);
                 bullet.GetComponent<TrailRenderer>().enabled = false;
                 bullet.transform.position = firePoint.transform.position;
                 bullet.transform.rotation = firePoint.transform.rotation;
