@@ -35,7 +35,7 @@ public class EntityStats : MonoBehaviour
         AmountOfHearts = _maxHealth / 4;
     }
 
-    public void TakeDamage(int damage)
+    public virtual void TakeDamage(int damage)
     {
         IncrementHealth(damage);
         if (_health <= 0)
