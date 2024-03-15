@@ -72,7 +72,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1980908149
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -134,8 +134,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 707130954911064585}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 6.107341, y: -1.0404524, z: 9.895327}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -155,8 +155,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c09d0826ee61fe445ab0467dda31a9a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _maxHealth: 0
+  <_damage>k__BackingField: 0
+  <_speed>k__BackingField: 0
+  <_timeToAttack>k__BackingField: 0
   target: {fileID: 0}
   isRanged: 0
+  enemyGun: {fileID: 0}
+  gunLocation: {fileID: 0}
+  _rotateSpeed: 0
 --- !u!195 &707130954911064588
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -195,9 +202,6 @@ MonoBehaviour:
   <_damage>k__BackingField: 1
   <_speed>k__BackingField: 4
   <_timeToAttack>k__BackingField: 0.25
-  _playerLevel: 0
-  _levelProgressionMultiplier: 0
-  _xpValue: 10
 --- !u!58 &-2889093938862742048
 CircleCollider2D:
   m_ObjectHideFlags: 0

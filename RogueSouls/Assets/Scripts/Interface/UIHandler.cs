@@ -24,6 +24,10 @@ public class UIHandler : MonoBehaviour
 
     public void TogglePauseMenu()
     {
+        if(_pauseMenu == null)
+        {
+            return;
+        }
         if (_pauseMenu.activeSelf)
         {
             _pauseMenu.SetActive(false);

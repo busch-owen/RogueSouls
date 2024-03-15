@@ -32,7 +32,7 @@ public class Enemy : EntityStats
     #region Update
     private void Update()
     {
-        if (targetInRange)
+        if (target != null && targetInRange)
         {
             enemyGun.Shoot();
             RangedAttack();
@@ -41,7 +41,12 @@ public class Enemy : EntityStats
 
     private void FixedUpdate()
     {
-        agent.SetDestination(target.position);
+
+        if(target != null && targetInRange) 
+        {
+            agent.SetDestination(target.position);
+        }
+        
     }
 
     private void RangedAttack()
@@ -58,6 +63,7 @@ public class Enemy : EntityStats
     {
         if (other.gameObject.tag == "Player")
         {
+            target = other.transform;
             targetInRange = true;
             
         }
@@ -67,6 +73,7 @@ public class Enemy : EntityStats
     {
         if (other.gameObject.tag == "Player")
         {
+            target = null;
             targetInRange = false;
         }
     }
