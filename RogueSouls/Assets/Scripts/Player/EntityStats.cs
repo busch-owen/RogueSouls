@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class EntityStats : MonoBehaviour
 {
+    #region GlobalVariables
     [SerializeField]
     public int _health { get; private set; }
     [SerializeField]
@@ -20,30 +21,33 @@ public class EntityStats : MonoBehaviour
     public float _timeToAttack { get; private set; }
 
     HeartDisplayHandler _heartDisplayHandler;
+    #endregion
 
+    #region hearts
     public virtual void Awake()
     {
         _heartDisplayHandler = GetComponentInChildren<HeartDisplayHandler>();
         UpdateHeartAmount();
         _health = _maxHealth;
     }
-
-
-
     public virtual void UpdateHeartAmount()
     {
         AmountOfHearts = _maxHealth / 4;
     }
+    #endregion
 
-    public void TakeDamage(int damage)
+    #region damage
+    public virtual void TakeDamage(int damage)
     {
         IncrementHealth(damage);
-        if (_health <= 0)
+        if (_health <= 0 && tag == "enemy")
         {
             Destroy(this.gameObject);
         }
     }
+    #endregion 
 
+    #region IncrementHealth
     public virtual void IncrementHealth(int incrementAmount)
     {
 
@@ -55,6 +59,7 @@ public class EntityStats : MonoBehaviour
         _health = Mathf.Clamp (_health, 0 , _maxHealth);
         _heartDisplayHandler?.DecrementHeartQuarters(incrementAmount);
     }
+    #endregion
 
 
 }

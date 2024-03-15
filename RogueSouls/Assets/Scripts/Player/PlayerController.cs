@@ -184,11 +184,14 @@ public class PlayerController : MonoBehaviour
     }
     public void HandleDodgeRollInput()
     {
-        if (canRoll && _rb.velocity != Vector2.zero)
+        if(_rb != null)
         {
-            _animator.SetTrigger("Dodge");
-            StartCoroutine(BeginDodgeRollDuration());
-            canRoll = false;
+            if (canRoll && _rb.velocity != Vector2.zero)
+            {
+                _animator.SetTrigger("Dodge");
+                StartCoroutine(BeginDodgeRollDuration());
+                canRoll = false;
+            }
         }
     }
 
@@ -235,9 +238,13 @@ public class PlayerController : MonoBehaviour
     //Gets the position of the mouse in world space
     public void HandleAimMouseInput(Vector2 aimPosition)
     {
-        _crosshairClamp.enabled = false;
-        aimPosition = Camera.main.ScreenToWorldPoint(aimPosition) - Camera.main.transform.position;
-        _crosshair.transform.localPosition = aimPosition;
+        if (_crosshairClamp != null)
+        {
+            _crosshairClamp.enabled = false;
+            aimPosition = Camera.main.ScreenToWorldPoint(aimPosition) - Camera.main.transform.position;
+            _crosshair.transform.localPosition = aimPosition;
+        }
+        
     }
 
     //Handles where the crosshair should go when using a controller
