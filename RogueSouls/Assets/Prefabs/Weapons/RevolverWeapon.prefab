@@ -92,7 +92,6 @@ MonoBehaviour:
   bulletForce: 30
   minSpread: -2
   maxSpread: 2
-  _screenShakeEffect: {fileID: 9142908295371051861}
   Reload_sounds: {fileID: 0}
   sfxHandler: {fileID: 0}
   gun_sounds: {fileID: 0}
@@ -109,7 +108,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71c936eb1088e824caec41dbfba797a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _targetCamTransform: {fileID: 0}
   _shakeAmount: 7
   _shakeDuration: 0.2
   _shakeRate: 0.001

@@ -19,6 +19,8 @@ public class WeaponWheel : MonoBehaviour
     [SerializeField]
     float _menuOpenTimeScale;
 
+    Inventory _playerInventory;
+
     Camera _camera;
 
     Vector2 _aimPosition;
@@ -27,12 +29,11 @@ public class WeaponWheel : MonoBehaviour
     ItemHighlight _itemHighlight;
 
     [SerializeField]
-    Transform[] _itemSlots;
+    List<Transform> _itemSlots = new List<Transform>();
 
-    [SerializeField]
-    RangedWeapon[] _weapons;
+    public List<GameObject> equippedItems { get; private set; } = new List<GameObject>();
 
-    RangedWeapon[] _playerWeapons;
+    List<GameObject> _spawnedItems = new List<GameObject>();
 
     PlayerController _playerController;
 
@@ -46,14 +47,11 @@ public class WeaponWheel : MonoBehaviour
         _playerController = FindObjectOfType<PlayerController>();
         _weaponOffsetHandle = _playerController.GetComponentInChildren<WeaponOffsetHandle>();
         _playerInputHandler = _playerController.GetComponent<PlayerInputHandler>();
+        _playerInventory = FindObjectOfType<Inventory>();
         _weaponWheelObject.SetActive(false);
 
-        _weapons = _playerController.GetComponentsInChildren<RangedWeapon>();
-        _playerWeapons = _playerController.GetComponentsInChildren<RangedWeapon>();
-
-        PutAwayCurrentWeapon();
-
-        _playerWeapons[0].gameObject.SetActive(true);
+        GrabWeaponsFromInventory();
+        LoadItemsOntoPlayer();
     }
 
     private void Update()
@@ -94,25 +92,21 @@ public class WeaponWheel : MonoBehaviour
 
     public void CloseWeaponWheel()
     {
-        if(_weaponWheelObject != null )
+        if (_weaponWheelObject != null)
         {
             _weaponWheelObject.SetActive(false);
-            if (WhichWeaponToSelect() < _playerWeapons.Length)
-            {
-                PutAwayCurrentWeapon();
-                _playerWeapons[WhichWeaponToSelect()].gameObject.SetActive(true);
-                _playerInputHandler.UpdateRangedWeaponReference();
-                _weaponOffsetHandle.SetCurrentWeapon();
-            }
+            PutAwayCurrentWeapon();
+            EquipWeapon(WhichWeaponToSelect());
+
             Time.timeScale = 1;
         }
     }
 
     private void FillItemSlots()
     {
-        for (int i = 0; i < _weapons.Length; i++)
+        for(int i = 0; i < _itemSlots.Count; i++)
         {
-            _itemSlots[i].GetComponent<SpriteRenderer>().sprite = _weapons[i].GetComponentInChildren<SpriteRenderer>().sprite;
+            _itemSlots[i].GetComponent<SpriteRenderer>().sprite = _spawnedItems[i].GetComponentInChildren<SpriteRenderer>().sprite;
         }
     }
 
@@ -144,9 +138,51 @@ public class WeaponWheel : MonoBehaviour
 
     private void PutAwayCurrentWeapon()
     {
-        for (int i = 0; i < _playerWeapons.Length; i++)
+        foreach(GameObject item in  _spawnedItems)
         {
-            _playerWeapons[i].gameObject.SetActive(false);
+            item.SetActive(false);
         }
+    }
+
+    private void GrabWeaponsFromInventory()
+    {
+        foreach(GameObject items in _playerInventory.InventoryObjects)
+        {
+            equippedItems.Add(items);
+        }
+    }
+
+    public void LoadItemsOntoPlayer()
+    {
+        foreach(GameObject objectToCheck in equippedItems)
+        {
+            string itemName = objectToCheck.name;
+            if (GameObject.Find("Player/Sprite/WeaponHandle/" + name) == null)
+            {
+                GameObject spawnedItem = Instantiate(objectToCheck, _weaponOffsetHandle.transform);
+                _spawnedItems.Add(spawnedItem);
+            }
+        }
+        PutAwayCurrentWeapon();
+        _spawnedItems[0].SetActive(true);
+
+        EquipWeapon(0);
+    }
+
+    public void PutItemInDesiredSlot(int desiredSlot, GameObject itemToEnter)
+    {
+        PutAwayCurrentWeapon();
+        _spawnedItems.Insert(_spawnedItems.Count - 1, _spawnedItems[desiredSlot]);
+        _spawnedItems.RemoveAt(desiredSlot);
+        _spawnedItems.Insert(desiredSlot, itemToEnter);
+
+        EquipWeapon(desiredSlot);
+    }
+
+    public void EquipWeapon(int index)
+    {
+        _spawnedItems[index].SetActive(true);
+        _weaponOffsetHandle.SetCurrentWeapon();
+        _playerInputHandler.UpdateRangedWeaponReference();
     }
 }

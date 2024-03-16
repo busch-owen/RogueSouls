@@ -11,11 +11,6 @@ public class WeaponOffsetHandle : MonoBehaviour
     [SerializeField]
     RangedWeapon _weapon;
 
-    private void Awake()
-    {
-        _weapon = GetComponentInChildren<RangedWeapon>();
-    }
-
     public void OffsetWeaponPos(float rotationAngle)
     {
         _weapon.transform.localPosition = new Vector2(this.transform.localPosition.x + _weaponOffset, this.transform.localPosition.y);
