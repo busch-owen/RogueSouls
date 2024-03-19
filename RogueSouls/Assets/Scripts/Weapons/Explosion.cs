@@ -5,39 +5,38 @@ using UnityEngine;
 public class Explosion : Bullet
 {
     [SerializeField]
-    float timeActive = 4f;
-    [SerializeField]
     private CircleCollider2D circleCollider;
     [SerializeField]
     Rigidbody2D rb;
     [SerializeField]
-    ParticleSystem FireAOEEffect;
+    FireEffect FireAOEEffect;
+    SpriteRenderer spriteRenderer;
     bool isRocket = false;
     bool hasCollided = false;
 
     [SerializeField]
     float _explosionRadius, _startRadius;
 
+    int itemsCollided = 0;
+
     // Start is called before the first frame update
     private void FixedUpdate()
     {
-        if (timeActive <= 0)
-        {
-            FireAOEEffect?.Stop();
-        }
-
         if(hasCollided)
         {
             rb.velocity = Vector2.zero;
             rb.angularVelocity = 0;
         }
-        
     }
 
     public override void OnEnable()
     {
         circleCollider.enabled = true;
+        itemsCollided = 0;
         circleCollider.radius = _startRadius;
+        spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+        spriteRenderer.enabled = true;
+        _trailRenderer.enabled = true;
         hasCollided = false;
         Invoke("OnDeSpawn", bulletLife);
     }
@@ -50,9 +49,16 @@ public class Explosion : Bullet
             
         }
         circleCollider.radius = _explosionRadius;
-        FireAOEEffect?.Play();
+        if(itemsCollided == 0)
+        {
+            FireEffect tempEffect = (FireEffect)PoolManager.Instance.Spawn(FireAOEEffect.name);
+            tempEffect.transform.position = this.transform.position;
+        }
+        spriteRenderer.enabled = false;
+        _trailRenderer.enabled = false;
         isRocket = true;
         hasCollided = true;
+        itemsCollided++;
 
         //create particle system
         //create circle collider the same size as particle system
