@@ -8,6 +8,7 @@ public class PlayerInputHandler : MonoBehaviour
     private RangedWeapon rangedWeapon;
     private MeleeBase meleeWeapon;
     private WeaponWheel weaponWheel;
+    private InventoryMenu inventoryMenu;
     private UIHandler uiHandler;
 
     CharacterInput characterInput;
@@ -17,6 +18,7 @@ public class PlayerInputHandler : MonoBehaviour
         playerController = GetComponent<PlayerController>();
         uiHandler = FindObjectOfType<UIHandler>();
         meleeWeapon = FindObjectOfType<MeleeBase>();
+        inventoryMenu = FindObjectOfType<InventoryMenu>();
         UpdateRangedWeaponReference();
         weaponWheel = FindObjectOfType<WeaponWheel>();
         if(characterInput == null)
@@ -41,7 +43,8 @@ public class PlayerInputHandler : MonoBehaviour
                 characterInput.CharacterActions.OpenWeaponWheel.canceled += i => weaponWheel?.CloseWeaponWheel();
             }
             
-            characterInput.CharacterActions.PauseMenu.started += i => uiHandler.TogglePauseMenu();
+            characterInput.CharacterActions.PauseMenu.started += i => uiHandler?.TogglePauseMenu();
+            characterInput.CharacterActions.SlotBinding.performed += i => inventoryMenu?.RequestBindSlot(i.ReadValue<Vector2>());
         }
 
         characterInput.Enable();

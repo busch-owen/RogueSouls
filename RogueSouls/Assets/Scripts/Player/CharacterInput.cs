@@ -291,6 +291,15 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SlotBinding"",
+                    ""type"": ""Value"",
+                    ""id"": ""cbeb6de3-f6b3-4780-839e-e741b970976a"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -425,6 +434,116 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
                     ""action"": ""MeleeAttack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""Keyboard"",
+                    ""id"": ""3c3a2de6-7762-4918-aa86-58ca3b76acd8"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SlotBinding"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""3c93b6e1-1285-48b8-88b9-05a9f3d4e0e3"",
+                    ""path"": ""<Keyboard>/4"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SlotBinding"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""6afe6a71-5706-4dc2-b3fa-f54038210ff2"",
+                    ""path"": ""<Keyboard>/2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SlotBinding"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""6cc76750-b1b1-4383-9445-6e244dae0723"",
+                    ""path"": ""<Keyboard>/3"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SlotBinding"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""03c267d6-032b-447e-8461-88885e27a68f"",
+                    ""path"": ""<Keyboard>/1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SlotBinding"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""2D Vector"",
+                    ""id"": ""644d575a-ede3-40f7-994e-223e31ca483d"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SlotBinding"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""9550772e-ea74-40a1-995b-00244a227b92"",
+                    ""path"": ""<Gamepad>/dpad/up"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SlotBinding"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""c1017fdd-91b2-461a-ba6a-02baf03ba9cc"",
+                    ""path"": ""<Gamepad>/dpad/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SlotBinding"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""d9d030df-953e-4579-96b6-a5f3c59de7a9"",
+                    ""path"": ""<Gamepad>/leftStick/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SlotBinding"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""e2cfe52f-8b58-468e-8f0d-21bbe377dcf4"",
+                    ""path"": ""<Gamepad>/leftStick/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SlotBinding"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
                 }
             ]
         }
@@ -444,6 +563,7 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
         m_CharacterActions_Interact = m_CharacterActions.FindAction("Interact", throwIfNotFound: true);
         m_CharacterActions_PauseMenu = m_CharacterActions.FindAction("PauseMenu", throwIfNotFound: true);
         m_CharacterActions_MeleeAttack = m_CharacterActions.FindAction("MeleeAttack", throwIfNotFound: true);
+        m_CharacterActions_SlotBinding = m_CharacterActions.FindAction("SlotBinding", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -573,6 +693,7 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_CharacterActions_Interact;
     private readonly InputAction m_CharacterActions_PauseMenu;
     private readonly InputAction m_CharacterActions_MeleeAttack;
+    private readonly InputAction m_CharacterActions_SlotBinding;
     public struct CharacterActionsActions
     {
         private @CharacterInput m_Wrapper;
@@ -583,6 +704,7 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
         public InputAction @Interact => m_Wrapper.m_CharacterActions_Interact;
         public InputAction @PauseMenu => m_Wrapper.m_CharacterActions_PauseMenu;
         public InputAction @MeleeAttack => m_Wrapper.m_CharacterActions_MeleeAttack;
+        public InputAction @SlotBinding => m_Wrapper.m_CharacterActions_SlotBinding;
         public InputActionMap Get() { return m_Wrapper.m_CharacterActions; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -610,6 +732,9 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
             @MeleeAttack.started += instance.OnMeleeAttack;
             @MeleeAttack.performed += instance.OnMeleeAttack;
             @MeleeAttack.canceled += instance.OnMeleeAttack;
+            @SlotBinding.started += instance.OnSlotBinding;
+            @SlotBinding.performed += instance.OnSlotBinding;
+            @SlotBinding.canceled += instance.OnSlotBinding;
         }
 
         private void UnregisterCallbacks(ICharacterActionsActions instance)
@@ -632,6 +757,9 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
             @MeleeAttack.started -= instance.OnMeleeAttack;
             @MeleeAttack.performed -= instance.OnMeleeAttack;
             @MeleeAttack.canceled -= instance.OnMeleeAttack;
+            @SlotBinding.started -= instance.OnSlotBinding;
+            @SlotBinding.performed -= instance.OnSlotBinding;
+            @SlotBinding.canceled -= instance.OnSlotBinding;
         }
 
         public void RemoveCallbacks(ICharacterActionsActions instance)
@@ -663,5 +791,6 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
         void OnInteract(InputAction.CallbackContext context);
         void OnPauseMenu(InputAction.CallbackContext context);
         void OnMeleeAttack(InputAction.CallbackContext context);
+        void OnSlotBinding(InputAction.CallbackContext context);
     }
 }

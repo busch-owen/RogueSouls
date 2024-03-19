@@ -51,7 +51,10 @@ public class WeaponWheel : MonoBehaviour
         _weaponWheelObject.SetActive(false);
 
         GrabWeaponsFromInventory();
-        LoadItemsOntoPlayer();
+        if(_spawnedItems.Count != 0)
+        {
+            LoadItemsOntoPlayer();
+        }
     }
 
     private void Update()
@@ -104,9 +107,12 @@ public class WeaponWheel : MonoBehaviour
 
     private void FillItemSlots()
     {
-        for(int i = 0; i < _itemSlots.Count; i++)
+        if(_spawnedItems.Count != 0)
         {
-            _itemSlots[i].GetComponent<SpriteRenderer>().sprite = _spawnedItems[i].GetComponentInChildren<SpriteRenderer>().sprite;
+            for (int i = 0; i < _itemSlots.Count; i++)
+            {
+                _itemSlots[i].GetComponent<SpriteRenderer>().sprite = _spawnedItems[i].GetComponentInChildren<SpriteRenderer>().sprite;
+            }
         }
     }
 
@@ -138,9 +144,12 @@ public class WeaponWheel : MonoBehaviour
 
     private void PutAwayCurrentWeapon()
     {
-        foreach(GameObject item in  _spawnedItems)
+        if(_spawnedItems.Count != 0)
         {
-            item.SetActive(false);
+            foreach (GameObject item in _spawnedItems)
+            {
+                item.SetActive(false);
+            }
         }
     }
 
@@ -154,35 +163,37 @@ public class WeaponWheel : MonoBehaviour
 
     public void LoadItemsOntoPlayer()
     {
+        Debug.Log("tried to load items onto player");
         foreach(GameObject objectToCheck in equippedItems)
         {
             string itemName = objectToCheck.name;
-            if (GameObject.Find("Player/Sprite/WeaponHandle/" + name) == null)
+            if (GameObject.Find("Player/Sprite/WeaponHandle/" + itemName) == null)
             {
                 GameObject spawnedItem = Instantiate(objectToCheck, _weaponOffsetHandle.transform);
+                Debug.Log("successfully loaded item onto player");
                 _spawnedItems.Add(spawnedItem);
             }
         }
         PutAwayCurrentWeapon();
-        _spawnedItems[0].SetActive(true);
-
-        EquipWeapon(0);
     }
 
-    public void PutItemInDesiredSlot(int desiredSlot, GameObject itemToEnter)
+    public void PutItemInDesiredSlot(int desiredSlot, int itemToInsert)
     {
         PutAwayCurrentWeapon();
         _spawnedItems.Insert(_spawnedItems.Count - 1, _spawnedItems[desiredSlot]);
         _spawnedItems.RemoveAt(desiredSlot);
-        _spawnedItems.Insert(desiredSlot, itemToEnter);
+        _spawnedItems.Insert(desiredSlot, equippedItems[itemToInsert]);
 
         EquipWeapon(desiredSlot);
     }
 
     public void EquipWeapon(int index)
     {
-        _spawnedItems[index].SetActive(true);
-        _weaponOffsetHandle.SetCurrentWeapon();
-        _playerInputHandler.UpdateRangedWeaponReference();
+        if (_spawnedItems.Count != 0)
+        {
+            _spawnedItems[index].SetActive(true);
+            _weaponOffsetHandle.SetCurrentWeapon();
+            _playerInputHandler.UpdateRangedWeaponReference();
+        }
     }
 }
