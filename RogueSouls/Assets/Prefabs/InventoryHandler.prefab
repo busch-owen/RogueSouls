@@ -1,0 +1,56 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5652162260903701715
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5652162260903701713}
+  - component: {fileID: 5652162260903701714}
+  m_Layer: 0
+  m_Name: InventoryHandler
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5652162260903701713
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5652162260903701715}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 932.4738, y: 522.7434, z: -6.9476957}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5652162260903701714
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5652162260903701715}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd6df1d76f19b10499776422f2f091b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <Keys>k__BackingField: []
+  <InventoryObjects>k__BackingField:
+  - {fileID: 3873842773402911558, guid: b47d89c4ec14c0140968ffd2b988d81e, type: 3}
+  - {fileID: 3873842773402911558, guid: cf0f37ece5705a74c813ae9f1f8b61c9, type: 3}
+  - {fileID: 3873842773402911558, guid: 7621fc21a650de44c8f8053ba5063b5c, type: 3}
+  - {fileID: 3873842773402911558, guid: 0c3be407c1c30354aa1c82ed38fa5325, type: 3}
+  - {fileID: 3873842773402911558, guid: d3b8669ff3f4cda45af93e3afdb9825d, type: 3}
+  - {fileID: 3873842773402911558, guid: ae92307d3948f9340a5b3fa74e3332bb, type: 3}
+  - {fileID: 3873842773402911558, guid: 045b20b9af8f3d442b89dac9568ba5a2, type: 3}
+  <BossKeys>k__BackingField: []

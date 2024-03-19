@@ -149,7 +149,6 @@ GameObject:
   - component: {fileID: 7529075971869702691}
   - component: {fileID: 7529075971869702689}
   - component: {fileID: 7529075971869702688}
-  - component: {fileID: 2539332685899994742}
   - component: {fileID: 3912358352390913484}
   - component: {fileID: 6404003266267446506}
   m_Layer: 7
@@ -191,7 +190,7 @@ MonoBehaviour:
   <Health>k__BackingField: 0
   _maxHealth: 8
   <Damage>k__BackingField: 0
-  <Speed>k__BackingField: 0
+  <Speed>k__BackingField: 6
   <TimeToAttack>k__BackingField: 0
   _gameManager: {fileID: 0}
   target: {fileID: 0}
@@ -221,24 +220,6 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &2539332685899994742
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7529075971869702693}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a1208892c04bfdd4994ba637bb61464a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  <Health>k__BackingField: 0
-  _maxHealth: 8
-  <Damage>k__BackingField: 0
-  <Speed>k__BackingField: 0
-  <TimeToAttack>k__BackingField: 0
-  _gameManager: {fileID: 0}
 --- !u!58 &3912358352390913484
 CircleCollider2D:
   m_ObjectHideFlags: 0
