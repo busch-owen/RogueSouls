@@ -894,6 +894,8 @@ MonoBehaviour:
   - {fileID: 5753862607509235406}
   - {fileID: 4898338748898684937}
   - {fileID: 8508595159454719188}
+  <equippedItems>k__BackingField: []
+  _spawnedItems: []
 --- !u!1 &7521576083890409156
 GameObject:
   m_ObjectHideFlags: 0
