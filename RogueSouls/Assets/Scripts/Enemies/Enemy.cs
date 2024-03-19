@@ -32,7 +32,7 @@ public class Enemy : EntityStats
     #region Update
     private void Update()
     {
-        if (targetInRange)
+        if (target != null && targetInRange)
         {
             enemyGun.Shoot();
             RangedAttack();
