@@ -34,13 +34,14 @@ public class WeaponWheel : MonoBehaviour
     [field: SerializeField]
     public List<GameObject> equippedItems { get; private set; } = new List<GameObject>();
 
-    List<GameObject> _spawnedItems = new List<GameObject>(12);
+    GameObject[] _spawnedItems = new GameObject[12];
 
     PlayerController _playerController;
 
     WeaponOffsetHandle _weaponOffsetHandle;
 
     PlayerInputHandler _playerInputHandler;
+
 
     private void Awake()
     {
@@ -52,10 +53,7 @@ public class WeaponWheel : MonoBehaviour
         _weaponWheelObject.SetActive(false);
 
         GrabWeaponsFromInventory();
-        if(_spawnedItems.Count != 0)
-        {
-            LoadItemsOntoPlayer();
-        }
+        LoadItemsOntoPlayer();
     }
 
     private void Update()
@@ -108,12 +106,9 @@ public class WeaponWheel : MonoBehaviour
 
     private void FillItemSlots()
     {
-        if(_spawnedItems.Count != 0)
+        for (int i = 0; i < _itemSlots.Count; i++)
         {
-            for (int i = 0; i < _spawnedItems.Count; i++)
-            {
-                _itemSlots[i].GetComponent<SpriteRenderer>().sprite = _spawnedItems[i].GetComponentInChildren<SpriteRenderer>().sprite;
-            }
+            _itemSlots[i].GetComponent<SpriteRenderer>().sprite = _spawnedItems[i]?.GetComponentInChildren<SpriteRenderer>().sprite;
         }
     }
 
@@ -145,12 +140,9 @@ public class WeaponWheel : MonoBehaviour
 
     private void PutAwayCurrentWeapon()
     {
-        if(_spawnedItems.Count != 0)
+        foreach (GameObject item in _spawnedItems)
         {
-            foreach (GameObject item in _spawnedItems)
-            {
-                item.SetActive(false);
-            }
+            item?.SetActive(false);
         }
     }
 
@@ -166,14 +158,14 @@ public class WeaponWheel : MonoBehaviour
     {
         GrabWeaponsFromInventory();
         Debug.Log("tried to load items onto player");
-        foreach(GameObject objectToCheck in equippedItems)
+        for(int i = 0; i < equippedItems.Count; i++)
         {
-            //string itemName = objectToCheck.name;
-            if (GameObject.Find("Player/Sprite/WeaponHandle/" + objectToCheck.name) == null)
+            string objectToCheck = equippedItems[i].name;
+            if (GameObject.Find("Player/Sprite/WeaponHandle/" + equippedItems[i].name) == null)
             {
                 Debug.Log("Looking for items to load onto player");
-                GameObject spawnedItem = Instantiate(objectToCheck, _weaponOffsetHandle.transform);
-                _spawnedItems.Add(spawnedItem);
+                GameObject spawnedItem = Instantiate(equippedItems[i], _weaponOffsetHandle.transform);
+                _spawnedItems[i] = spawnedItem;
             }
         }
     }
@@ -181,18 +173,15 @@ public class WeaponWheel : MonoBehaviour
     public void PutItemInDesiredSlot(int desiredSlot, int itemToInsert)
     {
         PutAwayCurrentWeapon();
+        //_spawnedItems?.RemoveAt(desiredSlot);
         //_spawnedItems.Add(_spawnedItems[itemToInsert]);
-        //_spawnedItems.RemoveAt(desiredSlot);
-        _spawnedItems.Insert(desiredSlot, equippedItems[itemToInsert]);
+
+        _spawnedItems[desiredSlot] = equippedItems[itemToInsert];
         EquipWeapon(desiredSlot);
     }
 
     public void EquipWeapon(int index)
     {
-        if(index > _spawnedItems.Count - 1)
-        {
-            return;
-        }
         _spawnedItems[index]?.SetActive(true);
         _weaponOffsetHandle.SetCurrentWeapon();
         _playerInputHandler.UpdateRangedWeaponReference();
