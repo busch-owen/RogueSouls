@@ -8,6 +8,11 @@ public class WarpObject : MonoBehaviour
 
     Rigidbody2D _warpTargetRb;
 
+    Transform _cameraTransform;
+
+    [SerializeField]
+    CameraBounds _cameraBounds;
+
     [SerializeField]
     Transform _warpPosition;
 
@@ -21,8 +26,10 @@ public class WarpObject : MonoBehaviour
 
     private void Awake()
     {
+        _cameraBounds = FindObjectOfType<CameraBounds>();
         _warpOverlay = GameObject.FindGameObjectWithTag("WarpOverlay");
         _warpOverlay.transform.localScale = _defaultWarpOverlaySize;
+        _cameraTransform = Camera.main.transform;
     }
 
     private void Start()
@@ -54,6 +61,7 @@ public class WarpObject : MonoBehaviour
     {
         _warpOverlay.transform.localScale = _defaultWarpOverlaySize;
         _warpOverlay.SetActive(true);
+        _cameraBounds.gameObject.SetActive(false);
         _warpTargetRb.velocity = Vector3.zero;
         while (true)
         {
@@ -69,6 +77,8 @@ public class WarpObject : MonoBehaviour
     {
         _warpOverlay.transform.localScale = _targetWarpOverlaySize;
         _warpTarget.position = _warpPosition.position;
+        _cameraTransform.position = _warpPosition.position;
+        _cameraBounds.gameObject.SetActive(true);
         while (true)
         {
             _warpOverlay.transform.localScale = Vector3.Lerp(_warpOverlay.transform.localScale, _defaultWarpOverlaySize, _warpOutTransitionSpeed * Time.fixedDeltaTime);
