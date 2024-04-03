@@ -1,0 +1,70 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - Carryable
+  - bullet
+  - enemy
+  - EnemyBullet
+  - WarpOverlay
+  - Chest
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - projectile
+  - Water
+  - UI
+  - EnemyProjectile
+  - Enemy
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: Background
+    uniqueID: 2343404773
+    locked: 0
+  - name: InteractableObjects
+    uniqueID: 1445394025
+    locked: 0
+  - name: Player/Enemies
+    uniqueID: 1980908149
+    locked: 0
+  - name: Items
+    uniqueID: 1501119281
+    locked: 0
+  - name: Foreground
+    uniqueID: 461597429
+    locked: 0
+  - name: Effects
+    uniqueID: 2726322865
+    locked: 0
+  - name: UI
+    uniqueID: 4134067031
+    locked: 0
