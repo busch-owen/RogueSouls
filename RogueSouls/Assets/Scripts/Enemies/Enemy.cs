@@ -6,6 +6,7 @@ using UnityEngine.AI;
 
 public class Enemy : EntityStats
 {
+    #region Global Variables
     [SerializeField] Transform target;
     NavMeshAgent agent;
     [SerializeField]
@@ -19,6 +20,8 @@ public class Enemy : EntityStats
     float _rotateSpeed;
     float _enemyWeaponRotationAngle;
     bool targetInRange;
+#endregion
+    #region Start   
     [SerializeField]
     bool iceArmor;
     [SerializeField]
@@ -41,15 +44,15 @@ public class Enemy : EntityStats
     private void Start()
     {
         agent = GetComponent<NavMeshAgent>();
-        agent.speed = _speed;
+        agent.speed = Speed;
         agent.updateRotation = false;
         agent.updateUpAxis = false;
     }
-
-
+#endregion
+    #region Update
     private void Update()
     {
-        if (targetInRange)
+        if (target != null && targetInRange)
         {
             enemyGun.Shoot();
             RangedAttack();
@@ -58,7 +61,7 @@ public class Enemy : EntityStats
 
     private void FixedUpdate()
     {
-        if (target != null)
+        if (target != null && targetInRange)
         {
             agent.SetDestination(target.position);
         }
@@ -69,8 +72,9 @@ public class Enemy : EntityStats
         _enemyWeaponRotationAngle = Mathf.Atan2(target.transform.position.y - this.transform.position.y, target.transform.position.x - this.transform.position.x) * Mathf.Rad2Deg;
         Quaternion rotation = Quaternion.AngleAxis(_enemyWeaponRotationAngle, Vector3.forward);
         gunLocation.rotation = Quaternion.Slerp(gunLocation.rotation, rotation, _rotateSpeed * Time.deltaTime);
-        
     }
+#endregion
+    #region Triggers
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.tag == "Player")
@@ -88,6 +92,7 @@ public class Enemy : EntityStats
             targetInRange = false;
         }
     }
+    #endregion
 
 
 

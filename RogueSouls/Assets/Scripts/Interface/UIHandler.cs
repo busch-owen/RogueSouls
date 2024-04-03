@@ -19,9 +19,11 @@ public class UIHandler : MonoBehaviour
 
     private void Awake()
     {
+        /*
         _pauseMenu.SetActive(false);
         _inventoryMenu.SetActive(false);
         _gameMenu.SetActive(false);
+        */
     }
 
     public void TogglePauseMenu()

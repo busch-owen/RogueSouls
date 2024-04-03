@@ -19,7 +19,6 @@ public class Bullet : PoolObject
     // Start is called before the first frame update
     public virtual void OnCollisionEnter2D(Collision2D other) 
 	{
-
         if(other.gameObject.tag == "enemy")
         {
             Enemy enemyToHit = other.gameObject.GetComponent<Enemy>();
@@ -30,12 +29,11 @@ public class Bullet : PoolObject
         {
             this.OnDeSpawn();
         }
-
     }
 
     public virtual void OnEnable()
     {
-        _trailRenderer = GetComponent<TrailRenderer>();
+        //_trailRenderer = GetComponent<TrailRenderer>();
         Invoke("OnDeSpawn", bulletLife);
         
     }

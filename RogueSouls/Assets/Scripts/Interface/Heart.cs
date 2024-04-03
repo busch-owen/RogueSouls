@@ -10,27 +10,40 @@ public class Heart : MonoBehaviour
     int _quarters = 4;
     int _maxQuarters;
 
+    public bool HeartEmpty { get; private set; }
+    public bool HeartFull { get; private set; } = true;
+
+    [field: SerializeField]
+    public int QuarterToRestore { get; private set; } = 0;
+
     private void OnEnable()
     {
         _maxQuarters = _quarters;
     }
 
-    public bool _heartEmpty { get; private set; }
-
     public void DisableQuarters()
     {
-        if(_quarters >= 1)
+        if (_quarters >= 1)
         {
             _heartQuarters[_quarters - 1]?.SetActive(false);
             _quarters--;
-            _heartEmpty = _quarters <= 0;
+            HeartEmpty = _quarters <= 0;
+            HeartFull = _quarters == 4;
+            QuarterToRestore++;
+            QuarterToRestore = Mathf.Clamp(QuarterToRestore, 0, 3);
         }
     }
 
     public void EnableQuarters(int quarterIndex)
     {
-        int index = quarterIndex - 1;
-        _heartQuarters[index]?.SetActive(true);
-        _heartEmpty = false;
+        if(quarterIndex < 4)
+        {
+            HeartEmpty = _quarters <= 0;
+            _quarters++;
+            HeartFull = _quarters == 4;
+            QuarterToRestore--;
+            QuarterToRestore = Mathf.Clamp(QuarterToRestore, 0, 3);
+            _heartQuarters[quarterIndex].SetActive(true);
+        }
     }
 }

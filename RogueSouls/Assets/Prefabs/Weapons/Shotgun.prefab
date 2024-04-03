@@ -133,7 +133,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6250265583612026718
 Transform:
   m_ObjectHideFlags: 0
@@ -176,7 +176,6 @@ MonoBehaviour:
   bulletForce: 15
   minSpread: 30
   maxSpread: 50
-  _screenShakeEffect: {fileID: 7513332494048581160}
   Reload_sounds: {fileID: 0}
   sfxHandler: {fileID: 0}
   gun_sounds: {fileID: 0}
@@ -193,7 +192,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71c936eb1088e824caec41dbfba797a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _targetCamTransform: {fileID: 0}
   _shakeAmount: 5
   _shakeDuration: 0.2
   _shakeRate: 0.001

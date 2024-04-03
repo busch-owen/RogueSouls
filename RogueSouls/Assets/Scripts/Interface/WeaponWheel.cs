@@ -19,6 +19,8 @@ public class WeaponWheel : MonoBehaviour
     [SerializeField]
     float _menuOpenTimeScale;
 
+    Inventory _playerInventory;
+
     Camera _camera;
 
     Vector2 _aimPosition;
@@ -27,12 +29,12 @@ public class WeaponWheel : MonoBehaviour
     ItemHighlight _itemHighlight;
 
     [SerializeField]
-    Transform[] _itemSlots;
+    List<Transform> _itemSlots = new List<Transform>();
 
-    [SerializeField]
-    RangedWeapon[] _weapons;
+    [field: SerializeField]
+    public List<GameObject> equippedItems { get; private set; } = new List<GameObject>();
 
-    RangedWeapon[] _playerWeapons;
+    List<GameObject> _spawnedItems = new List<GameObject>(12);
 
     PlayerController _playerController;
 
@@ -46,14 +48,14 @@ public class WeaponWheel : MonoBehaviour
         _playerController = FindObjectOfType<PlayerController>();
         _weaponOffsetHandle = _playerController.GetComponentInChildren<WeaponOffsetHandle>();
         _playerInputHandler = _playerController.GetComponent<PlayerInputHandler>();
+        _playerInventory = FindObjectOfType<Inventory>();
         _weaponWheelObject.SetActive(false);
 
-        _weapons = _playerController.GetComponentsInChildren<RangedWeapon>();
-        _playerWeapons = _playerController.GetComponentsInChildren<RangedWeapon>();
-
-        PutAwayCurrentWeapon();
-
-        _playerWeapons[0].gameObject.SetActive(true);
+        GrabWeaponsFromInventory();
+        if(_spawnedItems.Count != 0)
+        {
+            LoadItemsOntoPlayer();
+        }
     }
 
     private void Update()
@@ -71,8 +73,11 @@ public class WeaponWheel : MonoBehaviour
 
     public void HandleArrowInputMouse(Vector2 aimPosition)
     {
-        aimPosition = _camera.ScreenToWorldPoint(aimPosition) - _camera.transform.position;
-        _aimPosition = aimPosition;
+        if (_camera != null)
+        {
+            aimPosition = _camera.ScreenToWorldPoint(aimPosition) - _camera.transform.position;
+            _aimPosition = aimPosition;
+        }
     }
     public void HandleArrowInputController(Vector2 aimPosition)
     {
@@ -81,29 +86,34 @@ public class WeaponWheel : MonoBehaviour
 
     public void OpenWeaponWheel()
     {
-        _weaponWheelObject.SetActive(true);
-        FillItemSlots();
-        Time.timeScale = _menuOpenTimeScale;
+        if(_weaponWheelObject != null)
+        {
+            _weaponWheelObject.SetActive(true);
+            FillItemSlots();
+            Time.timeScale = _menuOpenTimeScale;
+        }
     }
 
     public void CloseWeaponWheel()
     {
-        _weaponWheelObject.SetActive(false);
-        if(WhichWeaponToSelect() < _playerWeapons.Length)
+        if (_weaponWheelObject != null)
         {
+            _weaponWheelObject.SetActive(false);
             PutAwayCurrentWeapon();
-            _playerWeapons[WhichWeaponToSelect()].gameObject.SetActive(true);
-            _playerInputHandler.UpdateRangedWeaponReference();
-            _weaponOffsetHandle.SetCurrentWeapon();
+            EquipWeapon(WhichWeaponToSelect());
+
+            Time.timeScale = 1;
         }
-        Time.timeScale = 1;
     }
 
     private void FillItemSlots()
     {
-        for (int i = 0; i < _weapons.Length; i++)
+        if(_spawnedItems.Count != 0)
         {
-            _itemSlots[i].GetComponent<SpriteRenderer>().sprite = _weapons[i].GetComponentInChildren<SpriteRenderer>().sprite;
+            for (int i = 0; i < _spawnedItems.Count; i++)
+            {
+                _itemSlots[i].GetComponent<SpriteRenderer>().sprite = _spawnedItems[i].GetComponentInChildren<SpriteRenderer>().sprite;
+            }
         }
     }
 
@@ -135,9 +145,56 @@ public class WeaponWheel : MonoBehaviour
 
     private void PutAwayCurrentWeapon()
     {
-        for (int i = 0; i < _playerWeapons.Length; i++)
+        if(_spawnedItems.Count != 0)
         {
-            _playerWeapons[i].gameObject.SetActive(false);
+            foreach (GameObject item in _spawnedItems)
+            {
+                item.SetActive(false);
+            }
         }
+    }
+
+    private void GrabWeaponsFromInventory()
+    {
+        foreach(GameObject items in _playerInventory.InventoryObjects)
+        {
+            equippedItems.Add(items);
+        }
+    }
+
+    public void LoadItemsOntoPlayer()
+    {
+        GrabWeaponsFromInventory();
+        Debug.Log("tried to load items onto player");
+        foreach(GameObject objectToCheck in equippedItems)
+        {
+            //string itemName = objectToCheck.name;
+            if (GameObject.Find("Player/Sprite/WeaponHandle/" + objectToCheck.name) == null)
+            {
+                Debug.Log("Looking for items to load onto player");
+                GameObject spawnedItem = Instantiate(objectToCheck, _weaponOffsetHandle.transform);
+                _spawnedItems.Add(spawnedItem);
+            }
+        }
+    }
+
+    public void PutItemInDesiredSlot(int desiredSlot, int itemToInsert)
+    {
+        PutAwayCurrentWeapon();
+        //_spawnedItems.Add(_spawnedItems[itemToInsert]);
+        //_spawnedItems.RemoveAt(desiredSlot);
+        _spawnedItems.Insert(desiredSlot, equippedItems[itemToInsert]);
+        EquipWeapon(desiredSlot);
+    }
+
+    public void EquipWeapon(int index)
+    {
+        if(index > _spawnedItems.Count - 1)
+        {
+            return;
+        }
+        _spawnedItems[index]?.SetActive(true);
+        _weaponOffsetHandle.SetCurrentWeapon();
+        _playerInputHandler.UpdateRangedWeaponReference();
     }
 }
