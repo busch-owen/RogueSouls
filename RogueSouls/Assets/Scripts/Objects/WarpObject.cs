@@ -61,7 +61,7 @@ public class WarpObject : MonoBehaviour
     {
         _warpOverlay.transform.localScale = _defaultWarpOverlaySize;
         _warpOverlay.SetActive(true);
-        _cameraBounds.gameObject.SetActive(false);
+        //_cameraBounds.gameObject.SetActive(false);
         _warpTargetRb.velocity = Vector3.zero;
         while (true)
         {
@@ -78,7 +78,7 @@ public class WarpObject : MonoBehaviour
         _warpOverlay.transform.localScale = _targetWarpOverlaySize;
         _warpTarget.position = _warpPosition.position;
         _cameraTransform.position = _warpPosition.position;
-        _cameraBounds.gameObject.SetActive(true);
+        //_cameraBounds.gameObject.SetActive(true);
         while (true)
         {
             _warpOverlay.transform.localScale = Vector3.Lerp(_warpOverlay.transform.localScale, _defaultWarpOverlaySize, _warpOutTransitionSpeed * Time.fixedDeltaTime);
