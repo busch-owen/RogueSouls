@@ -61,6 +61,8 @@ public class PlayerController : MonoBehaviour
     LayerMask _normalMask;
     LayerMask _invulnerableMask;
 
+    CharacterInput _characterInput;
+
     [Space(10)]
 
     #endregion
@@ -76,7 +78,9 @@ public class PlayerController : MonoBehaviour
     [Header("CrosshairAttributes"), Space(5)]
 
     [SerializeField]
-    GameObject _crosshair;
+    SpriteRenderer _crosshairSprite;
+    [SerializeField]
+    CrosshairFade _crosshairHandle;
 
     [SerializeField]
     float _crosshairMoveSpeed;
@@ -144,7 +148,8 @@ public class PlayerController : MonoBehaviour
         _animator = GetComponent<Animator>();
         _rb = GetComponent<Rigidbody2D>();
         _crosshairClamp = FindObjectOfType<CrosshairClamp>();
-        _crosshair = _crosshairClamp.gameObject;
+        _crosshairHandle = FindObjectOfType<CrosshairFade>();
+        _crosshairSprite = _crosshairHandle.GetComponentInChildren<SpriteRenderer>();
         _weaponOffsetHandle = GetComponentInChildren<WeaponOffsetHandle>();
         _effectHandler = GetComponentInChildren<PlayerEffectHandler>();
         _playerInventory = FindObjectOfType<Inventory>();
@@ -169,6 +174,7 @@ public class PlayerController : MonoBehaviour
             HandleMovement();
         }
         HandleCrosshairControllerMovement();
+        
     }
 
     private void FixedUpdate()
@@ -276,32 +282,36 @@ public class PlayerController : MonoBehaviour
     //Manages where the player's weapon should be aimin
     private void HandleAim()
     {
-        _weaponRotationAngle = Mathf.Atan2(_crosshair.transform.localPosition.y, _crosshair.transform.localPosition.x) * Mathf.Rad2Deg;
+        _weaponRotationAngle = Mathf.Atan2(_crosshairHandle.transform.position.y, _crosshairHandle.transform.position.x) * Mathf.Rad2Deg;
         Quaternion rotation = Quaternion.AngleAxis(_weaponRotationAngle, Vector3.forward);
         _aimHandleTransform.rotation = Quaternion.Slerp(_aimHandleTransform.rotation, rotation, _rotateSpeed * Time.deltaTime);
         _weaponOffsetHandle.OffsetWeaponPos(_weaponRotationAngle);
     }
 
     //Gets the position of the mouse in world space
-    public void HandleAimMouseInput(Vector2 aimPosition)
+    public void HandleAimMouseInput(Vector2 aimPostition)
     {
         if (_crosshairClamp != null)
         {
+            _crosshairSprite.enabled = false;
             _crosshairClamp.enabled = false;
-            aimPosition = Camera.main.ScreenToWorldPoint(aimPosition) - Camera.main.transform.position;
-            _crosshair.transform.localPosition = aimPosition;
-        }
-        
+            aimPostition = Camera.main.ScreenToWorldPoint(aimPostition) - transform.position;
+            _crosshairHandle.transform.position = aimPostition;
+            _crosshairHandle.FadeInCrosshair();
+        } 
     }
 
     //Handles where the crosshair should go when using a controller
     private void HandleCrosshairControllerMovement()
     {
-        _crosshair.transform.localPosition = new Vector3(_crosshair.transform.localPosition.x + _crosshairMovement.x * _crosshairMoveSpeed * Time.fixedDeltaTime,
-            _crosshair.transform.localPosition.y + _crosshairMovement.y * _crosshairMoveSpeed * Time.fixedDeltaTime);
+        _crosshairSprite.transform.localPosition = new Vector3(_crosshairSprite.transform.localPosition.x + _crosshairMovement.x * _crosshairMoveSpeed * Time.fixedDeltaTime,
+            _crosshairSprite.transform.localPosition.y + _crosshairMovement.y * _crosshairMoveSpeed * Time.fixedDeltaTime);
         if (_crosshairClamp.enabled)
         {
+            _crosshairSprite.enabled = false;
+            _crosshairHandle.transform.position = transform.position;
             _crosshairClamp.ClampCrosshair(_crosshairMovement);
+            _crosshairHandle.CheckCrosshairPosition();
         }
     }
 
