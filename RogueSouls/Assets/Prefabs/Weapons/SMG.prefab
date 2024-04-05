@@ -164,7 +164,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fireRate: 15
-  bulletLifetime: 3
+  bulletLifetime: 9
   maxAmmo: 40
   bulletCount: 1
   reloadTime: 1

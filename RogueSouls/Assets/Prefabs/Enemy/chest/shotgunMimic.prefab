@@ -191,7 +191,7 @@ MonoBehaviour:
   <Health>k__BackingField: 0
   _maxHealth: 8
   <Damage>k__BackingField: 0
-  <Speed>k__BackingField: 0
+  <Speed>k__BackingField: 4
   <TimeToAttack>k__BackingField: 0
   _gameManager: {fileID: 0}
   target: {fileID: 0}
@@ -236,7 +236,7 @@ MonoBehaviour:
   <Health>k__BackingField: 0
   _maxHealth: 8
   <Damage>k__BackingField: 0
-  <Speed>k__BackingField: 0
+  <Speed>k__BackingField: 3.5
   <TimeToAttack>k__BackingField: 0
   _gameManager: {fileID: 0}
 --- !u!58 &3912358352390913484

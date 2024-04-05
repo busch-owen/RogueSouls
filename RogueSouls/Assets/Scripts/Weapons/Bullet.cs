@@ -25,7 +25,7 @@ public class Bullet : PoolObject
             enemyToHit.TakeDamage(bulletDamage);
             this.OnDeSpawn();
         }
-        else
+        else if (other.gameObject.tag != "Player")
         {
             this.OnDeSpawn();
         }
@@ -34,6 +34,7 @@ public class Bullet : PoolObject
     public virtual void OnEnable()
     {
         //_trailRenderer = GetComponent<TrailRenderer>();
+        CancelInvoke("OnDespawn");
         Invoke("OnDeSpawn", bulletLife);
         
     }
