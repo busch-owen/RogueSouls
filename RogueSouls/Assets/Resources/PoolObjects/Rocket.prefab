@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4167837052820722140}
   - component: {fileID: -8330872383825618795}
   - component: {fileID: 7319297449972969170}
-  - component: {fileID: 8067149567225947333}
+  - component: {fileID: 4490841868447902012}
   m_Layer: 13
   m_Name: Rocket
   m_TagString: bullet
@@ -33,7 +33,8 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1420703805567809762}
-  - {fileID: 7223190775289926097}
+  - {fileID: 6887687501238889486}
+  - {fileID: 5081322702629548341}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
@@ -54,7 +55,7 @@ MonoBehaviour:
   bulletLife: 2
   bulletDamage: 0
   weapon: {fileID: 0}
-  FireAOEEffect: {fileID: 7223190775289926098}
+  FireAOEEffect: {fileID: 2955202515143746530, guid: f3e73d67db3916e4d86c1f666abfc9e6, type: 3}
   AOERange: 3
   rayColor: {r: 1, g: 0, b: 0, a: 1}
   center2D: {x: 30, y: 0}
@@ -82,22 +83,6 @@ Rigidbody2D:
   m_SleepingMode: 0
   m_CollisionDetection: 1
   m_Constraints: 4
---- !u!58 &4490841868447902012
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1922432395358111844}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.1
 --- !u!96 &7319297449972969170
 TrailRenderer:
   serializedVersion: 2
@@ -197,6 +182,22 @@ TrailRenderer:
   m_MinVertexDistance: 0.1
   m_Autodestruct: 0
   m_Emitting: 1
+--- !u!58 &4490841868447902012
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1922432395358111844}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.1
 --- !u!1 &5506593975186909699
 GameObject:
   m_ObjectHideFlags: 0
@@ -360,7 +361,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2955202515143746529, guid: abed0c18c34b2eb43976952a09c5196d, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2955202515143746529, guid: abed0c18c34b2eb43976952a09c5196d, type: 3}
       propertyPath: m_LocalPosition.x

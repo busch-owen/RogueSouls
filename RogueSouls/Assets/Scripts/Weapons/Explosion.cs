@@ -72,7 +72,10 @@ public class Explosion : Bullet
         TrailRenderer.enabled = false;
         rb.velocity = Vector3.zero;
         rb.freezeRotation = true;
-        FireAOEEffect?.Play();
+        GameObject particleObject = PoolManager.Instance.Spawn(FireAOEEffect.name).gameObject;
+        particleObject.transform.position = transform.position;
+        ParticleSystem newParticle = particleObject.GetComponent<ParticleSystem>();
+        newParticle?.Play();
 
         if (AOERange > 0)
         {

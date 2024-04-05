@@ -13,6 +13,7 @@ public class FireEffect : PoolObject
         {
             mainParticle = GetComponent<ParticleSystem>();
         }
+        mainParticle.Stop();
         Invoke("OnDeSpawn", mainParticle.main.duration);
     }
 }
