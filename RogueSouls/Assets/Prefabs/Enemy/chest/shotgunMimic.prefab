@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3773190192185705788}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.37300014, z: 0}
+  m_LocalPosition: {x: 0, y: 0.119, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -130,7 +130,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5872252957132993060}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.158, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -151,7 +151,7 @@ GameObject:
   - component: {fileID: 7529075971869702688}
   - component: {fileID: 2539332685899994742}
   - component: {fileID: 3912358352390913484}
-  - component: {fileID: 6404003266267446506}
+  - component: {fileID: 3365761195997348607}
   m_Layer: 7
   m_Name: shotgunMimic
   m_TagString: enemy
@@ -252,11 +252,11 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.25}
+  m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 5
---- !u!58 &6404003266267446506
-CircleCollider2D:
+  m_Radius: 10
+--- !u!61 &3365761195997348607
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -268,9 +268,19 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.25}
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
   serializedVersion: 2
-  m_Radius: 0.4
+  m_Size: {x: 1, y: 0.75}
+  m_EdgeRadius: 0
 --- !u!1001 &5872252956889366768
 PrefabInstance:
   m_ObjectHideFlags: 0
