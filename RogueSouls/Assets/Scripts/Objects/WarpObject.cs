@@ -1,3 +1,4 @@
+using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,8 +11,10 @@ public class WarpObject : MonoBehaviour
 
     Transform _cameraTransform;
 
+    CinemachineConfiner2D _cameraConfiner;
+
     [SerializeField]
-    CameraBounds _cameraBounds;
+    PolygonCollider2D _targetBoundingBox;
 
     [SerializeField]
     Transform _warpPosition;
@@ -26,7 +29,7 @@ public class WarpObject : MonoBehaviour
 
     private void Awake()
     {
-        _cameraBounds = FindObjectOfType<CameraBounds>();
+        _cameraConfiner = FindObjectOfType<CinemachineConfiner2D>();
         _warpOverlay = GameObject.FindGameObjectWithTag("WarpOverlay");
         _warpOverlay.transform.localScale = _defaultWarpOverlaySize;
         _cameraTransform = Camera.main.transform;
@@ -61,7 +64,6 @@ public class WarpObject : MonoBehaviour
     {
         _warpOverlay.transform.localScale = _defaultWarpOverlaySize;
         _warpOverlay.SetActive(true);
-        //_cameraBounds.gameObject.SetActive(false);
         _warpTargetRb.velocity = Vector3.zero;
         while (true)
         {
@@ -78,7 +80,7 @@ public class WarpObject : MonoBehaviour
         _warpOverlay.transform.localScale = _targetWarpOverlaySize;
         _warpTarget.position = _warpPosition.position;
         _cameraTransform.position = _warpPosition.position;
-        //_cameraBounds.gameObject.SetActive(true);
+        _cameraConfiner.m_BoundingShape2D = _targetBoundingBox;
         while (true)
         {
             _warpOverlay.transform.localScale = Vector3.Lerp(_warpOverlay.transform.localScale, _defaultWarpOverlaySize, _warpOutTransitionSpeed * Time.fixedDeltaTime);

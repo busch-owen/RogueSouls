@@ -195,19 +195,22 @@ public class WeaponWheel : MonoBehaviour
     {
         PutAwayCurrentWeapon();
 
-        _itemsEquippedToWeaponWheel[desiredSlot] = _itemsSpawnedOntoPlayer[itemToInsert];
+        //Assigns a weapon to the desired slot so the for loop has something to look for
+        GameObject itemToCompare = _itemsSpawnedOntoPlayer[itemToInsert];
 
         for (int i = 0; i < _itemsEquippedToWeaponWheel.Length; i++)
         {
-            if (_itemsEquippedToWeaponWheel[i] != null && _itemsEquippedToWeaponWheel[desiredSlot] != null)
+            //This check is here to remove the item from it's previous slot, but because there are technically two on the wheel it removes both
+            if(_itemsEquippedToWeaponWheel[i] != null)
             {
-                if (_itemsEquippedToWeaponWheel[i].name == _itemsEquippedToWeaponWheel[desiredSlot].name)
+                if (_itemsEquippedToWeaponWheel[i].name == itemToCompare.name)
                 {
-                    Debug.Log(i);
                     _itemsEquippedToWeaponWheel[i] = null;
                 }
             }
+            
         }
+        //this now re-assigns the weapon to it's desired slot
         _itemsEquippedToWeaponWheel[desiredSlot] = _itemsSpawnedOntoPlayer[itemToInsert];
         EquipWeapon(desiredSlot);
     }
