@@ -45,6 +45,7 @@ public class Explosion : Bullet
 
     public override void OnCollisionEnter2D(Collision2D collision)
     {
+        
         // Convert the 2D center to 3D
         Vector3 center = new Vector3(center2D.x, center2D.y, 0);
         center = this.transform.position;
@@ -85,9 +86,7 @@ public class Explosion : Bullet
                 
                 var enemy = hit.GetComponent<Enemy>();
                 if (enemy)
-                {
-                    Debug.Log(hit); 
-                    var closestPoint = hit.ClosestPoint(transform.position);
+                {                    var closestPoint = hit.ClosestPoint(transform.position);
                     var distance = Vector3.Distance(transform.position, closestPoint);
 
                     enemy.TakeDamage(bulletDamage);
@@ -102,6 +101,8 @@ public class Explosion : Bullet
                 enemy.TakeDamage(bulletDamage);
             }
         }
+
+        base.OnCollisionEnter2D(collision);
     }
 
 }

@@ -308,7 +308,7 @@ public class PlayerController : MonoBehaviour
             _crosshairSprite.transform.localPosition.y + _crosshairMovement.y * _crosshairMoveSpeed * Time.fixedDeltaTime);
         if (_crosshairClamp.enabled)
         {
-            _crosshairSprite.enabled = false;
+            _crosshairSprite.enabled = true;
             _crosshairHandle.transform.position = transform.position;
             _crosshairClamp.ClampCrosshair(_crosshairMovement);
             _crosshairHandle.CheckCrosshairPosition();

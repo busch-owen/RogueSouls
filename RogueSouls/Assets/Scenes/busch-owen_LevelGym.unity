@@ -348,7 +348,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9809bf1345abc5648af68b3a82653f08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_OverrideArea: 1
+  m_OverrideArea: 0
   m_Area: 1
   m_IgnoreFromBuild: 0
   m_AffectedAgents: ffffffff
@@ -11447,6 +11447,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1795591545}
     m_Modifications:
+    - target: {fileID: 653337200348733588, guid: bc9a9e951fd762348acec446dc37676e, type: 3}
+      propertyPath: <Speed>k__BackingField
+      value: 3.5
+      objectReference: {fileID: 0}
     - target: {fileID: 4778386910285843649, guid: bc9a9e951fd762348acec446dc37676e, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -12592,6 +12596,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1795591545}
     m_Modifications:
+    - target: {fileID: 3912358352390913484, guid: 8b1159860714b0c499d8eab4ac673856, type: 3}
+      propertyPath: m_Radius
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 7529075971869702691, guid: 8b1159860714b0c499d8eab4ac673856, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -12740,6 +12748,14 @@ PrefabInstance:
       propertyPath: m_Follow
       value: 
       objectReference: {fileID: 1147937488}
+    - target: {fileID: 5383140664289747815, guid: b43795ca6d46b1a4bb97bc61f67c83d4, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -13.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5383140664289747815, guid: b43795ca6d46b1a4bb97bc61f67c83d4, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -11.5
+      objectReference: {fileID: 0}
     - target: {fileID: 5383140664603045012, guid: b43795ca6d46b1a4bb97bc61f67c83d4, type: 3}
       propertyPath: m_Name
       value: '[Handlers_Managers]'
@@ -14138,11 +14154,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4318066686164884428, guid: 7d0ce984f9c707546b26d1c0106621da, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -13.5
       objectReference: {fileID: 0}
     - target: {fileID: 4318066686164884428, guid: 7d0ce984f9c707546b26d1c0106621da, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -11.5
       objectReference: {fileID: 0}
     - target: {fileID: 4318066686164884428, guid: 7d0ce984f9c707546b26d1c0106621da, type: 3}
       propertyPath: m_LocalPosition.z
@@ -15739,11 +15755,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6462503439365910307, guid: 1418c60f0965a114385314020647711d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -10.929171
       objectReference: {fileID: 0}
     - target: {fileID: 6462503439365910307, guid: 1418c60f0965a114385314020647711d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -11.51128
       objectReference: {fileID: 0}
     - target: {fileID: 6462503439365910307, guid: 1418c60f0965a114385314020647711d, type: 3}
       propertyPath: m_LocalPosition.z
@@ -15776,6 +15792,10 @@ PrefabInstance:
     - target: {fileID: 6462503439365910307, guid: 1418c60f0965a114385314020647711d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6462503439365910492, guid: 1418c60f0965a114385314020647711d, type: 3}
+      propertyPath: near clip plane
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 6462503439365910492, guid: 1418c60f0965a114385314020647711d, type: 3}
       propertyPath: m_BackGroundColor.b
@@ -16070,6 +16090,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 936539258}
     m_Modifications:
+    - target: {fileID: 9025086318995899484, guid: 6fc52c3e3e0fa4545957b49d25de100c, type: 3}
+      propertyPath: m_DefaultArea
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9025086318995899484, guid: 6fc52c3e3e0fa4545957b49d25de100c, type: 3}
+      propertyPath: m_NavMeshData
+      value: 
+      objectReference: {fileID: 23800000, guid: 27d858ade359d264b9cf6d76b694a69d, type: 2}
     - target: {fileID: 9025086318995899485, guid: 6fc52c3e3e0fa4545957b49d25de100c, type: 3}
       propertyPath: m_Name
       value: NavMesh

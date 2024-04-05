@@ -26,22 +26,33 @@ public class UIHandler : MonoBehaviour
         */
     }
 
+    private void Start()
+    {
+        _pauseMenu.SetActive(false);
+        _inventoryMenu.SetActive(false);
+        _gameMenu.SetActive(false);
+    }
+
     public void TogglePauseMenu()
     {
-        if (_pauseMenu.activeSelf && _pauseMenu != null)
+        if(_pauseMenu != null)
         {
-            _pauseMenu.SetActive(false);
-            ChangeHealthDisplayState(true);
-            Time.timeScale = 1.0f;
+            if (_pauseMenu.activeSelf)
+            {
+                _pauseMenu.SetActive(false);
+                ChangeHealthDisplayState(true);
+                Time.timeScale = 1.0f;
+            }
+            else
+            {
+                _pauseMenu.SetActive(true);
+                _currentMenu = _inventoryMenu;
+                OpenSpecificMenu(_currentMenu);
+                ChangeHealthDisplayState(false);
+                Time.timeScale = 0.0f;
+            }
         }
-        else
-        {
-            _pauseMenu.SetActive(true);
-            _currentMenu = _inventoryMenu;
-            OpenSpecificMenu(_currentMenu);
-            ChangeHealthDisplayState(false);
-            Time.timeScale = 0.0f;
-        }
+        
     }
 
     private void ChangeHealthDisplayState(bool desiredState)

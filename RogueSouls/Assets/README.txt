@@ -20,3 +20,8 @@ FAQ
 
 Q: "Why is my entire screen black in the editor?"
 A: This is the warp overlay, simply just hide it from the heirarchy
+
+Q: "Why don't my enemies chase me?"
+A: There's two possible solutions to this problem: 
+	S1: Your enemies have no speed value, please assign a speed on the entity stats script. 
+	S2: You haven't baked your Nav Mesh. To bake your nav mesh, click on the nav mesh in the level folder in your scene, then click "Bake"

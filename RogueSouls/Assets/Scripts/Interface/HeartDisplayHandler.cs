@@ -55,13 +55,13 @@ public class HeartDisplayHandler : MonoBehaviour
 
     public void IncreaseHeartQuarters(int healthToRestore)
     {
+        if (_entityStats.AtFullHealth())
+        {
+            return;
+        }
         for (int i = 0; i < healthToRestore; i++)
         {
-            if (_entityStats.AtFullHealth())
-            {
-                return;
-            }
-            else if (_heartsSpawned[_heartToIncrement].HeartFull && _heartToIncrement < _entityStats.AmountOfHearts - 1)
+            if (_heartsSpawned[_heartToIncrement].HeartFull && _heartToIncrement < _entityStats.AmountOfHearts - 1)
             {
                 _heartToIncrement++;
                 _heartToIncrement = Mathf.Clamp(_heartToIncrement, 0, 3);

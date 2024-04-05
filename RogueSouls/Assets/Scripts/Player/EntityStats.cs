@@ -60,7 +60,7 @@ public class EntityStats : MonoBehaviour
     {
         HealEntity(increaseAmount);
         UpdateHeartAmount();
-        _heartDisplayHandler.AddOneHeart();
+        //_heartDisplayHandler.AddOneHeart();
     }
 
     public virtual void IncrementHealth(int incrementAmount)

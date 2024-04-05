@@ -7,14 +7,17 @@ public class Heart : MonoBehaviour
     [SerializeField]
     GameObject[] _heartQuarters;
 
+    [SerializeField]
     int _quarters = 4;
     int _maxQuarters;
 
     public bool HeartEmpty { get; private set; }
+
+    [field: SerializeField]
     public bool HeartFull { get; private set; } = true;
 
     [field: SerializeField]
-    public int QuarterToRestore { get; private set; } = 0;
+    public int QuarterToRestore { get; private set; } = -1;
 
     private void OnEnable()
     {
@@ -23,14 +26,14 @@ public class Heart : MonoBehaviour
 
     public void DisableQuarters()
     {
-        if (_quarters >= 1)
+        if (_quarters > 0)
         {
+            Debug.LogFormat("Disabled Quarter {0}", QuarterToRestore);
             _heartQuarters[_quarters - 1]?.SetActive(false);
             _quarters--;
             HeartEmpty = _quarters <= 0;
             HeartFull = _quarters == 4;
             QuarterToRestore++;
-            QuarterToRestore = Mathf.Clamp(QuarterToRestore, 0, 3);
         }
     }
 
@@ -38,12 +41,13 @@ public class Heart : MonoBehaviour
     {
         if(quarterIndex < 4)
         {
-            HeartEmpty = _quarters <= 0;
             _quarters++;
-            HeartFull = _quarters == 4;
+            HeartEmpty = _quarters <= 0;
+            HeartFull = _quarters >= 4;
             QuarterToRestore--;
             QuarterToRestore = Mathf.Clamp(QuarterToRestore, 0, 3);
             _heartQuarters[quarterIndex].SetActive(true);
+            Debug.LogFormat("Enabled Quarter {0}", quarterIndex);
         }
     }
 }
