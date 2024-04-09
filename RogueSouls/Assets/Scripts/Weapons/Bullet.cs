@@ -17,6 +17,12 @@ public class Bullet : PoolObject
     [SerializeField]
     protected RangedWeapon weapon;
 
+    public virtual void OnEnable()
+    {
+        //_trailRenderer = GetComponent<TrailRenderer>();
+        //CancelInvoke("OnDespawn");
+        Invoke("OnDeSpawn", bulletLife);
+    }
 
     // Start is called before the first frame update
     public virtual void OnCollisionEnter2D(Collision2D other) 
@@ -31,12 +37,11 @@ public class Bullet : PoolObject
                 tempEffect.transform.position = transform.position;
                 tempEffect.GetComponent<ParticleSystem>().Play();
             }
-            
-            this.OnDeSpawn();
+            OnDeSpawn();
         }
         else if (other.gameObject.tag != "Player")
         {
-            this.OnDeSpawn();
+            OnDeSpawn();
             if(hitEffect != null)
             {
                 PoolObject tempEffect = PoolManager.Instance.Spawn(hitEffect.name);
@@ -44,14 +49,6 @@ public class Bullet : PoolObject
                 tempEffect.GetComponent<ParticleSystem>().Play();
             }
         }
-    }
-
-    public virtual void OnEnable()
-    {
-        //_trailRenderer = GetComponent<TrailRenderer>();
-        CancelInvoke("OnDespawn");
-        Invoke("OnDeSpawn", bulletLife);
-        
     }
 
     public void AssignWeapon(RangedWeapon weaponToAssign)

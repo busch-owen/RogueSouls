@@ -62,6 +62,7 @@ public class WeaponWheel : MonoBehaviour
 
         GrabWeaponsFromInventory();
         LoadItemsOntoPlayer();
+        EquipWeapon(0);
     }
 
     private void Update()

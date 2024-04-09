@@ -72,7 +72,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1980908149
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: -634084333, guid: 5c2140f9b34985f49b974c05f36181de, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -159,8 +159,9 @@ MonoBehaviour:
   <Health>k__BackingField: 0
   _maxHealth: 8
   <Damage>k__BackingField: 0
-  <Speed>k__BackingField: 4
+  <Speed>k__BackingField: 3
   <TimeToAttack>k__BackingField: 0
+  _heartDisplayHandler: {fileID: 0}
   _gameManager: {fileID: 0}
   target: {fileID: 0}
   isRanged: 1
@@ -204,8 +205,9 @@ MonoBehaviour:
   <Health>k__BackingField: 0
   _maxHealth: 8
   <Damage>k__BackingField: 0
-  <Speed>k__BackingField: 3.5
+  <Speed>k__BackingField: 3
   <TimeToAttack>k__BackingField: 0
+  _heartDisplayHandler: {fileID: 0}
   _gameManager: {fileID: 0}
 --- !u!58 &2046857538640857902
 CircleCollider2D:

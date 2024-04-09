@@ -46,7 +46,7 @@ public class EntityStats : MonoBehaviour
     }
     public virtual void TakeDamage(int damage)
     {
-        IncrementHealth(damage);
+        IncrementHealth(-damage);
         
         if (Health <= 0 && tag == "enemy")
         {
@@ -61,10 +61,14 @@ public class EntityStats : MonoBehaviour
 
     public void IncreaseHealth(int increaseAmount)
     {
+        _heartDisplayHandler.AddOneHeart();
+        _maxHealth += 4;
         HealEntity(increaseAmount);
         UpdateHeartAmount();
-        _heartDisplayHandler.CheckHeartQuarters();
-        //_heartDisplayHandler.AddOneHeart();
+        if (_heartDisplayHandler != null)
+        {
+            _heartDisplayHandler.CheckHeartQuarters();
+        }
     }
 
     public virtual void IncrementHealth(int incrementAmount)
@@ -73,9 +77,12 @@ public class EntityStats : MonoBehaviour
         {
             return;
         }
-        Health -= incrementAmount;
+        Health += incrementAmount;
         Health = Mathf.Clamp (Health, 0 , _maxHealth);
-        _heartDisplayHandler.CheckHeartQuarters();
+        if (_heartDisplayHandler != null)
+        {
+            _heartDisplayHandler.CheckHeartQuarters();
+        }
     }
     
 

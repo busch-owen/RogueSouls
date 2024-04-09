@@ -81,7 +81,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fireRate: 4
   bulletLifetime: 2
-  maxAmmo: 9
+  <MaxAmmo>k__BackingField: 12
   bulletCount: 1
   reloadTime: 0.5
   cam: {fileID: 0}
@@ -108,7 +108,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71c936eb1088e824caec41dbfba797a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _shakeAmount: 3
+  _shakeAmount: 0.75
   _shakeDuration: 0.2
   _shakeRate: 0.001
   _shakeSmoothRate: 0.3
@@ -137,7 +137,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8647750539015994099}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.167, y: 0.017, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -183,14 +183,14 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1501119281
-  m_SortingLayer: 4
+  m_SortingLayer: 5
   m_SortingOrder: 150
-  m_Sprite: {fileID: 21300000, guid: 26b4e7702ebc952448c9648255b2c5c7, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 24be5a16be7818549bb2d0efe172b411, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.16, y: 0.16}
+  m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1

@@ -32,7 +32,7 @@ public class PlayerStats : EntityStats
     #region Damage
     public override void TakeDamage(int damage)
     {
-        IncrementHealth(damage);
+        IncrementHealth(-damage);
         if (Health <= 0)
         {
             _gameManager.Restart();

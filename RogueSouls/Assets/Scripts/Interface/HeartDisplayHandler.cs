@@ -39,12 +39,14 @@ public class HeartDisplayHandler : MonoBehaviour
 
     public void CheckHeartQuarters()
     {
-        for(int i = 0; i < _heartsSpawned.Count; i++)
+        _heartToIncrement = 0;
+        _heartQuarterToIncrement = 3;
+
+        for (int i = 0; i < _heartsSpawned.Count; i++)
         {
             foreach(GameObject quarter in _heartsSpawned[i]._heartQuarters)
             {
                 quarter.SetActive(false);
-                Debug.Log("disabling all quarters");
             }
         }
         for (int i = 0; i < _entityStats.Health; i++)
@@ -56,18 +58,8 @@ public class HeartDisplayHandler : MonoBehaviour
                 _heartQuarterToIncrement = 3;
                 _heartToIncrement++;
             }
-            Debug.LogFormat("re enabled quarter {0} in heart {1}", _heartQuarterToIncrement + 1, _heartToIncrement);
             _heartQuarterToIncrement = Mathf.Clamp(_heartQuarterToIncrement, 0, 3);
             _heartToIncrement = Mathf.Clamp(_heartToIncrement, 0, _entityStats.AmountOfHearts - 1);
-
-            /*for(int j = 0; j < _heartsSpawned.Count; j++)
-            {
-                for (int k = _heartsSpawned[j]._heartQuarters.Length - 1; k > -1; k--)
-                {
-                    _heartsSpawned[j]._heartQuarters[k].SetActive(true);
-                    
-                }
-            }*/
         }
     }
 }

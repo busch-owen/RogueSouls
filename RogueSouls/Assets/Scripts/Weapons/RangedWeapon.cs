@@ -156,7 +156,10 @@ public class RangedWeapon : MonoBehaviour
         {
             isReloading = true;
 
-            _uiHandler.EnableReloadingText(reloadTime);
+            if(GetComponentInParent<PlayerController>())
+            {
+                _uiHandler.EnableReloadingText(reloadTime);
+            }
             // sfxHandler.clip = Reload_sounds; // this is commented out until we add back sfx, it was causing errors with not every weapon having one 
             // sfxHandler?.Play();
 
