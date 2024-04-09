@@ -12,10 +12,10 @@ public class RangedWeapon : MonoBehaviour
     private float fireRate;
     [SerializeField]
     private float bulletLifetime;
+    [field: SerializeField]
+    public int MaxAmmo { get; private set; }
     [SerializeField]
-    private int maxAmmo;
-    [SerializeField]
-    public float bulletCount;
+    private float bulletCount;
     [SerializeField]
     private float reloadTime;
     [SerializeField]
@@ -34,6 +34,8 @@ public class RangedWeapon : MonoBehaviour
     float minSpread;
     [SerializeField]
     float maxSpread;
+
+    UIHandler _uiHandler;
 
     ScreenShakeEffect _screenShakeEffect;
 
@@ -56,15 +58,20 @@ public class RangedWeapon : MonoBehaviour
 
     //end of editable variables within the inspector
 
-    private int currentAmmo;
+    public int CurrentAmmo { get; private set; }
     private bool isReloading = false;
     private float timeToNextFire = 0f;
-#endregion
+    #endregion
 
     #region first load
+
+    private void Awake()
+    {
+        _uiHandler = FindObjectOfType<UIHandler>();
+    }
     void Start()
     {
-        currentAmmo = maxAmmo;// always start with max ammo
+        CurrentAmmo = MaxAmmo;// always start with max ammo
         _screenShakeEffect = GetComponent<ScreenShakeEffect>();
     }
 
@@ -76,7 +83,7 @@ public class RangedWeapon : MonoBehaviour
     #region Update
     void Update()
     {
-        if (currentAmmo == 0 && !isReloading)
+        if (CurrentAmmo == 0 && !isReloading)
         {
             Reload();
         }
@@ -110,7 +117,7 @@ public class RangedWeapon : MonoBehaviour
         {
             timeToNextFire = Time.time + 1.0f / fireRate;// sets the time for the next bullet to be able to be fired
 
-            currentAmmo--;
+            CurrentAmmo--;
             //sfxHandler?.PlayOneShot(gun_sounds);
 
             muzzleFlashEffect?.Stop();
@@ -143,24 +150,27 @@ public class RangedWeapon : MonoBehaviour
     }
 #endregion
     #region Reload
-    void Reload()
+    public void Reload()
     {
+        if(CurrentAmmo != MaxAmmo)
+        {
+            isReloading = true;
 
-        isReloading = true;
+            _uiHandler.EnableReloadingText(reloadTime);
+            // sfxHandler.clip = Reload_sounds; // this is commented out until we add back sfx, it was causing errors with not every weapon having one 
+            // sfxHandler?.Play();
 
-       // sfxHandler.clip = Reload_sounds; // this is commented out until we add back sfx, it was causing errors with not every weapon having one 
-       // sfxHandler?.Play();
 
-
-        //Reload_sfx?.Stop();
-        //Reload_sfx?.PlayOneShot(Reload_sounds);
-        Invoke("FinishReload", reloadTime); // we do an invoke so we can add a delay to the reload time, rather than a regular function call
+            //Reload_sfx?.Stop();
+            //Reload_sfx?.PlayOneShot(Reload_sounds);
+            Invoke("FinishReload", reloadTime); // we do an invoke so we can add a delay to the reload time, rather than a regular function call
+        }
     }
 
 
     void FinishReload()
     {
-        currentAmmo = maxAmmo;
+        CurrentAmmo = MaxAmmo;
         //sfxHandler?.Stop();
         //sfxHandler.clip = null;
         isReloading = false;

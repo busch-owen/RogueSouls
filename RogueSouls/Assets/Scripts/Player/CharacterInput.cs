@@ -300,6 +300,15 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Reload"",
+                    ""type"": ""Button"",
+                    ""id"": ""ba861141-77cf-4285-b34b-48c10cdf810f"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -544,6 +553,28 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
                     ""action"": ""SlotBinding"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ce2e9c19-9182-4a8c-a1e7-8aab928a7afc"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Reload"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""51d6e818-5a4f-41a5-83f5-2fbd07cbb080"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Reload"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -564,6 +595,7 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
         m_CharacterActions_PauseMenu = m_CharacterActions.FindAction("PauseMenu", throwIfNotFound: true);
         m_CharacterActions_MeleeAttack = m_CharacterActions.FindAction("MeleeAttack", throwIfNotFound: true);
         m_CharacterActions_SlotBinding = m_CharacterActions.FindAction("SlotBinding", throwIfNotFound: true);
+        m_CharacterActions_Reload = m_CharacterActions.FindAction("Reload", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -694,6 +726,7 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_CharacterActions_PauseMenu;
     private readonly InputAction m_CharacterActions_MeleeAttack;
     private readonly InputAction m_CharacterActions_SlotBinding;
+    private readonly InputAction m_CharacterActions_Reload;
     public struct CharacterActionsActions
     {
         private @CharacterInput m_Wrapper;
@@ -705,6 +738,7 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
         public InputAction @PauseMenu => m_Wrapper.m_CharacterActions_PauseMenu;
         public InputAction @MeleeAttack => m_Wrapper.m_CharacterActions_MeleeAttack;
         public InputAction @SlotBinding => m_Wrapper.m_CharacterActions_SlotBinding;
+        public InputAction @Reload => m_Wrapper.m_CharacterActions_Reload;
         public InputActionMap Get() { return m_Wrapper.m_CharacterActions; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -735,6 +769,9 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
             @SlotBinding.started += instance.OnSlotBinding;
             @SlotBinding.performed += instance.OnSlotBinding;
             @SlotBinding.canceled += instance.OnSlotBinding;
+            @Reload.started += instance.OnReload;
+            @Reload.performed += instance.OnReload;
+            @Reload.canceled += instance.OnReload;
         }
 
         private void UnregisterCallbacks(ICharacterActionsActions instance)
@@ -760,6 +797,9 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
             @SlotBinding.started -= instance.OnSlotBinding;
             @SlotBinding.performed -= instance.OnSlotBinding;
             @SlotBinding.canceled -= instance.OnSlotBinding;
+            @Reload.started -= instance.OnReload;
+            @Reload.performed -= instance.OnReload;
+            @Reload.canceled -= instance.OnReload;
         }
 
         public void RemoveCallbacks(ICharacterActionsActions instance)
@@ -792,5 +832,6 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
         void OnPauseMenu(InputAction.CallbackContext context);
         void OnMeleeAttack(InputAction.CallbackContext context);
         void OnSlotBinding(InputAction.CallbackContext context);
+        void OnReload(InputAction.CallbackContext context);
     }
 }

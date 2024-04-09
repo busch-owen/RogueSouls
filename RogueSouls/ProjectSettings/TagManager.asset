@@ -27,7 +27,7 @@ TagManager:
   - Explosion
   - Camera
   - CameraBounds
-  - 
+  - IgnoreProjectile
   - 
   - 
   - 
@@ -49,6 +49,9 @@ TagManager:
     locked: 0
   - name: Background
     uniqueID: 2343404773
+    locked: 0
+  - name: WorldAssets
+    uniqueID: 3172962139
     locked: 0
   - name: InteractableObjects
     uniqueID: 1445394025
