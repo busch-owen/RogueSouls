@@ -35,6 +35,7 @@ public class PlayerInputHandler : MonoBehaviour
 
                 characterInput.CharacterActions.Attack.started += i => rangedWeapon?.EnableShootInput();
                 characterInput.CharacterActions.Attack.canceled += i => rangedWeapon?.DisableShootInput();
+                characterInput.CharacterActions.Reload.started += i => rangedWeapon.Reload();
                 characterInput.CharacterActions.MeleeAttack.started += i => meleeWeapon.Attack();
                 characterInput.CharacterActions.DodgeRoll.started += i => playerController?.HandleDodgeRollInput();
                 characterInput.CharacterActions.Interact.started += i => playerController?.Interact();

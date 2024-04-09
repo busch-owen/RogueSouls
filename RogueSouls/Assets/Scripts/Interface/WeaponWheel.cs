@@ -22,6 +22,8 @@ public class WeaponWheel : MonoBehaviour
 
     Inventory _playerInventory;
 
+    UIHandler _uiHandler;
+
     Camera _camera;
 
     Vector2 _aimPosition;
@@ -52,6 +54,7 @@ public class WeaponWheel : MonoBehaviour
     {
         _camera = Camera.main;
         _playerController = FindObjectOfType<PlayerController>();
+        _uiHandler = FindObjectOfType<UIHandler>();
         _weaponOffsetHandle = _playerController.GetComponentInChildren<WeaponOffsetHandle>();
         _playerInputHandler = _playerController.GetComponent<PlayerInputHandler>();
         _playerInventory = FindObjectOfType<Inventory>();
@@ -222,6 +225,7 @@ public class WeaponWheel : MonoBehaviour
             _itemsEquippedToWeaponWheel[index].SetActive(true);
             _weaponOffsetHandle.SetCurrentWeapon();
             _playerInputHandler.UpdateRangedWeaponReference();
+            _uiHandler.AssignTargetWeapon(_itemsEquippedToWeaponWheel[index].GetComponent<RangedWeapon>());
         }
     }
 }

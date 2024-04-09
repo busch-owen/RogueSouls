@@ -49,7 +49,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2dca3ff8c3553f94ca940d2bab253875, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hitEffect: {fileID: 2137886286693348554, guid: 16d35f7c6af167f468ce4f4d65cbdcf3, type: 3}
+  hitEffect: {fileID: 5515885454821392928, guid: c4867f2ee85dc104c956147885dad649, type: 3}
+  bloodHitEffect: {fileID: 5515885454821392928, guid: 547b1e521150c3e47992976361e0842d, type: 3}
   _trailRenderer: {fileID: 0}
   bulletLife: 2
   bulletDamage: 0

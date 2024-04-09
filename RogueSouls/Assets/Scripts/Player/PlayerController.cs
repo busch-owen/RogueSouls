@@ -282,7 +282,15 @@ public class PlayerController : MonoBehaviour
     //Manages where the player's weapon should be aimin
     private void HandleAim()
     {
-        _weaponRotationAngle = Mathf.Atan2(_crosshairHandle.transform.position.y, _crosshairHandle.transform.position.x) * Mathf.Rad2Deg;
+        if(!_crosshairClamp.isActiveAndEnabled)
+        {
+            _weaponRotationAngle = Mathf.Atan2(_crosshairHandle.transform.position.y, _crosshairHandle.transform.position.x) * Mathf.Rad2Deg;
+        }
+        else
+        {
+            _weaponRotationAngle = Mathf.Atan2(_crosshairSprite.transform.position.y - transform.position.y, _crosshairSprite.transform.position.x - transform.position.x) * Mathf.Rad2Deg;
+        }
+        
         Quaternion rotation = Quaternion.AngleAxis(_weaponRotationAngle, Vector3.forward);
         _aimHandleTransform.rotation = Quaternion.Slerp(_aimHandleTransform.rotation, rotation, _rotateSpeed * Time.deltaTime);
         _weaponOffsetHandle.OffsetWeaponPos(_weaponRotationAngle);

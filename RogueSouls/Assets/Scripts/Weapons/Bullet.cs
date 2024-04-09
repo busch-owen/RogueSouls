@@ -7,6 +7,8 @@ public class Bullet : PoolObject
     [SerializeField]
     protected GameObject hitEffect;
     [SerializeField]
+    protected GameObject bloodHitEffect;
+    [SerializeField]
     protected TrailRenderer _trailRenderer;
     [SerializeField]
     protected float bulletLife = 2f;
@@ -23,11 +25,24 @@ public class Bullet : PoolObject
         {
             Enemy enemyToHit = other.gameObject.GetComponent<Enemy>();
             enemyToHit.TakeDamage(bulletDamage);
+            if(hitEffect != null)
+            {
+                PoolObject tempEffect = PoolManager.Instance.Spawn(bloodHitEffect.name);
+                tempEffect.transform.position = transform.position;
+                tempEffect.GetComponent<ParticleSystem>().Play();
+            }
+            
             this.OnDeSpawn();
         }
         else
         {
             this.OnDeSpawn();
+            if(hitEffect != null)
+            {
+                PoolObject tempEffect = PoolManager.Instance.Spawn(hitEffect.name);
+                tempEffect.transform.position = transform.position;
+                tempEffect.GetComponent<ParticleSystem>().Play();
+            }
         }
     }
 

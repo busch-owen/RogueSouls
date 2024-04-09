@@ -71,7 +71,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1501119281
-  m_SortingLayer: 4
+  m_SortingLayer: 5
   m_SortingOrder: 150
   m_Sprite: {fileID: 21300000, guid: 26b13508592484e40a96e0d7d2d9d015, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -164,7 +164,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fireRate: 7
   bulletLifetime: 3
-  maxAmmo: 40
+  <MaxAmmo>k__BackingField: 15
   bulletCount: 1
   reloadTime: 1
   cam: {fileID: 0}
