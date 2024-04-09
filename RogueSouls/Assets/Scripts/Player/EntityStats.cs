@@ -21,10 +21,13 @@ public class EntityStats : MonoBehaviour
     [field: SerializeField]
     public float TimeToAttack { get; private set; }
 
+    [SerializeField]
     HeartDisplayHandler _heartDisplayHandler;
 
     [SerializeField]
     protected GameManager _gameManager;
+
+    Heart heart;
 
     #endregion
 
@@ -44,6 +47,7 @@ public class EntityStats : MonoBehaviour
     public virtual void TakeDamage(int damage)
     {
         IncrementHealth(damage);
+        
         if (Health <= 0 && tag == "enemy")
         {
             Destroy(this.gameObject);
@@ -51,7 +55,6 @@ public class EntityStats : MonoBehaviour
     } 
     public void HealEntity(int healthToHeal)
     {
-        _heartDisplayHandler.IncreaseHeartQuarters(healthToHeal);
         Health += healthToHeal;
         Health = Mathf.Clamp(Health, 0, _maxHealth);
     }
@@ -60,19 +63,19 @@ public class EntityStats : MonoBehaviour
     {
         HealEntity(increaseAmount);
         UpdateHeartAmount();
+        _heartDisplayHandler.CheckHeartQuarters();
         //_heartDisplayHandler.AddOneHeart();
     }
 
     public virtual void IncrementHealth(int incrementAmount)
     {
-
-        if(Health <= 0)
+        if (Health <= 0)
         {
             return;
         }
         Health -= incrementAmount;
         Health = Mathf.Clamp (Health, 0 , _maxHealth);
-        _heartDisplayHandler?.DecreaseHeartQuarters(incrementAmount);
+        _heartDisplayHandler.CheckHeartQuarters();
     }
     
 

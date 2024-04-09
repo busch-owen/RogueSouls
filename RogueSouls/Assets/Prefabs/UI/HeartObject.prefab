@@ -50,14 +50,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a5ca8f61bd6e784dabb5e72b56a34d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _heartQuarters:
-  - {fileID: 8590014790023851104}
-  - {fileID: 5524194442762547680}
-  - {fileID: 6273112902408203148}
+  <_heartQuarters>k__BackingField:
   - {fileID: 7328477746305933314}
+  - {fileID: 6273112902408203148}
+  - {fileID: 5524194442762547680}
+  - {fileID: 8590014790023851104}
   _quarters: 4
-  <HeartFull>k__BackingField: 1
-  <QuarterToRestore>k__BackingField: -1
 --- !u!1 &5021151829178134854
 GameObject:
   m_ObjectHideFlags: 0
@@ -163,7 +161,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5524194442762547680}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -315,7 +313,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7328477746305933314}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
