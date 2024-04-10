@@ -44,7 +44,7 @@ public class Chest : MonoBehaviour
                 _playerInventory.AddItemsToInventoryList(_itemToGivePlayer);
             }
 
-            _pickupDisplay.ShowSpecificMessage("You got a " + _itemToGivePlayer.name + "! \nItem was added to your inventory!", 2f);
+            _pickupDisplay.ShowSpecificMessage("You got a " + _itemToGivePlayer.GetComponent<CollectableItem>().ItemName + "! \nItem was added to your inventory!", 2f);
             _animator.SetBool("ChestOpen", true);
             _opened = true;
         }

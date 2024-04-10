@@ -35,6 +35,9 @@ public class RangedWeapon : MonoBehaviour
     [SerializeField]
     float maxSpread;
 
+    [field: SerializeField]
+    public string ItemName { get; private set; }
+
     UIHandler _uiHandler;
 
     ScreenShakeEffect _screenShakeEffect;

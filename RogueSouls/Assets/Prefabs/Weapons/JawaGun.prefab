@@ -126,6 +126,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6250265583612026718}
   - component: {fileID: -7550700366089920953}
+  - component: {fileID: -8283146527105278498}
   m_Layer: 0
   m_Name: JawaGun
   m_TagString: Untagged
@@ -175,10 +176,24 @@ MonoBehaviour:
   bulletForce: 20
   minSpread: -8
   maxSpread: 30
+  <ItemName>k__BackingField: 
   Reload_sounds: {fileID: 0}
   sfxHandler: {fileID: 0}
   gun_sounds: {fileID: 0}
   damage: 5
+--- !u!114 &-8283146527105278498
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3873842773402911558}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d20fc4100d746546811a698cab7c291, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <ItemName>k__BackingField: Jawa Gun
 --- !u!1001 &2463602303940190721
 PrefabInstance:
   m_ObjectHideFlags: 0

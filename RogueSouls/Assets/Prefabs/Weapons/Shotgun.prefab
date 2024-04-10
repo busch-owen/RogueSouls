@@ -127,6 +127,7 @@ GameObject:
   - component: {fileID: 6250265583612026718}
   - component: {fileID: 6543636311860320368}
   - component: {fileID: 7513332494048581160}
+  - component: {fileID: 3754695214236907559}
   m_Layer: 0
   m_Name: Shotgun
   m_TagString: Untagged
@@ -176,6 +177,7 @@ MonoBehaviour:
   bulletForce: 15
   minSpread: 30
   maxSpread: 50
+  <ItemName>k__BackingField: 
   Reload_sounds: {fileID: 0}
   sfxHandler: {fileID: 0}
   gun_sounds: {fileID: 0}
@@ -196,6 +198,19 @@ MonoBehaviour:
   _shakeDuration: 0.2
   _shakeRate: 0.001
   _shakeSmoothRate: 0.3
+--- !u!114 &3754695214236907559
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3873842773402911558}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d20fc4100d746546811a698cab7c291, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <ItemName>k__BackingField: Shotgun
 --- !u!1001 &2991459753219673282
 PrefabInstance:
   m_ObjectHideFlags: 0

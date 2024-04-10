@@ -43,6 +43,7 @@ GameObject:
   - component: {fileID: 6250265583612026718}
   - component: {fileID: 2589476555279233465}
   - component: {fileID: 9142908295371051861}
+  - component: {fileID: 3544356986893043356}
   m_Layer: 0
   m_Name: Revolver
   m_TagString: Untagged
@@ -92,6 +93,7 @@ MonoBehaviour:
   bulletForce: 30
   minSpread: -2
   maxSpread: 2
+  <ItemName>k__BackingField: 
   Reload_sounds: {fileID: 0}
   sfxHandler: {fileID: 0}
   gun_sounds: {fileID: 0}
@@ -112,6 +114,19 @@ MonoBehaviour:
   _shakeDuration: 0.2
   _shakeRate: 0.001
   _shakeSmoothRate: 0.3
+--- !u!114 &3544356986893043356
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3873842773402911558}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d20fc4100d746546811a698cab7c291, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <ItemName>k__BackingField: Revolver
 --- !u!1 &8647750539015994099
 GameObject:
   m_ObjectHideFlags: 0
