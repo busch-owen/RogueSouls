@@ -24,15 +24,19 @@ public class HUD : MonoBehaviour
     public void ShowSpecificMessage(string message, float messageLength)
     {
         _textBox.SetActive(true);
-        _textBoxText.text = message;
+        _textBoxText.text = message + "\n\nPress [ESC] to close.";
         Invoke("CloseTextBox", messageLength);
     }
 
-    void CloseTextBox()
+    public void CloseTextBox()
     {
-        _textBoxText.text = "";
-        _player.AllowInput();
-        _textBox.SetActive(false);
+        if(_textBox != null && _textBox.activeSelf)
+        {
+            _textBoxText.text = "";
+            _player.AllowInput();
+            _textBox.SetActive(false);
+        }
+        
     }
 
     #endregion

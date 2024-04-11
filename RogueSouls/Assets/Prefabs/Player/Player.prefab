@@ -7940,6 +7940,7 @@ MonoBehaviour:
   _playerSpriteObject: {fileID: 4318066684622877757}
   _objectCarryPoint: {fileID: 1849512328634653346}
   _invulnTime: 0.6
+  _grappleHookCancelRadius: 0
   _rb: {fileID: 4318066686164884419}
   _throwForce: 10
   _throwObjectDrag: 0.1

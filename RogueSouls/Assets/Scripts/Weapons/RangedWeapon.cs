@@ -35,7 +35,7 @@ public class RangedWeapon : MonoBehaviour
     [SerializeField]
     float maxSpread;
 
-    UIHandler _uiHandler;
+    protected UIHandler _uiHandler;
 
     ScreenShakeEffect _screenShakeEffect;
 
@@ -113,7 +113,7 @@ public class RangedWeapon : MonoBehaviour
     #region Shoot
     public virtual void Shoot(Vector2 additionalVelocity = new Vector2())
     {
-        if (Time.time >= timeToNextFire && !isReloading)// make sure you can't shoot faster than the gun allows to
+        if (Time.time >= timeToNextFire && !isReloading && !_uiHandler.IsPaused)// make sure you can't shoot faster than the gun allows to
         {
             timeToNextFire = Time.time + 1.0f / fireRate;// sets the time for the next bullet to be able to be fired
 

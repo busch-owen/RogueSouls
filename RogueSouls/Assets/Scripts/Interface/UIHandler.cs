@@ -66,12 +66,14 @@ public class UIHandler : MonoBehaviour
         {
             if (_pauseMenu.activeSelf)
             {
+                IsPaused = false;
                 _pauseMenu.SetActive(false);
                 ChangeHealthDisplayState(true);
                 Time.timeScale = 1.0f;
             }
             else
             {
+                IsPaused = true;
                 _pauseMenu.SetActive(true);
                 _currentMenu = _inventoryMenu;
                 OpenSpecificMenu(_currentMenu);

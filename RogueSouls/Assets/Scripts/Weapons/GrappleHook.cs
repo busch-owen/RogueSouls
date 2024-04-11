@@ -18,7 +18,10 @@ public class GrappleHook : RangedWeapon
     public override void Shoot(Vector2 additionalVelocity = default)
     {
         base.Shoot(additionalVelocity);
-        _gunRenderer.sprite = _firedSprite;
+        if (_uiHandler != null && !_uiHandler.IsPaused)
+        {
+            _gunRenderer.sprite = _firedSprite;
+        }
     }
 
     public override void FinishReload()

@@ -469,6 +469,7 @@ public class PlayerController : MonoBehaviour
     public IEnumerator MoveToSpecificLocation(Vector3 targetPos, float speed, float grappleTime)
     {
         _grappling = true;
+        canRoll = false;
         while (_grappling)
         {
             Vector3 moveDirection = targetPos - transform.position;
@@ -489,6 +490,7 @@ public class PlayerController : MonoBehaviour
         ToggleDashSmear(false);
         GoVulnerable();
         _grappling = false;
+        canRoll = true;
     }
 
     public bool IsGrappling()
