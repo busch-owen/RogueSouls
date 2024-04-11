@@ -55,6 +55,7 @@ MonoBehaviour:
   bulletLife: 2
   bulletDamage: 0
   weapon: {fileID: 0}
+  <MaxTravelDistance>k__BackingField: 30
 --- !u!50 &-8330872383825618795
 Rigidbody2D:
   serializedVersion: 4

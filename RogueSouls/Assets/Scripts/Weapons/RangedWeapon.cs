@@ -35,9 +35,6 @@ public class RangedWeapon : MonoBehaviour
     [SerializeField]
     float maxSpread;
 
-    [field: SerializeField]
-    public string ItemName { get; private set; }
-
     UIHandler _uiHandler;
 
     ScreenShakeEffect _screenShakeEffect;
@@ -54,7 +51,7 @@ public class RangedWeapon : MonoBehaviour
     [SerializeField]
     int damage;
 
-    PlayerController playerController;
+    public PlayerController playerController { get; private set; }
 
     bool shoot;
 
@@ -68,12 +65,12 @@ public class RangedWeapon : MonoBehaviour
 
     #region first load
 
-    private void Awake()
+    public virtual void Awake()
     {
         _uiHandler = FindObjectOfType<UIHandler>();
     }
     void Start()
-    {
+    {   
         CurrentAmmo = MaxAmmo;// always start with max ammo
         _screenShakeEffect = GetComponent<ScreenShakeEffect>();
     }
@@ -174,7 +171,7 @@ public class RangedWeapon : MonoBehaviour
     }
 
 
-    void FinishReload()
+    public virtual void FinishReload()
     {
         CurrentAmmo = MaxAmmo;
         //sfxHandler?.Stop();

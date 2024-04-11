@@ -23,24 +23,15 @@ public class Explosion : Bullet
     void Update()
     {
 
-        
-        
     }
 
-
-
-
-
-
-
     // Start is called before the first frame update
-    private void FixedUpdate()
+    public override void FixedUpdate()
     {
+        base.FixedUpdate();
         circleCollider = GetComponent<CircleCollider2D>();
         rb = GetComponent<Rigidbody2D>(); 
         TrailRenderer = GetComponent<TrailRenderer>();
-        
-
     }
 
     public override void OnCollisionEnter2D(Collision2D collision)

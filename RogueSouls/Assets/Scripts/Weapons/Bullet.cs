@@ -17,11 +17,23 @@ public class Bullet : PoolObject
     [SerializeField]
     protected RangedWeapon weapon;
 
+    [field: SerializeField]
+    public float MaxTravelDistance { get; private set; }
+
+    public PlayerController _controller { get; private set; }
+
     public virtual void OnEnable()
     {
         //_trailRenderer = GetComponent<TrailRenderer>();
-        //CancelInvoke("OnDespawn");
-        Invoke("OnDeSpawn", bulletLife);
+        _controller = FindObjectOfType<PlayerController>();
+    }
+
+    public virtual void FixedUpdate()
+    {
+        if (Vector2.Distance(transform.position, _controller.transform.position) >= MaxTravelDistance)
+        {
+            OnDeSpawn();
+        }
     }
 
     // Start is called before the first frame update

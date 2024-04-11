@@ -46,6 +46,8 @@ public class PlayerController : MonoBehaviour
     bool rolling = false;
     bool canRoll = true;
 
+    bool _grappling = false;
+
     bool _preventInput = false;
 
     bool _carryableObjectInRange;
@@ -60,6 +62,7 @@ public class PlayerController : MonoBehaviour
 
     LayerMask _normalMask;
     LayerMask _invulnerableMask;
+    LayerMask _grappleMask;
 
     CharacterInput _characterInput;
 
@@ -90,6 +93,8 @@ public class PlayerController : MonoBehaviour
     CrosshairClamp _crosshairClamp;
 
     [Space(10)]
+
+    WaitForFixedUpdate _waitForFixedUpdate = new();
 
     #endregion
 
@@ -156,8 +161,10 @@ public class PlayerController : MonoBehaviour
         _dodgeSmearRenderer.enabled = false;
         _melee = GetComponentInChildren<MeleeBase>();
 
+
         _normalMask = LayerMask.NameToLayer("Player");
         _invulnerableMask = LayerMask.NameToLayer("Invulnerable");
+        _grappleMask = LayerMask.NameToLayer("Grapple");
     }
 
     void Start()
@@ -193,7 +200,7 @@ public class PlayerController : MonoBehaviour
     #region Movement Input and Physics
     private void HandleMovement()
     {
-        if (!rolling && !_melee.IsLunging())
+        if (!rolling && !_melee.IsLunging() && !_grappling)
         {
             _movementSpeed = new Vector2(_xSpeed, _ySpeed);
 
@@ -273,6 +280,12 @@ public class PlayerController : MonoBehaviour
     public void GoVulnerable()
     {
         this.gameObject.layer = _normalMask;
+    }
+
+    public void GoGrappling(float grappleTime)
+    {
+        this.gameObject.layer = _grappleMask;
+        Invoke("GoVulnerable", grappleTime);
     }
 
     #endregion
@@ -361,6 +374,11 @@ public class PlayerController : MonoBehaviour
     #endregion
 
     #region Collision Detection
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(_grappling)
+            StopGrappling();
+    }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -446,5 +464,31 @@ public class PlayerController : MonoBehaviour
             }
         }
         #endregion
+    }
+
+    public IEnumerator MoveToSpecificLocation(Vector3 targetPos, float speed, float grappleTime)
+    {
+        _grappling = true;
+        Vector3 moveDirection = targetPos - transform.position;
+        _rb.AddForce(moveDirection.normalized * speed, ForceMode2D.Impulse);
+        ToggleDashSmear(true);
+
+        if (Mathf.Approximately(transform.position.x, targetPos.x) && Mathf.Approximately(transform.position.y, targetPos.y))
+        {
+            StopGrappling();
+        }
+
+        yield return _waitForFixedUpdate;
+    }
+
+    public void StopGrappling()
+    {
+        ToggleDashSmear(false);
+        _grappling = false;
+    }
+
+    public bool IsGrappling()
+    {
+        return _grappling;
     }
 }
