@@ -51,7 +51,7 @@ public class PlayerController : MonoBehaviour
 
     bool _grappling = false;
 
-    bool _preventInput = false;
+    public bool PreventingInput { get; private set; } = false;
 
     bool _carryableObjectInRange;
     bool _currentlyCarryingAnObject;
@@ -181,7 +181,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!_preventInput)
+        if (!PreventingInput)
         {
             HandleAim();
             HandleMovement();
@@ -267,14 +267,14 @@ public class PlayerController : MonoBehaviour
 
     public void PreventInput()
     {
-        _preventInput = true;
+        PreventingInput = true;
         _movementSpeed = Vector2.zero;
         _rb.velocity = Vector2.zero;
     }
 
     public void AllowInput()
     {
-        _preventInput = false;
+        PreventingInput = false;
     }
 
     public void GoInvulnerable(float invTime)
@@ -355,25 +355,28 @@ public class PlayerController : MonoBehaviour
     //All the animation handling happens here...
     public void HandleSpritesAndAnimations()
     {
-        if (_movement.x != 0 || _movement.y != 0)
+        if(!PreventingInput)
         {
-            _animator.SetBool("Running", true);
-            if (!_effectHandler.RunParticlesPlaying())
-                _effectHandler.PlayRunParticles();
-        }
-        else
-        {
-            _animator.SetBool("Running", false);
-            _effectHandler.StopRunParticles();
-        }
+            if (_movement.x != 0 || _movement.y != 0)
+            {
+                _animator.SetBool("Running", true);
+                if (!_effectHandler.RunParticlesPlaying())
+                    _effectHandler.PlayRunParticles();
+            }
+            else
+            {
+                _animator.SetBool("Running", false);
+                _effectHandler.StopRunParticles();
+            }
 
-        if (_movement.x < 0)
-        {
-            _playerSpriteObject.transform.localScale = new Vector2(-1, 1);
-        }
-        else if (_movement.x > 0)
-        {
-            _playerSpriteObject.transform.localScale = new Vector2(1, 1);
+            if (_movement.x < 0)
+            {
+                _playerSpriteObject.transform.localScale = new Vector2(-1, 1);
+            }
+            else if (_movement.x > 0)
+            {
+                _playerSpriteObject.transform.localScale = new Vector2(1, 1);
+            }
         }
     }
 

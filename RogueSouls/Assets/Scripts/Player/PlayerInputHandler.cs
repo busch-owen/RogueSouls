@@ -23,7 +23,7 @@ public class PlayerInputHandler : MonoBehaviour
         weaponWheel = FindObjectOfType<WeaponWheel>();
         if(characterInput == null)
         {
-            if(!uiHandler.IsPaused)
+            if(!uiHandler.IsPaused && !playerController.PreventingInput)
             {
                 characterInput = new CharacterInput();
                 characterInput.CharacterMovement.Movement.performed += i => playerController?.HandleMovementInput(i.ReadValue<Vector2>());

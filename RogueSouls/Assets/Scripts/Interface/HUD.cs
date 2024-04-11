@@ -85,6 +85,7 @@ public class HUD : MonoBehaviour
     public void ShowSpecificMessageOnChatBox(string message)
     {
         _chatBoxText.text = message;
+        _player.PreventInput();
     }
 
     public void CloseChatBox()
@@ -94,13 +95,15 @@ public class HUD : MonoBehaviour
             _chatBoxText.text = "";
             _player.AllowInput();
             ChatBox.SetActive(false);
+            _player.AllowInput();
         }
     }
 
     public void OpenPromptText(string whatToDisplay)
     {
-            _promptText.transform.position = Vector2.Lerp(_promptText.transform.position, _promptEndPos.transform.position, _promptLerpSpeed * Time.fixedDeltaTime);
-            _promptText.text = whatToDisplay;
+        _promptText.transform.position = Vector2.Lerp(_promptText.transform.position, _promptEndPos.transform.position, _promptLerpSpeed * Time.fixedDeltaTime);
+        _promptText.text = whatToDisplay;
+        
     }
 
     public void ClosePromptText()
