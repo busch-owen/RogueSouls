@@ -72,11 +72,10 @@ MonoBehaviour:
   hitEffect: {fileID: 5515885454821392928, guid: c4867f2ee85dc104c956147885dad649, type: 3}
   bloodHitEffect: {fileID: 5515885454821392928, guid: 547b1e521150c3e47992976361e0842d, type: 3}
   _trailRenderer: {fileID: 7319297449972969170}
-  bulletLife: 2
   bulletDamage: 1
   weapon: {fileID: 0}
-  <MaxTravelDistance>k__BackingField: 15
-  _grappleSpeed: 20
+  _maxTravelDistance: 15
+  _grappleSpeed: 150
   _grappleInvulnTime: 3
 --- !u!58 &4490841868447902012
 CircleCollider2D:

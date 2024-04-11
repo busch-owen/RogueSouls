@@ -35,6 +35,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     float _invulnTime;
 
+    [SerializeField]
+    float _grappleHookCancelRadius;
+
     Animator _animator;
 
     Vector2 _movementSpeed;
@@ -114,7 +117,6 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField]
     private RangedWeapon _gun;
-    private MeleeBase _melee;
     [SerializeField]
     private Transform _gunLocation;
 
@@ -159,8 +161,6 @@ public class PlayerController : MonoBehaviour
         _effectHandler = GetComponentInChildren<PlayerEffectHandler>();
         _playerInventory = FindObjectOfType<Inventory>();
         _dodgeSmearRenderer.enabled = false;
-        _melee = GetComponentInChildren<MeleeBase>();
-
 
         _normalMask = LayerMask.NameToLayer("Player");
         _invulnerableMask = LayerMask.NameToLayer("Invulnerable");
@@ -200,7 +200,7 @@ public class PlayerController : MonoBehaviour
     #region Movement Input and Physics
     private void HandleMovement()
     {
-        if (!rolling && !_melee.IsLunging() && !_grappling)
+        if (!rolling && !_grappling)
         {
             _movementSpeed = new Vector2(_xSpeed, _ySpeed);
 
@@ -281,11 +281,11 @@ public class PlayerController : MonoBehaviour
     {
         this.gameObject.layer = _normalMask;
     }
+    
 
-    public void GoGrappling(float grappleTime)
+    public void GoGrapple()
     {
         this.gameObject.layer = _grappleMask;
-        Invoke("GoVulnerable", grappleTime);
     }
 
     #endregion
@@ -469,21 +469,25 @@ public class PlayerController : MonoBehaviour
     public IEnumerator MoveToSpecificLocation(Vector3 targetPos, float speed, float grappleTime)
     {
         _grappling = true;
-        Vector3 moveDirection = targetPos - transform.position;
-        _rb.AddForce(moveDirection.normalized * speed, ForceMode2D.Impulse);
-        ToggleDashSmear(true);
-
-        if (Mathf.Approximately(transform.position.x, targetPos.x) && Mathf.Approximately(transform.position.y, targetPos.y))
+        while (_grappling)
         {
-            StopGrappling();
-        }
+            Vector3 moveDirection = targetPos - transform.position;
+            _rb.AddForce(moveDirection.normalized * speed * Time.fixedDeltaTime, ForceMode2D.Impulse);
+            ToggleDashSmear(true);
+            GoGrapple();
+            if(Vector2.Distance(targetPos, transform.position) <= _grappleHookCancelRadius)
+            {
+                StopGrappling();
+            }
 
-        yield return _waitForFixedUpdate;
+            yield return _waitForFixedUpdate;
+        }
     }
 
     public void StopGrappling()
     {
         ToggleDashSmear(false);
+        GoVulnerable();
         _grappling = false;
     }
 

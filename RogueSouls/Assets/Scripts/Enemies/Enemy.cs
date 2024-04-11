@@ -41,7 +41,7 @@ public class Enemy : EntityStats
 
     private void FixedUpdate()
     {
-        if (target != null && targetInRange)
+        if (target != null && targetInRange && agent.isActiveAndEnabled)
         {
             agent.SetDestination(target.position);
         }
@@ -74,7 +74,15 @@ public class Enemy : EntityStats
     }
     #endregion
 
+    public void StunEnemy()
+    {
+        agent.enabled = false;
+    }
 
+    public void BreakStun()
+    {
+        agent.enabled = true;
+    }
 
 
 }

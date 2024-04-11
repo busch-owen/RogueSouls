@@ -72,7 +72,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1445394025
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: -921946187, guid: 41c2b443d12e21f4b9fc23897b574956, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -118,6 +118,7 @@ GameObject:
   - component: {fileID: 5227099870663015060}
   - component: {fileID: 5227099870663015066}
   - component: {fileID: 5227099870663015067}
+  - component: {fileID: -4050572559633478018}
   m_Layer: 0
   m_Name: Mimic
   m_TagString: Chest
@@ -206,3 +207,15 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.5, y: 0.75}
   m_EdgeRadius: 0
+--- !u!114 &-4050572559633478018
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5227099870663015064}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d76a3e7a1b500ed4fa5d6c2b4828fab0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

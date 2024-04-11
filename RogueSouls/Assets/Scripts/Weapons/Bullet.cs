@@ -11,16 +11,14 @@ public class Bullet : PoolObject
     [SerializeField]
     protected TrailRenderer _trailRenderer;
     [SerializeField]
-    protected float bulletLife = 2f;
-    [SerializeField]
     protected int bulletDamage;
     [SerializeField]
     protected RangedWeapon weapon;
 
-    [field: SerializeField]
-    public float MaxTravelDistance { get; private set; }
+    [SerializeField]
+    protected float _maxTravelDistance;
 
-    public PlayerController _controller { get; private set; }
+    protected PlayerController _controller;
 
     public virtual void OnEnable()
     {
@@ -30,7 +28,7 @@ public class Bullet : PoolObject
 
     public virtual void FixedUpdate()
     {
-        if (Vector2.Distance(transform.position, _controller.transform.position) >= MaxTravelDistance)
+        if (Vector2.Distance(transform.position, _controller.transform.position) >= _maxTravelDistance)
         {
             OnDeSpawn();
         }

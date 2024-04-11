@@ -262,15 +262,6 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "MeleeAttack",
-                    "type": "Button",
-                    "id": "c0974870-f41d-489f-8aea-f70f488c74f8",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "SlotBinding",
                     "type": "Value",
                     "id": "cbeb6de3-f6b3-4780-839e-e741b970976a",
@@ -401,28 +392,6 @@
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "",
-                    "id": "5866abc3-1e99-47c1-b9cb-271acf3fa0c7",
-                    "path": "<Keyboard>/e",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "MeleeAttack",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "9f1a2795-9064-41ea-a966-0e7dbdae4cde",
-                    "path": "<Gamepad>/buttonNorth",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "MeleeAttack",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
                     "name": "Keyboard",
                     "id": "3c3a2de6-7762-4918-aa86-58ca3b76acd8",
                     "path": "2DVector",
@@ -546,7 +515,7 @@
                 {
                     "name": "",
                     "id": "51d6e818-5a4f-41a5-83f5-2fbd07cbb080",
-                    "path": "<Gamepad>/buttonEast",
+                    "path": "<Gamepad>/buttonNorth",
                     "interactions": "",
                     "processors": "",
                     "groups": "",

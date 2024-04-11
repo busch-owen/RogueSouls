@@ -53,10 +53,9 @@ MonoBehaviour:
   hitEffect: {fileID: 0}
   bloodHitEffect: {fileID: 0}
   _trailRenderer: {fileID: 7319297449972969170}
-  bulletLife: 2
   bulletDamage: 0
   weapon: {fileID: 0}
-  <MaxTravelDistance>k__BackingField: 30
+  _maxTravelDistance: 30
   FireAOEEffect: {fileID: 2955202515143746530, guid: f3e73d67db3916e4d86c1f666abfc9e6, type: 3}
   AOERange: 3
   rayColor: {r: 1, g: 0, b: 0, a: 1}

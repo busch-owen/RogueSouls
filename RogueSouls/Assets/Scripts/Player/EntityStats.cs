@@ -53,17 +53,12 @@ public class EntityStats : MonoBehaviour
             Destroy(this.gameObject);
         }
     } 
-    public void HealEntity(int healthToHeal)
-    {
-        Health += healthToHeal;
-        Health = Mathf.Clamp(Health, 0, _maxHealth);
-    }
 
     public void IncreaseHealth(int increaseAmount)
     {
         _heartDisplayHandler.AddOneHeart();
         _maxHealth += 4;
-        HealEntity(increaseAmount);
+        IncrementHealth(increaseAmount);
         UpdateHeartAmount();
         if (_heartDisplayHandler != null)
         {

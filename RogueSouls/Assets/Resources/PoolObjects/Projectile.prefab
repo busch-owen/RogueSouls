@@ -52,10 +52,9 @@ MonoBehaviour:
   hitEffect: {fileID: 5515885454821392928, guid: c4867f2ee85dc104c956147885dad649, type: 3}
   bloodHitEffect: {fileID: 5515885454821392928, guid: 547b1e521150c3e47992976361e0842d, type: 3}
   _trailRenderer: {fileID: 0}
-  bulletLife: 2
   bulletDamage: 0
   weapon: {fileID: 0}
-  <MaxTravelDistance>k__BackingField: 30
+  _maxTravelDistance: 30
 --- !u!50 &-8330872383825618795
 Rigidbody2D:
   serializedVersion: 4

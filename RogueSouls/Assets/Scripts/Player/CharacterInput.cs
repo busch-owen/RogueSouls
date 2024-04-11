@@ -284,15 +284,6 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""MeleeAttack"",
-                    ""type"": ""Button"",
-                    ""id"": ""c0974870-f41d-489f-8aea-f70f488c74f8"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
                     ""name"": ""SlotBinding"",
                     ""type"": ""Value"",
                     ""id"": ""cbeb6de3-f6b3-4780-839e-e741b970976a"",
@@ -423,28 +414,6 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 },
                 {
-                    ""name"": """",
-                    ""id"": ""5866abc3-1e99-47c1-b9cb-271acf3fa0c7"",
-                    ""path"": ""<Keyboard>/e"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""MeleeAttack"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""9f1a2795-9064-41ea-a966-0e7dbdae4cde"",
-                    ""path"": ""<Gamepad>/buttonNorth"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""MeleeAttack"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
                     ""name"": ""Keyboard"",
                     ""id"": ""3c3a2de6-7762-4918-aa86-58ca3b76acd8"",
                     ""path"": ""2DVector"",
@@ -568,7 +537,7 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""51d6e818-5a4f-41a5-83f5-2fbd07cbb080"",
-                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -593,7 +562,6 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
         m_CharacterActions_OpenWeaponWheel = m_CharacterActions.FindAction("OpenWeaponWheel", throwIfNotFound: true);
         m_CharacterActions_Interact = m_CharacterActions.FindAction("Interact", throwIfNotFound: true);
         m_CharacterActions_PauseMenu = m_CharacterActions.FindAction("PauseMenu", throwIfNotFound: true);
-        m_CharacterActions_MeleeAttack = m_CharacterActions.FindAction("MeleeAttack", throwIfNotFound: true);
         m_CharacterActions_SlotBinding = m_CharacterActions.FindAction("SlotBinding", throwIfNotFound: true);
         m_CharacterActions_Reload = m_CharacterActions.FindAction("Reload", throwIfNotFound: true);
     }
@@ -724,7 +692,6 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_CharacterActions_OpenWeaponWheel;
     private readonly InputAction m_CharacterActions_Interact;
     private readonly InputAction m_CharacterActions_PauseMenu;
-    private readonly InputAction m_CharacterActions_MeleeAttack;
     private readonly InputAction m_CharacterActions_SlotBinding;
     private readonly InputAction m_CharacterActions_Reload;
     public struct CharacterActionsActions
@@ -736,7 +703,6 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
         public InputAction @OpenWeaponWheel => m_Wrapper.m_CharacterActions_OpenWeaponWheel;
         public InputAction @Interact => m_Wrapper.m_CharacterActions_Interact;
         public InputAction @PauseMenu => m_Wrapper.m_CharacterActions_PauseMenu;
-        public InputAction @MeleeAttack => m_Wrapper.m_CharacterActions_MeleeAttack;
         public InputAction @SlotBinding => m_Wrapper.m_CharacterActions_SlotBinding;
         public InputAction @Reload => m_Wrapper.m_CharacterActions_Reload;
         public InputActionMap Get() { return m_Wrapper.m_CharacterActions; }
@@ -763,9 +729,6 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
             @PauseMenu.started += instance.OnPauseMenu;
             @PauseMenu.performed += instance.OnPauseMenu;
             @PauseMenu.canceled += instance.OnPauseMenu;
-            @MeleeAttack.started += instance.OnMeleeAttack;
-            @MeleeAttack.performed += instance.OnMeleeAttack;
-            @MeleeAttack.canceled += instance.OnMeleeAttack;
             @SlotBinding.started += instance.OnSlotBinding;
             @SlotBinding.performed += instance.OnSlotBinding;
             @SlotBinding.canceled += instance.OnSlotBinding;
@@ -791,9 +754,6 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
             @PauseMenu.started -= instance.OnPauseMenu;
             @PauseMenu.performed -= instance.OnPauseMenu;
             @PauseMenu.canceled -= instance.OnPauseMenu;
-            @MeleeAttack.started -= instance.OnMeleeAttack;
-            @MeleeAttack.performed -= instance.OnMeleeAttack;
-            @MeleeAttack.canceled -= instance.OnMeleeAttack;
             @SlotBinding.started -= instance.OnSlotBinding;
             @SlotBinding.performed -= instance.OnSlotBinding;
             @SlotBinding.canceled -= instance.OnSlotBinding;
@@ -830,7 +790,6 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
         void OnOpenWeaponWheel(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
         void OnPauseMenu(InputAction.CallbackContext context);
-        void OnMeleeAttack(InputAction.CallbackContext context);
         void OnSlotBinding(InputAction.CallbackContext context);
         void OnReload(InputAction.CallbackContext context);
     }

@@ -13,12 +13,19 @@ public class GrappleProjectile : Bullet
 
     bool _couldDespawn;
 
+    Enemy _hitEnemy;
+
     public override void FixedUpdate()
     {
         base.FixedUpdate();
         if (Mathf.Approximately(transform.position.x, _controller.transform.position.x) && Mathf.Approximately(transform.position.y, _controller.transform.position.y))
         {
             OnDeSpawn();
+            if(_hitEnemy != null)
+            {
+                _hitEnemy.BreakStun();
+                _hitEnemy = null;
+            }
         }
 
         if(!_controller.IsGrappling() && _couldDespawn)
@@ -37,9 +44,19 @@ public class GrappleProjectile : Bullet
 
     public override void OnCollisionEnter2D(Collision2D col)
     {
-        StartCoroutine(_controller.MoveToSpecificLocation(transform.position, _grappleSpeed, _grappleInvulnTime));
-        _controller.GoGrappling(_grappleInvulnTime);
+        if(col.gameObject.GetComponent<Grappleable>())
+        {
+            StartCoroutine(_controller.MoveToSpecificLocation(transform.position, _grappleSpeed, _grappleInvulnTime));
+            if(col.gameObject.GetComponent<Enemy>())
+            {
+                _hitEnemy = col.gameObject.GetComponent<Enemy>();
+                _hitEnemy.StunEnemy();
+            }
+        }
         _rigidbody.simulated = false;
         _couldDespawn = true;
+        PoolObject tempEffect = PoolManager.Instance.Spawn(hitEffect.name);
+        tempEffect.transform.position = transform.position;
+        tempEffect.GetComponent<ParticleSystem>().Play();
     }
 }

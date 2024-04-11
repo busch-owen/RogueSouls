@@ -28,13 +28,16 @@ public class EnemyBullet : Bullet
 
     }
 
-    public override void OnEnable()
+    public override void FixedUpdate()
     {
-        
+        base.FixedUpdate();
+    }
+
+    public override void OnEnable()
+    {        
+        base.OnEnable();
         _trailRenderer = GetComponent<TrailRenderer>();
-        Invoke("OnDeSpawn", bulletLife);
         weapon = FindObjectOfType<RangedWeapon>();
-        bulletDamage = weapon.AssignDamage();
-        
+        bulletDamage = weapon.AssignDamage();   
     }
 }
