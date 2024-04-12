@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5497249584433293504}
   - component: {fileID: 5497249584433293510}
   - component: {fileID: 5497249584433293505}
+  - component: {fileID: 4012026325556101194}
   m_Layer: 0
   m_Name: Pillars
   m_TagString: Untagged
@@ -126,6 +127,22 @@ PolygonCollider2D:
       - {x: 1.25, y: -1.09375}
       - {x: 1.4375, y: -0.96875}
       - {x: 1.4375, y: 0.96875}
+--- !u!114 &4012026325556101194
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5497249584433293507}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9809bf1345abc5648af68b3a82653f08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_OverrideArea: 1
+  m_Area: 1
+  m_IgnoreFromBuild: 0
+  m_AffectedAgents: ffffffff
 --- !u!1 &5497249585533178111
 GameObject:
   m_ObjectHideFlags: 0
@@ -173,6 +190,7 @@ GameObject:
   - component: {fileID: 5497249585923754539}
   - component: {fileID: 5497249585923754537}
   - component: {fileID: 5497249585923754536}
+  - component: {fileID: 557205900646639092}
   m_Layer: 0
   m_Name: Walls
   m_TagString: Untagged
@@ -280,6 +298,22 @@ PolygonCollider2D:
       - {x: 1.5, y: -1.125}
       - {x: 2.5, y: -1.125}
       - {x: 2.5, y: 1.125}
+--- !u!114 &557205900646639092
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5497249585923754538}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9809bf1345abc5648af68b3a82653f08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_OverrideArea: 1
+  m_Area: 1
+  m_IgnoreFromBuild: 0
+  m_AffectedAgents: ffffffff
 --- !u!1 &5497249585935741475
 GameObject:
   m_ObjectHideFlags: 0
@@ -290,6 +324,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5497249585935741472}
   - component: {fileID: 5497249585935741473}
+  - component: {fileID: 7177419696941733374}
   m_Layer: 0
   m_Name: Floor
   m_TagString: Untagged
@@ -364,6 +399,22 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &7177419696941733374
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5497249585935741475}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9809bf1345abc5648af68b3a82653f08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_OverrideArea: 1
+  m_Area: 1
+  m_IgnoreFromBuild: 0
+  m_AffectedAgents: ffffffff
 --- !u!1 &5497249586235456743
 GameObject:
   m_ObjectHideFlags: 0
@@ -375,6 +426,7 @@ GameObject:
   - component: {fileID: 5497249586235456740}
   - component: {fileID: 5497249586235456746}
   - component: {fileID: 5497249586235456741}
+  - component: {fileID: 1108203199770710089}
   m_Layer: 0
   m_Name: Roof
   m_TagString: Untagged
@@ -482,6 +534,22 @@ PolygonCollider2D:
       - {x: 1.5, y: 0.1875}
       - {x: 2.5, y: 0.1875}
       - {x: 2.5, y: 1.3125}
+--- !u!114 &1108203199770710089
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5497249586235456743}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9809bf1345abc5648af68b3a82653f08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_OverrideArea: 1
+  m_Area: 1
+  m_IgnoreFromBuild: 0
+  m_AffectedAgents: ffffffff
 --- !u!1001 &6739235008673298814
 PrefabInstance:
   m_ObjectHideFlags: 0

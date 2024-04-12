@@ -46,10 +46,21 @@ public class PlayerController : MonoBehaviour
 
     Vector2 _movement;
 
-    bool rolling = false;
+    bool _rolling = false;
     bool canRoll = true;
 
     bool _grappling = false;
+
+    [SerializeField]
+    int _bonkDamage;
+    [SerializeField]
+    int _grappleBonkDamage;
+
+    [SerializeField]
+    PoolObject _bonkEffect;
+
+    [SerializeField]
+    float _bonkKnockback;
 
     public bool PreventingInput { get; private set; } = false;
 
@@ -208,7 +219,7 @@ public class PlayerController : MonoBehaviour
     #region Movement Input and Physics
     private void HandleMovement()
     {
-        if (!rolling && !_grappling)
+        if (!_rolling && !_grappling)
         {
             _movementSpeed = new Vector2(_xSpeed, _ySpeed);
 
@@ -240,7 +251,7 @@ public class PlayerController : MonoBehaviour
 
     IEnumerator BeginDodgeRollDuration()
     {
-        rolling = true;
+        _rolling = true;
         _rb.AddForce(_movement.normalized * dodgeRollForce);
         GoInvulnerable(_invulnTime);
         ToggleDashSmear(true);
@@ -248,7 +259,7 @@ public class PlayerController : MonoBehaviour
         StartCoroutine(BeginDodgeRollCoolDown());
         ToggleDashSmear(false);
 
-        rolling = false;
+        _rolling = false;
     }
 
     IEnumerator BeginDodgeRollCoolDown()
@@ -264,7 +275,7 @@ public class PlayerController : MonoBehaviour
 
     public bool CurrentlyRolling()
     {
-        return rolling;
+        return _rolling;
     }
 
     public void PreventInput()
@@ -387,7 +398,28 @@ public class PlayerController : MonoBehaviour
     #region Collision Detection
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(_grappling)
+        if(collision.gameObject.GetComponent<Enemy>())
+        {
+            if(_rolling)
+            {
+                collision.gameObject.GetComponent<Enemy>().TakeDamage(_bonkDamage);
+                PoolObject tempParticle = PoolManager.Instance.Spawn(_bonkEffect.name);
+                tempParticle.transform.position = (transform.position + collision.transform.position) / 2;
+                tempParticle.GetComponent<ParticleSystem>().Play();
+            }
+            else if(_grappling)
+            {
+                collision.gameObject.GetComponent<Enemy>().TakeDamage(_grappleBonkDamage);
+                PoolObject tempParticle = PoolManager.Instance.Spawn(_bonkEffect.name);
+                tempParticle.transform.position = (transform.position + collision.transform.position) / 2;
+                tempParticle.GetComponent<ParticleSystem>().Play();
+                StopGrappling();
+            }
+            _rb.velocity = Vector2.zero;
+            _rb.AddForce((transform.position - collision.transform.position).normalized * _bonkKnockback, ForceMode2D.Impulse);
+        }
+
+        if (_grappling)
             StopGrappling();
     }
 

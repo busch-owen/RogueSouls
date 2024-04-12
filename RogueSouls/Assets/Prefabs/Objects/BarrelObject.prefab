@@ -72,7 +72,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1501119281
-  m_SortingLayer: 4
+  m_SortingLayer: 5
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 6525223c99e59f444a849e502af537c5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -98,6 +98,7 @@ GameObject:
   - component: {fileID: 4613193153211709863}
   - component: {fileID: 4613193153211709862}
   - component: {fileID: 4613193153211709865}
+  - component: {fileID: -7822514338425336325}
   m_Layer: 11
   m_Name: BarrelObject
   m_TagString: Carryable
@@ -199,6 +200,18 @@ MonoBehaviour:
   _destructibleObject: 0
   _destructionEffect: {fileID: 0}
   _minDestructionSpeed: 0
+--- !u!114 &-7822514338425336325
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4613193153211709864}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d76a3e7a1b500ed4fa5d6c2b4828fab0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4628016774722479065
 GameObject:
   m_ObjectHideFlags: 0
@@ -270,7 +283,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1501119281
-  m_SortingLayer: 4
+  m_SortingLayer: 5
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 01cbdbfc72af3844a82a2b7d73be000f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
