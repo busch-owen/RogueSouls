@@ -175,13 +175,17 @@ public class RangedWeapon : MonoBehaviour
 
                     Bullet bullet = (Bullet)PoolManager.Instance.Spawn(bulletPrefab.name);
                     bullet.AssignWeapon(this);
-                    bullet.GetComponent<TrailRenderer>().enabled = false;
+
+                    if(bullet.GetComponent<TrailRenderer>())
+                        bullet.GetComponent<TrailRenderer>().enabled = false;
+
                     bullet.transform.position = firePoint.transform.position;
                     bullet.transform.rotation = firePoint.transform.rotation;
                     Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
                     rb.velocity = Vector2.zero;
                     rb?.AddForce(firePoint.right * bulletForce, ForceMode2D.Impulse);//impulse force represents impact 
-                    bullet.GetComponent<TrailRenderer>().enabled = true;
+                    if (bullet.GetComponent<TrailRenderer>())
+                        bullet.GetComponent<TrailRenderer>().enabled = true;
                 }
 
                 firePoint.localRotation = defaultSpreadAngle;
