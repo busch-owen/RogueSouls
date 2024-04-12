@@ -169,6 +169,7 @@ MonoBehaviour:
   enemyGun: {fileID: 1871550474018874299}
   gunLocation: {fileID: 8886435309427360967}
   _rotateSpeed: 100
+  detectionRadius: 12
 --- !u!195 &4778386910285843650
 NavMeshAgent:
   m_ObjectHideFlags: 0

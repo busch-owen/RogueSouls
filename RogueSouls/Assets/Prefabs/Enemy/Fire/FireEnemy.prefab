@@ -127,7 +127,6 @@ GameObject:
   - component: {fileID: 7529075971869702691}
   - component: {fileID: 7529075971869702689}
   - component: {fileID: 7529075971869702688}
-  - component: {fileID: 2539332685899994742}
   - component: {fileID: 3912358352390913484}
   - component: {fileID: 3365761195997348607}
   - component: {fileID: -2293113258490416457}
@@ -179,7 +178,7 @@ MonoBehaviour:
   enemyGun: {fileID: 8784116570523874261}
   gunLocation: {fileID: 5872252957132993061}
   _rotateSpeed: 100
-  detectionRadius: 10
+  detectionRadius: 12
 --- !u!195 &7529075971869702688
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -202,25 +201,6 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &2539332685899994742
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7529075971869702693}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a1208892c04bfdd4994ba637bb61464a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  <Health>k__BackingField: 0
-  _maxHealth: 8
-  <Damage>k__BackingField: 0
-  <Speed>k__BackingField: 3.5
-  <TimeToAttack>k__BackingField: 0
-  _heartDisplayHandler: {fileID: 0}
-  _gameManager: {fileID: 0}
 --- !u!58 &3912358352390913484
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -228,7 +208,7 @@ CircleCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7529075971869702693}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
@@ -236,7 +216,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 10
+  m_Radius: 1
 --- !u!61 &3365761195997348607
 BoxCollider2D:
   m_ObjectHideFlags: 0
