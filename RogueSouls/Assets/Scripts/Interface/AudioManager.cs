@@ -11,6 +11,9 @@ public class AudioManager : MonoBehaviour
     private void OnEnable()
     {
         audioSource = FindObjectsOfType<AudioSource>();
+
+        //When the scene is started, the sound volume is set to the level adjusted by the user.
+        SetVolume(MainMenuHandler.GlobalSoundVolumeValue);
     }
 
     public void ToggleAudio()
