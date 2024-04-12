@@ -22,6 +22,10 @@ public class Enemy : EntityStats
 
     protected GameObject enemySprite;
 #endregion
+    [SerializeField]
+    float detectionRadius;
+    
+
     #region Start   
     private void Start()
     {
@@ -30,6 +34,9 @@ public class Enemy : EntityStats
         agent.updateRotation = false;
         agent.updateUpAxis = false;
         enemySprite = GetComponentInChildren<SpriteRenderer>().gameObject;
+        
+        target = FindObjectOfType<PlayerController>().transform;
+       
     }
 #endregion
     #region Update
@@ -55,6 +62,19 @@ public class Enemy : EntityStats
 
     public virtual void FixedUpdate()
     {
+
+        
+        float distance = Vector3.Distance(target.position, this.transform.position);
+
+        if (distance <= detectionRadius)
+        {
+            targetInRange = true;
+        }
+        else
+        {
+            targetInRange = false;
+        }
+
         if (target != null && targetInRange && agent.isActiveAndEnabled)
         {
             agent.SetDestination(target.position);
@@ -69,7 +89,7 @@ public class Enemy : EntityStats
     }
 #endregion
     #region Triggers
-    private void OnTriggerEnter2D(Collider2D other)
+    /*private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.tag == "Player")
         {
@@ -78,6 +98,7 @@ public class Enemy : EntityStats
         }
     }
 
+
     private void OnTriggerExit2D(Collider2D other)
     {
         if (other.gameObject.tag == "Player")
@@ -85,7 +106,7 @@ public class Enemy : EntityStats
             target = null;
             targetInRange = false;
         }
-    }
+    }*/
     #endregion
 
     public void StunEnemy()

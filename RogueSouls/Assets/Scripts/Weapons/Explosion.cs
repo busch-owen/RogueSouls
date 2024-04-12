@@ -92,8 +92,8 @@ public class Explosion : Bullet
                 enemy.TakeDamage(bulletDamage);
             }
         }
-
-        base.OnCollisionEnter2D(collision);
+        OnDeSpawn();
+        
     }
 
 }

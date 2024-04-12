@@ -118,7 +118,6 @@ GameObject:
   - component: {fileID: 4778386910285843651}
   - component: {fileID: 4778386910285843650}
   - component: {fileID: 653337200348733588}
-  - component: {fileID: 2046857538640857902}
   - component: {fileID: 8282977527723575816}
   - component: {fileID: 2862198251103426269}
   m_Layer: 7
@@ -169,6 +168,7 @@ MonoBehaviour:
   enemyGun: {fileID: 1871550474018874299}
   gunLocation: {fileID: 8886435309427360967}
   _rotateSpeed: 100
+  detectionRadius: 8
 --- !u!195 &4778386910285843650
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -210,22 +210,6 @@ MonoBehaviour:
   <TimeToAttack>k__BackingField: 0
   _heartDisplayHandler: {fileID: 0}
   _gameManager: {fileID: 0}
---- !u!58 &2046857538640857902
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4778386910285843655}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.25}
-  serializedVersion: 2
-  m_Radius: 6
 --- !u!58 &8282977527723575816
 CircleCollider2D:
   m_ObjectHideFlags: 0

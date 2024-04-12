@@ -9,10 +9,10 @@ public class PlayerController : MonoBehaviour
     [Header("Character Attributes"), Space(5)]
 
     [SerializeField]
-    float _xSpeed;
+    public float _xSpeed;
 
     [SerializeField]
-    float _ySpeed;
+    public float _ySpeed;
 
     [SerializeField]
     float dodgeRollForce;
