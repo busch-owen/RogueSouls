@@ -21,11 +21,17 @@ public class EnemyBullet : Bullet
             }
             this.OnDeSpawn();
         }
-        else
+        else if (other.gameObject.tag == "Player")
         {
-            this.OnDeSpawn();
+            
+            if (bloodHitEffect != null)
+            {
+                PoolObject tempEffect = PoolManager.Instance.Spawn(hitEffect.name);
+                tempEffect.transform.position = transform.position;
+                tempEffect.GetComponent<ParticleSystem>().Play();
+            }
         }
-
+        OnDeSpawn();
     }
 
     public override void FixedUpdate()

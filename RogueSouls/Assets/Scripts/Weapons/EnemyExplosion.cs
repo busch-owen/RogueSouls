@@ -90,6 +90,12 @@ public class EnemyExplosion : Bullet
             if (player)
             {
                 player.TakeDamage(bulletDamage);
+                if (hitEffect != null)
+                {
+                    PoolObject tempEffect = PoolManager.Instance.Spawn(hitEffect.name);
+                    tempEffect.transform.position = transform.position;
+                    tempEffect.GetComponent<ParticleSystem>().Play();
+                }
             }
         }
         OnDeSpawn();
