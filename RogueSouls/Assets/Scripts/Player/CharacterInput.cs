@@ -300,15 +300,6 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""ContinueDialogue"",
-                    ""type"": ""Button"",
-                    ""id"": ""b7cd39a1-ae17-46aa-a929-4c14c005a0ba"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -553,28 +544,6 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
                     ""action"": ""Reload"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""249447f7-a68c-4675-9143-dfa0b715b495"",
-                    ""path"": ""<Mouse>/leftButton"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""ContinueDialogue"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""3d354eca-18d0-405a-884b-f4e05bb6d35d"",
-                    ""path"": ""<Gamepad>/buttonSouth"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""ContinueDialogue"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -595,7 +564,6 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
         m_CharacterActions_PauseMenu = m_CharacterActions.FindAction("PauseMenu", throwIfNotFound: true);
         m_CharacterActions_SlotBinding = m_CharacterActions.FindAction("SlotBinding", throwIfNotFound: true);
         m_CharacterActions_Reload = m_CharacterActions.FindAction("Reload", throwIfNotFound: true);
-        m_CharacterActions_ContinueDialogue = m_CharacterActions.FindAction("ContinueDialogue", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -726,7 +694,6 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_CharacterActions_PauseMenu;
     private readonly InputAction m_CharacterActions_SlotBinding;
     private readonly InputAction m_CharacterActions_Reload;
-    private readonly InputAction m_CharacterActions_ContinueDialogue;
     public struct CharacterActionsActions
     {
         private @CharacterInput m_Wrapper;
@@ -738,7 +705,6 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
         public InputAction @PauseMenu => m_Wrapper.m_CharacterActions_PauseMenu;
         public InputAction @SlotBinding => m_Wrapper.m_CharacterActions_SlotBinding;
         public InputAction @Reload => m_Wrapper.m_CharacterActions_Reload;
-        public InputAction @ContinueDialogue => m_Wrapper.m_CharacterActions_ContinueDialogue;
         public InputActionMap Get() { return m_Wrapper.m_CharacterActions; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -769,9 +735,6 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
             @Reload.started += instance.OnReload;
             @Reload.performed += instance.OnReload;
             @Reload.canceled += instance.OnReload;
-            @ContinueDialogue.started += instance.OnContinueDialogue;
-            @ContinueDialogue.performed += instance.OnContinueDialogue;
-            @ContinueDialogue.canceled += instance.OnContinueDialogue;
         }
 
         private void UnregisterCallbacks(ICharacterActionsActions instance)
@@ -797,9 +760,6 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
             @Reload.started -= instance.OnReload;
             @Reload.performed -= instance.OnReload;
             @Reload.canceled -= instance.OnReload;
-            @ContinueDialogue.started -= instance.OnContinueDialogue;
-            @ContinueDialogue.performed -= instance.OnContinueDialogue;
-            @ContinueDialogue.canceled -= instance.OnContinueDialogue;
         }
 
         public void RemoveCallbacks(ICharacterActionsActions instance)
@@ -832,6 +792,5 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
         void OnPauseMenu(InputAction.CallbackContext context);
         void OnSlotBinding(InputAction.CallbackContext context);
         void OnReload(InputAction.CallbackContext context);
-        void OnContinueDialogue(InputAction.CallbackContext context);
     }
 }

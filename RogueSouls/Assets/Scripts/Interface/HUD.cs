@@ -41,15 +41,15 @@ public class HUD : MonoBehaviour
     {
         if (_player.InRangeOfNPC)
         {
-            OpenPromptText("Press [F] or [South Face Button] to speak to " + _player.CurrentNPC.NPCName);
+            OpenPromptText("Press [Interact] to speak to " + _player.CurrentNPC.NPCName);
         }  
         else if (_player.InRangeOfChest && !_player.CurrentChest.Opened)
         {
-            OpenPromptText("Press [F] or [West Face Button] to open chest.");
+            OpenPromptText("Press [F] or [Interact] to open chest.");
         }
         else if (_player.InRangeOfDoor && _player.CurrentDoor.IsLocked)
         {
-            OpenPromptText("Press [F] or [West Face Button] to unlock door.");
+            OpenPromptText("Press [F] or [Interact] to unlock door.");
         }
         else
         {
@@ -60,7 +60,7 @@ public class HUD : MonoBehaviour
     public void ShowSpecificMessageOnTextBox(string message, float messageLength)
     {
         _textBox.SetActive(true);
-        _textBoxText.text = message + "\n\nPress [ESC] to close.";
+        _textBoxText.text = message + "\n\nPress [ESC] or [Start] to close.";
         Invoke("CloseTextBox", messageLength);
     }
 
@@ -79,6 +79,7 @@ public class HUD : MonoBehaviour
         if(ChatBox != null)
         {
             ChatBox.SetActive(true);
+            Time.timeScale = 0;
         }
     }
 
@@ -96,6 +97,8 @@ public class HUD : MonoBehaviour
             _player.AllowInput();
             ChatBox.SetActive(false);
             _player.AllowInput();
+            Time.timeScale = 1;
+            _player.PreventDialogue();
         }
     }
 

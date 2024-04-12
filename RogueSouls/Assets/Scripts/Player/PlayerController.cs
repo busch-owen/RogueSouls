@@ -53,6 +53,8 @@ public class PlayerController : MonoBehaviour
 
     public bool PreventingInput { get; private set; } = false;
 
+    bool _preventingDialogue = false;
+
     bool _carryableObjectInRange;
     bool _currentlyCarryingAnObject;
     GameObject _carryableObject;
@@ -485,7 +487,7 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if(InRangeOfNPC)
+        if(InRangeOfNPC && !_preventingDialogue)
         {
             _playerHUD.OpenChatBox();
             CurrentNPC.ContinueDialogue();
@@ -531,5 +533,16 @@ public class PlayerController : MonoBehaviour
     public bool IsGrappling()
     {
         return _grappling;
+    }
+
+    public void PreventDialogue()
+    {
+        _preventingDialogue = true;
+        Invoke("AllowDialogue", 3f);
+    }
+
+    public void AllowDialogue()
+    {
+        _preventingDialogue = false;
     }
 }

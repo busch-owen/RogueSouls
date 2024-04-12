@@ -28,7 +28,7 @@ public class NPC : MonoBehaviour
         {
             if (index < _dialogue.Length && _dialogue[index] != null)
             {
-                _playerHUD.ShowSpecificMessageOnChatBox(_dialogue[index]);
+                _playerHUD.ShowSpecificMessageOnChatBox(NPCName + ": \n" + _dialogue[index] + "\n\nPress [Interact] to continue");
                 index++;
             }
             else

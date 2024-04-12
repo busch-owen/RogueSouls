@@ -113,40 +113,81 @@ public class RangedWeapon : MonoBehaviour
     #region Shoot
     public virtual void Shoot(Vector2 additionalVelocity = new Vector2())
     {
-        if (Time.time >= timeToNextFire && !isReloading && !_uiHandler.IsPaused)// make sure you can't shoot faster than the gun allows to
+        if (gameObject.GetComponentInParent<PlayerController>())
         {
-            timeToNextFire = Time.time + 1.0f / fireRate;// sets the time for the next bullet to be able to be fired
-
-            CurrentAmmo--;
-            //sfxHandler?.PlayOneShot(gun_sounds);
-
-            muzzleFlashEffect?.Stop();
-            muzzleFlashEffect?.Play();
-
-            _screenShakeEffect?.ShakeScreen();
-
-            Quaternion defaultSpreadAngle = firePoint.localRotation;
-            float spread = Random.Range(minSpread, maxSpread);
-            firePoint.transform.Rotate(new Vector3(0, 0, 1), -spread / 2f);
-            for (int i = 0; i < bulletCount; i++)
+            if (Time.time >= timeToNextFire && !isReloading && !_uiHandler.IsPaused && !playerController.PreventingInput)// make sure you can't shoot faster than the gun allows to
             {
-                float angle = (float)spread / (float)(bulletCount);
+                timeToNextFire = Time.time + 1.0f / fireRate;// sets the time for the next bullet to be able to be fired
 
-                firePoint.transform.Rotate(new Vector3(0, 0, 1), angle);
+                CurrentAmmo--;
+                //sfxHandler?.PlayOneShot(gun_sounds);
 
-                Bullet bullet = (Bullet)PoolManager.Instance.Spawn(bulletPrefab.name);
-                bullet.AssignWeapon(this);
-                bullet.GetComponent<TrailRenderer>().enabled = false;
-                bullet.transform.position = firePoint.transform.position;
-                bullet.transform.rotation = firePoint.transform.rotation;
-                Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
-                rb.velocity = Vector2.zero;
-                rb?.AddForce(firePoint.right * bulletForce, ForceMode2D.Impulse);//impulse force represents impact 
-                bullet.GetComponent<TrailRenderer>().enabled = true;
+                muzzleFlashEffect?.Stop();
+                muzzleFlashEffect?.Play();
+
+                _screenShakeEffect?.ShakeScreen();
+
+                Quaternion defaultSpreadAngle = firePoint.localRotation;
+                float spread = Random.Range(minSpread, maxSpread);
+                firePoint.transform.Rotate(new Vector3(0, 0, 1), -spread / 2f);
+                for (int i = 0; i < bulletCount; i++)
+                {
+                    float angle = (float)spread / (float)(bulletCount);
+
+                    firePoint.transform.Rotate(new Vector3(0, 0, 1), angle);
+
+                    Bullet bullet = (Bullet)PoolManager.Instance.Spawn(bulletPrefab.name);
+                    bullet.AssignWeapon(this);
+                    bullet.GetComponent<TrailRenderer>().enabled = false;
+                    bullet.transform.position = firePoint.transform.position;
+                    bullet.transform.rotation = firePoint.transform.rotation;
+                    Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
+                    rb.velocity = Vector2.zero;
+                    rb?.AddForce(firePoint.right * bulletForce, ForceMode2D.Impulse);//impulse force represents impact 
+                    bullet.GetComponent<TrailRenderer>().enabled = true;
+                }
+
+                firePoint.localRotation = defaultSpreadAngle;
             }
-
-            firePoint.localRotation = defaultSpreadAngle;
         }
+        else
+        {
+            if (Time.time >= timeToNextFire && !isReloading && !_uiHandler.IsPaused)// make sure you can't shoot faster than the gun allows to
+            {
+                timeToNextFire = Time.time + 1.0f / fireRate;// sets the time for the next bullet to be able to be fired
+
+                CurrentAmmo--;
+                //sfxHandler?.PlayOneShot(gun_sounds);
+
+                muzzleFlashEffect?.Stop();
+                muzzleFlashEffect?.Play();
+
+                _screenShakeEffect?.ShakeScreen();
+
+                Quaternion defaultSpreadAngle = firePoint.localRotation;
+                float spread = Random.Range(minSpread, maxSpread);
+                firePoint.transform.Rotate(new Vector3(0, 0, 1), -spread / 2f);
+                for (int i = 0; i < bulletCount; i++)
+                {
+                    float angle = (float)spread / (float)(bulletCount);
+
+                    firePoint.transform.Rotate(new Vector3(0, 0, 1), angle);
+
+                    Bullet bullet = (Bullet)PoolManager.Instance.Spawn(bulletPrefab.name);
+                    bullet.AssignWeapon(this);
+                    bullet.GetComponent<TrailRenderer>().enabled = false;
+                    bullet.transform.position = firePoint.transform.position;
+                    bullet.transform.rotation = firePoint.transform.rotation;
+                    Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
+                    rb.velocity = Vector2.zero;
+                    rb?.AddForce(firePoint.right * bulletForce, ForceMode2D.Impulse);//impulse force represents impact 
+                    bullet.GetComponent<TrailRenderer>().enabled = true;
+                }
+
+                firePoint.localRotation = defaultSpreadAngle;
+            }
+        }
+        
     }
 #endregion
     #region Reload
