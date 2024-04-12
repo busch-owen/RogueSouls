@@ -29,8 +29,8 @@ TagManager:
   - CameraBounds
   - IgnoreProjectile
   - Grapple
-  - 
-  - 
+  - Foreground
+  - Background
   - 
   - 
   - 
