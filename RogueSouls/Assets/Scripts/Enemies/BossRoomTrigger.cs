@@ -22,8 +22,8 @@ public class BossRoomTrigger : MonoBehaviour
     {
         if(_bossInRoom == null)
         {
-            _doorToOpenUponBossDeath.OpenDoor();
-            _entranceDoor.OpenDoor();
+            _doorToOpenUponBossDeath?.OpenDoor();
+            _entranceDoor?.OpenDoor();
         }
     }
 
@@ -35,7 +35,7 @@ public class BossRoomTrigger : MonoBehaviour
             {
                 _bossInRoom.gameObject.SetActive(true);
                 _bossInRoom.SetTarget(collision.transform);
-                _entranceDoor.CloseDoor();
+                _entranceDoor?.CloseDoor();
             }
         }
     }

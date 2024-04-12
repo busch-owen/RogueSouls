@@ -8130,6 +8130,10 @@ MonoBehaviour:
   _invulnTime: 0.6
   _grappleHookCancelRadius: 0
   _rb: {fileID: 4318066686164884419}
+  _bonkDamage: 2
+  _grappleBonkDamage: 4
+  _bonkEffect: {fileID: 5212899673152248168, guid: 1cd04832751839d4dae8691056f8bef6, type: 3}
+  _bonkKnockback: 7.5
   _throwForce: 10
   _throwObjectDrag: 0.1
   _crosshairSprite: {fileID: 0}

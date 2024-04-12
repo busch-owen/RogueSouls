@@ -1,9 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class KingSlime : Enemy
 {
+    [SerializeField]
+    Image _barFillImage;
+
     public override void Update()
     {
         if (target != null)
@@ -30,5 +34,12 @@ public class KingSlime : Enemy
         {
             agent.SetDestination(target.position);
         }
+    }
+
+    public override void TakeDamage(int damage)
+    {
+        base.TakeDamage(damage);
+        Debug.Log(Health / _maxHealth);
+        _barFillImage.fillAmount = (float)Health / (float)_maxHealth;
     }
 }
