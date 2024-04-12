@@ -64,23 +64,28 @@ public class Explosion : Bullet
         TrailRenderer.enabled = false;
         rb.velocity = Vector3.zero;
         rb.freezeRotation = true;
-        GameObject particleObject = PoolManager.Instance.Spawn(FireAOEEffect.name).gameObject;
+        PoolObject particleObject = PoolManager.Instance.Spawn(FireAOEEffect.name);
         particleObject.transform.position = transform.position;
-        ParticleSystem newParticle = particleObject.GetComponent<ParticleSystem>();
-        newParticle?.Play();
+        particleObject.GetComponent<ParticleSystem>().Play();
 
         if (AOERange > 0)
         {
             var hitColliders = Physics2D.OverlapCircleAll(transform.position, AOERange);
             foreach (var hit in hitColliders)
             {
-                
-                var enemy = hit.GetComponent<Enemy>();
-                if (enemy)
-                {                    var closestPoint = hit.ClosestPoint(transform.position);
+                if (hit.GetComponent<Enemy>())
+                {                    
+                    var closestPoint = hit.ClosestPoint(transform.position);
                     var distance = Vector3.Distance(transform.position, closestPoint);
 
-                    enemy.TakeDamage(bulletDamage);
+                    hit.GetComponent<Enemy>().TakeDamage(bulletDamage);
+                }
+                else if(hit.GetComponent<MinionSlime>())
+                {
+                    var closestPoint = hit.ClosestPoint(transform.position);
+                    var distance = Vector3.Distance(transform.position, closestPoint);
+
+                    hit.GetComponent<MinionSlime>().TakeDamage(bulletDamage);
                 }
             }
         }
@@ -90,6 +95,11 @@ public class Explosion : Bullet
             if (enemy)
             {
                 enemy.TakeDamage(bulletDamage);
+            }
+            
+            else if (collision.gameObject.GetComponent<MinionSlime>())
+            {
+                collision.gameObject.GetComponent<MinionSlime>().TakeDamage(bulletDamage);
             }
         }
         OnDeSpawn();

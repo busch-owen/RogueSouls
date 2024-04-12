@@ -70,7 +70,7 @@ public class MinionSlime : EnemyBullet
 
     public override void FixedUpdate()
     {
-        if(_agent.isActiveAndEnabled)
+        if(_agent != null && _agent.isActiveAndEnabled)
         {
             _agent.SetDestination(_target.position);
         }

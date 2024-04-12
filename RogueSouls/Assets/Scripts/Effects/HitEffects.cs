@@ -14,6 +14,6 @@ public class HitEffects : PoolObject
             mainParticle = GetComponent<ParticleSystem>();
         }
         mainParticle.Stop();
-        Invoke("OnDeSpawn", mainParticle.main.startLifetime.constant);
+        Invoke("OnDeSpawn", mainParticle.main.startLifetime.constant * 1.5f);
     }
 }

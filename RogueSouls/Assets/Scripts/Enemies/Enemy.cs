@@ -27,7 +27,7 @@ public class Enemy : EntityStats
     
 
     #region Start   
-    private void Start()
+    protected virtual void Start()
     {
         agent = GetComponent<NavMeshAgent>();
         agent.speed = Speed;

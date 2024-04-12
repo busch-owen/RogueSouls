@@ -15,6 +15,6 @@ public class FireEffect : PoolObject
             mainParticle = GetComponent<ParticleSystem>();
         }
         mainParticle.Stop();
-        //Invoke("OnDeSpawn", mainParticle.main.startLifetime.constant);
+        Invoke("OnDeSpawn", mainParticle.main.startLifetime.constant);
     }
 }
