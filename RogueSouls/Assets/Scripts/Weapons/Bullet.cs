@@ -41,17 +41,26 @@ public class Bullet : PoolObject
         {
             Enemy enemyToHit = other.gameObject.GetComponent<Enemy>();
             enemyToHit.TakeDamage(bulletDamage);
-            if(hitEffect != null)
+            if(bloodHitEffect != null)
             {
                 PoolObject tempEffect = PoolManager.Instance.Spawn(bloodHitEffect.name);
                 tempEffect.transform.position = transform.position;
                 tempEffect.GetComponent<ParticleSystem>().Play();
             }
-            OnDeSpawn();
+        }
+        else if (other.gameObject.CompareTag("MinionSlime"))
+        {
+            MinionSlime minion = other.gameObject.GetComponent<MinionSlime>();
+            minion.TakeDamage(bulletDamage);
+            if (bloodHitEffect != null)
+            {
+                PoolObject tempEffect = PoolManager.Instance.Spawn(bloodHitEffect.name);
+                tempEffect.transform.position = transform.position;
+                tempEffect.GetComponent<ParticleSystem>().Play();
+            }
         }
         else if (other.gameObject.tag != "Player")
         {
-            OnDeSpawn();
             if(hitEffect != null)
             {
                 PoolObject tempEffect = PoolManager.Instance.Spawn(hitEffect.name);
@@ -59,6 +68,8 @@ public class Bullet : PoolObject
                 tempEffect.GetComponent<ParticleSystem>().Play();
             }
         }
+        
+        OnDeSpawn();
     }
 
     public void AssignWeapon(RangedWeapon weaponToAssign)

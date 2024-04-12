@@ -6,24 +6,26 @@ using UnityEngine.AI;
 public class Enemy : EntityStats
 {
     #region Global Variables
-    [SerializeField] Transform target;
-    NavMeshAgent agent;
+    [SerializeField] protected Transform target;
+    protected NavMeshAgent agent;
     [SerializeField]
     bool isRanged;
 
     [SerializeField]
-    private RangedWeapon enemyGun;
+    protected RangedWeapon enemyGun;
     [SerializeField]
     private Transform gunLocation;
     [SerializeField]
     float _rotateSpeed;
     float _enemyWeaponRotationAngle;
     bool targetInRange;
+
+    protected GameObject enemySprite;
+#endregion
     [SerializeField]
     float detectionRadius;
     
 
-    #endregion
     #region Start   
     private void Start()
     {
@@ -31,22 +33,34 @@ public class Enemy : EntityStats
         agent.speed = Speed;
         agent.updateRotation = false;
         agent.updateUpAxis = false;
+        enemySprite = GetComponentInChildren<SpriteRenderer>().gameObject;
         
         target = FindObjectOfType<PlayerController>().transform;
        
     }
 #endregion
     #region Update
-    private void Update()
+    public virtual void Update()
     {
         if (target != null && targetInRange)
         {
             enemyGun.Shoot();
             RangedAttack();
         }
+
+        bool flipSprite = agent.velocity.x < 0;
+
+        if(flipSprite)
+        {
+            enemySprite.transform.localScale = new Vector3(-1, 1, 1);
+        }
+        else
+        {
+            enemySprite.transform.localScale = new Vector3(1, 1, 1);
+        }
     }
 
-    private void FixedUpdate()
+    public virtual void FixedUpdate()
     {
 
         
@@ -63,7 +77,7 @@ public class Enemy : EntityStats
         }
     }
 
-    private void RangedAttack()
+    public virtual void RangedAttack()
     {
         _enemyWeaponRotationAngle = Mathf.Atan2(target.transform.position.y - this.transform.position.y, target.transform.position.x - this.transform.position.x) * Mathf.Rad2Deg;
         Quaternion rotation = Quaternion.AngleAxis(_enemyWeaponRotationAngle, Vector3.forward);

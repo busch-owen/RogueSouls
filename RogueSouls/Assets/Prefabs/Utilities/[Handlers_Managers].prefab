@@ -236,6 +236,7 @@ GameObject:
   - component: {fileID: 5383140664289747814}
   - component: {fileID: 5892763010950315828}
   - component: {fileID: 6710200781298638873}
+  - component: {fileID: 6800168546254811451}
   m_Layer: 15
   m_Name: '[CameraHandler]'
   m_TagString: Untagged
@@ -324,6 +325,19 @@ MonoBehaviour:
   m_BoundingShape2D: {fileID: 0}
   m_Damping: 0.5
   m_MaxWindowSize: -1
+--- !u!114 &6800168546254811451
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5383140664289747813}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f568e9222c2482644810b306299dc4bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _defaultCameraBounds: {fileID: 0}
 --- !u!1 &5383140664418302143
 GameObject:
   m_ObjectHideFlags: 0

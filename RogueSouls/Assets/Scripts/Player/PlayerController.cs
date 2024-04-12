@@ -495,14 +495,6 @@ public class PlayerController : MonoBehaviour
         #endregion
     }
 
-    public void ContinueCurrentNPCDialogue()
-    {
-        if (CurrentNPC != null)
-        {
-            CurrentNPC.ContinueDialogue();
-        }
-    }
-
     public IEnumerator MoveToSpecificLocation(Vector3 targetPos, float speed, float grappleTime)
     {
         _grappling = true;
