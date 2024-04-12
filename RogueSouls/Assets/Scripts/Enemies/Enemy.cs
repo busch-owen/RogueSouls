@@ -70,6 +70,10 @@ public class Enemy : EntityStats
         {
             targetInRange = true;
         }
+        else
+        {
+            targetInRange = false;
+        }
 
         if (target != null && targetInRange && agent.isActiveAndEnabled)
         {

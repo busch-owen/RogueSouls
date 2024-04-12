@@ -10,6 +10,7 @@ TagManager:
   - EnemyBullet
   - WarpOverlay
   - Chest
+  - MinionSlime
   layers:
   - Default
   - TransparentFX
