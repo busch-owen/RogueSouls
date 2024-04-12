@@ -98,5 +98,8 @@ public class Enemy : EntityStats
         agent.enabled = true;
     }
 
-
+    public void SetTarget(Transform newTarget)
+    {
+        target = newTarget;
+    }
 }
