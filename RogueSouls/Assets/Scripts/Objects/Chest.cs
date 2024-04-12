@@ -7,25 +7,28 @@ public class Chest : MonoBehaviour
     [SerializeField]
     GameObject _itemToGivePlayer;
 
+    UIHandler _handler;
+
     HUD _pickupDisplay;
 
     Inventory _playerInventory;
 
     Animator _animator;
 
-    bool _opened;
+    public bool Opened { get; private set; }
 
     private void Awake()
     {
         _playerInventory = FindObjectOfType<Inventory>();
         _animator = GetComponentInChildren<Animator>();
         _pickupDisplay = FindAnyObjectByType<HUD>();
-        _opened = false;
+        _handler = FindObjectOfType<UIHandler>();
+        Opened = false;
     }
 
     public void OpenChest()
     {
-        if(!_opened)
+        if(!Opened)
         {
             if (_itemToGivePlayer.GetComponent<Key>())
             {
@@ -44,9 +47,9 @@ public class Chest : MonoBehaviour
                 _playerInventory.AddItemsToInventoryList(_itemToGivePlayer);
             }
 
-            _pickupDisplay.ShowSpecificMessage("You got a " + _itemToGivePlayer.GetComponent<CollectableItem>().ItemName + "! \nItem was added to your inventory!", 2f);
+            _pickupDisplay.ShowSpecificMessageOnTextBox("You got a " + _itemToGivePlayer.GetComponent<CollectableItem>().ItemName + "! \nItem was added to your inventory!", 2f);
             _animator.SetBool("ChestOpen", true);
-            _opened = true;
+            Opened = true;
         }
     }
 }

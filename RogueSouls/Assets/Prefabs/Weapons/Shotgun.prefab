@@ -134,7 +134,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &6250265583612026718
 Transform:
   m_ObjectHideFlags: 0
@@ -177,7 +177,6 @@ MonoBehaviour:
   bulletForce: 15
   minSpread: 30
   maxSpread: 50
-  <ItemName>k__BackingField: 
   Reload_sounds: {fileID: 0}
   sfxHandler: {fileID: 0}
   gun_sounds: {fileID: 0}

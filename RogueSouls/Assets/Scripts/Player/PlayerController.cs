@@ -51,7 +51,9 @@ public class PlayerController : MonoBehaviour
 
     bool _grappling = false;
 
-    bool _preventInput = false;
+    public bool PreventingInput { get; private set; } = false;
+
+    bool _preventingDialogue = false;
 
     bool _carryableObjectInRange;
     bool _currentlyCarryingAnObject;
@@ -120,17 +122,22 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private Transform _gunLocation;
 
-    [Space(10)]
+    [field: Space(10)]
 
     #endregion
 
     #region Misc Interaction Variables
 
-    Door _currentDoor;
-    bool _inRangeOfDoor = false;
+    public Door CurrentDoor { get; private set; }
+    public bool InRangeOfDoor { get; private set; } = false;
 
-    Chest _currentChest;
-    bool _inRangeOfChest = false;
+    public Chest CurrentChest { get; private set; }
+    public bool InRangeOfChest { get; private set; } = false;
+
+    public NPC CurrentNPC { get; private set; }
+    public bool InRangeOfNPC { get; private set; } = false;
+
+    HUD _playerHUD;
 
     #endregion
 
@@ -161,6 +168,7 @@ public class PlayerController : MonoBehaviour
         _effectHandler = GetComponentInChildren<PlayerEffectHandler>();
         _playerInventory = FindObjectOfType<Inventory>();
         _dodgeSmearRenderer.enabled = false;
+        _playerHUD = GetComponentInChildren<HUD>();
 
         _normalMask = LayerMask.NameToLayer("Player");
         _invulnerableMask = LayerMask.NameToLayer("Invulnerable");
@@ -175,7 +183,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!_preventInput)
+        if (!PreventingInput)
         {
             HandleAim();
             HandleMovement();
@@ -261,14 +269,14 @@ public class PlayerController : MonoBehaviour
 
     public void PreventInput()
     {
-        _preventInput = true;
+        PreventingInput = true;
         _movementSpeed = Vector2.zero;
         _rb.velocity = Vector2.zero;
     }
 
     public void AllowInput()
     {
-        _preventInput = false;
+        PreventingInput = false;
     }
 
     public void GoInvulnerable(float invTime)
@@ -349,25 +357,28 @@ public class PlayerController : MonoBehaviour
     //All the animation handling happens here...
     public void HandleSpritesAndAnimations()
     {
-        if (_movement.x != 0 || _movement.y != 0)
+        if(!PreventingInput)
         {
-            _animator.SetBool("Running", true);
-            if (!_effectHandler.RunParticlesPlaying())
-                _effectHandler.PlayRunParticles();
-        }
-        else
-        {
-            _animator.SetBool("Running", false);
-            _effectHandler.StopRunParticles();
-        }
+            if (_movement.x != 0 || _movement.y != 0)
+            {
+                _animator.SetBool("Running", true);
+                if (!_effectHandler.RunParticlesPlaying())
+                    _effectHandler.PlayRunParticles();
+            }
+            else
+            {
+                _animator.SetBool("Running", false);
+                _effectHandler.StopRunParticles();
+            }
 
-        if (_movement.x < 0)
-        {
-            _playerSpriteObject.transform.localScale = new Vector2(-1, 1);
-        }
-        else if (_movement.x > 0)
-        {
-            _playerSpriteObject.transform.localScale = new Vector2(1, 1);
+            if (_movement.x < 0)
+            {
+                _playerSpriteObject.transform.localScale = new Vector2(-1, 1);
+            }
+            else if (_movement.x > 0)
+            {
+                _playerSpriteObject.transform.localScale = new Vector2(1, 1);
+            }
         }
     }
 
@@ -387,15 +398,21 @@ public class PlayerController : MonoBehaviour
             _carryableObjectInRange = true;
             _carryableObject = other.gameObject;
         }
-        if (other.gameObject.tag == "Chest" && !_inRangeOfChest)
+        if (other.gameObject.tag == "Chest" && !InRangeOfChest)
         {
-            _currentChest = other.GetComponent<Chest>();
-            _inRangeOfChest = true;
+            CurrentChest = other.GetComponent<Chest>();
+            InRangeOfChest = true;
         }
         if (other.GetComponent<Door>())
         {
-            _currentDoor = other.GetComponent<Door>();
-            _inRangeOfDoor = true;
+            CurrentDoor = other.GetComponent<Door>();
+            InRangeOfDoor = true;
+        }
+        if (other.GetComponent<NPC>())
+        {
+            CurrentNPC = other.GetComponent<NPC>();
+            CurrentNPC.ResetIndex();
+            InRangeOfNPC = true;
         }
     }
 
@@ -408,13 +425,19 @@ public class PlayerController : MonoBehaviour
         }
         if (other.gameObject.tag == "Chest")
         {
-            _currentChest = null;
-            _inRangeOfChest = false;
+            CurrentChest = null;
+            InRangeOfChest = false;
         }
         if (other.GetComponent<Door>())
         {
-            _currentDoor = null;
-            _inRangeOfDoor = false;
+            CurrentDoor = null;
+            InRangeOfDoor = false;
+        }
+        if (other.GetComponent<NPC>())
+        {
+            CurrentNPC = null;
+            InRangeOfNPC = false;
+            _playerHUD.CloseChatBox();
         }
     }
     #endregion
@@ -443,27 +466,41 @@ public class PlayerController : MonoBehaviour
             heldCollider.enabled = true;
         }
 
-        if (_inRangeOfChest)
+        if (InRangeOfChest)
         {
-            _currentChest.OpenChest();
+            CurrentChest.OpenChest();
         }
 
-        if (_inRangeOfDoor)
+        if (InRangeOfDoor)
         {
-            if (_currentDoor.IsLocked && _playerInventory.Keys.Count > 0)
+            if (CurrentDoor.IsLocked && _playerInventory.Keys.Count > 0)
             {
-                _currentDoor.UnlockDoor();
-                _currentDoor.OpenDoor();
+                CurrentDoor.UnlockDoor();
+                CurrentDoor.OpenDoor();
                 _playerInventory.Keys.RemoveAt(0);
             }
-            else if (_currentDoor.IsBossDoor && _playerInventory.BossKeys.Count > 0)
+            else if (CurrentDoor.IsBossDoor && _playerInventory.BossKeys.Count > 0)
             {
-                _currentDoor.UnlockDoor();
-                _currentDoor.OpenDoor();
+                CurrentDoor.UnlockDoor();
+                CurrentDoor.OpenDoor();
                 _playerInventory.BossKeys.RemoveAt(0);
             }
         }
+
+        if(InRangeOfNPC && !_preventingDialogue)
+        {
+            _playerHUD.OpenChatBox();
+            CurrentNPC.ContinueDialogue();
+        }
         #endregion
+    }
+
+    public void ContinueCurrentNPCDialogue()
+    {
+        if (CurrentNPC != null)
+        {
+            CurrentNPC.ContinueDialogue();
+        }
     }
 
     public IEnumerator MoveToSpecificLocation(Vector3 targetPos, float speed, float grappleTime)
@@ -496,5 +533,16 @@ public class PlayerController : MonoBehaviour
     public bool IsGrappling()
     {
         return _grappling;
+    }
+
+    public void PreventDialogue()
+    {
+        _preventingDialogue = true;
+        Invoke("AllowDialogue", 3f);
+    }
+
+    public void AllowDialogue()
+    {
+        _preventingDialogue = false;
     }
 }

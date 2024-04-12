@@ -30,6 +30,8 @@ public class PlayerInputHandler : MonoBehaviour
                 characterInput.CharacterMovement.AimMouse.performed += i => playerController?.HandleAimMouseInput(i.ReadValue<Vector2>());
                 characterInput.CharacterMovement.AimController.performed += i => playerController?.HandleAimControllerInput(i.ReadValue<Vector2>());
 
+                characterInput.CharacterActions.Interact.started += i => playerController?.ContinueCurrentNPCDialogue();
+
                 characterInput.CharacterMovement.AimMouse.performed += i => weaponWheel?.HandleArrowInputMouse(i.ReadValue<Vector2>());
                 characterInput.CharacterMovement.AimController.performed += i => weaponWheel?.HandleArrowInputController(i.ReadValue<Vector2>());
 

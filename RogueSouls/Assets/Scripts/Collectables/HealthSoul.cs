@@ -25,7 +25,7 @@ public class HealthSoul : MonoBehaviour
             targetPlayer.IncreaseHealth(99);
             Destroy(this.gameObject);
 
-            _targetHUD.ShowSpecificMessage(_collectionMessage, _messageDuration);
+            _targetHUD.ShowSpecificMessageOnTextBox(_collectionMessage, _messageDuration);
         }
     }
 }
