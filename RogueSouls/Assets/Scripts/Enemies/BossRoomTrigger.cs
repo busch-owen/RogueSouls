@@ -10,6 +10,7 @@ public class BossRoomTrigger : MonoBehaviour
     [SerializeField]
     Door _doorToOpenUponBossDeath;
 
+    [SerializeField]
     Door _entranceDoor;
 
     private void Start()
@@ -28,19 +29,25 @@ public class BossRoomTrigger : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.GetComponent<PlayerController>())
+        if(_bossInRoom != null)
         {
-            _bossInRoom.gameObject.SetActive(true);
-            _bossInRoom.SetTarget(collision.transform);
-            _entranceDoor.CloseDoor();
+            if (collision.gameObject.GetComponent<PlayerController>())
+            {
+                _bossInRoom.gameObject.SetActive(true);
+                _bossInRoom.SetTarget(collision.transform);
+                _entranceDoor.CloseDoor();
+            }
         }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.gameObject.GetComponent<PlayerController>())
+        if(_bossInRoom != null)
         {
-            _bossInRoom.SetTarget(null);
+            if (collision.gameObject.GetComponent<PlayerController>())
+            {
+                _bossInRoom.SetTarget(null);
+            }
         }
     }
 }

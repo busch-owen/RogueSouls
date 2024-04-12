@@ -182,8 +182,11 @@ public class RangedWeapon : MonoBehaviour
                     bullet.transform.position = firePoint.transform.position;
                     bullet.transform.rotation = firePoint.transform.rotation;
                     Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
-                    rb.velocity = Vector2.zero;
-                    rb?.AddForce(firePoint.right * bulletForce, ForceMode2D.Impulse);//impulse force represents impact 
+                    if(rb != null)
+                    {
+                        rb.velocity = Vector2.zero;
+                        rb?.AddForce(firePoint.right * bulletForce, ForceMode2D.Impulse);//impulse force represents impact 
+                    }
                     if (bullet.GetComponent<TrailRenderer>())
                         bullet.GetComponent<TrailRenderer>().enabled = true;
                 }
