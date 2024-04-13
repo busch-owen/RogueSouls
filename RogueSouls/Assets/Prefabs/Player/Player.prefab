@@ -11541,7 +11541,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 815933726136487856}
-  - component: {fileID: 4468860556268284256}
+  - component: {fileID: 868360883120586162}
   m_Layer: 0
   m_Name: '[AudioHandler]'
   m_TagString: Untagged
@@ -11564,7 +11564,7 @@ Transform:
   m_Father: {fileID: 6558368112630337714}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4468860556268284256
+--- !u!114 &868360883120586162
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

@@ -44,7 +44,7 @@ public class PlayerInputHandler : MonoBehaviour
             }
             
             characterInput.CharacterActions.PauseMenu.started += i => uiHandler?.TogglePauseMenu();
-            characterInput.CharacterActions.PauseMenu.started += i => hud?.CloseTextBox();
+            characterInput.CharacterActions.StopInteract.started += i => hud?.CloseTextBox();
             characterInput.CharacterActions.SlotBinding.performed += i => inventoryMenu?.RequestBindSlot(i.ReadValue<Vector2>());
         }
 

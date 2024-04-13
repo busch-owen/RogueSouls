@@ -5,16 +5,19 @@ using UnityEngine.Events;
 
 public class InteractableObject : MonoBehaviour
 {
-    [SerializeField]
-    bool isTriggerObject;
+    [field: SerializeField]
+    public bool isTriggerObject { get; protected set; }
 
-    [SerializeField]
-    Door _targetDoor;
+    [field: SerializeField]
+    public bool IsTriggered { get; protected set; }
 
-    [SerializeField]
-    Sprite _onSprite, _offSprite;
+    [field: SerializeField]
+    public Door _targetDoor { get; protected set; }
 
-    SpriteRenderer _renderer;
+    [field: SerializeField]
+    public Sprite _onSprite, _offSprite;
+
+   public SpriteRenderer _renderer { get; protected set; }
 
     private void Start()
     {
@@ -22,7 +25,7 @@ public class InteractableObject : MonoBehaviour
         _renderer.sprite = _offSprite;
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)//pressure plate
     {
         if(collision.gameObject.GetComponent<Enemy>() || collision.gameObject.GetComponent<EnemyBullet>())
         {
@@ -33,24 +36,27 @@ public class InteractableObject : MonoBehaviour
             if (!_targetDoor.IsLocked)
             {
                 _targetDoor.OpenDoor();
+                IsTriggered = true;
                 _renderer.sprite = _onSprite;
             }
 
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    public virtual void OnCollisionEnter2D(Collision2D collision)//switch
     {
         if (collision.gameObject.GetComponent<Bullet>() && isTriggerObject)
         {
             if (!_targetDoor.IsOpen)
             {
                 _targetDoor.OpenDoor();
+                IsTriggered = true;
                 _renderer.sprite = _onSprite;
             }
             else
             {
                 _targetDoor.CloseDoor();
+                IsTriggered = false;
                 _renderer.sprite = _offSprite;
             }
         }
@@ -65,6 +71,7 @@ public class InteractableObject : MonoBehaviour
         if(!isTriggerObject && !collision.gameObject.GetComponent<Bullet>())
         {
             _targetDoor.CloseDoor();
+            IsTriggered = false;
             _renderer.sprite = _offSprite;
         }
     }
