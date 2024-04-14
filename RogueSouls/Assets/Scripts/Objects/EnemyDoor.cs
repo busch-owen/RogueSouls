@@ -4,21 +4,24 @@ using UnityEngine;
 
 public class EnemyDoor : Door
 {
-    public override void UnlockDoor()
+    [SerializeField]
+    public List<Enemy> enemies;
+    public bool killedAll = false;
+    
+    private void FixedUpdate()
     {
-        base.UnlockDoor();
+
     }
 
-    public override void OpenDoor()
+    public void NotifyEnemyDied(Enemy enemy)
     {
-        base.OpenDoor();
+        // Remove the dead enemy from the list
+        enemies.Remove(enemy);
+
+        // If all enemies are dead, open the door
+        if (enemies.Count == 0)
+        {
+            OpenDoor();
+        }
     }
-
-    public override void CloseDoor()
-    {
-        base.CloseDoor();
-    }
-
-
-
 }
