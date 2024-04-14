@@ -1,3 +1,4 @@
+using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -28,10 +29,11 @@ public class EntityStats : MonoBehaviour
     protected GameManager _gameManager;
 
     Heart heart;
+    Transform _respawnPoint;
 
     #endregion
 
-    public virtual void Awake()
+    protected virtual void Awake()
     {
         _heartDisplayHandler = GetComponentInChildren<HeartDisplayHandler>();
         _gameManager = FindObjectOfType<GameManager>();
@@ -68,10 +70,6 @@ public class EntityStats : MonoBehaviour
 
     public virtual void IncrementHealth(int incrementAmount)
     {
-        if (Health <= 0)
-        {
-            return;
-        }
         Health += incrementAmount;
         Health = Mathf.Clamp (Health, 0 , _maxHealth);
         if (_heartDisplayHandler != null)
@@ -85,5 +83,16 @@ public class EntityStats : MonoBehaviour
     {
         return Health == _maxHealth;
     }
+
+    public void Respawn()
+    {
+        transform.position = _respawnPoint.position;
+        IncrementHealth(999999);
+    }
     #endregion
+
+    public void ChangeRespawnPoint(Transform newPoint)
+    {
+        _respawnPoint = newPoint;
+    }
 }
