@@ -10,10 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 5864565272681678594}
   - component: {fileID: 5864565272681678595}
-  - component: {fileID: 3584072599056651879}
-  - component: {fileID: -6103846206065315656}
+  - component: {fileID: 5722593078692161873}
+  - component: {fileID: -6825209861444026499}
   m_Layer: 0
-  m_Name: TargetDoor
+  m_Name: EnemyDoor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -61,7 +61,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2, y: 1}
   m_EdgeRadius: 0
---- !u!114 &3584072599056651879
+--- !u!114 &5722593078692161873
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -70,19 +70,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 5864565272681678596}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8418f787b1746184da673f07593d9c50, type: 3}
+  m_Script: {fileID: 11500000, guid: 03c2634b67170e747bc1032a3727e6ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   <IsLocked>k__BackingField: 0
   <IsBossDoor>k__BackingField: 0
   _unlockedSprite: {fileID: 1764806380, guid: 6662024cfeada224c91b67727658692e, type: 3}
   _lockedSprite: {fileID: 571667588, guid: 6662024cfeada224c91b67727658692e, type: 3}
-  targetsToHit:
+  enemies:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  secondsToClose: 5
---- !u!114 &-6103846206065315656
+--- !u!114 &-6825209861444026499
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -169,7 +168,7 @@ SpriteRenderer:
   m_SortingLayer: 6
   m_SortingOrder: 0
   m_Sprite: {fileID: 1764806380, guid: 6662024cfeada224c91b67727658692e, type: 3}
-  m_Color: {r: 0, g: 0.7418866, b: 0.9433962, a: 1}
+  m_Color: {r: 0.9433962, g: 0.017576277, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

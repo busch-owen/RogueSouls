@@ -19,6 +19,8 @@ public class Enemy : EntityStats
     float _rotateSpeed;
     float _enemyWeaponRotationAngle;
     bool targetInRange;
+    [SerializeField]
+    EnemyDoor enemyDoor;
 
     protected GameObject enemySprite;
 #endregion
@@ -37,6 +39,15 @@ public class Enemy : EntityStats
         
         target = FindObjectOfType<PlayerController>().transform;
        
+    }
+
+    public override void TakeDamage(int damage)
+    {
+        base.TakeDamage(damage);
+        if ( enemyDoor!= null && Health <= 0)
+        {
+            enemyDoor.NotifyEnemyDied(this);
+        }
     }
 #endregion
     #region Update
