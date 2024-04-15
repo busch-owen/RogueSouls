@@ -7,26 +7,24 @@ public class EnemyBullet : Bullet
 {
     // Start is called before the first frame update
     public override void OnCollisionEnter2D(Collision2D other)
-    {
-
-        if (other.gameObject.GetComponent<PlayerStats>())
+    {   
+        if(other.gameObject.CompareTag("Player"))
         {
             PlayerStats enemyToHit = other.gameObject.GetComponent<PlayerStats>();
             enemyToHit.TakeDamage(bulletDamage);
-            if(hitEffect != null)
-            {
-                PoolObject tempEffect = PoolManager.Instance.Spawn(hitEffect.name);
-                tempEffect.transform.position = transform.position;
-                tempEffect.GetComponent<ParticleSystem>().Play();
-            }
-            this.OnDeSpawn();
-        }
-        else if (other.gameObject.tag == "Player")
-        {
-            
+
             if (bloodHitEffect != null)
             {
                 PoolObject tempEffect = PoolManager.Instance.Spawn(bloodHitEffect.name);
+                tempEffect.transform.position = transform.position;
+                tempEffect.GetComponent<ParticleSystem>().Play();
+            }
+        }
+        else
+        {
+            if (hitEffect != null)
+            {
+                PoolObject tempEffect = PoolManager.Instance.Spawn(hitEffect.name);
                 tempEffect.transform.position = transform.position;
                 tempEffect.GetComponent<ParticleSystem>().Play();
             }

@@ -12,6 +12,9 @@ public class HealthSoul : MonoBehaviour
     [SerializeField]
     float _messageDuration;
 
+    [SerializeField]
+    bool _isMajorSoul;
+
     private void OnEnable()
     {
         _targetHUD = FindObjectOfType<HUD>();
@@ -23,6 +26,14 @@ public class HealthSoul : MonoBehaviour
         {
             PlayerStats targetPlayer = other.GetComponent<PlayerStats>();
             targetPlayer.IncreaseHealth(99);
+            if(_isMajorSoul)
+            {
+                targetPlayer.IncreaseMajorSoulCount();
+            }
+            else
+            {
+                targetPlayer.IncreaseMinorSoulCount();
+            }
             Destroy(this.gameObject);
 
             _targetHUD.ShowSpecificMessageOnTextBox(_collectionMessage, _messageDuration);

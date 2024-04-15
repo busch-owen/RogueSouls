@@ -88,6 +88,12 @@ public class MinionSlime : EnemyBullet
 
     public override void OnCollisionEnter2D(Collision2D collision)
     {
+        if(collision.gameObject.GetComponent<PlayerStats>())
+        {
+            PlayerStats player = collision.gameObject.GetComponent<PlayerStats>();
+            player.TakeDamage(bulletDamage);
+        }
+
         Destroy(_rb);
         _agent.enabled = true;
         transform.rotation = Quaternion.Euler(0, 0, 0);

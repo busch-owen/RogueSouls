@@ -1,3 +1,4 @@
+using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,31 +15,46 @@ public class PlayerStats : EntityStats
     [SerializeField]
 
     protected float _xpValue;
+
+    CinemachineConfiner2D _cameraConfiner;
+
+    PolygonCollider2D _newCameraBounds;
+
+    public int MajorSoulsCollected { get; private set; }
+    public int MinorSoulsCollected { get; private set; }
+
+
     #endregion
-    #region Level
-    public void IncrementPlayerLevel(int incrementAmount)
+    protected override void Awake()
     {
-        _playerLevelProgression += incrementAmount;
-
-        if (_playerLevelProgression >= _amountUntilNextLevel)
-        {
-            _playerLevel++;
-            _playerLevelProgression -= _amountUntilNextLevel;
-
-            _amountUntilNextLevel *= _levelProgressionMultiplier;
-        }
+        base.Awake();
+        _cameraConfiner = FindObjectOfType<CinemachineConfiner2D>();
     }
-    #endregion
+
     #region Damage
     public override void TakeDamage(int damage)
     {
         IncrementHealth(-damage);
         if (Health <= 0)
         {
-            _gameManager.Restart();
+            Respawn();
+            _cameraConfiner.m_BoundingShape2D = _newCameraBounds;
         }
-  
     }
     #endregion
 
+    public void SetRespawnCameraBounds(PolygonCollider2D newBounds)
+    {
+        _newCameraBounds = newBounds;
+    }
+
+    public void IncreaseMajorSoulCount()
+    {
+        MajorSoulsCollected++;
+    }
+
+    public void IncreaseMinorSoulCount()
+    {
+        MinorSoulsCollected++;
+    }
 }
