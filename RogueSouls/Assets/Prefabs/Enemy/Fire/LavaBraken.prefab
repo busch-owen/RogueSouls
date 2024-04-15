@@ -358,6 +358,7 @@ MonoBehaviour:
   enemyGun: {fileID: 8784116570523874261}
   gunLocation: {fileID: 5872252957132993061}
   _rotateSpeed: 150
+  enemyDoor: {fileID: 0}
   detectionRadius: 0
   _barFillImage: {fileID: 5473316236482919395}
 --- !u!195 &7529075971869702688
@@ -642,6 +643,10 @@ PrefabInstance:
       propertyPath: bulletForce
       value: 20
       objectReference: {fileID: 0}
+    - target: {fileID: 6543636311860320368, guid: 5bc79142193f91d418f9b8de3830f233, type: 3}
+      propertyPath: bulletPrefab
+      value: 
+      objectReference: {fileID: 5506845646475612572, guid: 7d6f2933e323f454ca69730c551a415d, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5bc79142193f91d418f9b8de3830f233, type: 3}
 --- !u!4 &8472887849303274747 stripped
