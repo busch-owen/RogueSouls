@@ -12,6 +12,9 @@ public class Door : MonoBehaviour
 
     public bool IsOpen { get; protected set; }
 
+    [SerializeField]
+    bool _startOpen;
+
     public GameObject _doorObject { get; protected set; }
 
     [SerializeField]
@@ -36,6 +39,11 @@ public class Door : MonoBehaviour
         else
         {
             _doorRenderer.sprite = _unlockedSprite;
+        }
+
+        if(_startOpen)
+        {
+            OpenDoor();
         }
         
     }

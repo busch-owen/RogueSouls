@@ -16,7 +16,6 @@ public class TargetDoor : Door
         if (targetToCheck.IsTriggered)
         {
             targetsHit++;
-            Debug.Log(targetsHit);
         }
         if (targetsHit == targetsToHit.Length)
         {
