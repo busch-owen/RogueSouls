@@ -116,7 +116,7 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
                     ""id"": ""41a553ab-6bcb-4821-8664-6a2d21c29209"",
                     ""path"": ""2DVector(mode=2)"",
                     ""interactions"": """",
-                    ""processors"": """",
+                    ""processors"": ""StickDeadzone(min=0.25,max=0.925)"",
                     ""groups"": """",
                     ""action"": ""Movement"",
                     ""isComposite"": true,
@@ -557,7 +557,7 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""db427c72-612d-457c-9340-7aa9488d6e6a"",
-                    ""path"": ""<Keyboard>/leftShift"",
+                    ""path"": ""<Keyboard>/tab"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -568,7 +568,7 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""9c8f176d-715c-4b76-8db8-8034759ac828"",
-                    ""path"": ""<Gamepad>/leftTrigger"",
+                    ""path"": ""<Gamepad>/leftShoulder"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
