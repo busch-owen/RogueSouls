@@ -125,7 +125,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d20fc4100d746546811a698cab7c291, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <ItemName>k__BackingField: Pistol
+  <ItemName>k__BackingField: your family's heirloom
 --- !u!1 &8647750539015994099
 GameObject:
   m_ObjectHideFlags: 0

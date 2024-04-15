@@ -20,6 +20,10 @@ public class PlayerStats : EntityStats
 
     PolygonCollider2D _newCameraBounds;
 
+    public int MajorSoulsCollected { get; private set; }
+    public int MinorSoulsCollected { get; private set; }
+
+
     #endregion
     protected override void Awake()
     {
@@ -42,5 +46,15 @@ public class PlayerStats : EntityStats
     public void SetRespawnCameraBounds(PolygonCollider2D newBounds)
     {
         _newCameraBounds = newBounds;
+    }
+
+    public void IncreaseMajorSoulCount()
+    {
+        MajorSoulsCollected++;
+    }
+
+    public void IncreaseMinorSoulCount()
+    {
+        MinorSoulsCollected++;
     }
 }
