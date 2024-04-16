@@ -27,6 +27,8 @@ public class PlayerStats : EntityStats
     [SerializeField]
     private Youdied youDied;
 
+    public bool PlayerIsDead { get; private set; }
+
     public int MajorSoulsCollected { get; private set; }
     public int MinorSoulsCollected { get; private set; }
 
@@ -47,9 +49,12 @@ public class PlayerStats : EntityStats
         StartHurtEffect();
         if (Health <= 0)
         {
-            youDied.StartCoroutine(youDied.FadeImage());
-            Respawn();
-            _cameraConfiner.m_BoundingShape2D = _newCameraBounds;
+            if(!PlayerIsDead)
+            {
+                PlayerIsDead = true;
+                youDied.StartCoroutine(youDied.FadeImage());
+                _cameraConfiner.m_BoundingShape2D = _newCameraBounds;
+            }            
         }
     }
     #endregion

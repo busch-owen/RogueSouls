@@ -11,12 +11,16 @@ public class Youdied : MonoBehaviour
     [SerializeField]
     private Image Image;
     private WaitForSeconds waitForSeconds;
-    private GameManager _gameManager;
+    private PlayerStats _playerStats;
+
+    CanvasGroup _canvasGroup;
+
     // Start is called before the first frame update
     void Start()
     {
-        Image.color = new Color(Image.color.r, Image.color.g, Image.color.b, 0);
-        _gameManager = FindObjectOfType<GameManager>();
+        _canvasGroup = GetComponent<CanvasGroup>();
+        _canvasGroup.alpha = 0.0f;
+        _playerStats = FindObjectOfType<PlayerStats>();
     }
 
     public void Died()
@@ -26,18 +30,21 @@ public class Youdied : MonoBehaviour
 
     public IEnumerator FadeImage()
     {
-        for (float i = 0; i <= 1; i += Time.deltaTime / fadeDuration)
+        for (float i = 0; i <= 1; i += Time.deltaTime / fadeDuration)//FadeIn
         {
-            Image.color = new Color(Image.color.r, Image.color.g, Image.color.b, i);
+            _canvasGroup.alpha = i;
             yield return null; // Wait for the next frame
         }
-        _gameManager.Restart();
-        for (float i = 1; i >= 0; i -= Time.deltaTime / fadeDuration)
+        _canvasGroup.alpha = 1.0f;
+        _playerStats.Respawn();
+        yield return new WaitForSeconds(fadeDuration * 2);
+        for (float i = 1; i >= 0; i -= Time.deltaTime / (fadeDuration / 2))//FadeOut
         {
-            Image.color = new Color(Image.color.r, Image.color.g, Image.color.b, i);
+            Debug.Log(i);
+            _canvasGroup.alpha = i;
             yield return null;
         }
-
+        _canvasGroup.alpha = 0.0f;
     }
     // Update is called once per frame
     void Update()

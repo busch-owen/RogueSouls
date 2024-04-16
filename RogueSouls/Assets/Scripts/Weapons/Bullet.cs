@@ -22,7 +22,8 @@ public class Bullet : PoolObject
 
     public virtual void OnEnable()
     {
-        //_trailRenderer = GetComponent<TrailRenderer>();
+        _trailRenderer = GetComponent<TrailRenderer>();
+        _trailRenderer.Clear();
         _controller = FindObjectOfType<PlayerController>();
     }
 
