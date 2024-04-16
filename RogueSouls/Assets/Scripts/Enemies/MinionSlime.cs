@@ -7,7 +7,7 @@ using UnityEngine.AI;
 public class MinionSlime : EnemyBullet
 {
     [SerializeField] Transform _target;
-    NavMeshAgent _agent;
+    public NavMeshAgent _agent { get; protected set; }
 
     Rigidbody2D _rb;
 
@@ -20,13 +20,13 @@ public class MinionSlime : EnemyBullet
     float _enemyWeaponRotationAngle;
 
     [SerializeField]
-    float _speed;
-    
+    public float _speed { get; protected set; }
+
     int _health;
     [SerializeField]
     int _maxHealth;
 
-    GameObject _spriteObject;
+    public GameObject _spriteObject { get; protected set; }
 
     public override void OnEnable()
     {
@@ -45,7 +45,7 @@ public class MinionSlime : EnemyBullet
         _spriteObject = GetComponentInChildren<SpriteRenderer>().gameObject;
     }
 
-    private void Update()
+    public virtual void Update()
     {
         if(_target != null)
         {

@@ -5,7 +5,7 @@ using UnityEngine;
 public class BossRoomTrigger : MonoBehaviour
 {
     [SerializeField]
-    KingSlime _bossInRoom;
+    Enemy _bossInRoom;
 
     [SerializeField]
     Door _doorToOpenUponBossDeath;
@@ -47,7 +47,11 @@ public class BossRoomTrigger : MonoBehaviour
             if (collision.gameObject.GetComponent<PlayerController>())
             {
                 _entranceDoor?.OpenDoor();
-                _bossInRoom.DespawnAllSlimesSpawned();
+                if(_bossInRoom.GetComponent<KingSlime>())
+                {
+                    _bossInRoom.GetComponent<KingSlime>().DespawnAllSlimesSpawned();
+                }
+                    
                 _bossInRoom.IncrementHealth(999999);
                 _bossInRoom.SetTarget(null);
                 _bossInRoom.gameObject.SetActive(false);
