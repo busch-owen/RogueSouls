@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UIHandler : MonoBehaviour
 {
@@ -39,9 +40,18 @@ public class UIHandler : MonoBehaviour
     [SerializeField]
     TMP_Text _smallKeyCount, _bossKeyCount;
 
+    [SerializeField]
+    Image _weaponPreviewImage;
+
+    [SerializeField]
+    Sprite _emptyHandSprite;
+
     PlayerStats _playerStats;
 
     Inventory _playerInventory;
+
+    [SerializeField]
+    Image[] _slotImages;
 
     public bool IsPaused {  get; private set; }
 
@@ -86,6 +96,11 @@ public class UIHandler : MonoBehaviour
             }
             else
             {
+                if (_targetWeapon == null)
+                {
+                    _weaponPreviewImage.sprite = _emptyHandSprite;
+                }
+
                 IsPaused = true;
                 _pauseMenu.SetActive(true);
                 _currentMenu = _inventoryMenu;
@@ -114,6 +129,20 @@ public class UIHandler : MonoBehaviour
         targetText.text = soulAmount.ToString();
     }
 
+    public void UpdateWeaponWheelSlots(int index, Sprite image)
+    {
+        if(image != null)
+        {
+            _slotImages[index].sprite = image;
+            _slotImages[index].SetNativeSize();
+        }
+        else
+        {
+            _slotImages[index].sprite = _emptyHandSprite;
+            _slotImages[index].SetNativeSize();
+        }
+    }
+
     public void OpenSpecificMenu(GameObject menuToOpen)
     {
         _currentMenu.SetActive(false);
@@ -124,6 +153,8 @@ public class UIHandler : MonoBehaviour
     public void AssignTargetWeapon(RangedWeapon weapon)
     {
         _targetWeapon = weapon;
+        _weaponPreviewImage.sprite = _targetWeapon.GetComponentInChildren<SpriteRenderer>().sprite;
+        _weaponPreviewImage.SetNativeSize();
     }
 
     public void EnableReloadingText(float reloadTime)
