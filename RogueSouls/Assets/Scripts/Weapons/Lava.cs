@@ -11,7 +11,9 @@ public class Lava : MonoBehaviour
     [SerializeField]
     int damage;
     PlayerController playerController;
-    // Start is called before the first frame update
+    [SerializeField]
+    float LavaDamageTick;
+   /* // Start is called before the first frame update
     void Start()
     {
 
@@ -21,7 +23,7 @@ public class Lava : MonoBehaviour
     void Update()
     {
         
-    }
+    }*/
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -32,8 +34,8 @@ public class Lava : MonoBehaviour
             playerController = other.GetComponent<PlayerController>();
             
             stats = other.GetComponent<EntityStats>();
-            InvokeRepeating("LavaDamage", 0f, 1f);
-            Debug.Log(damage);
+            InvokeRepeating("LavaDamage", 0f, LavaDamageTick);
+            
             
 
         }

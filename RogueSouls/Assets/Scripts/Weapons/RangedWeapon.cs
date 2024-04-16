@@ -27,9 +27,9 @@ public class RangedWeapon : MonoBehaviour
     [SerializeField] 
 	public Transform firePoint;
 	[SerializeField]
-	Bullet bulletPrefab;
+	public Bullet bulletPrefab;
 	[SerializeField]
-	float bulletForce = 0.15f;
+	protected float bulletForce = 0.15f;
     [SerializeField]
     float minSpread;
     [SerializeField]
@@ -60,12 +60,12 @@ public class RangedWeapon : MonoBehaviour
 
     public int CurrentAmmo { get; private set; }
     private bool isReloading = false;
-    private float timeToNextFire = 0f;
-    #endregion
+    protected float timeToNextFire = 0f;
+#endregion
 
-    #region first load
+#region first load
 
-    public virtual void Awake()
+public virtual void Awake()
     {
         _uiHandler = FindObjectOfType<UIHandler>();
     }

@@ -7,12 +7,18 @@ public class LavaBraken : Enemy
 {
     [SerializeField]
     Image _barFillImage;
+
     public override void Update()
     {
         if (target != null)
         {
             enemyGun.Shoot();
             RangedAttack();
+            
+
+
+
+
         }
 
         bool flipSprite = agent.velocity.x < 0;
@@ -29,6 +35,8 @@ public class LavaBraken : Enemy
 
     public override void FixedUpdate()
     {
+
+
         if (target != null && agent.isActiveAndEnabled)
         {
             agent.SetDestination(target.position);

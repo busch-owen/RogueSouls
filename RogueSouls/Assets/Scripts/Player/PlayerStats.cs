@@ -24,6 +24,8 @@ public class PlayerStats : EntityStats
     Vignette vignette;
 
     ScreenShakeEffect _hurtScreenShake;
+    [SerializeField]
+    private Youdied youDied;
 
     public int MajorSoulsCollected { get; private set; }
     public int MinorSoulsCollected { get; private set; }
@@ -45,6 +47,7 @@ public class PlayerStats : EntityStats
         StartHurtEffect();
         if (Health <= 0)
         {
+            youDied.StartCoroutine(youDied.FadeImage());
             Respawn();
             _cameraConfiner.m_BoundingShape2D = _newCameraBounds;
         }
