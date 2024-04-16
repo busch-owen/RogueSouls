@@ -16,7 +16,7 @@ public class MinionSlime : EnemyBullet
     float _rotateSpeed;
     float _enemyWeaponRotationAngle;
 
-    [SerializeField]
+    [field: SerializeField]
     public float _speed { get; protected set; }
 
     int _health;

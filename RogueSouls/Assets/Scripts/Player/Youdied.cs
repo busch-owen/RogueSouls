@@ -19,16 +19,16 @@ public class Youdied : MonoBehaviour
     void Start()
     {
         _canvasGroup = GetComponent<CanvasGroup>();
-        _canvasGroup.alpha = 0.0f;
         _playerStats = FindObjectOfType<PlayerStats>();
     }
 
     public void Died()
     {
         StartCoroutine(FadeImage());
+        _canvasGroup.alpha = 0;
     }
 
-    public IEnumerator FadeImage()
+    private IEnumerator FadeImage()
     {
         for (float i = 0; i <= 1; i += Time.deltaTime / fadeDuration)//FadeIn
         {
@@ -40,7 +40,6 @@ public class Youdied : MonoBehaviour
         yield return new WaitForSeconds(fadeDuration * 2);
         for (float i = 1; i >= 0; i -= Time.deltaTime / (fadeDuration / 2))//FadeOut
         {
-            Debug.Log(i);
             _canvasGroup.alpha = i;
             yield return null;
         }

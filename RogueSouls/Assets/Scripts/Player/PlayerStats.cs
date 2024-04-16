@@ -52,7 +52,7 @@ public class PlayerStats : EntityStats
             if(!PlayerIsDead)
             {
                 PlayerIsDead = true;
-                youDied.StartCoroutine(youDied.FadeImage());
+                youDied.Died();
                 _cameraConfiner.m_BoundingShape2D = _newCameraBounds;
             }            
         }

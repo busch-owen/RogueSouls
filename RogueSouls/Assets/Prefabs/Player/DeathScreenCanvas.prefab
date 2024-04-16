@@ -90,7 +90,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e3a9a571cb088f4b89219ea4c3e9126, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fadeDuration: 0
+  fadeDuration: 1
   Image: {fileID: 3865549256228000715}
 --- !u!225 &3865549256227999797
 CanvasGroup:
@@ -100,9 +100,9 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3865549256228000718}
   m_Enabled: 1
-  m_Alpha: 1
-  m_Interactable: 1
-  m_BlocksRaycasts: 1
+  m_Alpha: 0
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
 --- !u!1 &3865549256286066356
 GameObject:
