@@ -51,6 +51,10 @@ public class HUD : MonoBehaviour
         {
             OpenPromptText("Press [F] or [Interact] to unlock door.");
         }
+        else if(_player.CarryableObjectInRange)
+        {
+            OpenPromptText("Press [F] or [Interact] to pick up object.");
+        }
         else
         {
             ClosePromptText();

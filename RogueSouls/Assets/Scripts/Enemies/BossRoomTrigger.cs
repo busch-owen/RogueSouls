@@ -13,8 +13,11 @@ public class BossRoomTrigger : MonoBehaviour
     [SerializeField]
     Door _entranceDoor;
 
+    Vector3 _startPos;
+
     private void Start()
     {
+        _startPos = _bossInRoom.transform.position;
         _bossInRoom.gameObject.SetActive(false);
     }
 
@@ -34,6 +37,7 @@ public class BossRoomTrigger : MonoBehaviour
             if (collision.gameObject.GetComponent<PlayerController>())
             {
                 _bossInRoom.gameObject.SetActive(true);
+                _bossInRoom.transform.position = _startPos;
                 _bossInRoom.SetTarget(collision.transform);
                 _entranceDoor?.CloseDoor();
             }
@@ -52,7 +56,6 @@ public class BossRoomTrigger : MonoBehaviour
                     _bossInRoom.GetComponent<KingSlime>().DespawnAllSlimesSpawned();
                 }
                 _bossInRoom.IncrementHealth(999999);
-                _bossInRoom.SetTarget(null);
                 _bossInRoom.gameObject.SetActive(false);
             }
         }

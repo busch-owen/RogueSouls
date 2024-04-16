@@ -12,11 +12,16 @@ public class KingSlime : Enemy
     [SerializeField]
     TMP_Text _barHealthText;
 
-    MinionSlime[] _enemiesSpawned; 
+    MinionSlime[] _enemiesSpawned;
 
     protected override void Start()
     {
         base.Start();
+    }
+
+    private void OnEnable()
+    {
+        _barFillImage.fillAmount = (float)Health / (float)_maxHealth;
         _barHealthText.text = Health + "/" + _maxHealth;
     }
 

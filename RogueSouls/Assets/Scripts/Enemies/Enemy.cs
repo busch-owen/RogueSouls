@@ -6,6 +6,7 @@ using UnityEngine.AI;
 public class Enemy : EntityStats
 {
     #region Global Variables
+
     [SerializeField] protected Transform target;
     protected NavMeshAgent agent;
     [SerializeField]
@@ -23,10 +24,17 @@ public class Enemy : EntityStats
     EnemyDoor enemyDoor;
 
     protected GameObject enemySprite;
-#endregion
+
+    [SerializeField]
+    ParticleSystem _deathEffect;
+
     [SerializeField]
     float detectionRadius;
-    
+
+    #endregion
+
+
+
 
     #region Start   
     protected virtual void Start()
@@ -44,9 +52,15 @@ public class Enemy : EntityStats
     public override void TakeDamage(int damage)
     {
         base.TakeDamage(damage);
-        if ( enemyDoor!= null && Health <= 0)
+
+        if (enemyDoor != null && Health <= 0)
         {
             enemyDoor.NotifyEnemyDied(this);
+        }
+        
+        if(_deathEffect && Health <= 0)
+        {
+            Instantiate(_deathEffect, transform.position, Quaternion.identity);
         }
     }
 #endregion
@@ -123,6 +137,7 @@ public class Enemy : EntityStats
     public void StunEnemy()
     {
         agent.enabled = false;
+        Invoke("BreakStun", 4f);
     }
 
     public void BreakStun()

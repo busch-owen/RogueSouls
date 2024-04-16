@@ -13,7 +13,7 @@ public class EnemyBullet : Bullet
             PlayerStats enemyToHit = other.gameObject.GetComponent<PlayerStats>();
             enemyToHit.TakeDamage(bulletDamage);
 
-            if (bloodHitEffect != null)
+            if (bloodHitEffect)
             {
                 PoolObject tempEffect = PoolManager.Instance.Spawn(bloodHitEffect.name);
                 tempEffect.transform.position = transform.position;
@@ -22,7 +22,7 @@ public class EnemyBullet : Bullet
         }
         else
         {
-            if (hitEffect != null)
+            if (hitEffect)
             {
                 PoolObject tempEffect = PoolManager.Instance.Spawn(hitEffect.name);
                 tempEffect.transform.position = transform.position;
