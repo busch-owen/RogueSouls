@@ -169,7 +169,7 @@ MonoBehaviour:
   gunLocation: {fileID: 8886435309427360967}
   _rotateSpeed: 100
   enemyDoor: {fileID: 0}
-  detectionRadius: 8
+  detectionRadius: 10
 --- !u!195 &4778386910285843650
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -282,6 +282,18 @@ PrefabInstance:
       propertyPath: bulletPrefab
       value: 
       objectReference: {fileID: 1529760520838631460, guid: 688332df93319fb40809db0f1e70e71a, type: 3}
+    - target: {fileID: 135372700821571553, guid: 4cd34c3050b0164469cd0d4c1ebfc4db, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 135372700821571553, guid: 4cd34c3050b0164469cd0d4c1ebfc4db, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.g
+      value: 0.015686275
+      objectReference: {fileID: 0}
+    - target: {fileID: 135372700821571553, guid: 4cd34c3050b0164469cd0d4c1ebfc4db, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.r
+      value: 0.5372549
+      objectReference: {fileID: 0}
     - target: {fileID: 3873842773402911558, guid: 4cd34c3050b0164469cd0d4c1ebfc4db, type: 3}
       propertyPath: m_Name
       value: SlimeShooter

@@ -35,7 +35,7 @@ public class Lava : MonoBehaviour
             
             stats = other.GetComponent<EntityStats>();
             InvokeRepeating("LavaDamage", 0f, LavaDamageTick);
-            Debug.Log(damage);
+            
             
 
         }

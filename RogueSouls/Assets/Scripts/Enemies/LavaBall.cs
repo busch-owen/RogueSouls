@@ -9,7 +9,7 @@ public class LavaBall : MinionSlime
     float detectionRadius;
     [SerializeField] protected Transform target;
     bool targetInRange;
-    [SerializeField] protected float Speed;
+    [SerializeField] protected float BallSpeed;
 
     public override void OnCollisionEnter2D(Collision2D coll)
     {
@@ -22,12 +22,13 @@ public class LavaBall : MinionSlime
         
         base.OnEnable();
         _agent.enabled = true;
+        _agent.speed = BallSpeed;
     }
 
     private void Start()
     {
         target = FindObjectOfType<PlayerController>().transform;
-        _agent.speed = Speed;
+        _agent.speed = BallSpeed;
     }
 
     
