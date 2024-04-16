@@ -120,10 +120,12 @@ public class WeaponWheel : MonoBehaviour
             if (_itemsEquippedToWeaponWheel[i] != null)
             {
                 _itemSlots[i].GetComponent<SpriteRenderer>().sprite = _itemsEquippedToWeaponWheel[i].GetComponentInChildren<SpriteRenderer>().sprite;
+                _uiHandler.UpdateWeaponWheelSlots(i, _itemsEquippedToWeaponWheel[i].GetComponentInChildren<SpriteRenderer>().sprite);
             }
             else
             {
                 _itemSlots[i].GetComponent<SpriteRenderer>().sprite = null;
+                _uiHandler.UpdateWeaponWheelSlots(i, null);
             }
         }
     }
@@ -226,6 +228,7 @@ public class WeaponWheel : MonoBehaviour
             _itemsEquippedToWeaponWheel[index].SetActive(true);
             _weaponOffsetHandle.SetCurrentWeapon();
             _playerInputHandler.UpdateRangedWeaponReference();
+            FillItemSlots();
             _uiHandler.AssignTargetWeapon(_itemsEquippedToWeaponWheel[index].GetComponent<RangedWeapon>());
         }
     }
