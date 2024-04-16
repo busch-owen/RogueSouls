@@ -14,6 +14,12 @@ public class UIHandler : MonoBehaviour
     [SerializeField]
     GameObject _heartsDisplay;
 
+    [SerializeField]
+    GameObject _playerStatsPanel;
+
+    [SerializeField]
+    Transform _heartDisplayHandlePosition;
+
     GameObject _currentMenu;
 
     [SerializeField]
@@ -27,15 +33,22 @@ public class UIHandler : MonoBehaviour
     [SerializeField]
     GameObject _reloadingText;
 
+    [SerializeField]
+    TMP_Text _minorSoulCount, _majorSoulCount;
+
+    [SerializeField]
+    TMP_Text _smallKeyCount, _bossKeyCount;
+
+    PlayerStats _playerStats;
+
+    Inventory _playerInventory;
+
     public bool IsPaused {  get; private set; }
 
     private void Awake()
     {
-        /*
-        _pauseMenu.SetActive(false);
-        _inventoryMenu.SetActive(false);
-        _gameMenu.SetActive(false);
-        */
+        _playerStats = GetComponentInParent<PlayerStats>();
+        _playerInventory = FindObjectOfType<Inventory>();
     }
 
     private void Start()
@@ -68,7 +81,7 @@ public class UIHandler : MonoBehaviour
             {
                 IsPaused = false;
                 _pauseMenu.SetActive(false);
-                ChangeHealthDisplayState(true);
+                ChangeHealthDisplayParent(transform.parent);
                 Time.timeScale = 1.0f;
             }
             else
@@ -77,16 +90,28 @@ public class UIHandler : MonoBehaviour
                 _pauseMenu.SetActive(true);
                 _currentMenu = _inventoryMenu;
                 OpenSpecificMenu(_currentMenu);
-                ChangeHealthDisplayState(false);
+                UpdateItemsCollectedText(_majorSoulCount, _playerStats.MajorSoulsCollected);
+                UpdateItemsCollectedText(_minorSoulCount, _playerStats.MinorSoulsCollected);
+                UpdateItemsCollectedText(_smallKeyCount, _playerInventory.Keys.Count);
+                UpdateItemsCollectedText(_bossKeyCount, _playerInventory.BossKeys.Count);
+                ChangeHealthDisplayParent(_heartDisplayHandlePosition);
                 Time.timeScale = 0.0f;
             }
         }
         
     }
 
-    private void ChangeHealthDisplayState(bool desiredState)
+    private void ChangeHealthDisplayParent(Transform desiredParent)
     {
-        _heartsDisplay.SetActive(desiredState);
+        _heartsDisplay.transform.SetParent(desiredParent);
+        RectTransform heartDisplayTransform = _heartsDisplay.GetComponent<RectTransform>();
+        heartDisplayTransform.anchoredPosition = Vector3.zero;
+        //heartDisplayTransform.anchorMin = new Vector2(0, -0);
+    }
+
+    void UpdateItemsCollectedText(TMP_Text targetText, int soulAmount)
+    {
+        targetText.text = soulAmount.ToString();
     }
 
     public void OpenSpecificMenu(GameObject menuToOpen)

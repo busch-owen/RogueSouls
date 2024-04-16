@@ -51,7 +51,6 @@ public class BossRoomTrigger : MonoBehaviour
                 {
                     _bossInRoom.GetComponent<KingSlime>().DespawnAllSlimesSpawned();
                 }
-                    
                 _bossInRoom.IncrementHealth(999999);
                 _bossInRoom.SetTarget(null);
                 _bossInRoom.gameObject.SetActive(false);

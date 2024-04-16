@@ -50,7 +50,7 @@ public class CarryableObject : MonoBehaviour
 
     void SpawnHeartPickup()
     {
-        int chanceToDropHeart = Random.Range(0, 4);
+        int chanceToDropHeart = Random.Range(0, 3);
         if (chanceToDropHeart == 1)
         {
             PoolObject newPickup = PoolManager.Instance.Spawn("HealthPickup");

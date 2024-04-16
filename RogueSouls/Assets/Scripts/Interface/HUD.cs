@@ -60,7 +60,7 @@ public class HUD : MonoBehaviour
     public void ShowSpecificMessageOnTextBox(string message, float messageLength)
     {
         _textBox.SetActive(true);
-        _textBoxText.text = message + "\n\nPress [ESC] or [Start] to close.";
+        _textBoxText.text = message + "\n\nPress [Tab] or [Left Shoulder Button] to close.";
         Invoke("CloseTextBox", messageLength);
     }
 
