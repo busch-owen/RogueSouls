@@ -51,6 +51,10 @@ public class HUD : MonoBehaviour
         {
             OpenPromptText("Press [F] or [Interact] to unlock door.");
         }
+        else if(_player.CarryableObjectInRange)
+        {
+            OpenPromptText("Press [F] or [Interact] to pick up object.");
+        }
         else
         {
             ClosePromptText();
@@ -60,7 +64,7 @@ public class HUD : MonoBehaviour
     public void ShowSpecificMessageOnTextBox(string message, float messageLength)
     {
         _textBox.SetActive(true);
-        _textBoxText.text = message + "\n\nPress [ESC] or [Start] to close.";
+        _textBoxText.text = message + "\n\nPress [Tab] or [Left Shoulder Button] to close.";
         Invoke("CloseTextBox", messageLength);
     }
 

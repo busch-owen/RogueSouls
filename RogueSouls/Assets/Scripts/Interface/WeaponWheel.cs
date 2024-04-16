@@ -80,7 +80,7 @@ public class WeaponWheel : MonoBehaviour
 
     public void HandleArrowInputMouse(Vector2 aimPosition)
     {
-        if (_camera != null)
+        if (_camera)
         {
             aimPosition = _camera.ScreenToWorldPoint(aimPosition) - _camera.transform.position;
             _aimPosition = aimPosition;
@@ -93,7 +93,7 @@ public class WeaponWheel : MonoBehaviour
 
     public void OpenWeaponWheel()
     {
-        if(_weaponWheelObject != null)
+        if(_weaponWheelObject)
         {
             _weaponWheelObject.SetActive(true);
             FillItemSlots();
@@ -103,7 +103,7 @@ public class WeaponWheel : MonoBehaviour
 
     public void CloseWeaponWheel()
     {
-        if (_weaponWheelObject != null)
+        if (_weaponWheelObject)
         {
             _weaponWheelObject.SetActive(false);
             PutAwayCurrentWeapon();
@@ -117,13 +117,15 @@ public class WeaponWheel : MonoBehaviour
     {
         for (int i = 0; i < _itemSlots.Length; i++)
         {
-            if (_itemsEquippedToWeaponWheel[i] != null)
+            if (_itemsEquippedToWeaponWheel[i])
             {
                 _itemSlots[i].GetComponent<SpriteRenderer>().sprite = _itemsEquippedToWeaponWheel[i].GetComponentInChildren<SpriteRenderer>().sprite;
+                _uiHandler.UpdateWeaponWheelSlots(i, _itemsEquippedToWeaponWheel[i].GetComponentInChildren<SpriteRenderer>().sprite);
             }
             else
             {
                 _itemSlots[i].GetComponent<SpriteRenderer>().sprite = null;
+                _uiHandler.UpdateWeaponWheelSlots(i, null);
             }
         }
     }
@@ -158,7 +160,7 @@ public class WeaponWheel : MonoBehaviour
     {
         foreach (GameObject item in _itemsSpawnedOntoPlayer)
         {
-            if(item != null)
+            if(item)
             {
                 item.SetActive(false);
             }
@@ -179,15 +181,15 @@ public class WeaponWheel : MonoBehaviour
         GrabWeaponsFromInventory();
         for (int i = 0; i < _itemsInInventory.Length; i++)
         {
-            if (_itemsInInventory[i] == null)
+            if (!_itemsInInventory[i])
             {
                 return;
             }
             string objectToCheck = _itemsInInventory[i].name;
-            if (GameObject.Find("Player/Sprite/WeaponHandle/" + (_itemsInInventory[i]?.name + "(Clone)")) == null)
+            if (!GameObject.Find("Player/Sprite/WeaponHandle/" + (_itemsInInventory[i]?.name + "(Clone)")))
             {
                 GameObject spawnedItem = Instantiate(_itemsInInventory[i], _weaponOffsetHandle.transform);
-                if (spawnedItem != null)
+                if (spawnedItem)
                 {
                     _itemsSpawnedOntoPlayer[i] = spawnedItem;
                 }
@@ -205,7 +207,7 @@ public class WeaponWheel : MonoBehaviour
         for (int i = 0; i < _itemsEquippedToWeaponWheel.Length; i++)
         {
             //This check is here to remove the item from it's previous slot, but because there are technically two on the wheel it removes both
-            if(_itemsEquippedToWeaponWheel[i] != null)
+            if(_itemsEquippedToWeaponWheel[i])
             {
                 if (_itemsEquippedToWeaponWheel[i].name == itemToCompare.name)
                 {
@@ -221,11 +223,12 @@ public class WeaponWheel : MonoBehaviour
 
     public void EquipWeapon(int index)
     {
-        if (_itemsEquippedToWeaponWheel[index] != null)
+        if (_itemsEquippedToWeaponWheel[index])
         {
             _itemsEquippedToWeaponWheel[index].SetActive(true);
             _weaponOffsetHandle.SetCurrentWeapon();
             _playerInputHandler.UpdateRangedWeaponReference();
+            FillItemSlots();
             _uiHandler.AssignTargetWeapon(_itemsEquippedToWeaponWheel[index].GetComponent<RangedWeapon>());
         }
     }

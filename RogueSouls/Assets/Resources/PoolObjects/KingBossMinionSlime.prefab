@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4778386909870762835}
   - component: {fileID: 4778386909870762834}
   - component: {fileID: 4778386909870762833}
-  m_Layer: 7
+  m_Layer: 22
   m_Name: Sprite
   m_TagString: MinionSlime
   m_Icon: {fileID: 0}
@@ -119,7 +119,7 @@ GameObject:
   - component: {fileID: 4778386910285843650}
   - component: {fileID: 2862198251103426269}
   - component: {fileID: 2808707135137429453}
-  m_Layer: 7
+  m_Layer: 22
   m_Name: KingBossMinionSlime
   m_TagString: MinionSlime
   m_Icon: {fileID: 0}
@@ -165,7 +165,7 @@ MonoBehaviour:
   enemyGun: {fileID: 1871550474018874299}
   gunLocation: {fileID: 8886435309427360967}
   _rotateSpeed: 100
-  _speed: 3
+  <_speed>k__BackingField: 3
   _maxHealth: 4
 --- !u!195 &4778386910285843650
 NavMeshAgent:
@@ -226,7 +226,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8886435309427360967}
-  m_Layer: 7
+  m_Layer: 22
   m_Name: handle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -258,11 +258,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2577823044407019990, guid: 4cd34c3050b0164469cd0d4c1ebfc4db, type: 3}
       propertyPath: m_Layer
-      value: 7
+      value: 22
       objectReference: {fileID: 0}
     - target: {fileID: 3651399317519360951, guid: 4cd34c3050b0164469cd0d4c1ebfc4db, type: 3}
       propertyPath: m_Layer
-      value: 7
+      value: 22
       objectReference: {fileID: 0}
     - target: {fileID: 3873842773402911558, guid: 4cd34c3050b0164469cd0d4c1ebfc4db, type: 3}
       propertyPath: m_Name
@@ -270,7 +270,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3873842773402911558, guid: 4cd34c3050b0164469cd0d4c1ebfc4db, type: 3}
       propertyPath: m_Layer
-      value: 7
+      value: 22
       objectReference: {fileID: 0}
     - target: {fileID: 6250265583612026718, guid: 4cd34c3050b0164469cd0d4c1ebfc4db, type: 3}
       propertyPath: m_RootOrder

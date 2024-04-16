@@ -116,7 +116,7 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
                     ""id"": ""41a553ab-6bcb-4821-8664-6a2d21c29209"",
                     ""path"": ""2DVector(mode=2)"",
                     ""interactions"": """",
-                    ""processors"": """",
+                    ""processors"": ""StickDeadzone(min=0.25,max=0.925)"",
                     ""groups"": """",
                     ""action"": ""Movement"",
                     ""isComposite"": true,
@@ -296,6 +296,15 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
                     ""name"": ""Reload"",
                     ""type"": ""Button"",
                     ""id"": ""ba861141-77cf-4285-b34b-48c10cdf810f"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""StopInteract"",
+                    ""type"": ""Button"",
+                    ""id"": ""9ce60408-5e0f-49a6-a613-ac1541bd53c9"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -544,6 +553,28 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
                     ""action"": ""Reload"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""db427c72-612d-457c-9340-7aa9488d6e6a"",
+                    ""path"": ""<Keyboard>/tab"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""StopInteract"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9c8f176d-715c-4b76-8db8-8034759ac828"",
+                    ""path"": ""<Gamepad>/leftShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""StopInteract"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -564,6 +595,7 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
         m_CharacterActions_PauseMenu = m_CharacterActions.FindAction("PauseMenu", throwIfNotFound: true);
         m_CharacterActions_SlotBinding = m_CharacterActions.FindAction("SlotBinding", throwIfNotFound: true);
         m_CharacterActions_Reload = m_CharacterActions.FindAction("Reload", throwIfNotFound: true);
+        m_CharacterActions_StopInteract = m_CharacterActions.FindAction("StopInteract", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -694,6 +726,7 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_CharacterActions_PauseMenu;
     private readonly InputAction m_CharacterActions_SlotBinding;
     private readonly InputAction m_CharacterActions_Reload;
+    private readonly InputAction m_CharacterActions_StopInteract;
     public struct CharacterActionsActions
     {
         private @CharacterInput m_Wrapper;
@@ -705,6 +738,7 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
         public InputAction @PauseMenu => m_Wrapper.m_CharacterActions_PauseMenu;
         public InputAction @SlotBinding => m_Wrapper.m_CharacterActions_SlotBinding;
         public InputAction @Reload => m_Wrapper.m_CharacterActions_Reload;
+        public InputAction @StopInteract => m_Wrapper.m_CharacterActions_StopInteract;
         public InputActionMap Get() { return m_Wrapper.m_CharacterActions; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -735,6 +769,9 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
             @Reload.started += instance.OnReload;
             @Reload.performed += instance.OnReload;
             @Reload.canceled += instance.OnReload;
+            @StopInteract.started += instance.OnStopInteract;
+            @StopInteract.performed += instance.OnStopInteract;
+            @StopInteract.canceled += instance.OnStopInteract;
         }
 
         private void UnregisterCallbacks(ICharacterActionsActions instance)
@@ -760,6 +797,9 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
             @Reload.started -= instance.OnReload;
             @Reload.performed -= instance.OnReload;
             @Reload.canceled -= instance.OnReload;
+            @StopInteract.started -= instance.OnStopInteract;
+            @StopInteract.performed -= instance.OnStopInteract;
+            @StopInteract.canceled -= instance.OnStopInteract;
         }
 
         public void RemoveCallbacks(ICharacterActionsActions instance)
@@ -792,5 +832,6 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
         void OnPauseMenu(InputAction.CallbackContext context);
         void OnSlotBinding(InputAction.CallbackContext context);
         void OnReload(InputAction.CallbackContext context);
+        void OnStopInteract(InputAction.CallbackContext context);
     }
 }

@@ -81,7 +81,7 @@ MonoBehaviour:
   bulletLifetime: 3
   <MaxAmmo>k__BackingField: 5
   bulletCount: 1
-  reloadTime: 1
+  reloadTime: 2
   cam: {fileID: 0}
   muzzleFlashEffect: {fileID: 135372700821571553}
   impactEffect: {fileID: 0}

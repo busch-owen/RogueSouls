@@ -6,6 +6,7 @@ using UnityEngine.AI;
 public class Enemy : EntityStats
 {
     #region Global Variables
+
     [SerializeField] protected Transform target;
     protected NavMeshAgent agent;
     [SerializeField]
@@ -19,12 +20,23 @@ public class Enemy : EntityStats
     float _rotateSpeed;
     float _enemyWeaponRotationAngle;
     bool targetInRange;
+    [SerializeField]
+    EnemyDoor enemyDoor;
 
     protected GameObject enemySprite;
-#endregion
+
+    [SerializeField]
+    ParticleSystem _deathEffect;
+
     [SerializeField]
     float detectionRadius;
-    
+
+    Animator _animator;
+
+    #endregion
+
+
+
 
     #region Start   
     protected virtual void Start()
@@ -34,9 +46,26 @@ public class Enemy : EntityStats
         agent.updateRotation = false;
         agent.updateUpAxis = false;
         enemySprite = GetComponentInChildren<SpriteRenderer>().gameObject;
+
+        _animator = GetComponentInChildren<Animator>();
         
         target = FindObjectOfType<PlayerController>().transform;
        
+    }
+
+    public override void TakeDamage(int damage)
+    {
+        base.TakeDamage(damage);
+
+        if (enemyDoor != null && Health <= 0)
+        {
+            enemyDoor.NotifyEnemyDied(this);
+        }
+        
+        if(_deathEffect && Health <= 0)
+        {
+            Instantiate(_deathEffect, transform.position, Quaternion.identity);
+        }
     }
 #endregion
     #region Update
@@ -62,8 +91,13 @@ public class Enemy : EntityStats
 
     public virtual void FixedUpdate()
     {
+        bool moving = agent.velocity.x != 0 || agent.velocity.y != 0;
 
-        
+        if (_animator)
+        {
+            _animator.SetBool("Moving", moving);
+        }
+
         float distance = Vector3.Distance(target.position, this.transform.position);
 
         if (distance <= detectionRadius)
@@ -112,6 +146,7 @@ public class Enemy : EntityStats
     public void StunEnemy()
     {
         agent.enabled = false;
+        Invoke("BreakStun", 4f);
     }
 
     public void BreakStun()

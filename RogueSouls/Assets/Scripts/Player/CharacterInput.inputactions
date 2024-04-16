@@ -94,7 +94,7 @@
                     "id": "41a553ab-6bcb-4821-8664-6a2d21c29209",
                     "path": "2DVector(mode=2)",
                     "interactions": "",
-                    "processors": "",
+                    "processors": "StickDeadzone(min=0.25,max=0.925)",
                     "groups": "",
                     "action": "Movement",
                     "isComposite": true,
@@ -274,6 +274,15 @@
                     "name": "Reload",
                     "type": "Button",
                     "id": "ba861141-77cf-4285-b34b-48c10cdf810f",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "StopInteract",
+                    "type": "Button",
+                    "id": "9ce60408-5e0f-49a6-a613-ac1541bd53c9",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -520,6 +529,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "Reload",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "db427c72-612d-457c-9340-7aa9488d6e6a",
+                    "path": "<Keyboard>/tab",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "StopInteract",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "9c8f176d-715c-4b76-8db8-8034759ac828",
+                    "path": "<Gamepad>/leftShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "StopInteract",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

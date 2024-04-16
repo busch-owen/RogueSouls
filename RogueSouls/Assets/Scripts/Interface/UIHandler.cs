@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UIHandler : MonoBehaviour
 {
@@ -13,6 +14,12 @@ public class UIHandler : MonoBehaviour
 
     [SerializeField]
     GameObject _heartsDisplay;
+
+    [SerializeField]
+    GameObject _playerStatsPanel;
+
+    [SerializeField]
+    Transform _heartDisplayHandlePosition;
 
     GameObject _currentMenu;
 
@@ -27,15 +34,31 @@ public class UIHandler : MonoBehaviour
     [SerializeField]
     GameObject _reloadingText;
 
+    [SerializeField]
+    TMP_Text _minorSoulCount, _majorSoulCount;
+
+    [SerializeField]
+    TMP_Text _smallKeyCount, _bossKeyCount;
+
+    [SerializeField]
+    Image _weaponPreviewImage;
+
+    [SerializeField]
+    Sprite _emptyHandSprite;
+
+    PlayerStats _playerStats;
+
+    Inventory _playerInventory;
+
+    [SerializeField]
+    Image[] _slotImages;
+
     public bool IsPaused {  get; private set; }
 
     private void Awake()
     {
-        /*
-        _pauseMenu.SetActive(false);
-        _inventoryMenu.SetActive(false);
-        _gameMenu.SetActive(false);
-        */
+        _playerStats = GetComponentInParent<PlayerStats>();
+        _playerInventory = FindObjectOfType<Inventory>();
     }
 
     private void Start()
@@ -68,25 +91,56 @@ public class UIHandler : MonoBehaviour
             {
                 IsPaused = false;
                 _pauseMenu.SetActive(false);
-                ChangeHealthDisplayState(true);
+                ChangeHealthDisplayParent(transform.parent);
                 Time.timeScale = 1.0f;
             }
             else
             {
+                if (_targetWeapon == null)
+                {
+                    _weaponPreviewImage.sprite = _emptyHandSprite;
+                }
+
                 IsPaused = true;
                 _pauseMenu.SetActive(true);
                 _currentMenu = _inventoryMenu;
                 OpenSpecificMenu(_currentMenu);
-                ChangeHealthDisplayState(false);
+                UpdateItemsCollectedText(_majorSoulCount, _playerStats.MajorSoulsCollected);
+                UpdateItemsCollectedText(_minorSoulCount, _playerStats.MinorSoulsCollected);
+                UpdateItemsCollectedText(_smallKeyCount, _playerInventory.Keys.Count);
+                UpdateItemsCollectedText(_bossKeyCount, _playerInventory.BossKeys.Count);
+                ChangeHealthDisplayParent(_heartDisplayHandlePosition);
                 Time.timeScale = 0.0f;
             }
         }
         
     }
 
-    private void ChangeHealthDisplayState(bool desiredState)
+    private void ChangeHealthDisplayParent(Transform desiredParent)
     {
-        _heartsDisplay.SetActive(desiredState);
+        _heartsDisplay.transform.SetParent(desiredParent);
+        RectTransform heartDisplayTransform = _heartsDisplay.GetComponent<RectTransform>();
+        heartDisplayTransform.anchoredPosition = Vector3.zero;
+        //heartDisplayTransform.anchorMin = new Vector2(0, -0);
+    }
+
+    void UpdateItemsCollectedText(TMP_Text targetText, int soulAmount)
+    {
+        targetText.text = soulAmount.ToString();
+    }
+
+    public void UpdateWeaponWheelSlots(int index, Sprite image)
+    {
+        if(image != null)
+        {
+            _slotImages[index].sprite = image;
+            _slotImages[index].SetNativeSize();
+        }
+        else
+        {
+            _slotImages[index].sprite = _emptyHandSprite;
+            _slotImages[index].SetNativeSize();
+        }
     }
 
     public void OpenSpecificMenu(GameObject menuToOpen)
@@ -99,6 +153,8 @@ public class UIHandler : MonoBehaviour
     public void AssignTargetWeapon(RangedWeapon weapon)
     {
         _targetWeapon = weapon;
+        _weaponPreviewImage.sprite = _targetWeapon.GetComponentInChildren<SpriteRenderer>().sprite;
+        _weaponPreviewImage.SetNativeSize();
     }
 
     public void EnableReloadingText(float reloadTime)

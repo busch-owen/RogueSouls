@@ -66,7 +66,7 @@ public class PlayerController : MonoBehaviour
 
     bool _preventingDialogue = false;
 
-    bool _carryableObjectInRange;
+    public bool CarryableObjectInRange { get; private set; }
     bool _currentlyCarryingAnObject;
     GameObject _carryableObject;
 
@@ -427,7 +427,7 @@ public class PlayerController : MonoBehaviour
     {
         if (other.gameObject.tag == "Carryable" && !_currentlyCarryingAnObject)
         {
-            _carryableObjectInRange = true;
+            CarryableObjectInRange = true;
             _carryableObject = other.gameObject;
         }
         if (other.gameObject.tag == "Chest" && !InRangeOfChest)
@@ -452,7 +452,7 @@ public class PlayerController : MonoBehaviour
     {
         if (other.gameObject.tag == "Carryable" && !_currentlyCarryingAnObject)
         {
-            _carryableObjectInRange = false;
+            CarryableObjectInRange = false;
             _carryableObject = null;
         }
         if (other.gameObject.tag == "Chest")
@@ -478,7 +478,7 @@ public class PlayerController : MonoBehaviour
 
     public void Interact()
     {
-        if (_carryableObjectInRange && !_currentlyCarryingAnObject)
+        if (CarryableObjectInRange && !_currentlyCarryingAnObject)
         {
             BoxCollider2D heldCollider = _carryableObject.GetComponent<BoxCollider2D>();
             heldCollider.enabled = false;

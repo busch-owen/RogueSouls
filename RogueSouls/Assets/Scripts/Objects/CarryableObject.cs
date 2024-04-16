@@ -17,9 +17,6 @@ public class CarryableObject : MonoBehaviour
 
     Rigidbody2D _rb;
 
-    [SerializeField]
-    float _minDestructionSpeed;
-
     private void Start()
     {
         _carryableObject = GetComponentInChildren<SpriteRenderer>().gameObject;
@@ -33,8 +30,10 @@ public class CarryableObject : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(_destructibleObject && !collision.gameObject.GetComponent<PlayerController>())
+        if (_destructibleObject && !collision.gameObject.GetComponent<PlayerController>())
         {
+            SpawnHeartPickup();
+
             _destructionEffect?.Play();
             _carryableObject?.SetActive(false);
             _boxCollider.enabled = false;
@@ -47,5 +46,15 @@ public class CarryableObject : MonoBehaviour
         _carryableObject?.SetActive(true);
         _boxCollider.enabled = true;
         _circleCollider.enabled = true;
+    }
+
+    void SpawnHeartPickup()
+    {
+        int chanceToDropHeart = Random.Range(0, 3);
+        if (chanceToDropHeart == 1)
+        {
+            PoolObject newPickup = PoolManager.Instance.Spawn("HealthPickup");
+            newPickup.transform.position = this.transform.position;
+        }
     }
 }

@@ -15,6 +15,9 @@ public class Chest : MonoBehaviour
 
     Animator _animator;
 
+    [SerializeField]
+    float _messageDuration;
+
     public bool Opened { get; private set; }
 
     private void Awake()
@@ -47,7 +50,7 @@ public class Chest : MonoBehaviour
                 _playerInventory.AddItemsToInventoryList(_itemToGivePlayer);
             }
 
-            _pickupDisplay.ShowSpecificMessageOnTextBox("You got a " + _itemToGivePlayer.GetComponent<CollectableItem>().ItemName + "! \nItem was added to your inventory!", 2f);
+            _pickupDisplay.ShowSpecificMessageOnTextBox("You got a " + _itemToGivePlayer.GetComponent<CollectableItem>().ItemName + "! \nItem was added to your inventory!", _messageDuration);
             _animator.SetBool("ChestOpen", true);
             Opened = true;
         }

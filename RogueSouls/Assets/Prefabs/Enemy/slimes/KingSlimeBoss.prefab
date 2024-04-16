@@ -308,7 +308,7 @@ Animator:
   m_GameObject: {fileID: 4778386909870762832}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: e97ad7503328bb94ab00a08766737ce0, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -370,7 +370,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Health>k__BackingField: 0
-  _maxHealth: 100
+  _maxHealth: 150
   <Damage>k__BackingField: 0
   <Speed>k__BackingField: 2
   <TimeToAttack>k__BackingField: 0
@@ -380,7 +380,9 @@ MonoBehaviour:
   isRanged: 1
   enemyGun: {fileID: 2198323127719836843}
   gunLocation: {fileID: 8886435309427360967}
-  _rotateSpeed: 100
+  _rotateSpeed: 400
+  enemyDoor: {fileID: 0}
+  _deathEffect: {fileID: 2299606306180639273, guid: af7fddd0faec58341ba18e9fd8eefc75, type: 3}
   detectionRadius: 0
   _barFillImage: {fileID: 5039554236713270681}
   _barHealthText: {fileID: 5206348450679394703}
@@ -662,7 +664,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6250265583612026718, guid: 02a2d2054603d2e45bd39bb0dc0aca48, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.75
+      value: 1.162
       objectReference: {fileID: 0}
     - target: {fileID: 6250265583612026718, guid: 02a2d2054603d2e45bd39bb0dc0aca48, type: 3}
       propertyPath: m_LocalPosition.y

@@ -23,7 +23,6 @@ public class GrappleProjectile : Bullet
             OnDeSpawn();
             if(_hitEnemy != null)
             {
-                _hitEnemy.BreakStun();
                 _hitEnemy = null;
             }
         }

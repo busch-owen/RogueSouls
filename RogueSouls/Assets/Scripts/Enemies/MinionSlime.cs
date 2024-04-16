@@ -1,13 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class MinionSlime : EnemyBullet
 {
     [SerializeField] Transform _target;
-    NavMeshAgent _agent;
+    public NavMeshAgent _agent { get; protected set; }
 
     Rigidbody2D _rb;
 
@@ -19,14 +16,14 @@ public class MinionSlime : EnemyBullet
     float _rotateSpeed;
     float _enemyWeaponRotationAngle;
 
-    [SerializeField]
-    float _speed;
-    
+    [field: SerializeField]
+    public float _speed { get; protected set; }
+
     int _health;
     [SerializeField]
     int _maxHealth;
 
-    GameObject _spriteObject;
+    public GameObject _spriteObject { get; protected set; }
 
     public override void OnEnable()
     {
@@ -45,7 +42,7 @@ public class MinionSlime : EnemyBullet
         _spriteObject = GetComponentInChildren<SpriteRenderer>().gameObject;
     }
 
-    private void Update()
+    public virtual void Update()
     {
         if(_target != null)
         {
@@ -88,6 +85,12 @@ public class MinionSlime : EnemyBullet
 
     public override void OnCollisionEnter2D(Collision2D collision)
     {
+        if(collision.gameObject.GetComponent<PlayerStats>())
+        {
+            PlayerStats player = collision.gameObject.GetComponent<PlayerStats>();
+            player.TakeDamage(bulletDamage);
+        }
+
         Destroy(_rb);
         _agent.enabled = true;
         transform.rotation = Quaternion.Euler(0, 0, 0);
