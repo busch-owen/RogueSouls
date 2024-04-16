@@ -36,13 +36,19 @@ public class UIHandler : MonoBehaviour
     [SerializeField]
     TMP_Text _minorSoulCount, _majorSoulCount;
 
+    [SerializeField]
+    TMP_Text _smallKeyCount, _bossKeyCount;
+
     PlayerStats _playerStats;
+
+    Inventory _playerInventory;
 
     public bool IsPaused {  get; private set; }
 
     private void Awake()
     {
         _playerStats = GetComponentInParent<PlayerStats>();
+        _playerInventory = FindObjectOfType<Inventory>();
     }
 
     private void Start()
@@ -84,8 +90,10 @@ public class UIHandler : MonoBehaviour
                 _pauseMenu.SetActive(true);
                 _currentMenu = _inventoryMenu;
                 OpenSpecificMenu(_currentMenu);
-                UpdateSoulCollectedText(_majorSoulCount, _playerStats.MajorSoulsCollected);
-                UpdateSoulCollectedText(_minorSoulCount, _playerStats.MinorSoulsCollected);
+                UpdateItemsCollectedText(_majorSoulCount, _playerStats.MajorSoulsCollected);
+                UpdateItemsCollectedText(_minorSoulCount, _playerStats.MinorSoulsCollected);
+                UpdateItemsCollectedText(_smallKeyCount, _playerInventory.Keys.Count);
+                UpdateItemsCollectedText(_bossKeyCount, _playerInventory.BossKeys.Count);
                 ChangeHealthDisplayParent(_heartDisplayHandlePosition);
                 Time.timeScale = 0.0f;
             }
@@ -101,7 +109,7 @@ public class UIHandler : MonoBehaviour
         //heartDisplayTransform.anchorMin = new Vector2(0, -0);
     }
 
-    void UpdateSoulCollectedText(TMP_Text targetText, int soulAmount)
+    void UpdateItemsCollectedText(TMP_Text targetText, int soulAmount)
     {
         targetText.text = soulAmount.ToString();
     }
