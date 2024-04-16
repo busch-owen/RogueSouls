@@ -50,7 +50,7 @@ public class WarpObject : MonoBehaviour
             {
                 _warpPosition.GetComponent<BoxCollider2D>().enabled = false;
             }
-            StartCoroutine(BeginWarpSequence());
+            StartCoroutine("BeginWarpSequence");
             Invoke("TriggerReturnTransition", _warpCooldownLength);
         }
     }
@@ -77,10 +77,7 @@ public class WarpObject : MonoBehaviour
 
     IEnumerator ReturnWarpSequence()
     {
-        _warpOverlay.transform.localScale = _targetWarpOverlaySize;
-        _warpTarget.position = _warpPosition.position;
         _cameraTransform.position = _warpPosition.position;
-        _cameraConfiner.m_BoundingShape2D = _targetBoundingBox;
         while (true)
         {
             _warpOverlay.transform.localScale = Vector3.Lerp(_warpOverlay.transform.localScale, _defaultWarpOverlaySize, _warpOutTransitionSpeed * Time.fixedDeltaTime);
@@ -90,6 +87,9 @@ public class WarpObject : MonoBehaviour
 
     void TriggerReturnTransition()
     {
+        _warpOverlay.transform.localScale = _targetWarpOverlaySize;
+        _warpTarget.position = _warpPosition.position;
+        _cameraConfiner.m_BoundingShape2D = _targetBoundingBox;
         StartCoroutine(ReturnWarpSequence());
     }
 

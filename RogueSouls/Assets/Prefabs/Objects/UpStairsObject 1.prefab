@@ -71,7 +71,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1445394025
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: -213536191, guid: 398455aa9744a38428a7ae868362b1f3, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -156,10 +156,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf60f499484d21141b704aa1450b208f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _targetBoundingBox: {fileID: 0}
   _warpPosition: {fileID: 0}
-  _defaultWarpOverlaySize: {x: 50, y: 50, z: 50}
-  _targetWarpOverlaySize: {x: 0.25, y: 0.25, z: 0.25}
-  _warpInTransitionSpeed: 5
-  _warpOutTransitionSpeed: 5
+  _defaultWarpOverlaySize: {x: 70, y: 70, z: 70}
+  _targetWarpOverlaySize: {x: 0.5, y: 0.5, z: 0.5}
+  _warpInTransitionSpeed: 4
+  _warpOutTransitionSpeed: 4
   _warpCooldownLength: 1
   _stairUseCooldownTime: 3

@@ -382,6 +382,7 @@ MonoBehaviour:
   gunLocation: {fileID: 8886435309427360967}
   _rotateSpeed: 400
   enemyDoor: {fileID: 0}
+  _deathEffect: {fileID: 2299606306180639273, guid: af7fddd0faec58341ba18e9fd8eefc75, type: 3}
   detectionRadius: 0
   _barFillImage: {fileID: 5039554236713270681}
   _barHealthText: {fileID: 5206348450679394703}

@@ -157,10 +157,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _targetBoundingBox: {fileID: 0}
-  _warpPosition: {fileID: 0}
-  _defaultWarpOverlaySize: {x: 50, y: 50, z: 50}
-  _targetWarpOverlaySize: {x: 0.25, y: 0.25, z: 0.25}
-  _warpInTransitionSpeed: 5
-  _warpOutTransitionSpeed: 5
+  _warpPosition: {fileID: 1670343470619237014}
+  _defaultWarpOverlaySize: {x: 70, y: 70, z: 70}
+  _targetWarpOverlaySize: {x: 0.5, y: 0.5, z: 0.5}
+  _warpInTransitionSpeed: 4
+  _warpOutTransitionSpeed: 4
   _warpCooldownLength: 1
   _stairUseCooldownTime: 3
