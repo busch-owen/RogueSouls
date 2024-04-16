@@ -86,8 +86,16 @@ public class EntityStats : MonoBehaviour
 
     public void Respawn()
     {
-        transform.position = _respawnPoint.position;
-        IncrementHealth(999999);
+        if(_respawnPoint != null)
+        {
+            transform.position = _respawnPoint.position;
+            IncrementHealth(999999);
+        }
+        else
+        {
+            transform.position = Vector3.zero;
+            IncrementHealth(999999);
+        }
     }
     #endregion
 
