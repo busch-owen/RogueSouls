@@ -31,6 +31,8 @@ public class Enemy : EntityStats
     [SerializeField]
     float detectionRadius;
 
+    Animator _animator;
+
     #endregion
 
 
@@ -44,6 +46,8 @@ public class Enemy : EntityStats
         agent.updateRotation = false;
         agent.updateUpAxis = false;
         enemySprite = GetComponentInChildren<SpriteRenderer>().gameObject;
+
+        _animator = GetComponentInChildren<Animator>();
         
         target = FindObjectOfType<PlayerController>().transform;
        
@@ -87,8 +91,13 @@ public class Enemy : EntityStats
 
     public virtual void FixedUpdate()
     {
+        bool moving = agent.velocity.x != 0 || agent.velocity.y != 0;
 
-        
+        if (_animator)
+        {
+            _animator.SetBool("Moving", moving);
+        }
+
         float distance = Vector3.Distance(target.position, this.transform.position);
 
         if (distance <= detectionRadius)
