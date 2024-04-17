@@ -169,7 +169,8 @@ MonoBehaviour:
   gunLocation: {fileID: 8886435309427360967}
   _rotateSpeed: 100
   enemyDoor: {fileID: 0}
-  detectionRadius: 10
+  _deathEffect: {fileID: 0}
+  detectionRadius: 12
 --- !u!195 &4778386910285843650
 NavMeshAgent:
   m_ObjectHideFlags: 0

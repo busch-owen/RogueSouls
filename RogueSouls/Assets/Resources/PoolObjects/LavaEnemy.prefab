@@ -200,8 +200,9 @@ MonoBehaviour:
   enemyGun: {fileID: 0}
   gunLocation: {fileID: 0}
   _rotateSpeed: 0
+  <_speed>k__BackingField: 0
   _maxHealth: 8
-  detectionRadius: 8
+  detectionRadius: 12
   target: {fileID: 0}
   BallSpeed: 4
 --- !u!195 &6175586912072974954

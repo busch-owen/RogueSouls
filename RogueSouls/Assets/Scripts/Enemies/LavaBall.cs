@@ -33,7 +33,7 @@ public class LavaBall : MinionSlime
 
     
 
-    public override void Update()
+    public override void FixedUpdate()
     {
         float distance = Vector3.Distance(target.position, this.transform.position);
 
@@ -52,5 +52,10 @@ public class LavaBall : MinionSlime
         }
 
         _spriteObject.transform.rotation = Quaternion.Euler(0, 0, 0);
+    }
+
+    public override void Update()
+    {
+        
     }
 }

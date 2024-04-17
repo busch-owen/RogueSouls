@@ -34,13 +34,12 @@ public class BrakenAttack : RangedWeapon
             Debug.Log(rand.ToString());
             if (rand >=5)
             {
-
                 bulletForce = 1;
                 bulletPrefab = Lava;
             }
             else if(rand <=5)
             {
-                bulletForce = 15;
+                bulletForce = 20;
                 bulletPrefab = OtherLava;
             }
         }

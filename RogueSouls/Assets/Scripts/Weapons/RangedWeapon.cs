@@ -15,7 +15,7 @@ public class RangedWeapon : MonoBehaviour
     [field: SerializeField]
     public int MaxAmmo { get; private set; }
     [SerializeField]
-    private float bulletCount;
+    protected float bulletCount;
     [SerializeField]
     private float reloadTime;
     [SerializeField]
