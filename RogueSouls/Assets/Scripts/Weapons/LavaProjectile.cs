@@ -10,13 +10,12 @@ public class LavaProjectile : EnemyExplosion
     int damage;
     PlayerController playerController;
     EntityStats player;
-    // Start is called before the first frame update
     void Start()
     {
         player = GetComponent<EntityStats>();
     }
 
-    // Update is called once per frame
+ 
     void Update()
     {
         
