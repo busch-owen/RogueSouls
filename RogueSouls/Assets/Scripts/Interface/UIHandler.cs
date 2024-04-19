@@ -1,7 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class UIHandler : MonoBehaviour
@@ -71,7 +70,7 @@ public class UIHandler : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (_targetWeapon == null)
+        if (!_targetWeapon)
         {
             _ammoLayout.SetActive(false);
         }
@@ -85,46 +84,45 @@ public class UIHandler : MonoBehaviour
 
     public void TogglePauseMenu()
     {
-        if(_pauseMenu != null)
-        {
-            if (_pauseMenu.activeSelf)
-            {
-                IsPaused = false;
-                _pauseMenu.SetActive(false);
-                ChangeHealthDisplayParent(transform.parent);
-                Time.timeScale = 1.0f;
-            }
-            else
-            {
-                if (_targetWeapon == null)
-                {
-                    _weaponPreviewImage.sprite = _emptyHandSprite;
-                }
-
-                IsPaused = true;
-                _pauseMenu.SetActive(true);
-                _currentMenu = _inventoryMenu;
-                OpenSpecificMenu(_currentMenu);
-                UpdateItemsCollectedText(_majorSoulCount, _playerStats.MajorSoulsCollected);
-                UpdateItemsCollectedText(_minorSoulCount, _playerStats.MinorSoulsCollected);
-                UpdateItemsCollectedText(_smallKeyCount, _playerInventory.Keys.Count);
-                UpdateItemsCollectedText(_bossKeyCount, _playerInventory.BossKeys.Count);
-                ChangeHealthDisplayParent(_heartDisplayHandlePosition);
-                Time.timeScale = 0.0f;
-            }
-        }
+        if (!_pauseMenu) return;
         
+        if (_pauseMenu.activeSelf)
+        {
+            IsPaused = false;
+            _pauseMenu.SetActive(false);
+            ChangeHealthDisplayParent(transform.parent);
+            Time.timeScale = 1.0f;
+        }
+        else
+        {
+            if (!_targetWeapon)
+            {
+                _weaponPreviewImage.sprite = _emptyHandSprite;
+            }
+
+            IsPaused = true;
+            _pauseMenu.SetActive(true);
+            _currentMenu = _inventoryMenu;
+            OpenSpecificMenu(_currentMenu);
+            UpdateItemsCollectedText(_majorSoulCount, _playerStats.MajorSoulsCollected);
+            UpdateItemsCollectedText(_minorSoulCount, _playerStats.MinorSoulsCollected);
+            UpdateItemsCollectedText(_smallKeyCount, _playerInventory.Keys.Count);
+            UpdateItemsCollectedText(_bossKeyCount, _playerInventory.BossKeys.Count);
+            ChangeHealthDisplayParent(_heartDisplayHandlePosition);
+            Time.timeScale = 0.0f;
+        }
+
     }
 
     private void ChangeHealthDisplayParent(Transform desiredParent)
     {
         _heartsDisplay.transform.SetParent(desiredParent);
-        RectTransform heartDisplayTransform = _heartsDisplay.GetComponent<RectTransform>();
+        var heartDisplayTransform = _heartsDisplay.GetComponent<RectTransform>();
         heartDisplayTransform.anchoredPosition = Vector3.zero;
         //heartDisplayTransform.anchorMin = new Vector2(0, -0);
     }
 
-    void UpdateItemsCollectedText(TMP_Text targetText, int soulAmount)
+    private void UpdateItemsCollectedText(TMP_Text targetText, int soulAmount)
     {
         targetText.text = soulAmount.ToString();
     }
@@ -160,11 +158,21 @@ public class UIHandler : MonoBehaviour
     public void EnableReloadingText(float reloadTime)
     {
         _reloadingText.SetActive(true);
-        Invoke("DisableReloadingText", reloadTime);
+        Invoke(nameof(DisableReloadingText), reloadTime);
     }
 
-    void DisableReloadingText()
+    private void DisableReloadingText()
     {
         _reloadingText.SetActive(false);
+    }
+
+    public void QuitToMenu()
+    {
+        SceneManager.LoadScene("MainMenuTest");
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
     }
 }

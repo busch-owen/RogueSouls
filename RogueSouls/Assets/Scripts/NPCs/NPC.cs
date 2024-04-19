@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Timeline;
 
 public class NPC : MonoBehaviour
 {
@@ -15,6 +16,9 @@ public class NPC : MonoBehaviour
     HUD _playerHUD;
 
     GameObject _dialogueBox;
+    
+    [SerializeField]
+    private GameObject _exclaimationMark;
 
     private void Awake()
     {
@@ -24,18 +28,22 @@ public class NPC : MonoBehaviour
 
     public void ContinueDialogue()
     {
-        if(_dialogueBox.activeSelf)
+        if (!_dialogueBox.activeSelf) return;
+        
+        if (_exclaimationMark)
         {
-            if (index < _dialogue.Length && _dialogue[index] != null)
-            {
-                _playerHUD.ShowSpecificMessageOnChatBox(NPCName + ": \n" + _dialogue[index] + "\n\nPress [Interact] to continue");
-                index++;
-            }
-            else
-            {
-                index = 0;
-                _playerHUD.CloseChatBox();
-            }
+            _exclaimationMark.SetActive(false);
+        }
+        
+        if (index < _dialogue.Length && _dialogue[index] != null)
+        {
+            _playerHUD.ShowSpecificMessageOnChatBox(NPCName + ": \n" + _dialogue[index] + "\n\nPress [Interact] to continue");
+            index++;
+        }
+        else
+        {
+            index = 0;
+            _playerHUD.CloseChatBox();
         }
     }
 

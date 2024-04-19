@@ -14,20 +14,15 @@ public class KingSlime : Enemy
 
     MinionSlime[] _enemiesSpawned;
 
-    protected override void Start()
-    {
-        base.Start();
-    }
-
-    private void OnEnable()
+    protected virtual void OnEnable()
     {
         _barFillImage.fillAmount = (float)Health / (float)_maxHealth;
         _barHealthText.text = Health + "/" + _maxHealth;
     }
 
-    public override void Update()
+    protected override void Update()
     {
-        if (target != null)
+        if (target)
         {
             enemyGun.Shoot();
             RangedAttack();
@@ -47,9 +42,9 @@ public class KingSlime : Enemy
         }
     }
 
-    public override void FixedUpdate()
+    protected override void FixedUpdate()
     {
-        if (target != null && agent.isActiveAndEnabled)
+        if (target && agent.isActiveAndEnabled)
         {
             agent.SetDestination(target.position);
         }

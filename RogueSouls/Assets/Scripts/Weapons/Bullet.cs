@@ -38,33 +38,33 @@ public class Bullet : PoolObject
     // Start is called before the first frame update
     public virtual void OnCollisionEnter2D(Collision2D other) 
 	{
-        if(other.gameObject.tag == "enemy")
+        if(other.gameObject.CompareTag("enemy"))
         {
-            Enemy enemyToHit = other.gameObject.GetComponent<Enemy>();
+            var enemyToHit = other.gameObject.GetComponent<EntityStats>();
             enemyToHit.TakeDamage(bulletDamage);
             if(bloodHitEffect != null)
             {
-                PoolObject tempEffect = PoolManager.Instance.Spawn(bloodHitEffect.name);
+                var tempEffect = PoolManager.Instance.Spawn(bloodHitEffect.name);
                 tempEffect.transform.position = transform.position;
                 tempEffect.GetComponent<ParticleSystem>().Play();
             }
         }
         else if (other.gameObject.CompareTag("MinionSlime"))
         {
-            MinionSlime minion = other.gameObject.GetComponent<MinionSlime>();
+            var minion = other.gameObject.GetComponent<EntityStats>();
             minion.TakeDamage(bulletDamage);
             if (bloodHitEffect != null)
             {
-                PoolObject tempEffect = PoolManager.Instance.Spawn(bloodHitEffect.name);
+                var tempEffect = PoolManager.Instance.Spawn(bloodHitEffect.name);
                 tempEffect.transform.position = transform.position;
                 tempEffect.GetComponent<ParticleSystem>().Play();
             }
         }
-        else if (other.gameObject.tag != "Player")
+        else if (!other.gameObject.CompareTag("Player"))
         {
             if(hitEffect != null)
             {
-                PoolObject tempEffect = PoolManager.Instance.Spawn(hitEffect.name);
+                var tempEffect = PoolManager.Instance.Spawn(hitEffect.name);
                 tempEffect.transform.position = transform.position;
                 tempEffect.GetComponent<ParticleSystem>().Play();
             }

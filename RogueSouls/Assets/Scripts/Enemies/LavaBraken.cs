@@ -8,7 +8,7 @@ public class LavaBraken : Enemy
     [SerializeField]
     Image _barFillImage;
 
-    public override void Update()
+    protected override void Update()
     {
         if (target != null)
         {
@@ -33,7 +33,7 @@ public class LavaBraken : Enemy
         }
     }
 
-    public override void FixedUpdate()
+    protected override void FixedUpdate()
     {
 
 
