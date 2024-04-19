@@ -7,18 +7,20 @@ public class HeartDisplayHandler : MonoBehaviour
     [SerializeField]
     Heart heartDisplayObject;
 
+    [SerializeField]
     List<Heart> _heartsSpawned = new List<Heart>();
 
+    [SerializeField]
     EntityStats _entityStats;
 
-    [SerializeField]
-    int _heartToIncrement;
+    int _heartToIncrement = 0;
+    int _heartQuarterToIncrement = 3;
 
     private void Start()
     {
         _entityStats = GetComponentInParent<EntityStats>();
         CreateHeartsForAmountOfHearts();
-
+        CheckHeartQuarters();
     }
 
     private void CreateHeartsForAmountOfHearts()
@@ -31,45 +33,33 @@ public class HeartDisplayHandler : MonoBehaviour
 
     public void AddOneHeart()
     {
-        _heartToIncrement = _heartsSpawned.Count;
         Heart heartSpawned = Instantiate(heartDisplayObject, this.transform);
         _heartsSpawned.Add(heartSpawned);
     }
 
-    public void DecreaseHeartQuarters(int healthToTakeAway)
+    public void CheckHeartQuarters()
     {
-        for(int i = 0; i < healthToTakeAway; i++)
-        {
-            if (_heartsSpawned[_heartToIncrement].HeartEmpty)
-            {
-                _heartToIncrement--;
-                _heartToIncrement = Mathf.Clamp(_heartToIncrement, 0, _heartsSpawned.Count);
-                _heartsSpawned[_heartToIncrement].DisableQuarters();
-            }
-            else
-            {
-                _heartsSpawned[_heartToIncrement].DisableQuarters();
-            }
-        }    
-    }
+        _heartToIncrement = 0;
+        _heartQuarterToIncrement = 3;
 
-    public void IncreaseHeartQuarters(int healthToRestore)
-    {
-        for (int i = 0; i < healthToRestore; i++)
+        for (int i = 0; i < _heartsSpawned.Count; i++)
         {
-            if (_entityStats.AtFullHealth())
+            foreach(GameObject quarter in _heartsSpawned[i]._heartQuarters)
             {
-                return;
+                quarter.SetActive(false);
             }
-            else if (_heartsSpawned[_heartToIncrement].HeartFull && _heartToIncrement < _entityStats.AmountOfHearts - 1)
+        }
+        for (int i = 0; i < _entityStats.Health; i++)
+        {
+            _heartsSpawned[_heartToIncrement]._heartQuarters[_heartQuarterToIncrement].SetActive(true);
+            _heartQuarterToIncrement--;
+            if (_heartQuarterToIncrement < 0)
             {
+                _heartQuarterToIncrement = 3;
                 _heartToIncrement++;
-                _heartToIncrement = Mathf.Clamp(_heartToIncrement, 0, 3);
             }
-            else
-            {
-                _heartsSpawned[_heartToIncrement].EnableQuarters(_heartsSpawned[_heartToIncrement].QuarterToRestore);
-            }
+            _heartQuarterToIncrement = Mathf.Clamp(_heartQuarterToIncrement, 0, 3);
+            _heartToIncrement = Mathf.Clamp(_heartToIncrement, 0, _entityStats.AmountOfHearts - 1);
         }
     }
 }

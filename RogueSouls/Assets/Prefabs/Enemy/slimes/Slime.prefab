@@ -72,7 +72,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1980908149
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: -634084333, guid: 5c2140f9b34985f49b974c05f36181de, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -120,6 +120,7 @@ GameObject:
   - component: {fileID: 653337200348733588}
   - component: {fileID: 2046857538640857902}
   - component: {fileID: 8282977527723575816}
+  - component: {fileID: 2862198251103426269}
   m_Layer: 7
   m_Name: Slime
   m_TagString: enemy
@@ -156,15 +157,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c09d0826ee61fe445ab0467dda31a9a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <Health>k__BackingField: 0
   _maxHealth: 8
-  <_damage>k__BackingField: 1
-  <_speed>k__BackingField: 4
-  <_timeToAttack>k__BackingField: 0
+  <Damage>k__BackingField: 0
+  <Speed>k__BackingField: 3
+  <TimeToAttack>k__BackingField: 0
+  _heartDisplayHandler: {fileID: 0}
+  _gameManager: {fileID: 0}
   target: {fileID: 0}
   isRanged: 1
   enemyGun: {fileID: 8373608547663523759}
   gunLocation: {fileID: 8886435309427360967}
   _rotateSpeed: 100
+  detectionRadius: 12
 --- !u!195 &4778386910285843650
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -199,10 +204,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1208892c04bfdd4994ba637bb61464a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <Health>k__BackingField: 0
   _maxHealth: 8
-  <_damage>k__BackingField: 1
-  <_speed>k__BackingField: 4
-  <_timeToAttack>k__BackingField: 0.25
+  <Damage>k__BackingField: 0
+  <Speed>k__BackingField: 3
+  <TimeToAttack>k__BackingField: 0
+  _heartDisplayHandler: {fileID: 0}
+  _gameManager: {fileID: 0}
 --- !u!58 &2046857538640857902
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -234,7 +242,19 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0.25}
   serializedVersion: 2
-  m_Radius: 0.2
+  m_Radius: 0.3
+--- !u!114 &2862198251103426269
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4778386910285843655}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d76a3e7a1b500ed4fa5d6c2b4828fab0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8886435309427360966
 GameObject:
   m_ObjectHideFlags: 0
@@ -244,6 +264,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8886435309427360967}
+  - component: {fileID: 4408390723992800973}
   m_Layer: 0
   m_Name: handle
   m_TagString: Untagged
@@ -267,6 +288,20 @@ Transform:
   m_Father: {fileID: 4778386910285843649}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4408390723992800973
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8886435309427360966}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 077fd61a9499a9544983b58781997d1c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _weaponOffset: 0
+  _weapon: {fileID: 8373608547663523759}
 --- !u!1001 &7134703045591757288
 PrefabInstance:
   m_ObjectHideFlags: 0

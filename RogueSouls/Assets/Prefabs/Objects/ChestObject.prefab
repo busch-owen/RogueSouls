@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4815583136052947193}
   - component: {fileID: 4815583136052947192}
   - component: {fileID: -9082884474749241696}
+  - component: {fileID: 6819650919818517131}
   m_Layer: 12
   m_Name: ChestObject
   m_TagString: Chest
@@ -48,7 +49,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a737ed26817ceb48899a8892934a5f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _itemToGivePlayer: {fileID: 1513510823955187234, guid: a668b7cdba5073d42b710fd430408496, type: 3}
+  _itemToGivePlayer: {fileID: 0}
 --- !u!61 &4815583136052947193
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -117,6 +118,18 @@ MonoBehaviour:
   m_Area: 1
   m_IgnoreFromBuild: 0
   m_AffectedAgents: ffffffff
+--- !u!114 &6819650919818517131
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4815583136052947195}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d76a3e7a1b500ed4fa5d6c2b4828fab0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4815583136793086056
 GameObject:
   m_ObjectHideFlags: 0
@@ -189,7 +202,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1445394025
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: -921946187, guid: 41c2b443d12e21f4b9fc23897b574956, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

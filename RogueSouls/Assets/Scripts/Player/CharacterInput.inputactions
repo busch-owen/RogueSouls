@@ -94,7 +94,7 @@
                     "id": "41a553ab-6bcb-4821-8664-6a2d21c29209",
                     "path": "2DVector(mode=2)",
                     "interactions": "",
-                    "processors": "",
+                    "processors": "StickDeadzone(min=0.25,max=0.925)",
                     "groups": "",
                     "action": "Movement",
                     "isComposite": true,
@@ -262,15 +262,6 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "MeleeAttack",
-                    "type": "Button",
-                    "id": "c0974870-f41d-489f-8aea-f70f488c74f8",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "SlotBinding",
                     "type": "Value",
                     "id": "cbeb6de3-f6b3-4780-839e-e741b970976a",
@@ -278,6 +269,24 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "Reload",
+                    "type": "Button",
+                    "id": "ba861141-77cf-4285-b34b-48c10cdf810f",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "StopInteract",
+                    "type": "Button",
+                    "id": "9ce60408-5e0f-49a6-a613-ac1541bd53c9",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -392,28 +401,6 @@
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "",
-                    "id": "5866abc3-1e99-47c1-b9cb-271acf3fa0c7",
-                    "path": "<Keyboard>/e",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "MeleeAttack",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "9f1a2795-9064-41ea-a966-0e7dbdae4cde",
-                    "path": "<Gamepad>/buttonNorth",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "MeleeAttack",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
                     "name": "Keyboard",
                     "id": "3c3a2de6-7762-4918-aa86-58ca3b76acd8",
                     "path": "2DVector",
@@ -504,7 +491,7 @@
                 {
                     "name": "left",
                     "id": "d9d030df-953e-4579-96b6-a5f3c59de7a9",
-                    "path": "<Gamepad>/leftStick/left",
+                    "path": "<Gamepad>/dpad/left",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -515,13 +502,57 @@
                 {
                     "name": "right",
                     "id": "e2cfe52f-8b58-468e-8f0d-21bbe377dcf4",
-                    "path": "<Gamepad>/leftStick/right",
+                    "path": "<Gamepad>/dpad/right",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "SlotBinding",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "ce2e9c19-9182-4a8c-a1e7-8aab928a7afc",
+                    "path": "<Keyboard>/r",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Reload",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "51d6e818-5a4f-41a5-83f5-2fbd07cbb080",
+                    "path": "<Gamepad>/buttonNorth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Reload",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "db427c72-612d-457c-9340-7aa9488d6e6a",
+                    "path": "<Keyboard>/tab",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "StopInteract",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "9c8f176d-715c-4b76-8db8-8034759ac828",
+                    "path": "<Gamepad>/leftShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "StopInteract",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }

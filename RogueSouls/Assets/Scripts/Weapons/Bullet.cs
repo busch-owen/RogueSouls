@@ -7,35 +7,70 @@ public class Bullet : PoolObject
     [SerializeField]
     protected GameObject hitEffect;
     [SerializeField]
-    protected TrailRenderer _trailRenderer;
+    protected GameObject bloodHitEffect;
     [SerializeField]
-    protected float bulletLife = 2f;
+    protected TrailRenderer _trailRenderer;
     [SerializeField]
     protected int bulletDamage;
     [SerializeField]
     protected RangedWeapon weapon;
 
+    [SerializeField]
+    protected float _maxTravelDistance;
+
+    protected PlayerController _controller;
+
+    public virtual void OnEnable()
+    {
+        _trailRenderer = GetComponent<TrailRenderer>();
+        _trailRenderer.Clear();
+        _controller = FindObjectOfType<PlayerController>();
+    }
+
+    public virtual void FixedUpdate()
+    {
+        if (Vector2.Distance(transform.position, _controller.transform.position) >= _maxTravelDistance)
+        {
+            OnDeSpawn();
+        }
+    }
 
     // Start is called before the first frame update
     public virtual void OnCollisionEnter2D(Collision2D other) 
 	{
-        if(other.gameObject.tag == "enemy")
+        if(other.gameObject.CompareTag("enemy"))
         {
-            Enemy enemyToHit = other.gameObject.GetComponent<Enemy>();
+            var enemyToHit = other.gameObject.GetComponent<EntityStats>();
             enemyToHit.TakeDamage(bulletDamage);
-            this.OnDeSpawn();
+            if(bloodHitEffect != null)
+            {
+                var tempEffect = PoolManager.Instance.Spawn(bloodHitEffect.name);
+                tempEffect.transform.position = transform.position;
+                tempEffect.GetComponent<ParticleSystem>().Play();
+            }
         }
-        else
+        else if (other.gameObject.CompareTag("MinionSlime"))
         {
-            this.OnDeSpawn();
+            var minion = other.gameObject.GetComponent<EntityStats>();
+            minion.TakeDamage(bulletDamage);
+            if (bloodHitEffect != null)
+            {
+                var tempEffect = PoolManager.Instance.Spawn(bloodHitEffect.name);
+                tempEffect.transform.position = transform.position;
+                tempEffect.GetComponent<ParticleSystem>().Play();
+            }
         }
-    }
-
-    public virtual void OnEnable()
-    {
-        //_trailRenderer = GetComponent<TrailRenderer>();
-        Invoke("OnDeSpawn", bulletLife);
+        else if (!other.gameObject.CompareTag("Player"))
+        {
+            if(hitEffect != null)
+            {
+                var tempEffect = PoolManager.Instance.Spawn(hitEffect.name);
+                tempEffect.transform.position = transform.position;
+                tempEffect.GetComponent<ParticleSystem>().Play();
+            }
+        }
         
+        OnDeSpawn();
     }
 
     public void AssignWeapon(RangedWeapon weaponToAssign)

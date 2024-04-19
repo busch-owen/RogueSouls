@@ -9,10 +9,10 @@ public class PlayerController : MonoBehaviour
     [Header("Character Attributes"), Space(5)]
 
     [SerializeField]
-    float _xSpeed;
+    public float _xSpeed;
 
     [SerializeField]
-    float _ySpeed;
+    public float _ySpeed;
 
     [SerializeField]
     float dodgeRollForce;
@@ -35,6 +35,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     float _invulnTime;
 
+    [SerializeField]
+    float _grappleHookCancelRadius;
+
     Animator _animator;
 
     Vector2 _movementSpeed;
@@ -43,12 +46,27 @@ public class PlayerController : MonoBehaviour
 
     Vector2 _movement;
 
-    bool rolling = false;
+    bool _rolling = false;
     bool canRoll = true;
 
-    bool _preventInput = false;
+    bool _grappling = false;
 
-    bool _carryableObjectInRange;
+    [SerializeField]
+    int _bonkDamage;
+    [SerializeField]
+    int _grappleBonkDamage;
+
+    [SerializeField]
+    PoolObject _bonkEffect;
+
+    [SerializeField]
+    float _bonkKnockback;
+
+    public bool PreventingInput { get; private set; } = false;
+
+    bool _preventingDialogue = false;
+
+    public bool CarryableObjectInRange { get; private set; }
     bool _currentlyCarryingAnObject;
     GameObject _carryableObject;
 
@@ -60,6 +78,9 @@ public class PlayerController : MonoBehaviour
 
     LayerMask _normalMask;
     LayerMask _invulnerableMask;
+    LayerMask _grappleMask;
+
+    CharacterInput _characterInput;
 
     [Space(10)]
 
@@ -76,7 +97,9 @@ public class PlayerController : MonoBehaviour
     [Header("CrosshairAttributes"), Space(5)]
 
     [SerializeField]
-    GameObject _crosshair;
+    SpriteRenderer _crosshairSprite;
+    [SerializeField]
+    CrosshairFade _crosshairHandle;
 
     [SerializeField]
     float _crosshairMoveSpeed;
@@ -86,6 +109,8 @@ public class PlayerController : MonoBehaviour
     CrosshairClamp _crosshairClamp;
 
     [Space(10)]
+
+    WaitForFixedUpdate _waitForFixedUpdate = new();
 
     #endregion
 
@@ -105,21 +130,25 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField]
     private RangedWeapon _gun;
-    private MeleeBase _melee;
     [SerializeField]
     private Transform _gunLocation;
 
-    [Space(10)]
+    [field: Space(10)]
 
     #endregion
 
     #region Misc Interaction Variables
 
-    Door _currentDoor;
-    bool _inRangeOfDoor = false;
+    public Door CurrentDoor { get; private set; }
+    public bool InRangeOfDoor { get; private set; } = false;
 
-    Chest _currentChest;
-    bool _inRangeOfChest = false;
+    public Chest CurrentChest { get; private set; }
+    public bool InRangeOfChest { get; private set; } = false;
+
+    public NPC CurrentNPC { get; private set; }
+    public bool InRangeOfNPC { get; private set; } = false;
+
+    HUD _playerHUD;
 
     #endregion
 
@@ -144,15 +173,17 @@ public class PlayerController : MonoBehaviour
         _animator = GetComponent<Animator>();
         _rb = GetComponent<Rigidbody2D>();
         _crosshairClamp = FindObjectOfType<CrosshairClamp>();
-        _crosshair = _crosshairClamp.gameObject;
+        _crosshairHandle = FindObjectOfType<CrosshairFade>();
+        _crosshairSprite = _crosshairHandle.GetComponentInChildren<SpriteRenderer>();
         _weaponOffsetHandle = GetComponentInChildren<WeaponOffsetHandle>();
         _effectHandler = GetComponentInChildren<PlayerEffectHandler>();
         _playerInventory = FindObjectOfType<Inventory>();
         _dodgeSmearRenderer.enabled = false;
-        _melee = GetComponentInChildren<MeleeBase>();
+        _playerHUD = GetComponentInChildren<HUD>();
 
         _normalMask = LayerMask.NameToLayer("Player");
         _invulnerableMask = LayerMask.NameToLayer("Invulnerable");
+        _grappleMask = LayerMask.NameToLayer("Grapple");
     }
 
     void Start()
@@ -163,12 +194,13 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!_preventInput)
+        if (!PreventingInput)
         {
             HandleAim();
             HandleMovement();
         }
         HandleCrosshairControllerMovement();
+        
     }
 
     private void FixedUpdate()
@@ -187,7 +219,7 @@ public class PlayerController : MonoBehaviour
     #region Movement Input and Physics
     private void HandleMovement()
     {
-        if (!rolling && !_melee.IsLunging())
+        if (!_rolling && !_grappling)
         {
             _movementSpeed = new Vector2(_xSpeed, _ySpeed);
 
@@ -219,7 +251,7 @@ public class PlayerController : MonoBehaviour
 
     IEnumerator BeginDodgeRollDuration()
     {
-        rolling = true;
+        _rolling = true;
         _rb.AddForce(_movement.normalized * dodgeRollForce);
         GoInvulnerable(_invulnTime);
         ToggleDashSmear(true);
@@ -227,7 +259,7 @@ public class PlayerController : MonoBehaviour
         StartCoroutine(BeginDodgeRollCoolDown());
         ToggleDashSmear(false);
 
-        rolling = false;
+        _rolling = false;
     }
 
     IEnumerator BeginDodgeRollCoolDown()
@@ -243,19 +275,19 @@ public class PlayerController : MonoBehaviour
 
     public bool CurrentlyRolling()
     {
-        return rolling;
+        return _rolling;
     }
 
     public void PreventInput()
     {
-        _preventInput = true;
+        PreventingInput = true;
         _movementSpeed = Vector2.zero;
         _rb.velocity = Vector2.zero;
     }
 
     public void AllowInput()
     {
-        _preventInput = false;
+        PreventingInput = false;
     }
 
     public void GoInvulnerable(float invTime)
@@ -268,6 +300,12 @@ public class PlayerController : MonoBehaviour
     {
         this.gameObject.layer = _normalMask;
     }
+    
+
+    public void GoGrapple()
+    {
+        this.gameObject.layer = _grappleMask;
+    }
 
     #endregion
 
@@ -276,32 +314,44 @@ public class PlayerController : MonoBehaviour
     //Manages where the player's weapon should be aimin
     private void HandleAim()
     {
-        _weaponRotationAngle = Mathf.Atan2(_crosshair.transform.localPosition.y, _crosshair.transform.localPosition.x) * Mathf.Rad2Deg;
+        if(!_crosshairClamp.isActiveAndEnabled)
+        {
+            _weaponRotationAngle = Mathf.Atan2(_crosshairHandle.transform.position.y, _crosshairHandle.transform.position.x) * Mathf.Rad2Deg;
+        }
+        else
+        {
+            _weaponRotationAngle = Mathf.Atan2(_crosshairSprite.transform.position.y - transform.position.y, _crosshairSprite.transform.position.x - transform.position.x) * Mathf.Rad2Deg;
+        }
+        
         Quaternion rotation = Quaternion.AngleAxis(_weaponRotationAngle, Vector3.forward);
         _aimHandleTransform.rotation = Quaternion.Slerp(_aimHandleTransform.rotation, rotation, _rotateSpeed * Time.deltaTime);
         _weaponOffsetHandle.OffsetWeaponPos(_weaponRotationAngle);
     }
 
     //Gets the position of the mouse in world space
-    public void HandleAimMouseInput(Vector2 aimPosition)
+    public void HandleAimMouseInput(Vector2 aimPostition)
     {
         if (_crosshairClamp != null)
         {
+            _crosshairSprite.enabled = false;
             _crosshairClamp.enabled = false;
-            aimPosition = Camera.main.ScreenToWorldPoint(aimPosition) - Camera.main.transform.position;
-            _crosshair.transform.localPosition = aimPosition;
-        }
-        
+            aimPostition = Camera.main.ScreenToWorldPoint(aimPostition) - transform.position;
+            _crosshairHandle.transform.position = aimPostition;
+            _crosshairHandle.FadeInCrosshair();
+        } 
     }
 
     //Handles where the crosshair should go when using a controller
     private void HandleCrosshairControllerMovement()
     {
-        _crosshair.transform.localPosition = new Vector3(_crosshair.transform.localPosition.x + _crosshairMovement.x * _crosshairMoveSpeed * Time.fixedDeltaTime,
-            _crosshair.transform.localPosition.y + _crosshairMovement.y * _crosshairMoveSpeed * Time.fixedDeltaTime);
+        _crosshairSprite.transform.localPosition = new Vector3(_crosshairSprite.transform.localPosition.x + _crosshairMovement.x * _crosshairMoveSpeed * Time.fixedDeltaTime,
+            _crosshairSprite.transform.localPosition.y + _crosshairMovement.y * _crosshairMoveSpeed * Time.fixedDeltaTime);
         if (_crosshairClamp.enabled)
         {
+            _crosshairSprite.enabled = true;
+            _crosshairHandle.transform.position = transform.position;
             _crosshairClamp.ClampCrosshair(_crosshairMovement);
+            _crosshairHandle.CheckCrosshairPosition();
         }
     }
 
@@ -318,48 +368,83 @@ public class PlayerController : MonoBehaviour
     //All the animation handling happens here...
     public void HandleSpritesAndAnimations()
     {
-        if (_movement.x != 0 || _movement.y != 0)
+        if(!PreventingInput)
         {
-            _animator.SetBool("Running", true);
-            if (!_effectHandler.RunParticlesPlaying())
-                _effectHandler.PlayRunParticles();
-        }
-        else
-        {
-            _animator.SetBool("Running", false);
-            _effectHandler.StopRunParticles();
-        }
+            if (_movement.x != 0 || _movement.y != 0)
+            {
+                _animator.SetBool("Running", true);
+                if (!_effectHandler.RunParticlesPlaying())
+                    _effectHandler.PlayRunParticles();
+            }
+            else
+            {
+                _animator.SetBool("Running", false);
+                _effectHandler.StopRunParticles();
+            }
 
-        if (_movement.x < 0)
-        {
-            _playerSpriteObject.transform.localScale = new Vector2(-1, 1);
-        }
-        else if (_movement.x > 0)
-        {
-            _playerSpriteObject.transform.localScale = new Vector2(1, 1);
+            if (_movement.x < 0)
+            {
+                _playerSpriteObject.transform.localScale = new Vector2(-1, 1);
+            }
+            else if (_movement.x > 0)
+            {
+                _playerSpriteObject.transform.localScale = new Vector2(1, 1);
+            }
         }
     }
 
     #endregion
 
     #region Collision Detection
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.gameObject.GetComponent<Enemy>())
+        {
+            if(_rolling)
+            {
+                collision.gameObject.GetComponent<Enemy>().TakeDamage(_bonkDamage);
+                PoolObject tempParticle = PoolManager.Instance.Spawn(_bonkEffect.name);
+                tempParticle.transform.position = (transform.position + collision.transform.position) / 2;
+                tempParticle.GetComponent<ParticleSystem>().Play();
+            }
+            else if(_grappling)
+            {
+                collision.gameObject.GetComponent<Enemy>().TakeDamage(_grappleBonkDamage);
+                PoolObject tempParticle = PoolManager.Instance.Spawn(_bonkEffect.name);
+                tempParticle.transform.position = (transform.position + collision.transform.position) / 2;
+                tempParticle.GetComponent<ParticleSystem>().Play();
+                StopGrappling();
+            }
+            _rb.velocity = Vector2.zero;
+            _rb.AddForce((transform.position - collision.transform.position).normalized * _bonkKnockback, ForceMode2D.Impulse);
+        }
+
+        if (_grappling)
+            StopGrappling();
+    }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.tag == "Carryable" && !_currentlyCarryingAnObject)
         {
-            _carryableObjectInRange = true;
+            CarryableObjectInRange = true;
             _carryableObject = other.gameObject;
         }
-        if (other.gameObject.tag == "Chest" && !_inRangeOfChest)
+        if (other.gameObject.tag == "Chest" && !InRangeOfChest)
         {
-            _currentChest = other.GetComponent<Chest>();
-            _inRangeOfChest = true;
+            CurrentChest = other.GetComponent<Chest>();
+            InRangeOfChest = true;
         }
         if (other.GetComponent<Door>())
         {
-            _currentDoor = other.GetComponent<Door>();
-            _inRangeOfDoor = true;
+            CurrentDoor = other.GetComponent<Door>();
+            InRangeOfDoor = true;
+        }
+        if (other.GetComponent<NPC>())
+        {
+            CurrentNPC = other.GetComponent<NPC>();
+            CurrentNPC.ResetIndex();
+            InRangeOfNPC = true;
         }
     }
 
@@ -367,18 +452,24 @@ public class PlayerController : MonoBehaviour
     {
         if (other.gameObject.tag == "Carryable" && !_currentlyCarryingAnObject)
         {
-            _carryableObjectInRange = false;
+            CarryableObjectInRange = false;
             _carryableObject = null;
         }
         if (other.gameObject.tag == "Chest")
         {
-            _currentChest = null;
-            _inRangeOfChest = false;
+            CurrentChest = null;
+            InRangeOfChest = false;
         }
         if (other.GetComponent<Door>())
         {
-            _currentDoor = null;
-            _inRangeOfDoor = false;
+            CurrentDoor = null;
+            InRangeOfDoor = false;
+        }
+        if (other.GetComponent<NPC>())
+        {
+            CurrentNPC = null;
+            InRangeOfNPC = false;
+            _playerHUD.CloseChatBox();
         }
     }
     #endregion
@@ -387,7 +478,7 @@ public class PlayerController : MonoBehaviour
 
     public void Interact()
     {
-        if (_carryableObjectInRange && !_currentlyCarryingAnObject)
+        if (CarryableObjectInRange && !_currentlyCarryingAnObject)
         {
             BoxCollider2D heldCollider = _carryableObject.GetComponent<BoxCollider2D>();
             heldCollider.enabled = false;
@@ -407,26 +498,75 @@ public class PlayerController : MonoBehaviour
             heldCollider.enabled = true;
         }
 
-        if (_inRangeOfChest)
+        if (InRangeOfChest)
         {
-            _currentChest.OpenChest();
+            CurrentChest.OpenChest();
         }
 
-        if (_inRangeOfDoor)
+        if (InRangeOfDoor)
         {
-            if (_currentDoor.IsLocked && _playerInventory.Keys.Count > 0)
+            if (CurrentDoor.IsLocked && _playerInventory.Keys.Count > 0)
             {
-                _currentDoor.UnlockDoor();
-                _currentDoor.OpenDoor();
+                CurrentDoor.UnlockDoor();
+                CurrentDoor.OpenDoor();
                 _playerInventory.Keys.RemoveAt(0);
             }
-            else if (_currentDoor.IsBossDoor && _playerInventory.BossKeys.Count > 0)
+            else if (CurrentDoor.IsBossDoor && _playerInventory.BossKeys.Count > 0)
             {
-                _currentDoor.UnlockDoor();
-                _currentDoor.OpenDoor();
+                CurrentDoor.UnlockDoor();
+                CurrentDoor.OpenDoor();
                 _playerInventory.BossKeys.RemoveAt(0);
             }
         }
+
+        if(InRangeOfNPC && !_preventingDialogue)
+        {
+            _playerHUD.OpenChatBox();
+            CurrentNPC.ContinueDialogue();
+        }
         #endregion
+    }
+
+    public IEnumerator MoveToSpecificLocation(Vector3 targetPos, float speed, float grappleTime)
+    {
+        _grappling = true;
+        canRoll = false;
+        while (_grappling)
+        {
+            Vector3 moveDirection = targetPos - transform.position;
+            _rb.AddForce(moveDirection.normalized * speed * Time.fixedDeltaTime, ForceMode2D.Impulse);
+            ToggleDashSmear(true);
+            GoGrapple();
+            if(Vector2.Distance(targetPos, transform.position) <= _grappleHookCancelRadius)
+            {
+                StopGrappling();
+            }
+
+            yield return _waitForFixedUpdate;
+        }
+    }
+
+    public void StopGrappling()
+    {
+        ToggleDashSmear(false);
+        GoVulnerable();
+        _grappling = false;
+        canRoll = true;
+    }
+
+    public bool IsGrappling()
+    {
+        return _grappling;
+    }
+
+    public void PreventDialogue()
+    {
+        _preventingDialogue = true;
+        Invoke("AllowDialogue", 3f);
+    }
+
+    public void AllowDialogue()
+    {
+        _preventingDialogue = false;
     }
 }

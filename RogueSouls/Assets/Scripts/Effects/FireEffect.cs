@@ -1,3 +1,4 @@
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,6 +14,7 @@ public class FireEffect : PoolObject
         {
             mainParticle = GetComponent<ParticleSystem>();
         }
-        Invoke("OnDeSpawn", mainParticle.main.duration);
+        mainParticle.Stop();
+        Invoke("OnDeSpawn", mainParticle.main.startLifetime.constant);
     }
 }

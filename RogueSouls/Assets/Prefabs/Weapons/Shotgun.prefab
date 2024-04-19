@@ -71,7 +71,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1501119281
-  m_SortingLayer: 4
+  m_SortingLayer: 5
   m_SortingOrder: 150
   m_Sprite: {fileID: 21300000, guid: 2c69cbab924abe04782513b7cfb20f2a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -127,13 +127,14 @@ GameObject:
   - component: {fileID: 6250265583612026718}
   - component: {fileID: 6543636311860320368}
   - component: {fileID: 7513332494048581160}
+  - component: {fileID: 3754695214236907559}
   m_Layer: 0
   m_Name: Shotgun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &6250265583612026718
 Transform:
   m_ObjectHideFlags: 0
@@ -164,8 +165,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fireRate: 0.75
-  bulletLifetime: 0
-  maxAmmo: 10
+  bulletLifetime: 3
+  <MaxAmmo>k__BackingField: 5
   bulletCount: 5
   reloadTime: 5
   cam: {fileID: 0}
@@ -179,7 +180,7 @@ MonoBehaviour:
   Reload_sounds: {fileID: 0}
   sfxHandler: {fileID: 0}
   gun_sounds: {fileID: 0}
-  damage: 15
+  damage: 2
 --- !u!114 &7513332494048581160
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -196,6 +197,19 @@ MonoBehaviour:
   _shakeDuration: 0.2
   _shakeRate: 0.001
   _shakeSmoothRate: 0.3
+--- !u!114 &3754695214236907559
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3873842773402911558}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d20fc4100d746546811a698cab7c291, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <ItemName>k__BackingField: Shotgun
 --- !u!1001 &2991459753219673282
 PrefabInstance:
   m_ObjectHideFlags: 0

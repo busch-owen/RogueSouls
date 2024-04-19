@@ -10,6 +10,7 @@ TagManager:
   - EnemyBullet
   - WarpOverlay
   - Chest
+  - MinionSlime
   layers:
   - Default
   - TransparentFX
@@ -25,18 +26,18 @@ TagManager:
   - Carriable
   - Interactible
   - Explosion
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Camera
+  - CameraBounds
+  - IgnoreProjectile
+  - Grapple
+  - Foreground
+  - Background
+  - Cliffs
+  - Lava
+  - BossSlimeEnemy
+  - LavaBall
+  - Braken
+  - UncleEnemy
   - 
   - 
   - 
@@ -49,6 +50,9 @@ TagManager:
     locked: 0
   - name: Background
     uniqueID: 2343404773
+    locked: 0
+  - name: WorldAssets
+    uniqueID: 3172962139
     locked: 0
   - name: InteractableObjects
     uniqueID: 1445394025

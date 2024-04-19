@@ -1,3 +1,4 @@
+using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -21,14 +22,18 @@ public class EntityStats : MonoBehaviour
     [field: SerializeField]
     public float TimeToAttack { get; private set; }
 
+    [SerializeField]
     HeartDisplayHandler _heartDisplayHandler;
 
     [SerializeField]
     protected GameManager _gameManager;
 
+    Heart heart;
+    Transform _respawnPoint;
+
     #endregion
 
-    public virtual void Awake()
+    protected virtual void Awake()
     {
         _heartDisplayHandler = GetComponentInChildren<HeartDisplayHandler>();
         _gameManager = FindObjectOfType<GameManager>();
@@ -43,36 +48,34 @@ public class EntityStats : MonoBehaviour
     }
     public virtual void TakeDamage(int damage)
     {
-        IncrementHealth(damage);
+        IncrementHealth(-damage);
+        
         if (Health <= 0 && tag == "enemy")
         {
             Destroy(this.gameObject);
         }
     } 
-    public void HealEntity(int healthToHeal)
-    {
-        _heartDisplayHandler.IncreaseHeartQuarters(healthToHeal);
-        Health += healthToHeal;
-        Health = Mathf.Clamp(Health, 0, _maxHealth);
-    }
 
     public void IncreaseHealth(int increaseAmount)
     {
-        HealEntity(increaseAmount);
-        UpdateHeartAmount();
         _heartDisplayHandler.AddOneHeart();
+        _maxHealth += 4;
+        IncrementHealth(increaseAmount);
+        UpdateHeartAmount();
+        if (_heartDisplayHandler != null)
+        {
+            _heartDisplayHandler.CheckHeartQuarters();
+        }
     }
 
     public virtual void IncrementHealth(int incrementAmount)
     {
-
-        if(Health <= 0)
-        {
-            return;
-        }
-        Health -= incrementAmount;
+        Health += incrementAmount;
         Health = Mathf.Clamp (Health, 0 , _maxHealth);
-        _heartDisplayHandler?.DecreaseHeartQuarters(incrementAmount);
+        if (_heartDisplayHandler != null)
+        {
+            _heartDisplayHandler.CheckHeartQuarters();
+        }
     }
     
 
@@ -80,5 +83,24 @@ public class EntityStats : MonoBehaviour
     {
         return Health == _maxHealth;
     }
+
+    public void Respawn()
+    {
+        if(_respawnPoint != null)
+        {
+            transform.position = _respawnPoint.position;
+            IncrementHealth(999999);
+        }
+        else
+        {
+            transform.position = Vector3.zero;
+            IncrementHealth(999999);
+        }
+    }
     #endregion
+
+    public void ChangeRespawnPoint(Transform newPoint)
+    {
+        _respawnPoint = newPoint;
+    }
 }

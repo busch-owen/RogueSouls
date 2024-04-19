@@ -5,19 +5,22 @@ using UnityEngine;
 public class Door : MonoBehaviour
 {
     [field: SerializeField]
-    public bool IsLocked { get; private set; }
+    public bool IsLocked { get; protected set; }
 
     [field: SerializeField]
-    public bool IsBossDoor { get; private set; }
+    public bool IsBossDoor { get; protected set; }
 
-    public bool IsOpen { get; private set; }
+    public bool IsOpen { get; protected set; }
 
-    GameObject _doorObject;
+    [SerializeField]
+    bool _startOpen;
+
+    public GameObject _doorObject { get; protected set; }
 
     [SerializeField]
     Sprite _unlockedSprite, _lockedSprite;
 
-    SpriteRenderer _doorRenderer;
+    public SpriteRenderer _doorRenderer { get; protected set; }
 
     private void Start()
     {
@@ -37,10 +40,15 @@ public class Door : MonoBehaviour
         {
             _doorRenderer.sprite = _unlockedSprite;
         }
+
+        if(_startOpen)
+        {
+            OpenDoor();
+        }
         
     }
 
-    public void OpenDoor()
+    public virtual void OpenDoor()
     {
         if(!IsLocked)
         {
@@ -49,13 +57,13 @@ public class Door : MonoBehaviour
         }
     }
 
-    public void CloseDoor()
+    public virtual void CloseDoor()
     {
         _doorObject.SetActive(true);
         IsOpen = false;
     }
 
-    public void UnlockDoor()
+    public virtual void UnlockDoor()
     {
         if(IsLocked)
         {

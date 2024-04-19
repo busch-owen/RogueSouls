@@ -1,3 +1,4 @@
+using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,6 +8,13 @@ public class WarpObject : MonoBehaviour
     Transform _warpTarget;
 
     Rigidbody2D _warpTargetRb;
+
+    Transform _cameraTransform;
+
+    CinemachineConfiner2D _cameraConfiner;
+
+    [SerializeField]
+    PolygonCollider2D _targetBoundingBox;
 
     [SerializeField]
     Transform _warpPosition;
@@ -21,8 +29,10 @@ public class WarpObject : MonoBehaviour
 
     private void Awake()
     {
+        _cameraConfiner = FindObjectOfType<CinemachineConfiner2D>();
         _warpOverlay = GameObject.FindGameObjectWithTag("WarpOverlay");
         _warpOverlay.transform.localScale = _defaultWarpOverlaySize;
+        _cameraTransform = Camera.main.transform;
     }
 
     private void Start()
@@ -40,7 +50,7 @@ public class WarpObject : MonoBehaviour
             {
                 _warpPosition.GetComponent<BoxCollider2D>().enabled = false;
             }
-            StartCoroutine(BeginWarpSequence());
+            StartCoroutine("BeginWarpSequence");
             Invoke("TriggerReturnTransition", _warpCooldownLength);
         }
     }
@@ -67,8 +77,7 @@ public class WarpObject : MonoBehaviour
 
     IEnumerator ReturnWarpSequence()
     {
-        _warpOverlay.transform.localScale = _targetWarpOverlaySize;
-        _warpTarget.position = _warpPosition.position;
+        _cameraTransform.position = _warpPosition.position;
         while (true)
         {
             _warpOverlay.transform.localScale = Vector3.Lerp(_warpOverlay.transform.localScale, _defaultWarpOverlaySize, _warpOutTransitionSpeed * Time.fixedDeltaTime);
@@ -78,6 +87,9 @@ public class WarpObject : MonoBehaviour
 
     void TriggerReturnTransition()
     {
+        _warpOverlay.transform.localScale = _targetWarpOverlaySize;
+        _warpTarget.position = _warpPosition.position;
+        _cameraConfiner.m_BoundingShape2D = _targetBoundingBox;
         StartCoroutine(ReturnWarpSequence());
     }
 

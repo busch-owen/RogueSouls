@@ -12,10 +12,10 @@ public class RangedWeapon : MonoBehaviour
     private float fireRate;
     [SerializeField]
     private float bulletLifetime;
+    [field: SerializeField]
+    public int MaxAmmo { get; private set; }
     [SerializeField]
-    private int maxAmmo;
-    [SerializeField]
-    public float bulletCount;
+    protected float bulletCount;
     [SerializeField]
     private float reloadTime;
     [SerializeField]
@@ -27,13 +27,15 @@ public class RangedWeapon : MonoBehaviour
     [SerializeField] 
 	public Transform firePoint;
 	[SerializeField]
-	Bullet bulletPrefab;
+	public Bullet bulletPrefab;
 	[SerializeField]
-	float bulletForce = 0.15f;
+	protected float bulletForce = 0.15f;
     [SerializeField]
     float minSpread;
     [SerializeField]
     float maxSpread;
+
+    protected UIHandler _uiHandler;
 
     ScreenShakeEffect _screenShakeEffect;
 
@@ -49,22 +51,27 @@ public class RangedWeapon : MonoBehaviour
     [SerializeField]
     int damage;
 
-    PlayerController playerController;
+    public PlayerController playerController { get; private set; }
 
     bool shoot;
 
 
     //end of editable variables within the inspector
 
-    private int currentAmmo;
+    public int CurrentAmmo { get; private set; }
     private bool isReloading = false;
-    private float timeToNextFire = 0f;
+    protected float timeToNextFire = 0f;
 #endregion
 
-    #region first load
-    void Start()
+#region first load
+
+public virtual void Awake()
     {
-        currentAmmo = maxAmmo;// always start with max ammo
+        _uiHandler = FindObjectOfType<UIHandler>();
+    }
+    void Start()
+    {   
+        CurrentAmmo = MaxAmmo;// always start with max ammo
         _screenShakeEffect = GetComponent<ScreenShakeEffect>();
     }
 
@@ -76,7 +83,7 @@ public class RangedWeapon : MonoBehaviour
     #region Update
     void Update()
     {
-        if (currentAmmo == 0 && !isReloading)
+        if (CurrentAmmo == 0 && !isReloading)
         {
             Reload();
         }
@@ -106,61 +113,115 @@ public class RangedWeapon : MonoBehaviour
     #region Shoot
     public virtual void Shoot(Vector2 additionalVelocity = new Vector2())
     {
-        if (Time.time >= timeToNextFire && !isReloading)// make sure you can't shoot faster than the gun allows to
+        if (gameObject.GetComponentInParent<PlayerController>())
         {
-            timeToNextFire = Time.time + 1.0f / fireRate;// sets the time for the next bullet to be able to be fired
-
-            currentAmmo--;
-            //sfxHandler?.PlayOneShot(gun_sounds);
-
-            muzzleFlashEffect?.Stop();
-            muzzleFlashEffect?.Play();
-
-            _screenShakeEffect?.ShakeScreen();
-
-            Quaternion defaultSpreadAngle = firePoint.localRotation;
-            float spread = Random.Range(minSpread, maxSpread);
-            firePoint.transform.Rotate(new Vector3(0, 0, 1), -spread / 2f);
-            for (int i = 0; i < bulletCount; i++)
+            if (Time.time >= timeToNextFire && !isReloading && !_uiHandler.IsPaused && !playerController.PreventingInput)// make sure you can't shoot faster than the gun allows to
             {
-                float angle = (float)spread / (float)(bulletCount);
+                timeToNextFire = Time.time + 1.0f / fireRate;// sets the time for the next bullet to be able to be fired
 
-                firePoint.transform.Rotate(new Vector3(0, 0, 1), angle);
+                CurrentAmmo--;
+                //sfxHandler?.PlayOneShot(gun_sounds);
 
-                Bullet bullet = (Bullet)PoolManager.Instance.Spawn(bulletPrefab.name);
-                bullet.AssignWeapon(this);
-                bullet.GetComponent<TrailRenderer>().enabled = false;
-                bullet.transform.position = firePoint.transform.position;
-                bullet.transform.rotation = firePoint.transform.rotation;
-                Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
-                rb.velocity = Vector2.zero;
-                rb?.AddForce(firePoint.right * bulletForce, ForceMode2D.Impulse);//impulse force represents impact 
-                bullet.GetComponent<TrailRenderer>().enabled = true;
+                muzzleFlashEffect?.Stop();
+                muzzleFlashEffect?.Play();
+
+                _screenShakeEffect?.ShakeScreen();
+
+                Quaternion defaultSpreadAngle = firePoint.localRotation;
+                float spread = Random.Range(minSpread, maxSpread);
+                firePoint.transform.Rotate(new Vector3(0, 0, 1), -spread / 2f);
+                for (int i = 0; i < bulletCount; i++)
+                {
+                    float angle = (float)spread / (float)(bulletCount);
+
+                    firePoint.transform.Rotate(new Vector3(0, 0, 1), angle);
+
+                    Bullet bullet = (Bullet)PoolManager.Instance.Spawn(bulletPrefab.name);
+                    bullet.AssignWeapon(this);
+                    bullet.GetComponent<TrailRenderer>().enabled = false;
+                    bullet.transform.position = firePoint.transform.position;
+                    bullet.transform.rotation = firePoint.transform.rotation;
+                    Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
+                    rb.velocity = Vector2.zero;
+                    rb?.AddForce(firePoint.right * bulletForce, ForceMode2D.Impulse);//impulse force represents impact 
+                    bullet.GetComponent<TrailRenderer>().enabled = true;
+                }
+
+                firePoint.localRotation = defaultSpreadAngle;
             }
-
-            firePoint.localRotation = defaultSpreadAngle;
         }
+        else
+        {
+            if (Time.time >= timeToNextFire && !isReloading && !_uiHandler.IsPaused)// make sure you can't shoot faster than the gun allows to
+            {
+                timeToNextFire = Time.time + 1.0f / fireRate;// sets the time for the next bullet to be able to be fired
+
+                CurrentAmmo--;
+                //sfxHandler?.PlayOneShot(gun_sounds);
+
+                muzzleFlashEffect?.Stop();
+                muzzleFlashEffect?.Play();
+
+                _screenShakeEffect?.ShakeScreen();
+
+                Quaternion defaultSpreadAngle = firePoint.localRotation;
+                float spread = Random.Range(minSpread, maxSpread);
+                firePoint.transform.Rotate(new Vector3(0, 0, 1), -spread / 2f);
+                for (int i = 0; i < bulletCount; i++)
+                {
+                    float angle = (float)spread / (float)(bulletCount);
+
+                    firePoint.transform.Rotate(new Vector3(0, 0, 1), angle);
+
+                    Bullet bullet = (Bullet)PoolManager.Instance.Spawn(bulletPrefab.name);
+                    bullet.AssignWeapon(this);
+
+                    if(bullet.GetComponent<TrailRenderer>())
+                        bullet.GetComponent<TrailRenderer>().enabled = false;
+
+                    bullet.transform.position = firePoint.transform.position;
+                    bullet.transform.rotation = firePoint.transform.rotation;
+                    Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
+                    if(rb != null)
+                    {
+                        rb.velocity = Vector2.zero;
+                        rb?.AddForce(firePoint.right * bulletForce, ForceMode2D.Impulse);//impulse force represents impact 
+                    }
+                    if (bullet.GetComponent<TrailRenderer>())
+                        bullet.GetComponent<TrailRenderer>().enabled = true;
+                }
+
+                firePoint.localRotation = defaultSpreadAngle;
+            }
+        }
+        
     }
 #endregion
     #region Reload
-    void Reload()
+    public void Reload()
     {
+        if(CurrentAmmo != MaxAmmo)
+        {
+            isReloading = true;
 
-        isReloading = true;
+            if(GetComponentInParent<PlayerController>())
+            {
+                _uiHandler.EnableReloadingText(reloadTime);
+            }
+            // sfxHandler.clip = Reload_sounds; // this is commented out until we add back sfx, it was causing errors with not every weapon having one 
+            // sfxHandler?.Play();
 
-       // sfxHandler.clip = Reload_sounds; // this is commented out until we add back sfx, it was causing errors with not every weapon having one 
-       // sfxHandler?.Play();
 
-
-        //Reload_sfx?.Stop();
-        //Reload_sfx?.PlayOneShot(Reload_sounds);
-        Invoke("FinishReload", reloadTime); // we do an invoke so we can add a delay to the reload time, rather than a regular function call
+            //Reload_sfx?.Stop();
+            //Reload_sfx?.PlayOneShot(Reload_sounds);
+            Invoke("FinishReload", reloadTime); // we do an invoke so we can add a delay to the reload time, rather than a regular function call
+        }
     }
 
 
-    void FinishReload()
+    public virtual void FinishReload()
     {
-        currentAmmo = maxAmmo;
+        CurrentAmmo = MaxAmmo;
         //sfxHandler?.Stop();
         //sfxHandler.clip = null;
         isReloading = false;

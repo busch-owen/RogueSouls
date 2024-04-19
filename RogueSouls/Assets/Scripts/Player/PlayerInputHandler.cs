@@ -6,10 +6,10 @@ public class PlayerInputHandler : MonoBehaviour
 {
     private PlayerController playerController;
     private RangedWeapon rangedWeapon;
-    private MeleeBase meleeWeapon;
     private WeaponWheel weaponWheel;
     private InventoryMenu inventoryMenu;
     private UIHandler uiHandler;
+    private HUD hud;
 
     CharacterInput characterInput;
 
@@ -17,7 +17,7 @@ public class PlayerInputHandler : MonoBehaviour
     {
         playerController = GetComponent<PlayerController>();
         uiHandler = FindObjectOfType<UIHandler>();
-        meleeWeapon = FindObjectOfType<MeleeBase>();
+        hud = FindObjectOfType<HUD>();
         inventoryMenu = FindObjectOfType<InventoryMenu>();
         UpdateRangedWeaponReference();
         weaponWheel = FindObjectOfType<WeaponWheel>();
@@ -35,7 +35,7 @@ public class PlayerInputHandler : MonoBehaviour
 
                 characterInput.CharacterActions.Attack.started += i => rangedWeapon?.EnableShootInput();
                 characterInput.CharacterActions.Attack.canceled += i => rangedWeapon?.DisableShootInput();
-                characterInput.CharacterActions.MeleeAttack.started += i => meleeWeapon.Attack();
+                characterInput.CharacterActions.Reload.started += i => rangedWeapon?.Reload();
                 characterInput.CharacterActions.DodgeRoll.started += i => playerController?.HandleDodgeRollInput();
                 characterInput.CharacterActions.Interact.started += i => playerController?.Interact();
 
@@ -44,6 +44,7 @@ public class PlayerInputHandler : MonoBehaviour
             }
             
             characterInput.CharacterActions.PauseMenu.started += i => uiHandler?.TogglePauseMenu();
+            characterInput.CharacterActions.StopInteract.started += i => hud?.CloseTextBox();
             characterInput.CharacterActions.SlotBinding.performed += i => inventoryMenu?.RequestBindSlot(i.ReadValue<Vector2>());
         }
 

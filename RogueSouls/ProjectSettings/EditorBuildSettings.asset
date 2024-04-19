@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/busch-owen_LevelGym.unity
-    guid: 387799e6e4611c64ca5f5b5f3b80fb1e
+    path: Assets/Scenes/MainMenuTest.unity
+    guid: 9ba509944eb3c2f48987ca33129433fb
+  - enabled: 1
+    path: Assets/Scenes/OwenBusch_PlainsArea.unity
+    guid: 99ee32118d0ea584ea67d6d1697fb2e9
   m_configObjects: {}

@@ -116,7 +116,7 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
                     ""id"": ""41a553ab-6bcb-4821-8664-6a2d21c29209"",
                     ""path"": ""2DVector(mode=2)"",
                     ""interactions"": """",
-                    ""processors"": """",
+                    ""processors"": ""StickDeadzone(min=0.25,max=0.925)"",
                     ""groups"": """",
                     ""action"": ""Movement"",
                     ""isComposite"": true,
@@ -284,15 +284,6 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""MeleeAttack"",
-                    ""type"": ""Button"",
-                    ""id"": ""c0974870-f41d-489f-8aea-f70f488c74f8"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
                     ""name"": ""SlotBinding"",
                     ""type"": ""Value"",
                     ""id"": ""cbeb6de3-f6b3-4780-839e-e741b970976a"",
@@ -300,6 +291,24 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Reload"",
+                    ""type"": ""Button"",
+                    ""id"": ""ba861141-77cf-4285-b34b-48c10cdf810f"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""StopInteract"",
+                    ""type"": ""Button"",
+                    ""id"": ""9ce60408-5e0f-49a6-a613-ac1541bd53c9"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -414,28 +423,6 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 },
                 {
-                    ""name"": """",
-                    ""id"": ""5866abc3-1e99-47c1-b9cb-271acf3fa0c7"",
-                    ""path"": ""<Keyboard>/e"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""MeleeAttack"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""9f1a2795-9064-41ea-a966-0e7dbdae4cde"",
-                    ""path"": ""<Gamepad>/buttonNorth"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""MeleeAttack"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
                     ""name"": ""Keyboard"",
                     ""id"": ""3c3a2de6-7762-4918-aa86-58ca3b76acd8"",
                     ""path"": ""2DVector"",
@@ -526,7 +513,7 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
                 {
                     ""name"": ""left"",
                     ""id"": ""d9d030df-953e-4579-96b6-a5f3c59de7a9"",
-                    ""path"": ""<Gamepad>/leftStick/left"",
+                    ""path"": ""<Gamepad>/dpad/left"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -537,13 +524,57 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
                 {
                     ""name"": ""right"",
                     ""id"": ""e2cfe52f-8b58-468e-8f0d-21bbe377dcf4"",
-                    ""path"": ""<Gamepad>/leftStick/right"",
+                    ""path"": ""<Gamepad>/dpad/right"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""SlotBinding"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ce2e9c19-9182-4a8c-a1e7-8aab928a7afc"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Reload"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""51d6e818-5a4f-41a5-83f5-2fbd07cbb080"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Reload"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""db427c72-612d-457c-9340-7aa9488d6e6a"",
+                    ""path"": ""<Keyboard>/tab"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""StopInteract"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9c8f176d-715c-4b76-8db8-8034759ac828"",
+                    ""path"": ""<Gamepad>/leftShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""StopInteract"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -562,8 +593,9 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
         m_CharacterActions_OpenWeaponWheel = m_CharacterActions.FindAction("OpenWeaponWheel", throwIfNotFound: true);
         m_CharacterActions_Interact = m_CharacterActions.FindAction("Interact", throwIfNotFound: true);
         m_CharacterActions_PauseMenu = m_CharacterActions.FindAction("PauseMenu", throwIfNotFound: true);
-        m_CharacterActions_MeleeAttack = m_CharacterActions.FindAction("MeleeAttack", throwIfNotFound: true);
         m_CharacterActions_SlotBinding = m_CharacterActions.FindAction("SlotBinding", throwIfNotFound: true);
+        m_CharacterActions_Reload = m_CharacterActions.FindAction("Reload", throwIfNotFound: true);
+        m_CharacterActions_StopInteract = m_CharacterActions.FindAction("StopInteract", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -692,8 +724,9 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_CharacterActions_OpenWeaponWheel;
     private readonly InputAction m_CharacterActions_Interact;
     private readonly InputAction m_CharacterActions_PauseMenu;
-    private readonly InputAction m_CharacterActions_MeleeAttack;
     private readonly InputAction m_CharacterActions_SlotBinding;
+    private readonly InputAction m_CharacterActions_Reload;
+    private readonly InputAction m_CharacterActions_StopInteract;
     public struct CharacterActionsActions
     {
         private @CharacterInput m_Wrapper;
@@ -703,8 +736,9 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
         public InputAction @OpenWeaponWheel => m_Wrapper.m_CharacterActions_OpenWeaponWheel;
         public InputAction @Interact => m_Wrapper.m_CharacterActions_Interact;
         public InputAction @PauseMenu => m_Wrapper.m_CharacterActions_PauseMenu;
-        public InputAction @MeleeAttack => m_Wrapper.m_CharacterActions_MeleeAttack;
         public InputAction @SlotBinding => m_Wrapper.m_CharacterActions_SlotBinding;
+        public InputAction @Reload => m_Wrapper.m_CharacterActions_Reload;
+        public InputAction @StopInteract => m_Wrapper.m_CharacterActions_StopInteract;
         public InputActionMap Get() { return m_Wrapper.m_CharacterActions; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -729,12 +763,15 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
             @PauseMenu.started += instance.OnPauseMenu;
             @PauseMenu.performed += instance.OnPauseMenu;
             @PauseMenu.canceled += instance.OnPauseMenu;
-            @MeleeAttack.started += instance.OnMeleeAttack;
-            @MeleeAttack.performed += instance.OnMeleeAttack;
-            @MeleeAttack.canceled += instance.OnMeleeAttack;
             @SlotBinding.started += instance.OnSlotBinding;
             @SlotBinding.performed += instance.OnSlotBinding;
             @SlotBinding.canceled += instance.OnSlotBinding;
+            @Reload.started += instance.OnReload;
+            @Reload.performed += instance.OnReload;
+            @Reload.canceled += instance.OnReload;
+            @StopInteract.started += instance.OnStopInteract;
+            @StopInteract.performed += instance.OnStopInteract;
+            @StopInteract.canceled += instance.OnStopInteract;
         }
 
         private void UnregisterCallbacks(ICharacterActionsActions instance)
@@ -754,12 +791,15 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
             @PauseMenu.started -= instance.OnPauseMenu;
             @PauseMenu.performed -= instance.OnPauseMenu;
             @PauseMenu.canceled -= instance.OnPauseMenu;
-            @MeleeAttack.started -= instance.OnMeleeAttack;
-            @MeleeAttack.performed -= instance.OnMeleeAttack;
-            @MeleeAttack.canceled -= instance.OnMeleeAttack;
             @SlotBinding.started -= instance.OnSlotBinding;
             @SlotBinding.performed -= instance.OnSlotBinding;
             @SlotBinding.canceled -= instance.OnSlotBinding;
+            @Reload.started -= instance.OnReload;
+            @Reload.performed -= instance.OnReload;
+            @Reload.canceled -= instance.OnReload;
+            @StopInteract.started -= instance.OnStopInteract;
+            @StopInteract.performed -= instance.OnStopInteract;
+            @StopInteract.canceled -= instance.OnStopInteract;
         }
 
         public void RemoveCallbacks(ICharacterActionsActions instance)
@@ -790,7 +830,8 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
         void OnOpenWeaponWheel(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
         void OnPauseMenu(InputAction.CallbackContext context);
-        void OnMeleeAttack(InputAction.CallbackContext context);
         void OnSlotBinding(InputAction.CallbackContext context);
+        void OnReload(InputAction.CallbackContext context);
+        void OnStopInteract(InputAction.CallbackContext context);
     }
 }
