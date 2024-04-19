@@ -21,7 +21,7 @@ public class LavaBraken : Enemy
 
         }
 
-        bool flipSprite = agent.velocity.x < 0;
+        bool flipSprite = _agent.velocity.x < 0;
 
         if (flipSprite)
         {
@@ -37,9 +37,9 @@ public class LavaBraken : Enemy
     {
 
 
-        if (target != null && agent.isActiveAndEnabled)
+        if (target != null && _agent.isActiveAndEnabled)
         {
-            agent.SetDestination(target.position);
+            _agent.SetDestination(target.position);
         }
     }
 

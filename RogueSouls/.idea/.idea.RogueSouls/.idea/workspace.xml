@@ -6,18 +6,14 @@
   <component name="ChangeListManager">
     <list default="true" id="1b75eb2c-952f-4375-8a39-08bf3116d934" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.RogueSouls/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.RogueSouls/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Art/Fonts/alagard SDF.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Art/Fonts/alagard SDF.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Player/Player.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Player/Player.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/OwenBusch_PlainsArea/NavMesh-NavMesh.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/OwenBusch_PlainsArea/NavMesh-NavMesh.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/OwenBusch_PlainsArea/NavMesh-NavMesh.asset.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/OwenBusch_PlainsArea/NavMesh-NavMesh.asset.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Collectables/HealthSoul.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Collectables/HealthSoul.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Enemy/UncleBoss.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Enemy/UncleBoss.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/OwenBusch_PlainsArea.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/OwenBusch_PlainsArea.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemies/Enemy.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Enemies/Enemy.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemies/KingSlime.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Enemies/KingSlime.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemies/LavaBraken.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Enemies/LavaBraken.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Interface/UIHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Interface/UIHandler.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/NPCs/NPC.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/NPCs/NPC.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Systems/GameManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Systems/GameManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Weapons/Bullet.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Weapons/Bullet.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemies/UncleBoss.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Enemies/UncleBoss.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/NavMeshAreas.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/NavMeshAreas.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UserSettings/Layouts/default-2021.dwlt" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/Layouts/default-2021.dwlt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -115,7 +111,7 @@
       <option name="presentableId" value="Default" />
       <updated>1713490289192</updated>
       <workItem from="1713490292068" duration="401000" />
-      <workItem from="1713537772917" duration="6704000" />
+      <workItem from="1713537772917" duration="9232000" />
     </task>
     <servers />
   </component>

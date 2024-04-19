@@ -8,7 +8,7 @@ public class Enemy : EntityStats
     #region Global Variables
 
     [SerializeField] protected Transform target;
-    protected NavMeshAgent agent;
+    protected NavMeshAgent _agent;
     [SerializeField]
     bool isRanged;
 
@@ -43,10 +43,10 @@ public class Enemy : EntityStats
     #region Start   
     protected virtual void Start()
     {
-        agent = GetComponent<NavMeshAgent>();
-        agent.speed = Speed;
-        agent.updateRotation = false;
-        agent.updateUpAxis = false;
+        _agent = GetComponent<NavMeshAgent>();
+        _agent.speed = Speed;
+        _agent.updateRotation = false;
+        _agent.updateUpAxis = false;
         enemySprite = GetComponentInChildren<SpriteRenderer>().gameObject;
         _offsetHandle = GetComponentInChildren<WeaponOffsetHandle>();
 
@@ -80,7 +80,7 @@ public class Enemy : EntityStats
             RangedAttack();
         }
 
-        bool flipSprite = agent.velocity.x < 0;
+        bool flipSprite = _agent.velocity.x < 0;
 
         if(flipSprite)
         {
@@ -94,7 +94,7 @@ public class Enemy : EntityStats
 
     protected virtual void FixedUpdate()
     {
-        bool moving = agent.velocity.x != 0 || agent.velocity.y != 0;
+        bool moving = _agent.velocity.x != 0 || _agent.velocity.y != 0;
 
         if (_animator)
         {
@@ -112,9 +112,9 @@ public class Enemy : EntityStats
             targetInRange = false;
         }
 
-        if (target != null && targetInRange && agent.isActiveAndEnabled)
+        if (target != null && targetInRange && _agent.isActiveAndEnabled)
         {
-            agent.SetDestination(target.position);
+            _agent.SetDestination(target.position);
         }
     }
 
@@ -149,13 +149,13 @@ public class Enemy : EntityStats
 
     public void StunEnemy()
     {
-        agent.enabled = false;
+        _agent.enabled = false;
         Invoke("BreakStun", 4f);
     }
 
     public void BreakStun()
     {
-        agent.enabled = true;
+        _agent.enabled = true;
     }
 
     public void SetTarget(Transform newTarget)

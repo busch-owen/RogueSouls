@@ -24,13 +24,11 @@ public class UncleBoss : KingSlime
         
         if(!_rb) _rb = gameObject.AddComponent<Rigidbody2D>();
         
-        agent = GetComponent<NavMeshAgent>();
+        _agent = GetComponent<NavMeshAgent>();
         _dashTrail = GetComponentInChildren<TrailRenderer>();
-        _dashTrail.enabled = false;
-        _isPhaseTwo = false;
-        _rb.simulated = false;
-        _rb.gravityScale = 0f;
-        agent.enabled = true;
+        
+        ResetDashState();
+        
         InvokeRepeating(nameof(Dash), _dashRate, _dashRate);
     }
 
@@ -53,24 +51,25 @@ public class UncleBoss : KingSlime
     {
         if (_isDashing || !_canDash) return;
         
+        _rb.isKinematic = false;
         _isDashing = true;
         _canDash = false;
-        _rb.simulated = true;
-        Vector3 dashVector = agent.velocity;
-        agent.enabled = false;
+        var dashVector = _agent.velocity.normalized;
+        _agent.enabled = false;
         _dashTrail.enabled = true;
         
-        _rb.AddForce(dashVector.normalized * _dashForce);
-        Debug.Log("Dashed");
+        _rb.AddForce(dashVector * _dashForce);
         Invoke(nameof(ResetDashState), _invulnTime);
     }
 
     private void ResetDashState()
     {
+        _rb.isKinematic = true;
+        _rb.gravityScale = 0;
+        _rb.velocity = Vector2.zero;
         _isDashing = false;
         _canDash = true;
-        _rb.simulated = false;
-        agent.enabled = true;
+        _agent.enabled = true;
         _dashTrail.enabled = false;
     }
 }

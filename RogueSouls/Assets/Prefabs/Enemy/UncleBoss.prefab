@@ -490,9 +490,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4778386910285843649}
   - component: {fileID: 2922788437150689609}
+  - component: {fileID: 8282977527723575816}
   - component: {fileID: 4778386910285843650}
   - component: {fileID: 653337200348733588}
-  - component: {fileID: 8282977527723575816}
   - component: {fileID: 2862198251103426269}
   m_Layer: 25
   m_Name: UncleBoss
@@ -544,13 +544,29 @@ MonoBehaviour:
   gunLocation: {fileID: 8886435309427360967}
   _rotateSpeed: 1000
   enemyDoor: {fileID: 0}
-  _deathEffect: {fileID: 0}
+  _deathEffect: {fileID: 777651334277765183, guid: 270c66d006d23b34ba6b57f46754c2b9, type: 3}
   detectionRadius: 0
   _barFillImage: {fileID: 3570696493826200609}
   _barHealthText: {fileID: 9158513743323600156}
-  _dashForce: 300
+  _dashForce: 500
   _invulnTime: 0.6
   _dashRate: 5
+--- !u!58 &8282977527723575816
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4778386910285843655}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.05, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.4
 --- !u!195 &4778386910285843650
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -558,7 +574,7 @@ NavMeshAgent:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4778386910285843655}
-  m_Enabled: 1
+  m_Enabled: 0
   m_AgentTypeID: 0
   m_Radius: 0.3
   m_Speed: 4
@@ -592,22 +608,6 @@ MonoBehaviour:
   <TimeToAttack>k__BackingField: 0
   _heartDisplayHandler: {fileID: 0}
   _gameManager: {fileID: 0}
---- !u!58 &8282977527723575816
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4778386910285843655}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0.05, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.4
 --- !u!114 &2862198251103426269
 MonoBehaviour:
   m_ObjectHideFlags: 0

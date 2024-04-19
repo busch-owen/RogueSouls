@@ -30,7 +30,7 @@ public class KingSlime : Enemy
 
         transform.rotation = Quaternion.Euler(0, 0, 0);
 
-        bool flipSprite = agent.velocity.x < 0;
+        bool flipSprite = _agent.velocity.x < 0;
 
         if (flipSprite)
         {
@@ -44,9 +44,9 @@ public class KingSlime : Enemy
 
     protected override void FixedUpdate()
     {
-        if (target && agent.isActiveAndEnabled)
+        if (target && _agent.isActiveAndEnabled)
         {
-            agent.SetDestination(target.position);
+            _agent.SetDestination(target.position);
         }
     }
 
