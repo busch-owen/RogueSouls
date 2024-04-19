@@ -13,6 +13,8 @@ public class PlayerStats : EntityStats
     [SerializeField]
     protected float _levelProgressionMultiplier;
     [SerializeField]
+    
+    Transform _respawnPoint;
 
     protected float _xpValue;
 
@@ -58,6 +60,27 @@ public class PlayerStats : EntityStats
         }
     }
     #endregion
+    
+    public void Respawn()
+    {
+        if(_respawnPoint != null)
+        {
+            transform.position = _respawnPoint.position;
+            PlayerIsDead = false;
+            IncrementHealth(999999);
+        }
+        else
+        {
+            transform.position = Vector3.zero;
+            PlayerIsDead = false;
+            IncrementHealth(999999);
+        }
+    }
+    
+    public void ChangeRespawnPoint(Transform newPoint)
+    {
+        _respawnPoint = newPoint;
+    }
 
     public void SetRespawnCameraBounds(PolygonCollider2D newBounds)
     {

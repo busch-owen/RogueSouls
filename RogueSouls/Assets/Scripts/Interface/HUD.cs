@@ -41,19 +41,19 @@ public class HUD : MonoBehaviour
     {
         if (_player.InRangeOfNPC)
         {
-            OpenPromptText("Press [Interact] to speak to " + _player.CurrentNPC.NPCName);
+            OpenPromptText("Press [F] to speak to " + _player.CurrentNPC.NPCName);
         }  
         else if (_player.InRangeOfChest && !_player.CurrentChest.Opened)
         {
-            OpenPromptText("Press [F] or [Interact] to open chest.");
+            OpenPromptText("Press [F] to open chest.");
         }
         else if (_player.InRangeOfDoor && _player.CurrentDoor.IsLocked)
         {
-            OpenPromptText("Press [F] or [Interact] to unlock door.");
+            OpenPromptText("Press [F] to unlock door.");
         }
         else if(_player.CarryableObjectInRange)
         {
-            OpenPromptText("Press [F] or [Interact] to pick up object.");
+            OpenPromptText("Press [F] to pick up object.");
         }
         else
         {
@@ -64,7 +64,7 @@ public class HUD : MonoBehaviour
     public void ShowSpecificMessageOnTextBox(string message, float messageLength)
     {
         _textBox.SetActive(true);
-        _textBoxText.text = message + "\n\nPress [Tab] or [Left Shoulder Button] to close.";
+        _textBoxText.text = message + "\n\nPress [Tab] to close.";
         Invoke("CloseTextBox", messageLength);
     }
 

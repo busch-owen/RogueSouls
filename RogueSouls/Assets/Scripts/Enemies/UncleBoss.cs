@@ -16,12 +16,24 @@ public class UncleBoss : KingSlime
     private float _baseDashRate;
 
     private bool _isPhaseTwo;
+
+    private Animator _anim;
+
+    private LayerMask _normalMask;
+    private LayerMask _invulnerableMask;
     
+    
+    private static readonly int Dashing = Animator.StringToHash("Dashing");
+
     protected override void Awake()
     {
         base.Awake();
         _baseDashRate = _dashRate;
         
+        _normalMask = LayerMask.NameToLayer("UncleEnemy");
+        _invulnerableMask  = LayerMask.NameToLayer("Invulnerable");
+
+        if (!_anim) _anim = GetComponentInChildren<Animator>();
         if(!_rb) _rb = gameObject.AddComponent<Rigidbody2D>();
         
         _agent = GetComponent<NavMeshAgent>();
@@ -32,6 +44,16 @@ public class UncleBoss : KingSlime
         InvokeRepeating(nameof(Dash), _dashRate, _dashRate);
     }
 
+    protected override void Update()
+    {
+        if (!_isDashing)
+        {
+            enemyGun.Shoot();
+            RangedAttack();
+        }
+        base.Update();
+    }
+    
     protected override void OnEnable()
     {
         base.OnEnable();
@@ -51,6 +73,8 @@ public class UncleBoss : KingSlime
     {
         if (_isDashing || !_canDash) return;
         
+        gameObject.layer = _invulnerableMask;
+        _anim.SetTrigger(Dashing);
         _rb.isKinematic = false;
         _isDashing = true;
         _canDash = false;
@@ -64,6 +88,7 @@ public class UncleBoss : KingSlime
 
     private void ResetDashState()
     {
+        gameObject.layer = _normalMask;
         _rb.isKinematic = true;
         _rb.gravityScale = 0;
         _rb.velocity = Vector2.zero;

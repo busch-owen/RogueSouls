@@ -29,7 +29,6 @@ public class EntityStats : MonoBehaviour
     protected GameManager _gameManager;
 
     Heart heart;
-    Transform _respawnPoint;
 
     #endregion
 
@@ -84,23 +83,6 @@ public class EntityStats : MonoBehaviour
         return Health == _maxHealth;
     }
 
-    public void Respawn()
-    {
-        if(_respawnPoint != null)
-        {
-            transform.position = _respawnPoint.position;
-            IncrementHealth(999999);
-        }
-        else
-        {
-            transform.position = Vector3.zero;
-            IncrementHealth(999999);
-        }
-    }
+    
     #endregion
-
-    public void ChangeRespawnPoint(Transform newPoint)
-    {
-        _respawnPoint = newPoint;
-    }
 }

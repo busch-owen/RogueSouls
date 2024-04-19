@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Timeline;
 
 public class NPC : MonoBehaviour
 {
@@ -37,7 +34,7 @@ public class NPC : MonoBehaviour
         
         if (index < _dialogue.Length && _dialogue[index] != null)
         {
-            _playerHUD.ShowSpecificMessageOnChatBox(NPCName + ": \n" + _dialogue[index] + "\n\nPress [Interact] to continue");
+            _playerHUD.ShowSpecificMessageOnChatBox(NPCName + ": \n" + _dialogue[index] + "\n\nPress [F] to continue");
             index++;
         }
         else
