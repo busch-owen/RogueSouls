@@ -50,14 +50,22 @@ public class Enemy : EntityStats
 
     public override void TakeDamage(int damage)
     {
+        base.TakeDamage(damage);
+
         if (iceArmor)
         {
             damage *= (armorDamper/100);
         }
-        base.TakeDamage(damage);
-        //if( _health > 50%) // If health Falls below 50 the icearmor gets removed and takes straight damage
+        
+        
+        if (enemyDoor != null && Health <= 0)
         {
-            
+            enemyDoor.NotifyEnemyDied(this);
+        }
+
+        if (_deathEffect && Health <= 0)
+        {
+            Instantiate(_deathEffect, transform.position, Quaternion.identity);
         }
     }
 
@@ -76,20 +84,6 @@ public class Enemy : EntityStats
        
     }
 
-    public override void TakeDamage(int damage)
-    {
-        base.TakeDamage(damage);
-
-        if (enemyDoor != null && Health <= 0)
-        {
-            enemyDoor.NotifyEnemyDied(this);
-        }
-        
-        if(_deathEffect && Health <= 0)
-        {
-            Instantiate(_deathEffect, transform.position, Quaternion.identity);
-        }
-    }
 #endregion
     #region Update
     protected virtual void Update()
