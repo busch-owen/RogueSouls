@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,6 +16,16 @@ public class HealthSoul : MonoBehaviour
     [SerializeField]
     bool _isMajorSoul;
 
+    private GameManager _gameManager;
+
+    private void Awake()
+    {
+        if (!_gameManager)
+        {
+            _gameManager = FindObjectOfType<GameManager>();
+        }
+    }
+
     private void OnEnable()
     {
         _targetHUD = FindObjectOfType<HUD>();
@@ -29,12 +40,13 @@ public class HealthSoul : MonoBehaviour
             if(_isMajorSoul)
             {
                 targetPlayer.IncreaseMajorSoulCount();
+                _gameManager.CheckForHealthSouls(targetPlayer.MajorSoulsCollected);
             }
             else
             {
                 targetPlayer.IncreaseMinorSoulCount();
             }
-            Destroy(this.gameObject);
+            Destroy(gameObject);
 
             _targetHUD.ShowSpecificMessageOnTextBox(_collectionMessage, _messageDuration);
         }

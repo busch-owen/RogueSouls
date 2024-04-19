@@ -40,23 +40,25 @@ public class WarpObject : MonoBehaviour
         
     }
 
-    void OnTriggerEnter2D(Collider2D other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.gameObject.GetComponent<PlayerController>())
+        
+        if (other.gameObject.GetComponent<WarpObject>()) return;
+        if (!other.gameObject.GetComponent<PlayerController>()) return;
+        
+        _warpTargetRb = other.gameObject.GetComponent<Rigidbody2D>();
+        _warpTarget = other.transform;
+        if(_warpPosition.GetComponent<BoxCollider2D>())
         {
-            _warpTargetRb = other.gameObject.GetComponent<Rigidbody2D>();
-            _warpTarget = other.transform;
-            if(_warpPosition.GetComponent<BoxCollider2D>())
-            {
-                _warpPosition.GetComponent<BoxCollider2D>().enabled = false;
-            }
-            StartCoroutine("BeginWarpSequence");
-            Invoke("TriggerReturnTransition", _warpCooldownLength);
+            _warpPosition.GetComponent<BoxCollider2D>().enabled = false;
         }
+        StartCoroutine("BeginWarpSequence");
+        Invoke("TriggerReturnTransition", _warpCooldownLength);
     }
 
     private void OnTriggerExit2D(Collider2D other)
     {
+        if (other.gameObject.GetComponent<WarpObject>()) return;
         Invoke("ResetStairs", _stairUseCooldownTime);
     }
 
