@@ -65,6 +65,7 @@ public class UIHandler : MonoBehaviour
         CloseAllMenus();
         _inventoryMenu.SetActive(true);
         _reloadingText.SetActive(false);
+        _pauseMenu.SetActive(false);
     }
 
     private void FixedUpdate()
