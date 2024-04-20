@@ -9,7 +9,7 @@ public class UIHandler : MonoBehaviour
     GameObject _pauseMenu;
 
     [SerializeField]
-    GameObject _inventoryMenu, optionsMenu, _gameMenu;
+    GameObject _inventoryMenu, _optionsMenu, _gameMenu;
 
     [SerializeField]
     GameObject _heartsDisplay;
@@ -62,9 +62,8 @@ public class UIHandler : MonoBehaviour
 
     private void Start()
     {
-        _pauseMenu.SetActive(false);
-        _inventoryMenu.SetActive(false);
-        _gameMenu.SetActive(false);
+        CloseAllMenus();
+        _inventoryMenu.SetActive(true);
         _reloadingText.SetActive(false);
     }
 
@@ -143,7 +142,7 @@ public class UIHandler : MonoBehaviour
 
     public void OpenSpecificMenu(GameObject menuToOpen)
     {
-        _currentMenu.SetActive(false);
+        CloseAllMenus();
         _currentMenu = menuToOpen;
         _currentMenu.SetActive(true);
     }
@@ -165,6 +164,14 @@ public class UIHandler : MonoBehaviour
     {
         _reloadingText.SetActive(false);
     }
+
+    private void CloseAllMenus()
+    {
+        _inventoryMenu.SetActive(false);
+        _optionsMenu.SetActive(false);
+        _gameMenu.SetActive(false);
+    }
+    
 
     public void QuitToMenu()
     {

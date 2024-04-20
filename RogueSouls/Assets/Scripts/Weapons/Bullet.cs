@@ -51,7 +51,7 @@ public class Bullet : PoolObject
         }
         else if (other.gameObject.CompareTag("MinionSlime"))
         {
-            var minion = other.gameObject.GetComponent<EntityStats>();
+            var minion = other.gameObject.GetComponent<MinionSlime>();
             minion.TakeDamage(bulletDamage);
             if (bloodHitEffect != null)
             {
