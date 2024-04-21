@@ -5,47 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1b75eb2c-952f-4375-8a39-08bf3116d934" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Assets/Art/Effects/IceFlash.prefab" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Art/Effects/IceFlash.prefab.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Art/Sprites/Weapons/IceProjectile.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Art/Sprites/Weapons/IceProjectile.png.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Enemy/Ice.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Enemy/Ice/SiddIceEnemy.prefab" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Enemy/Ice/SiddIceEnemy.prefab.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Weapons/IceShooter.prefab" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Weapons/IceShooter.prefab.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Resources/PoolObjects/IceBullet.prefab" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Resources/PoolObjects/IceBullet.prefab.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scenes/DEFAULT_LEVEL/NavMesh-NavMesh Surface.asset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scenes/DEFAULT_LEVEL/NavMesh-NavMesh Surface.asset.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scenes/Lava/NavMesh-NavMesh (3).asset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scenes/Lava/NavMesh-NavMesh (3).asset.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scenes/Lava/NavMesh-NavMesh 1.asset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scenes/Lava/NavMesh-NavMesh 1.asset.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Enemies/IceEnemy.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Enemies/IceEnemy.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.RogueSouls/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.RogueSouls/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animations/Enemies/IceEnemy/Idle.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Animations/Enemies/IceEnemy/Idle.anim" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animations/Enemies/IceEnemy/Run.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Animations/Enemies/IceEnemy/Run.anim" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Art/Sprites/Biomes/Lava/LavaLevelPalette.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Art/Sprites/Biomes/Lava/LavaLevelPalette.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Art/Sprites/Biomes/Lava/lavaTileset 1.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Art/Sprites/Biomes/Lava/lavaTileset 1.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Art/Sprites/Biomes/Lava/lavaTileset 1_18.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Art/Sprites/Biomes/Lava/lavaTileset 1_18.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Art/Sprites/Biomes/Lava/lavaTileset 1_18.asset.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Art/Sprites/Biomes/Lava/lavaTileset 1_18.asset.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Art/Sprites/Enemies/iceEnemy.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Art/Sprites/Enemies/iceEnemy.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Enemy/IceEnemy.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Enemy/IceEnemy.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Level/FullLevels/Level.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Level/FullLevels/Level.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Level/Global Light 2D.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Level/Global Light 2D.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Weapons/SMG.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Weapons/SMG.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/DEFAULT_LEVEL.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/DEFAULT_LEVEL.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Lava.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Lava.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Art/Materials/SmallRock.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Art/Materials/SmallRock.mat" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/OwenBusch_PlainsArea.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/OwenBusch_PlainsArea.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Systems/GameManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Systems/GameManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Weapons/Lava.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Weapons/Lava.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Weapons/LavaProjectile.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Weapons/LavaProjectile.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/NavMeshAreas.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/NavMeshAreas.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UserSettings/Layouts/default-2021.dwlt" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/Layouts/default-2021.dwlt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -83,7 +44,7 @@
     "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "Merging main",
+    "git-widget-placeholder": "main",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -158,7 +119,7 @@
       <workItem from="1713537772917" duration="14924000" />
       <workItem from="1713574702234" duration="990000" />
       <workItem from="1713636418739" duration="1408000" />
-      <workItem from="1713657249897" duration="1274000" />
+      <workItem from="1713657249897" duration="1577000" />
     </task>
     <servers />
   </component>
