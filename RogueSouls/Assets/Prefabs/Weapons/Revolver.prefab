@@ -93,11 +93,10 @@ MonoBehaviour:
   bulletForce: 30
   minSpread: -2
   maxSpread: 2
-  <ItemName>k__BackingField: 
   Reload_sounds: {fileID: 0}
   sfxHandler: {fileID: 0}
   gun_sounds: {fileID: 0}
-  damage: 30
+  damage: 10
 --- !u!114 &9142908295371051861
 MonoBehaviour:
   m_ObjectHideFlags: 0

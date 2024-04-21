@@ -5,8 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1b75eb2c-952f-4375-8a39-08bf3116d934" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/Assets/Art/Materials/SmallRock.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Art/Materials/SmallRock.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.RogueSouls/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.RogueSouls/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Weapons/Revolver.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Weapons/Revolver.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/OwenBusch_PlainsArea.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/OwenBusch_PlainsArea.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/OwenBusch_PlainsArea/NavMesh-NavMesh (3).asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/OwenBusch_PlainsArea/NavMesh-NavMesh (3).asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/OwenBusch_PlainsArea/NavMesh-NavMesh (4).asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/OwenBusch_PlainsArea/NavMesh-NavMesh (4).asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemies/LavaBraken.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Enemies/LavaBraken.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Interface/AudioManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Interface/AudioManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Objects/WarpObject.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Objects/WarpObject.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,7 +69,7 @@
 }]]></component>
   <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
     <configuration name="Standalone Player" type="RunUnityExe" factoryName="Unity Executable">
-      <option name="EXE_PATH" value="$PROJECT_DIR$/Builds/04_19_2024\RogueSouls.exe" />
+      <option name="EXE_PATH" value="$PROJECT_DIR$/Builds/04_20_2024/RogueSouls.exe" />
       <option name="PROGRAM_PARAMETERS" value="" />
       <option name="WORKING_DIRECTORY" value="D:\Unity\RogueSouls\RogueSouls\Builds\04_16_24" />
       <option name="PASS_PARENT_ENVS" value="1" />
@@ -119,7 +125,7 @@
       <workItem from="1713537772917" duration="14924000" />
       <workItem from="1713574702234" duration="990000" />
       <workItem from="1713636418739" duration="1408000" />
-      <workItem from="1713657249897" duration="1577000" />
+      <workItem from="1713657249897" duration="3499000" />
     </task>
     <servers />
   </component>

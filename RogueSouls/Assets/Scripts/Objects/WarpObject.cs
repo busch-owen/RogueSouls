@@ -35,11 +35,6 @@ public class WarpObject : MonoBehaviour
         _cameraTransform = Camera.main.transform;
     }
 
-    private void Start()
-    {
-        
-    }
-
     private void OnTriggerEnter2D(Collider2D other)
     {
         
@@ -59,6 +54,7 @@ public class WarpObject : MonoBehaviour
     private void OnTriggerExit2D(Collider2D other)
     {
         if (other.gameObject.GetComponent<WarpObject>()) return;
+        if (!other.gameObject.GetComponent<PlayerController>()) return;
         Invoke("ResetStairs", _stairUseCooldownTime);
     }
 

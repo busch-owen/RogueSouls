@@ -5,8 +5,8 @@ public class AudioManager : MonoBehaviour
 {
     [SerializeField] private AudioSource[] audioSource; // AudioSource Reference
     [Range(0f, 1f)]
-    [SerializeField] private float volume = 1f; // Control the auido
-    [SerializeField] private bool isMuted = false; // Mute the auido
+    [SerializeField] private float volume = 1f; // Control the audio
+    [SerializeField] private bool isMuted; // Mute the audio
 
     private void OnEnable()
     {
@@ -27,7 +27,7 @@ public class AudioManager : MonoBehaviour
             }
         }
     }
-    // Adjust the audiocontrol
+    // Adjust the audio control
     public void SetVolume(float newVolume)
     {
         volume = newVolume;
