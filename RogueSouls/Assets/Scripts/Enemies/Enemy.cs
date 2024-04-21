@@ -10,28 +10,28 @@ public class Enemy : EntityStats
     [SerializeField] protected Transform target;
     protected NavMeshAgent _agent;
     [SerializeField]
-    bool isRanged;
+    protected bool isRanged;
 
     [SerializeField]
     protected RangedWeapon enemyGun;
     [SerializeField]
-    private Transform gunLocation;
+    protected private Transform gunLocation;
     [SerializeField]
-    float _rotateSpeed;
-    float _enemyWeaponRotationAngle;
-    bool targetInRange;
+    protected float _rotateSpeed;
+    protected float _enemyWeaponRotationAngle;
+    protected bool targetInRange;
     [SerializeField]
     EnemyDoor enemyDoor;
 
-    private WeaponOffsetHandle _offsetHandle;
+    protected WeaponOffsetHandle _offsetHandle;
 
     protected GameObject enemySprite;
 
     [SerializeField]
-    ParticleSystem _deathEffect;
+    protected ParticleSystem _deathEffect;
 
     [SerializeField]
-    float detectionRadius;
+    protected float detectionRadius;
 
     Animator _animator;
 
@@ -74,10 +74,14 @@ public class Enemy : EntityStats
     #region Update
     protected virtual void Update()
     {
-        if (target != null && targetInRange)
+
+        if (isRanged)
         {
-            enemyGun.Shoot();
-            RangedAttack();
+            if (target != null && targetInRange)
+            {
+                enemyGun.Shoot();
+                RangedAttack();
+            }
         }
 
         bool flipSprite = _agent.velocity.x < 0;

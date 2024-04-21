@@ -198,7 +198,7 @@ MonoBehaviour:
   radius: 1
   color: {r: 1, g: 0, b: 0, a: 1}
   resolution: 36
-  damage: 0
+  damage: 2
 --- !u!1 &5506593975186909699
 GameObject:
   m_ObjectHideFlags: 0

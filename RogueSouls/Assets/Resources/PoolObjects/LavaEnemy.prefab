@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 8959257328355839906}
   - component: {fileID: 7319297449972969170}
   - component: {fileID: 4490841868447902012}
-  - component: {fileID: 5506845646475612572}
   - component: {fileID: 4625701418322334476}
   - component: {fileID: 6175586912072974954}
   m_Layer: 23
@@ -152,32 +151,6 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
---- !u!114 &5506845646475612572
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1922432395358111844}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 644e9dac4c97f8642a9f0e6fa32fc703, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hitEffect: {fileID: 0}
-  bloodHitEffect: {fileID: 0}
-  _trailRenderer: {fileID: 0}
-  bulletDamage: 4
-  weapon: {fileID: 0}
-  _maxTravelDistance: 30
-  FireAOEEffect: {fileID: 777651334277765183, guid: d3912ce8a420928428d41a540ce12b91, type: 3}
-  AOERange: 2
-  rayColor: {r: 1, g: 0, b: 0, a: 1}
-  center2D: {x: 0, y: 0}
-  radius: 1
-  color: {r: 1, g: 0, b: 0, a: 1}
-  resolution: 36
-  damage: 0
 --- !u!114 &4625701418322334476
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -190,21 +163,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a4300fdc3300ae41bcba81227c6b705, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hitEffect: {fileID: 0}
-  bloodHitEffect: {fileID: 5515885454821392928, guid: 547b1e521150c3e47992976361e0842d, type: 3}
-  _trailRenderer: {fileID: 0}
-  bulletDamage: 0
-  weapon: {fileID: 0}
-  _maxTravelDistance: 30
-  _target: {fileID: 0}
+  <Health>k__BackingField: 0
+  _maxHealth: 8
+  <Damage>k__BackingField: 0
+  <Speed>k__BackingField: 0
+  <TimeToAttack>k__BackingField: 0
+  _heartDisplayHandler: {fileID: 0}
+  _gameManager: {fileID: 0}
+  target: {fileID: 0}
+  isRanged: 0
   enemyGun: {fileID: 0}
   gunLocation: {fileID: 0}
   _rotateSpeed: 0
-  <_speed>k__BackingField: 0
-  _maxHealth: 8
+  enemyDoor: {fileID: 0}
+  _deathEffect: {fileID: 0}
   detectionRadius: 12
-  target: {fileID: 0}
-  BallSpeed: 4
+  LavaEffect: {fileID: 8460925647646372931, guid: d3912ce8a420928428d41a540ce12b91, type: 3}
 --- !u!195 &6175586912072974954
 NavMeshAgent:
   m_ObjectHideFlags: 0

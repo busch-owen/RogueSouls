@@ -11,8 +11,12 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         Time.timeScale = 1.0f;
-        _postFinalBossAssets.SetActive(false);
-        _forestBlockageAssets.SetActive(true);
+        if (_postFinalBossAssets && _forestBlockageAssets != null)
+        {
+            _postFinalBossAssets.SetActive(false);
+            _forestBlockageAssets.SetActive(true);
+        }
+
     }
     
     public void CheckForHealthSouls(int amountOfSouls)
