@@ -26,7 +26,7 @@ public class MainMenuHandler : MonoBehaviour
         _soundSlider.value = GlobalSoundVolumeValue;
     }
 
-    public void StartGame(string startSceneName = "Yasub_Scene")
+    public void StartGame(string startSceneName = "MAIN_LEVEL")
     {
         // Continue if the specified start scene exists
         if (SceneUtility.GetBuildIndexByScenePath(startSceneName) != -1)

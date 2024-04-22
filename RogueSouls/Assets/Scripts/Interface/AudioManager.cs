@@ -1,12 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+
 public class AudioManager : MonoBehaviour
 {
-    [SerializeField] private AudioSource[] audioSource; // AudioSource Reference
-    [Range(0f, 1f)]
-    [SerializeField] private float volume = 1f; // Control the audio
     [SerializeField] private bool isMuted; // Mute the audio
+    
 
     private void OnEnable()
     {
@@ -17,25 +14,12 @@ public class AudioManager : MonoBehaviour
     public void ToggleAudio()
     {
         isMuted = !isMuted;
-        if (audioSource != null)
-        {
-            foreach (AudioSource source in audioSource)
-            {
-                source.volume = isMuted ? 0f : volume;
-            }
-        }
+        var newVolume = isMuted ? 0f : MainMenuHandler.GlobalSoundVolumeValue;
+        PlayerPrefs.SetFloat("SoundVolume", newVolume);
     }
     // Adjust the audio control
     public void SetVolume(float newVolume)
     {
-        audioSource = FindObjectsOfType<AudioSource>();
-        volume = newVolume;
-        if(audioSource != null)
-        {
-            foreach(AudioSource source in audioSource)
-            {
-                source.volume = isMuted ? 0f : volume;
-            }
-        }
+        PlayerPrefs.SetFloat("SoundVolume", newVolume);
     }
 }
