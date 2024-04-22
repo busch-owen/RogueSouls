@@ -6,7 +6,7 @@ using UnityEngine.AI;
 public class BrakenAttack : RangedWeapon
 {
     [SerializeField]
-    public Bullet Lava, OtherLava;
+    public Bullet Fire, Lava;
    
     
 
@@ -34,13 +34,15 @@ public class BrakenAttack : RangedWeapon
             Debug.Log(rand.ToString());
             if (rand >=5)
             {
-                bulletForce = 1;
-                bulletPrefab = Lava;
+                bulletForce = 20;
+                fireRate = 15;
+                bulletPrefab = Fire;
             }
             else if(rand <=5)
             {
+                fireRate = 1;
                 bulletForce = 20;
-                bulletPrefab = OtherLava;
+                bulletPrefab = Lava;
             }
         }
 

@@ -9,7 +9,7 @@ public class RangedWeapon : MonoBehaviour
     //weapon basics
 
     [SerializeField]
-    private float fireRate;
+    protected float fireRate;
     [SerializeField]
     private float bulletLifetime;
     [field: SerializeField]
@@ -45,8 +45,6 @@ public class RangedWeapon : MonoBehaviour
     AudioSource sfxHandler;
     [SerializeField]
     AudioClip gun_sounds;
-
-    public static RangedWeapon Instance;
 
     [SerializeField]
     int damage;
