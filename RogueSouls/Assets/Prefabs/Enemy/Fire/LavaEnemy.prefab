@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 7905106343968048519}
   m_Layer: 23
   m_Name: LavaEnemy
-  m_TagString: EnemyBullet
+  m_TagString: enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -164,7 +164,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Health>k__BackingField: 0
-  _maxHealth: 32
+  _maxHealth: 24
   <Damage>k__BackingField: 0
   <Speed>k__BackingField: 4
   <TimeToAttack>k__BackingField: 0

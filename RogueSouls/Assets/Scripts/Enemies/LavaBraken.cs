@@ -14,6 +14,7 @@ public class LavaBraken : Enemy
 
     protected override void Update()
     {
+        _barHealthText.text = Health + "/" + _maxHealth;
         if (target != null)
         {
             enemyGun.Shoot();
@@ -51,6 +52,6 @@ public class LavaBraken : Enemy
     {
         base.TakeDamage(damage);
         _barFillImage.fillAmount = (float)Health / (float)_maxHealth;
-        _barHealthText.text = Health + "/" + _maxHealth;
+        
     }
 }

@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 45683460609472377}
   - component: {fileID: 1026746564785712097}
   - component: {fileID: 8735669739565012804}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: FlameThrowerGolem
-  m_TagString: Untagged
+  m_TagString: enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -114,7 +114,7 @@ GameObject:
   - component: {fileID: 45683460688448853}
   - component: {fileID: 45683460688448852}
   - component: {fileID: 45683460688448851}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -218,7 +218,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7480019522707081708}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Handle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -249,12 +249,28 @@ PrefabInstance:
     m_TransformParent: {fileID: 7480019522707081708}
     m_Modifications:
     - target: {fileID: 1897592052110433115, guid: 9a4a6b0144622dc44b80e5f7d88e8ecc, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897592052110433115, guid: 9a4a6b0144622dc44b80e5f7d88e8ecc, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3651399317519360951, guid: 9a4a6b0144622dc44b80e5f7d88e8ecc, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 3873842773402911558, guid: 9a4a6b0144622dc44b80e5f7d88e8ecc, type: 3}
       propertyPath: m_Name
       value: EnemyFlame
+      objectReference: {fileID: 0}
+    - target: {fileID: 3873842773402911558, guid: 9a4a6b0144622dc44b80e5f7d88e8ecc, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4631185654993314091, guid: 9a4a6b0144622dc44b80e5f7d88e8ecc, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 6250265583612026718, guid: 9a4a6b0144622dc44b80e5f7d88e8ecc, type: 3}
       propertyPath: m_RootOrder

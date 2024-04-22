@@ -58,6 +58,7 @@ public class RangedWeapon : MonoBehaviour
 
     public int CurrentAmmo { get; private set; }
     private bool isReloading = false;
+    [SerializeField]
     protected float timeToNextFire = 0f;
 #endregion
 
