@@ -19,9 +19,9 @@ public class MinionSlime : EnemyBullet
     [field: SerializeField]
     public float _speed { get; protected set; }
 
-    int _health;
+    protected int _health;
     [SerializeField]
-    int _maxHealth;
+    protected int _maxHealth;
 
     public GameObject _spriteObject { get; protected set; }
 

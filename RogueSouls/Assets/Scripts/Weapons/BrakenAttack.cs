@@ -38,20 +38,11 @@ public class BrakenAttack : RangedWeapon
         
         if(Time.time < timeToNextFire )
         {
-            randInt = Random.Range( Min, 1000 );
-            rand = Random.Range(0, 100);
-
-
-            
-            if(randInt >= 999)
-            {
-                
-                EnemySpawn();
-            }
+            rand = Random.Range(0, 50);
             if (rand >=25)
             {
-                bulletForce = 10;
-                fireRate = 1;
+                bulletForce = 20;
+                fireRate = 30;
                 bulletPrefab = Fire;
             }
             else if(rand <=25)
