@@ -29,6 +29,9 @@ public class PlayerStats : EntityStats
     [SerializeField]
     private Youdied youDied;
 
+    private AudioSource _sfxHandler;
+    [SerializeField] private AudioClip hurtEffect;
+
     public bool PlayerIsDead { get; private set; }
 
     public int MajorSoulsCollected { get; private set; }
@@ -42,6 +45,7 @@ public class PlayerStats : EntityStats
         _postProcessVolume = FindObjectOfType<Volume>().profile;
         _cameraConfiner = FindObjectOfType<CinemachineConfiner2D>();
         _hurtScreenShake = GetComponent<ScreenShakeEffect>();
+        _sfxHandler = GetComponent<AudioSource>();
     }
 
     #region Damage
@@ -103,6 +107,7 @@ public class PlayerStats : EntityStats
         vignette.intensity.Override(0.5f);
         InvokeRepeating("DecreaseHurtEffect", 0, 0.02f);
         _hurtScreenShake.ShakeScreen();
+        _sfxHandler.PlayOneShot(hurtEffect);
     }
 
     void DecreaseHurtEffect() 

@@ -19,12 +19,7 @@ public class Explosion : Bullet
     public float radius = 1.0f; // The radius of the circle
     public Color color = Color.red; // The color of the circle
     public int resolution = 36; // The number of lines to draw the circle, increase for a smoother circle
-
-    void Update()
-    {
-
-    }
-
+    
     // Start is called before the first frame update
     public override void FixedUpdate()
     {
@@ -102,6 +97,7 @@ public class Explosion : Bullet
                 collision.gameObject.GetComponent<MinionSlime>().TakeDamage(bulletDamage);
             }
         }
+        
         OnDeSpawn();
         
     }

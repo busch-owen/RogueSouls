@@ -67,6 +67,7 @@ public class RangedWeapon : MonoBehaviour
 public virtual void Awake()
     {
         _uiHandler = FindObjectOfType<UIHandler>();
+        sfxHandler = GetComponent<AudioSource>();
     }
     void Start()
     {   
@@ -119,7 +120,9 @@ public virtual void Awake()
                 timeToNextFire = Time.time + 1.0f / fireRate;// sets the time for the next bullet to be able to be fired
 
                 CurrentAmmo--;
-                //sfxHandler?.PlayOneShot(gun_sounds);
+                
+                if(sfxHandler)
+                    sfxHandler.PlayOneShot(gun_sounds);
 
                 muzzleFlashEffect?.Stop();
                 muzzleFlashEffect?.Play();
