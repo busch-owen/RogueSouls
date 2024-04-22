@@ -177,7 +177,7 @@ MonoBehaviour:
   _rotateSpeed: 0
   enemyDoor: {fileID: 0}
   _deathEffect: {fileID: 0}
-  detectionRadius: 12
+  detectionRadius: 8
   LavaEffect: {fileID: 8460925647646372931, guid: d3912ce8a420928428d41a540ce12b91, type: 3}
 --- !u!195 &7905106343968048519
 NavMeshAgent:

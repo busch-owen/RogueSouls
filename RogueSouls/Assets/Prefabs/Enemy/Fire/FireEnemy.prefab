@@ -227,7 +227,7 @@ MonoBehaviour:
   _rotateSpeed: 100
   enemyDoor: {fileID: 0}
   _deathEffect: {fileID: 0}
-  detectionRadius: 12
+  detectionRadius: 8
 --- !u!195 &7529075971869702688
 NavMeshAgent:
   m_ObjectHideFlags: 0
