@@ -78,9 +78,7 @@ MonoBehaviour:
   _rotateSpeed: 100
   enemyDoor: {fileID: 0}
   _deathEffect: {fileID: 0}
-  detectionRadius: 8
-  iceArmor: 1
-  armorDamper: 50
+  detectionRadius: 12
 --- !u!195 &8735669739565012804
 NavMeshAgent:
   m_ObjectHideFlags: 0
