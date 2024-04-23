@@ -40,7 +40,8 @@ public class HealthSoul : MonoBehaviour
             if(_isMajorSoul)
             {
                 targetPlayer.IncreaseMajorSoulCount();
-                _gameManager.CheckForHealthSouls(targetPlayer.MajorSoulsCollected);
+                if(_gameManager)
+                    _gameManager.CheckForHealthSouls(targetPlayer.MajorSoulsCollected);
             }
             else
             {

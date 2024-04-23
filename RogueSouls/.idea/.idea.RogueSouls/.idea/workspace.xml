@@ -6,9 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="1b75eb2c-952f-4375-8a39-08bf3116d934" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.RogueSouls/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.RogueSouls/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Enemy/Fire/LavaBraken.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Enemy/Fire/LavaBraken.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Enemy/slimes/KingSlimeBoss.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Enemy/slimes/KingSlimeBoss.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/MAIN_LEVEL.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/MAIN_LEVEL.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Objects/WarpObject.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Objects/WarpObject.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -65,7 +64,7 @@
 }</component>
   <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
     <configuration name="Standalone Player" type="RunUnityExe" factoryName="Unity Executable">
-      <option name="EXE_PATH" value="$PROJECT_DIR$/Builds/04_21_2024\RogueSouls.exe" />
+      <option name="EXE_PATH" value="$PROJECT_DIR$/Builds/04_22_2024/RogueSouls.exe" />
       <option name="PROGRAM_PARAMETERS" value="" />
       <option name="WORKING_DIRECTORY" value="D:\Unity\RogueSouls\RogueSouls\Builds\04_16_24" />
       <option name="PASS_PARENT_ENVS" value="1" />
@@ -125,6 +124,7 @@
       <workItem from="1713755852883" duration="1609000" />
       <workItem from="1713760008081" duration="904000" />
       <workItem from="1713809746638" duration="7000" />
+      <workItem from="1713840416991" duration="308000" />
     </task>
     <servers />
   </component>
@@ -133,6 +133,7 @@
   </component>
   <component name="UnityProjectConfiguration" hasMinimizedUI="true" />
   <component name="UnityProjectDiscoverer">
+    <option name="hasUnityReference" value="true" />
     <option name="unityProject" value="true" />
     <option name="unityProjectFolder" value="true" />
   </component>

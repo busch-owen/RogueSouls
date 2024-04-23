@@ -31,7 +31,8 @@ public class WarpObject : MonoBehaviour
     {
         _cameraConfiner = FindObjectOfType<CinemachineConfiner2D>();
         _warpOverlay = GameObject.FindGameObjectWithTag("WarpOverlay");
-        _warpOverlay.transform.localScale = _defaultWarpOverlaySize;
+        if (_warpOverlay)
+            _warpOverlay.transform.localScale = _defaultWarpOverlaySize;
         _cameraTransform = Camera.main.transform;
     }
 
@@ -40,6 +41,8 @@ public class WarpObject : MonoBehaviour
         
         if (other.gameObject.GetComponent<WarpObject>()) return;
         if (!other.gameObject.GetComponent<PlayerController>()) return;
+        
+        Debug.Log("The little fucker breaking our game is " + other.name);
         
         _warpTargetRb = other.gameObject.GetComponent<Rigidbody2D>();
         _warpTarget = other.transform;
